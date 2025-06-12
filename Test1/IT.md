@@ -50,6 +50,16 @@ Robot de livraison dérivé de `robot`.
 
 Robot de déplacement libre dérivé de `robot`.
 
+### d. armRobot (nouvelle classe fille)
+Robot à un degré de liberté, dérivé de robot.
+
+Fonctionnalités spécifiques :
+
+Ne se déplace pas dans l’espace
+Effectue une rotation de son bras dans une direction (clockwise, anticlockwise)
+Angle modifiable dynamiquement
+
+
 **Fonctionnalités spécifiques :**
 
 - Se déplace dans une direction donnée (`avant`, `arrière`, `gauche`, `droite`)
