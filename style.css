@@ -1,0 +1,78 @@
+header {
+  background-color: #007b5f;
+  color: white;
+  text-align: center;
+  padding: 1rem 1rem; /* réduire de 2rem à 1rem */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+header p {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Style commun aux drapeaux */
+header .flag {
+  position: absolute;
+  width: 38px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  cursor: default;
+  transition: transform 0.3s ease;
+}
+
+
+
+/* Effet zoom au survol */
+header .flag:hover {
+  transform: scale(1.1);
+}
+
+/* Positionnement des drapeaux dans les coins */
+header .flag.benin {
+  top: 12px;
+  left: 12px;
+}
+
+header .flag.senegal {
+  top: 12px;
+  right: 12px;
+}
+
+header .flag.madagascar {
+  bottom: 12px;
+  left: 12px;
+}
+
+header .flag.maroc {
+  bottom: 12px;
+  right: 12px;
+}
+
+
+.vertical-text {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: left top;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007b5f;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0.3rem 0.6rem;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+  cursor: default;
+  z-index: 9999;
+  user-select: none;
+}
