@@ -1,0 +1,246 @@
+/* === HEADER ENSA STYLE === */
+.header-ensa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007b5f;
+  color: white;
+  padding: 1.2rem 2rem;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.header-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.header-column.left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo-ecole {
+  height: 50px;
+  margin-bottom: 0.5rem;
+}
+
+/* Effet pour montrer que le logo est cliquable */
+.header-column.right a img {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.header-column.right a img:hover {
+  transform: scale(1.05);
+}
+
+/* 
+.school-info {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 250px;
+} 
+*/
+
+.header-column.center {
+  text-align: center;
+}
+
+.header-column.center h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.header-column.center p {
+  margin-top: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.header-column.right {
+  text-align: right;        /* Aligne tout le texte à droite */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;    /* Aligne logo et texte sur la droite */
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tekbot-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #007b5f;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 24px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.tekbot-link:hover {
+  background-color: white;
+  color: #005844;
+  border: 2px solid #005844;
+}
+
+/* Bouton du lien */
+.subtext a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #007b5f;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 24px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.subtext a:hover {
+  background-color: white;
+  color: #005844;
+  border-color: #005844;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 3rem 1rem;
+}
+
+.grid-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.card {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color: white;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-title {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  z-index: 1;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .card-title {
+  opacity: 0;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  padding: 1rem;
+  text-align: center;
+  z-index: 2;
+}
+
+.card:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-overlay h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.1rem;
+  color: #f5a623;
+}
+
+.card-overlay ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.card-overlay li {
+  margin: 0.3rem 0;
+  font-weight: 500;
+}
+
+.it {
+  background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60');
+}
+
+.electronics {
+  background-image: url('https://img.pikbest.com/wp/202342/futuristic-abstract-wallpaper-circuit-board-high-tech-background-with-technology-inspired-circuitry-texture_9945182.jpg!bwr800');
+}
+
+.mechanical {
+  background-image: url('https://static4.depositphotos.com/1011764/330/i/600/depositphotos_3306463-stock-photo-blueprint.jpg');
+}
+
+.mechatronics {
+  width: calc(2 * 300px + 2 * 2rem); /* 3 cartes de 300px + 2 espacements de 2rem */
+  max-width: 100%;
+  height: 220px;
+  background-image: url('https://thumbs.dreamstime.com/z/g%C3%A9nie-m%C3%A9canique-comme-%C3%A9lectronique-et-m%C3%A9lange-sch%C3%A9ma-machatronique-ing%C3%A9nierie-en-informatique-%C3%A9lectrique-combinaison-239676015.jpg?ct=jpeg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  margin: 0 auto 2rem auto; /* Centrage horizontal + marge bas */
+}
+
+
+
+
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 1rem;
+  color: #666;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    width: 90%;
+    height: 180px;
+  }
+
+  .mechatronics {
+    height: 200px;
+  }
+}
