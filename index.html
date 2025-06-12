@@ -3,188 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Équipe B2MS CleanTech</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #f4f6f8;
-      font-family: 'Segoe UI', sans-serif;
-    }
+  <title>team B2MS</title>
+  <link rel="stylesheet" href="style.css" />
 
-    header {
-      background-color: #007b5f;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    header img {
-      width: 40px;
-    }
-
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-    }
-
-    /* Bouton du lien */
-    .subtext a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.6rem 1.2rem;
-      background-color: rgba(255, 255, 255, 0.85);
-      color: #007b5f;
-      font-weight: bold;
-      font-size: 1.1rem;
-      border-radius: 24px;
-      text-decoration: none;
-      border: 2px solid transparent;
-      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    }
-
-    .subtext a:hover {
-      background-color: white;
-      color: #005844;
-      border-color: #005844;
-    }
-
-    .grid {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding: 3rem 1rem;
-    }
-
-    .card {
-      position: relative;
-      width: 300px;
-      height: 200px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 16px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      color: white;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .card-title {
-      position: absolute;
-      bottom: 15px;
-      left: 20px;
-      color: white;
-      font-size: 1.8rem;
-      font-weight: bold;
-      z-index: 1;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 4px 10px;
-      border-radius: 8px;
-      transition: opacity 0.3s ease;
-    }
-    .card:hover .card-title {
-      opacity: 0;
-    }
-
-    .card-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      padding: 1rem;
-      text-align: center;
-      z-index: 2;
-    }
-
-    .card:hover .card-overlay {
-      opacity: 1;
-    }
-
-    .card-overlay h3 {
-      margin: 0 0 0.8rem;
-      font-size: 1.1rem;
-      color: #f5a623;
-    }
-
-    .card-overlay ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 0.95rem;
-    }
-
-    .card-overlay li {
-      margin: 0.3rem 0;
-      font-weight: 500;
-    }
-
-    .it {
-      background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60');
-    }
-
-    .electronics {
-      background-image: url('https://img.pikbest.com/wp/202342/futuristic-abstract-wallpaper-circuit-board-high-tech-background-with-technology-inspired-circuitry-texture_9945182.jpg!bwr800');
-    }
-
-    .mechanical {
-      background-image: url('https://static4.depositphotos.com/1011764/330/i/600/depositphotos_3306463-stock-photo-blueprint.jpg');
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.8rem;
-      padding: 1rem;
-      color: #666;
-    }
-
-    @media screen and (max-width: 600px) {
-      .card {
-        width: 90%;
-        height: 180px;
-      }
-    }
-  </style>
 </head>
 <body>
-  <header>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Flag_of_Benin.svg" alt="Drapeau Bénin" class="flag benin" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_Madagascar.svg" alt="Drapeau Madagascar" class="flag madagascar" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Drapeau Maroc" class="flag maroc" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Flag_of_Senegal.svg" alt="Drapeau Sénégal" class="flag senegal" />
- 
-  <h1>Équipe B2MS CleanTech</h1>
-  <p>Innovation durable & interdisciplinaire</p>
-  <div class="subtext">
-    <a href="https://trc.tekbot.io/" target="_blank" rel="noopener noreferrer">
+
+  <header class="header-ensa">
+  <div class="header-column left">
+    <a href="https://trc.tekbot.io/" class="tekbot-link" target="_blank">
       Tekbot Robotics Challenge
     </a>
   </div>
+
+  <div class="header-column center">
+  <div class="team-name-wrapper" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <!-- Drapeaux gauche -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Flag_of_Benin.svg" alt="Drapeau Bénin" style="height: 30px;"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_Madagascar.svg" alt="Drapeau Madagascar" style="height: 30px;"/>
+  
+
+    <h1 style="margin: 0; font-size: 2.2rem; font-weight: 700;">B2MS CleanTech</h1>
+
+    <!-- Drapeaux droite -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Drapeau Maroc" style="height: 30px;"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Flag_of_Senegal.svg" alt="Drapeau Sénégal" style="height: 30px;"/>
+ 
+  </div>
+  <p>Innovation durable & interdisciplinaire</p>
+</div>
+
+
+  <div class="header-column right">
+  <a href="https://ensa-marrakech.uca.ma/" target="_blank" rel="noopener noreferrer">
+    <img src="https://ensa-marrakech.uca.ma/wp-content/uploads/2024/10/cropped-new_logo-1-1-1024x347.png" alt="Logo ENSA" class="logo-ecole" />
+  </a>
+  </div>
 </header>
 
-
-
-  <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center; color: #333;">
+<section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center; color: #333;">
   <h2>À propos de l'équipe</h2>
   <p>
     L'équipe B2MS CleanTech réunit des étudiants passionnés issus de différentes spécialités — informatique, électronique et mécanique — 
@@ -193,10 +50,7 @@
   </p>
 </section>
 
-
-
-  <section class="grid">
-
+<section class="grid">
 
     <!-- IT -->
 <a href="it.html" style="text-decoration: none;">
@@ -205,9 +59,9 @@
     <div class="card-overlay">
       <h3>Développement robotique : POO, ROS2 et navigation</h3>
       <ul>
-        <li>Bill-Elvis SOMAKOU</li>
-        <li>Iruno LEFORT</li>
-        <li>Yassine MACHAY</li>
+        <li>- Bill-Elvis SOMAKOU</li>
+        <li>- Iruno LEFORT</li>
+        <li>- Yassine MACHAY</li>
       </ul>
     </div>
   </div>
@@ -220,13 +74,14 @@
     <div class="card-overlay">
       <h3>Conception de circuit et système électronique embarqué</h3>
         <ul>
-          <li>Hiba EL GOUMRI</li>
-          <li>Hiba BENZAGHAR</li>
-          <li>Maryam EL HATIMY</li>
+          <li>- Hiba EL GOUMRI</li>
+          <li>- Hiba BENZAGHAR</li>
+          <li>- Maryam EL HATIMY</li>
       </ul>
     </div>
   </div>
 </a>
+
 
     <!-- Mécanique -->
 <a href="mecanique.html" style="text-decoration: none;">
@@ -235,18 +90,35 @@
       <div class="card-overlay">
         <h3>Conception, modélisation et assemblage de pièces</h3>
         <ul>
-          <li>Cheikh SAMB</li>
-          <li>Ahlam EL BAZ</li>
-          <li>Otmane EL BACHA</li>
-          <li>Naoual EL KHARRAZ</li>
+          <li>- Cheikh SAMB</li>
+          <li>- Ahlam EL BAZ</li>
+          <li>- Otmane EL BACHA</li>
+          <li>- Naoual EL KHARRAZ</li>
         </ul>
       </div>
     </div>
 </a>
 
+<!-- Mécatronique -->
+<section class="grid-container"></section>
+<a href="mecatronique.html" style="text-decoration: none; width: 100%;">
+  <div class="card mechatronics">
+    <div class="card-title">Mécatronique</div>
+    <div class="card-overlay">
+      <h3>Test final</h3>
+      <ul>
+        <li>- Mécanique</li>
+        <li>- Electronique</li>
+        <li>- Programmation</li>
+      </ul>
+    </div>
+  </div>
+</a>
+
+  </section>
   </section>
 
-  <footer style="background-color: #007b5f; color: white; padding: 1rem 0; text-align: center;">
+<footer style="background-color: #007b5f; color: white; padding: 1rem 0; text-align: center;">
   <p>&copy; 2025 Équipe B2MS CleanTech – Tous droits réservés</p>
 </footer>
 
