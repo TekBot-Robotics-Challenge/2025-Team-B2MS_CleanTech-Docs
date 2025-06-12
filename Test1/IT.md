@@ -78,7 +78,7 @@ Robot de déplacement libre dérivé de `robot`.
 ---
 
 ## 📐 4. Diagramme UML Simplifié
-
+![WhatsApp Image 2025-06-12 à 17 12 55_9bec65ae](https://github.com/user-attachments/assets/9f2ddd81-a3cf-40c8-962b-950bc6706b68)
 
 ---
 
