@@ -14,13 +14,15 @@ header {
   
 }
 
-h2, h3, h4 {
-  margin-top: 1rem;    
-  margin-bottom: 0.5rem;
+h2 {
+  margin-top: 0rem; 
+  text-align: center;
+  margin-bottom: 0.3rem;
 }
 
-h2 {
-  text-align: center;
+h3, h4 {
+  margin-top: 0rem;    
+  margin-bottom: 0.3rem;
 }
 
 p {
@@ -28,14 +30,10 @@ p {
   margin-bottom: 0.3rem;
 }
 
-h3, h4 {
+ul {
+  margin-top: 0;      
   margin-bottom: 0.3rem;
 }
-
-
-
-
-
 
 .main-nav {
   position: sticky;
