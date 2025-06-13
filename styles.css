@@ -195,13 +195,63 @@ nav {
   padding-block: 5rem 5rem;
 }
 
-.header__container_team h1 {
+/* .header__container_team h1 {
   font-size: 8rem;
   font-weight: 1000;
   line-height: 4.5rem;
   color: var(--primary-color);
   text-align: center;
+} */
+
+
+/* .header__container_team h1 {
+  font-family: "Orbitron";
+  font-size: 8rem;
+  font-weight: 800;
+  line-height: 4.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  color: transparent;
+  -webkit-text-stroke: 4px #00f5d4;
+  
+} */
+
+@keyframes neonBlink {
+  0%, 100% {
+    text-shadow:
+      0 0 10px rgba(0, 245, 212, 0.8),
+      0 0 20px rgba(0, 245, 212, 0.6),
+      0 0 30px rgba(0, 245, 212, 0.4);
+    -webkit-text-stroke: 1px #00f5d4;
+  }
+  50% {
+    text-shadow:
+      0 0 5px rgba(0, 245, 212, 0.2),
+      0 0 10px rgba(0, 245, 212, 0.1),
+      0 0 15px rgba(0, 245, 212, 0.05);
+    -webkit-text-stroke: 1px rgba(0, 245, 212, 0.3);
+  }
 }
+
+.header__container_team h1 {
+  font-family: "Orbitron";
+  font-size: 8rem;
+  font-weight: 800;
+  line-height: 4.5rem;
+  text-align: center;
+
+  color: transparent;
+  -webkit-text-stroke: 1px #00f5d4;
+
+  text-shadow:
+    0 0 10px rgba(0, 245, 212, 0.8),
+    0 0 20px rgba(0, 245, 212, 0.6),
+    0 0 30px rgba(0, 245, 212, 0.4);
+
+  animation: neonBlink 1.5s infinite;
+}
+
+
 
 
 .header__container {
