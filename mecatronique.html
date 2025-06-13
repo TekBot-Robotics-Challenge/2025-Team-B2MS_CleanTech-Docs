@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Département Mécatronique – B2MS CleanTech</title>
+  <link rel="stylesheet" href="style-commun.css" />
+
+</head>
+<body>
+  <header>
+    <h1>Département Mécatronique – B2MS CleanTech</h1>
+  </header>
+
+  <nav class="main-nav">
+    <a href="index.html"><button>Accueil</button></a>
+    <a href="it.html"><button>IT</button></a>
+    <a href="electronique.html"><button>Électronique</button></a>
+    <a href="mecanique.html"><button>Mécanique</button></a>
+    <button class="tab-button active" data-target="mecatronique-content">Mécatronique</button>
+  </nav>
+
+  <section id="mecatronique-content" class="tab-content active">
+    <nav class="subnav">
+      <button class="subtab-button active" data-target="test1">Test 1</button>
+      <button class="subtab-button" data-target="test2">Test 2</button>
+      <button class="subtab-button" data-target="test3">Test 3</button>
+    </nav>
+
+    <div id="test1" class="subtab-content active">
+      <h2>Test 1</h2>
+      <p>Contenu du Test 1 : description, code, résultats ou autres informations ici.</p>
+    </div>
+
+    <div id="test2" class="subtab-content">
+      <h2>Test 2</h2>
+      <p>Contenu du Test 2 : analyse, données, explications techniques, etc.</p>
+    </div>
+
+    <div id="test3" class="subtab-content">
+      <h2>Test 3</h2>
+      <p>Contenu du Test 3 : démo, visualisation, retour d’expérience, etc.</p>
+    </div>
+  </section>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script>
+    // Onglets principaux (IT, Electronique, ...)
+    document.querySelectorAll(".tab-button").forEach(button => {
+      button.addEventListener("click", e => {
+        document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+
+        // Afficher le contenu lié (ici, uniquement IT est en page unique)
+        document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
+
+        const target = e.currentTarget.getAttribute("data-target");
+        if (target) {
+          document.getElementById(target).classList.add("active");
+        }
+      });
+    });
+
+    // Sous-onglets (Test 1, 2, 3)
+    document.querySelectorAll(".subtab-button").forEach(button => {
+      button.addEventListener("click", e => {
+        const parent = e.currentTarget.closest(".tab-content");
+
+        parent.querySelectorAll(".subtab-button").forEach(btn => btn.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+
+        parent.querySelectorAll(".subtab-content").forEach(content => content.classList.remove("active"));
+        const target = e.currentTarget.getAttribute("data-target");
+        parent.querySelector("#" + target).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>

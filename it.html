@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Département IT – B2MS CleanTech</title>
+  <link rel="stylesheet" href="style-commun.css" />
+</head>
+<body>
+  <header>
+    <h1>Département IT – B2MS CleanTech</h1>
+  </header>
+
+  <nav class="main-nav">
+    <a href="index.html"><button>Accueil</button></a>
+    <button class="tab-button active" data-target="it-content">IT</button>
+    <a href="electronique.html"><button>Électronique</button></a>
+    <a href="mecanique.html"><button>Mécanique</button></a>
+    <a href="mecatronique.html"><button>Mécatronique</button></a>
+  </nav>
+
+  <section id="it-content" class="tab-content active">
+    <nav class="subnav">
+      <button class="subtab-button active" data-target="test1">Projet 1</button>
+      <button class="subtab-button" data-target="test2">Projet 2</button>
+      <button class="subtab-button" data-target="test3">Projet 3</button>
+    </nav>
+
+    <div id="test1" class="subtab-content active">
+      <h2>Système de Gestion de Robots</h2>
+        <h3>1. Contexte et objectifs:</h3>
+          <p>
+            L’objectif de ce projet est de mettre en pratique les principes de la programmation orientée objet (POO) en C++ à travers la conception d’un système de gestion de différents types de robots.
+          </p>
+          <p>
+            Le système permet notamment de :
+          </p>
+          <ul>
+            <li>Créer plusieurs types de robots avec des comportements spécifiques.</li>
+            <li>Simuler leurs mouvements.</li>
+            <li>Implémenter des fonctionnalités génériques : héritage, polymorphisme, surcharge, encapsulation, etc.</li>
+            <li>Appliquer les bonnes pratiques de conception logicielle (structure modulaire, classes bien définies, etc.).</li>
+          </ul>
+          <h3>2. Architecture générale</h3>
+
+          <p>
+            Le système est composé de trois classes principales, dont une classe mère : <strong>robot</strong>.
+          </p>
+
+          <h4><strong>a. robot</strong>(Classe mère)</h4>
+          <p>
+            Il s'agit d'une classe générique représentant un robot. Elle regroupe les attributs et comportements communs à tous les types de robots.
+          </p>
+
+          <p>
+            - Attributs principaux : ID du robot, Position 2D : coordonnées <code>(x, y)</code>, État : <code>ON</code> ou <code>OFF</code>
+          </p>
+          <p>
+            - Fonctionnalités : constructeurs / destructeurs, méthodes de déplacement (virtuelles), calcul de la distance à l’origine, méthodes d’affichage
+          </p>
+
+          <h4><strong>b. deliveryRobot </strong>(Classe fille)</h4>
+          <p>
+            Il s'agit d'un robot de livraison, dérivé de <strong>robot</strong>.
+          </p>
+
+          <p>
+            - Fonctionnalités spécifiques  : livrer des entités vers des zones prédéfinies (zone1, zone2), gèrer le nombre d'entités à livrer, implémenter un déplacement basé sur la zone          
+          </p>
+
+          <h4><strong>c. deliveryRobot </strong>(Classe fille)</h4>
+          <p>
+            Il s'agit d'un robot qui se déplace librement, dérivé de <strong>robot</strong>.
+          </p>
+
+          <p>
+            - Fonctionnalité spécifique  : se déplacer dans une direction donnée(avant, arrière, gauche, droite)       
+          </p>
+
+          <h4><strong>d. armRobot </strong>(Classe fille)</h4>
+          <p>
+            Il s'agit d'un bras robotique, dérivé de <strong>robot</strong>.
+          </p>
+
+          <p>
+            - Fonctionnalité spécifique  : effectuer une rotation dans une direction     
+          </p>
+
+        <h3>3. Concept de POO utilisés</h3>
+            <ul>
+            <li><strong>Encapsulation</strong> : Attributs privés, accès par getters/setters</li>
+            <li><strong>Héritage </strong> : Les classes deliveryRobot et travellingRobot héritent de robot</li>
+            <li><strong>Polymorphisme </strong> : Méthodes virtuelles (move, getNameOfRobot)</li>
+            <li><strong>Surcharge </strong> : Constructeurs et opérateurs d’affectation</li>
+          </ul>
+
+          <div class="image-container">
+            <img src="images/Test1/IT/code_it.png" alt="Code" class="image-centree" />
+            <p>
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/tree/29c205f31917e11acc9b94ef01549ebb94ee7ca4/Test1/IT" download class="download-link">lien vers les codes</a>
+            </p>
+          </div>
+
+          
+          <h3>4. Diagramme UML</h3>
+          <div class="image-container">
+            <img src="images/Test1/IT/UML digramme.png" alt="Diagramme UML simplifié" class="image-centree" />
+          </div>
+       
+          <h3>5. Tests réalisés</h3>
+            <ul>
+            <li>Création d’objets de chaque classe</li>
+            <li>Simulation des déplacements (changement de zone / direction)</li>
+            <li>Vérification des distances depuis l’origine</li>
+            <li>Test du polymorphisme avec des pointeurs de type robot*</li>
+          </ul>  
+
+          <h3>6. Résultats obtenus</h3>
+            <ul>
+            <li>Chaque type de robot fonctionne indépendamment</li>
+            <li>Les mouvements sont simulés correctement selon la logique métier</li>
+            <li>Le code est bien structuré, modulaire, réutilisable et extensible</li>
+            <li>Les bonnes pratiques C++ sont respectées (gestion mémoire, encapsulation, etc.)</li>
+          </ul> 
+
+          <h3>7. Limites et perspectives</h3>
+            <h4>Limitations :</h4>
+            <ul>
+            <li>Les déplacements sont simulés mais pas visualisés graphiquement.</li>
+            <li>Le système ne gère pas d’environnement réel ou physique</li>
+          </ul> 
+          
+            <h4>Améliorations possibles :</h4>
+            <ul>
+            <li>Ajout d’une interface graphique (SFML, Qt)</li>
+            <li>Implémentation de logs ou de fichiers de tracking</li>
+            <li>Extension à d’autres types de robots (volants, marins, etc.)</li>
+            <li>Gestion d’obstacles, de cartes ou de missions</li>
+          </ul> 
+
+        <h3>8. Conclusion</h3>
+          <p>
+            Ce projet nous a permis de :
+          </p>
+          <ul>
+            <li>Appliquer les concepts fondamentaux de la programmation orientée objet</li>
+            <li>Comprendre l’importance de la conception logicielle modulaire</li>
+            <li>Développer un système cohérent, évolutif et structuré en C++</li>
+          </ul>  
+
+          <p>
+            Il constitue une base solide pour des projets plus complexes, comme des systèmes embarqués dans des robots réels ou des simulations d’intelligence artificielle mobile.
+          </p>
+
+    </div>
+
+    <div id="test2" class="subtab-content">
+      <h2>Test 2</h2>
+      
+      <p>Contenu du Test 2 :</p>
+    </div>
+
+    <div id="test3" class="subtab-content">
+      <h2>Test 3</h2>
+      <p>Contenu du Test 3 :</p>
+    </div>
+  </section>
+
+  <footer>
+        Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script>
+    // Onglets principaux (IT, Electronique, ...)
+    document.querySelectorAll(".tab-button").forEach(button => {
+      button.addEventListener("click", e => {
+        document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+
+        // Afficher le contenu lié (ici, uniquement IT est en page unique)
+        document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
+
+        const target = e.currentTarget.getAttribute("data-target");
+        if (target) {
+          document.getElementById(target).classList.add("active");
+        }
+      });
+    });
+
+    // Sous-onglets (Test 1, 2, 3)
+    document.querySelectorAll(".subtab-button").forEach(button => {
+      button.addEventListener("click", e => {
+        const parent = e.currentTarget.closest(".tab-content");
+
+        parent.querySelectorAll(".subtab-button").forEach(btn => btn.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+
+        parent.querySelectorAll(".subtab-content").forEach(content => content.classList.remove("active"));
+        const target = e.currentTarget.getAttribute("data-target");
+        parent.querySelector("#" + target).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
