@@ -3,257 +3,206 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Département Électronique – B2MS CleanTech</title>
+  <title>Département Mécanique – B2MS CleanTech</title>
   <link rel="stylesheet" href="style-commun.css" />
 
 </head>
 <body>
   <header>
-    <h1>Département Électronique – B2MS CleanTech</h1>
+    <h1>Département Mécanique – B2MS CleanTech</h1>
   </header>
 
   <nav class="main-nav">
     <a href="index.html"><button>Accueil</button></a>
     <a href="it.html"><button>IT</button></a>
-    <button class="tab-button active" data-target="electronique-content">Electronique</button>
-    <a href="mecanique.html"><button>Mécanique</button></a>
+    <a href="electronique.html"><button>Électronique</button></a>
+    <button class="tab-button active" data-target="mecanique-content">Mécanique</button>
     <a href="mecatronique.html"><button>Mécatronique</button></a>
   </nav>
 
-  <section id="electronique-content" class="tab-content active">
+  <section id="mecanique-content" class="tab-content active">
     <nav class="subnav">
-      <button class="subtab-button active" data-target="test1">Projet 1</button>
-      <button class="subtab-button" data-target="test2">Projet 2</button>
-      <button class="subtab-button" data-target="test3">Projet 3</button>
+      <button class="subtab-button active" data-target="test1">Niveau 1</button>
+      <button class="subtab-button" data-target="test2">Niveau 2</button>
+      <button class="subtab-button" data-target="test3">Niveau 3</button>
     </nav>
 
+
     <div id="test1" class="subtab-content active">
-      <h2>Projet Gyroscope et Accéléromètre MPU6050</h2>
-        <h3>1. Contexte et objectifs:</h3>
+      <h2>Conception et assemblage des pièces</h2>
+        <h3>1. Objectifs:</h3>
           <p>
-            Les données de navigation telles que la direction et l'accélération sont essentielles dans la conception d’un robot.
-            Ce projet utilise un module MPU6050, combinant un gyroscope et un accéléromètre, pour mesurer l’orientation et les mouvements.
+            Cette partie vise à évaluer vos compétences de base en conception assistée par ordinateur (CAO) à l’aide de SolidWorks.
           </p>
           <p>
-            Ce projet a pour objectif de :
+            Il est divisé en deux grandes parties :
           </p>
           <ul>
-            <li>Comprendre le fonctionnement d’un capteur inertiel (IMU).</li>
-            <li>afficher en temps réel les directions (haut, bas, gauche, droite) ainsi que les données d’accélération sur un écran LCD.</li>
-            <li>Utiliser le protocole de communication I2C.</li>
-            <li>Appliquer les bonnes pratiques de conception logicielle (structure modulaire, classes bien définies, etc.).</li>
+            <li>
+              Modélisation de pièces simples : Modéliser des pièces simples en respectant 
+              les consignes géométriques, les matériaux et les unités, puis déterminer leur masse.
+            </li>
+            <li>
+              Assemblage d’un mécanisme de pince mécanique : Assembler une pince mécanique à l’aide des fichiers fournis
+              et déterminer les coordonnées du centre de masse dans deux positions.
+            </li>
           </ul>
 
-          <h3>2. Choix du capteur : MPU6050</h3>
+          <h3>2. Conception de pièces 3D</h3>
+          <h4>Pièce I</h4>
+            <div class="image-container">
+            <img src="images/Test1/Mecanique/Piece1/piece1a.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece1/piece1b.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece1/piece1c.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece1/piece1d.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece1/piece1e.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece1/piece1f.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece1/piece1g.png" alt="Piece" class="image-small" />
+            <p>
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test1/Mecanique/Pi%C3%A8ce1.SLDPRT" download class="download-link">télécharger la pièce 1</a>
+            </p>
+          </div>
+          
 
           <p>
-           Le <strong>MPU6050</strong> est un capteur IMU (Inertial Measurement Unit) 6 axes qui combine :
-            <ul>
-            <li>Un accéléromètre 3 axes</li>
-            <li>Un gyroscope 3 axes</li>
-            </ul>
+            Ce qui donne :
           </p>
+
+          <div class="image-container">
+            <img src="images/Test1/Mecanique/Piece1/piece1_propriete.png" alt="Piece" class="image-small" />
+            <p>
+              La masse de la pièce est donc 3201.11 g.
+            </p>
+          </div>
+          
+          
+          
+
+          <h4>Pièce II</h4>
+            <div class="image-container">
+            <!-- <img src="images/Mecanique/Piece2/piece2a.png" alt="Piece" class="image-small" /> -->
+            <img src="images/Test1/Mecanique/Piece2/piece2b.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece2/piece2c.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece2/piece2d.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece2/piece2e.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece2/piece2f.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece2/piece2g.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece2/piece2h.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece2/piece2i.png" alt="Piece" class="image-small" />
+            <p>
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test1/Mecanique/Pi%C3%A8ce2.SLDPRT" download class="download-link">télécharger la pièce 2</a>
+            </p>
+          </div>
+          
+          <p>
+            Ce qui donne :
+          </p>
+
+          <div class="image-container">
+            <img src="images/Test1/Mecanique/Piece2/piece2_propriete.png" alt="Piece" class="image-small" />
+            <p>
+              La masse de la pièce est donc 296.30 g.
+            </p>
+          </div>
+          
+          <h4>Pièce III</h4>
+            <div class="image-container">
+            <img src="images/Test1/Mecanique/Piece3/piece3a.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece3/piece3b.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece3/piece3c.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece3/piece3d.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece3/piece3e.png" alt="Piece" class="image-small" />
+            <p>
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test1/Mecanique/Pi%C3%A8ce3.SLDPRT" download class="download-link">télécharger la pièce 3</a>
+            </p>
+          </div>
+
+          <p>
+            Ce qui donne :
+          </p>
+
+          <div class="image-container">
+            <img src="images/Test1/Mecanique/Piece3/piece3_propriete.png" alt="Piece" class="image-small" />
+            <p>
+              La masse de la pièce est donc 1633.25 g.
+            </p>
+          </div>
+
+          <h4>Pièce IV</h4>
+            <div class="image-container">
+            <img src="images/Test1/Mecanique/Piece4/piece4a.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece4/piece4b.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece4/piece4c.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece4/piece4d.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece4/piece4e.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece4/piece4f.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece4/piece4g.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece4/piece4h.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Piece4/piece4i.png" alt="Piece" class="image-small" />
+            <p>
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test1/Mecanique/Pi%C3%A8ce4.SLDPRT" download class="download-link">télécharger la pièce 4</a>
+            </p>
+          </div>
         
           <p>
-            Il utilise une interface I2C, parfaitement compatible avec les
-            microcontrôleurs comme l’Arduino, ce qui facilite la lecture des
-            données avec un minimum de fils et une consommation réduite.
+            Ce qui donne :
           </p>
 
-          <p>
-            Il est largement utilisé dans la communauté Arduino, avec de
-            nombreuses bibliothèques disponibles (comme MPU6050.h ou
-            Wire.h), ce qui simplifie le développement et le débogage
-          </p>
-
-          <p>
-          <strong>Caractéristiques principales</strong> : <a href="https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf" download class="download-link">datasheet du MPU6050</a>
-            <ul>
-            <li>Interface I2C (adresse par défaut : `0x68`)</li>
-            <li>Plage de mesure accéléromètre : ±2g, ±4g, ±8g, ±16g</li>
-            <li>Tension d’alimentation : 3.3V – 5V</li>
-            </ul>
-            
-          </p>
-          
-
-        <h3>3. Principe de fonctionnement</h3>
-            <p>
-             Le capteur MPU6050 combine deux fonctions principales : un accéléromètre et un gyroscope.
-            L’accéléromètre permet de mesurer l’accélération linéaire sur les trois axes (X, Y, Z), ce qui
-            permet de détecter les mouvements de la main vers le haut, le bas, la gauche, la droite, l’avant
-            ou l’arrière. De son côté, le gyroscope mesure la vitesse angulaire sur ces mêmes axes, ce qui
-            permet de connaître l’orientation de la main, comme une inclinaison ou une rotation.
-          </p>
-
-          <p>
-           Pour transmettre les données au microcontrôleur, le MPU6050 utilise le protocole de
-            communication I2C. Ce protocole est simple et efficace, car il ne nécessite que deux fils : la
-            ligne SCL (pour l’horloge) et la ligne SDA (pour les données). Grâce à cette liaison, le
-            microcontrôleur peut envoyer des commandes au capteur et lire ses valeurs en temps réel.
-          </p>
-
-          <p>
-           Pour que le MPU6050 envoie les données, il ne suffit pas
-          de simplement le connecter. Étant donné qu’on utilise
-          une communication I2C, il faut suivre un protocole bien
-          défini :
-          </p>
-
-          <h4>a. Envoi d’une commande au capteur</h4>
-  
-            <p>
-            Avant de lire une donnée, l’Arduino doit envoyer l’adresse du registre souhaité. Cette adresse indique quel type de
-              donnée on veut (accélération, vitesse angulaire)
-            </p>
-
-            <div class="image-container">
-              <img src="images/Test1/Electronique/registre_electronique1.png" alt="Registre" class="image-centree" />
-            </div>
-            <div class="image-container">
-              <img src="images/Test1/Electronique/registre_electronique2.png" alt="Registre" class="image-centree" />
-            </div>
-
-          <h4>b.  Structure des données reçues</h4>
-
-            <p>
-              Chaque mesure (accélération ou rotation) est codée sur 16 bits (2 octets) :  
-            </p>
-              <ul>
-              <li>8 bits MSB (poids fort)</li>
-              <li>8 bits LSB (poids faible)</li>
-            </ul> 
-            <p>
-              Les valeurs sont en complément à deux (signed integer), ce qui permet d'indiquer un sens positif ou négatif du mouvement. 
-            </p>
-
-          <h4>c. Conversion des données brutes</h4>
-  
-            <p>
-            Pour exploiter les mesures, il faut les convertir en unités physiques :
-            </p>
-            <ul>
-              <li> Accélération en g (gravité terrestre)</li>
-              <li> Rotation en °/s (degrés par seconde)</li>
-            </ul> 
-
-            <div class="image-container">
-              <img src="images/Test1/Electronique/converesion_electro1.png" alt="Conversion" class="image-centree" />
-            </div>
-            <div class="image-container">
-              <img src="images/Test1/Electronique/converesion_electro2.png" alt="Conversion" class="image-centree" />
-            </div>
-
-          
-          <h3>4. Schéma électronique sous KICAD</h3>
           <div class="image-container">
-            <img src="images/Test1/Electronique/schema_electro.png" alt="Schéma électronique sous KICAD" class="image-centree" />
-          </div>
-
-          <h3>
-            5. Codage : <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/tree/29c205f31917e11acc9b94ef01549ebb94ee7ca4/Test1/Electronique" download class="download-link">lien vers les codes</a>
-          </h3> 
-          <h4>a. Code 1: </h4> 
+            <img src="images/Test1/Mecanique/Piece4/piece4_propriete.png" alt="Piece" class="image-small" />
             <p>
-              Ce code utilise les librairies existantes sur Arduino IDE.
+              La masse de la pièce est donc 131.77 g.
             </p>
-          <div class="image-container">
-            <img src="images/Test1/Electronique/code1a.png" alt="Code" class="image-small" />
-            <img src="images/Test1/Electronique/code1b.png" alt="Code" class="image-small" />
-            <img src="images/Test1/Electronique/code1c.png" alt="Code" class="image-small" />
           </div>
 
-          <h4>a. Code 2: </h4> 
+        <h3>3. Assemblage  d’une pince mécanique</h3>
+        <p>
+          Ayant les pièces fournies, nous avons suivi les plans ci-dessous :
+        </p>
+          <div class="image-container">
+            <img src="images/Test1/Mecanique/Assemblage/pieces_fournies.png" alt="Piece" class="image-center" />
+          </div>
+
+          <div class="image-container">
+            <img src="images/Test1/Mecanique/Assemblage/plan1.png" alt="Piece" class="image-small" />
+            <img src="images/Test1/Mecanique/Assemblage/plan2.png" alt="Piece" class="image-small" />
+          </div>
+
+          <h4>Embout de vérin en position minimale</h4>
+          <div class="image-container">
+            <img src="images/Test1/Mecanique/Assemblage/assemblage1.png" alt="Piece" class="image-center" />
+            <img src="images/Test1/Mecanique/Assemblage/assemblage1_propriete.png" alt="Piece" class="image-small" />
             <p>
-              Ce code n'utilise pas les librairies existantes sur Arduino IDE pour le capteur.
+              Le centre de gravité de l'objet : (13.84; 3.78; 19.86).
             </p>
-            <div class="image-container">
-            <img src="images/Test1/Electronique/code2a.png" alt="Code" class="image-small" />
-            <img src="images/Test1/Electronique/code2b.png" alt="Code" class="image-small" />
-            <img src="images/Test1/Electronique/code2c.png" alt="Code" class="image-small" />
-            <img src="images/Test1/Electronique/code2d.png" alt="Code" class="image-small" />
-            <img src="images/Test1/Electronique/code2e.png" alt="Code" class="image-small" />
           </div>
 
-
-          <h3>6. Conception d'un prototype et démonstration</h3>
-          <ul>
-              <li> 
-                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/e5c868a970dbb57e96550918782e5e32cda997c2/images/Test1/Electronique" download class="download-link">lien vers les images</a>
-             </li>
-              <li>
-                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/e5c868a970dbb57e96550918782e5e32cda997c2/videos/Test1/Electronique" download class="download-link">lien vers les vidéos</a>
-              </li>
-            </ul> 
           
+
+          <h4>Embout de vérin en position maximale</h4>
           <div class="image-container">
-            <img src="images/Test1/Electronique/electronique1.jpg" alt="Prototype" class="image-small" />
-            <img src="images/Test1/Electronique/electronique2.jpg" alt="Prototype" class="image-small" />
-            <img src="images/Test1/Electronique/electronique3.jpg" alt="Prototype" class="image-small" />
-            <img src="images/Test1/Electronique/electronique4.jpg" alt="Prototype" class="image-small" />
+            <img src="images/Test1/Mecanique/Assemblage/assemblage2.png" alt="Piece" class="image-center" />
+            <img src="images/Test1/Mecanique/Assemblage/assemblage2_propriete.png" alt="Piece" class="image-small" />
+            <p>
+              Le centre de gravité de l'objet : (10.47; 3.87; 19.86).
+            </p>
           </div>
 
-          <video controls width=auto>
-            <source src="videos/Test1/Electronique/final_trial.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la vidéo HTML5.
-          </video>
-
-          <video controls width=auto>
-            <source src="videos/Test1/Electronique/prototype.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la vidéo HTML5.
-          </video>
-
-          <h3>7. Remarques</h3>
-            <ul>
-            <li>
-              Pour des lectures plus stables et précises, il est possible d'intégrer
-              un filtre complémentaire ou un filtre de Kalman.</li>
-            <li>
-              Ce projet constitue une excellente base pour des systèmes plus avancés,
-              tels que les contrôleurs, les robots auto-équilibrés ou les plateformes de stabilisation.</li>
-          </ul> 
-          
-    
-        <h3>8. Conclusion</h3>
-          <p>
-            Ce projet nous a permis d’explorer l’intégration d’un capteur inertiel dans un système embarqué, ainsi que de mettre en œuvre la détection
-            et l’affichage en temps réel des mouvements de la main.
+          <p class="txt_center">
+             <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test1/Mecanique/AssemblageTEST1.SLDASM" download class="download-link">télécharger la pince mécanique</a>
           </p>
-           
-          <p>
-            Le module MPU6050 s’est révélé être un outil efficace et accessible
-            pour la détection de l’orientation et des mouvements.
-          </p>
-
-          <p>
-            Grâce à sa compatibilité avec l’écosystème Arduino et à la disponibilité de bibliothèques
-            dédiées, le MPU6050 peut être facilement intégré dans divers projets éducatifs ou de prototypage.
-          </p>
-
-          <p>
-            L’affichage des directions détectées et des valeurs d’accélération sur un écran LCD 16x2
-            offre une visualisation claire et pédagogique, idéale pour l’apprentissage des capteurs,
-            de la programmation de microcontrôleurs et des interfaces homme-machine.
-          </p>      
-          
-          <p>
-            Au-delà de son intérêt pédagogique, ce système peut être étendu à des applications telles
-            que le contrôle par gestes, la réalité virtuelle ou la robotique, avec la possibilité
-            d’ajouter une communication Bluetooth ou Wi-Fi pour renforcer l’interactivité.
-          </p>      
-
 
     </div>
 
+
     <div id="test2" class="subtab-content">
       <h2>Test 2</h2>
-      
-      <p>Contenu du Test 2 :</p>
+      <p>Contenu du Test 2 : analyse, données, explications techniques, etc.</p>
     </div>
 
     <div id="test3" class="subtab-content">
       <h2>Test 3</h2>
-      <p>Contenu du Test 3 :</p>
+      <p>Contenu du Test 3 : démo, visualisation, retour d’expérience, etc.</p>
     </div>
   </section>
 
