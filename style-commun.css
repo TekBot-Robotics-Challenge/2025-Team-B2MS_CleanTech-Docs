@@ -35,6 +35,16 @@ ul {
   margin-bottom: 0.3rem;
 }
 
+.txt_center{
+  text-align: center;
+}
+
+.txt_center p{
+  text-align: center;
+  margin-top: 0;      
+  margin-bottom: 0.3rem;
+}
+
 .main-nav {
   position: sticky;
   top: 0;
