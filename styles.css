@@ -130,7 +130,7 @@ body {
 .logo-ecole {
   margin-bottom: 0.5rem;
   width: 200px;
-  height: auto;
+  height: 60px;
 }
 
 
@@ -192,29 +192,9 @@ nav {
 }
 
 .header__container_team {
-  padding-block: 5rem 5rem;
+  padding-block:4rem 4rem;
 }
 
-/* .header__container_team h1 {
-  font-size: 8rem;
-  font-weight: 1000;
-  line-height: 4.5rem;
-  color: var(--primary-color);
-  text-align: center;
-} */
-
-
-/* .header__container_team h1 {
-  font-family: "Orbitron";
-  font-size: 8rem;
-  font-weight: 800;
-  line-height: 4.5rem;
-  color: var(--primary-color);
-  text-align: center;
-  color: transparent;
-  -webkit-text-stroke: 4px #00f5d4;
-  
-} */
 
 @keyframes neonBlink {
   0%, 100% {
@@ -255,7 +235,7 @@ nav {
 
 
 .header__container {
-  padding-block: 0rem 15rem;
+  padding-block: 0rem 8rem;
 }
 
 
