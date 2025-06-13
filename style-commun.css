@@ -32,11 +32,21 @@ h3, h4 {
   margin-bottom: 0.3rem;
 }
 
+p, ul {
+  margin-bottom: 0.3rem;
+}
 
+h2, ul {
+  margin-bottom: 0.3rem;
+}
 
+h3, ul {
+  margin-bottom: 0.3rem;
+}
 
-
-
+h4, ul {
+  margin-bottom: 0.3rem;
+}
 .main-nav {
   position: sticky;
   top: 0;
