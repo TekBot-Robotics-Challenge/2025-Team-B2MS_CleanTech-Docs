@@ -158,7 +158,13 @@ img {
 }
 
 .image-centree {
-  max-width: 100%;
+  max-width: 80%;
+  height: auto;
+  cursor: pointer;
+}
+
+.image-small {
+  max-width: 40%;
   height: auto;
   cursor: pointer;
 }
@@ -170,6 +176,7 @@ video {
   margin: 2rem auto;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  max-width: 40%;
 }
 
 .download-link {
