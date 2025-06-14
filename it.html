@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Département IT – B2MS CleanTech</title>
   <link rel="stylesheet" href="style-commun.css" />
+  <link rel="stylesheet" href="style-code.css" />
 </head>
 <body>
   <header>
@@ -53,11 +54,87 @@
           </p>
 
           <p>
-            - Attributs principaux : ID du robot, Position 2D : coordonnées <code>(x, y)</code>, État : <code>ON</code> ou <code>OFF</code>
+            - Attributs principaux : ID du robot, Position 2D : coordonnées (x, y), État : ON ou OFF
           </p>
           <p>
             - Fonctionnalités : constructeurs / destructeurs, méthodes de déplacement (virtuelles), calcul de la distance à l’origine, méthodes d’affichage
           </p>
+
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-cpp')">Copier</button>
+              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+            </div>
+            <pre><code id="code-cpp">
+                #include "robot.hpp"
+
+                robot::robot() : ID(0), position(0, 0), status(OFF) {}
+
+                robot::robot(unsigned int Id, float x, float y) : ID(Id), position(x, y), status(ON) {}
+
+                robot::robot(const robot &rhs)
+                    : ID(rhs.ID), position(rhs.position), status(rhs.status) {}
+
+                robot &robot::operator=(const robot &rhs)
+                {
+                    if (this != &rhs)
+                    {
+                        ID = rhs.ID;
+                        position = rhs.position;
+                        status = rhs.status;
+                    }
+                    return *this;
+                }
+
+                robot::~robot() {}
+
+                float robot::distanceFromOrigin()
+                {
+                    return std::sqrt(position.x * position.x + position.y * position.y);
+                }
+
+                vect2D robot::getPosition() const
+                {
+                    return position;
+                }
+
+                void robot::setPosition(const vect2D &currentPosition)
+                {
+                    position = currentPosition;
+                }
+
+                unsigned int robot::getID() const
+                {
+                    return ID;
+                }
+
+                void robot::setID(int Id)
+                {
+                    ID = Id;
+                }
+
+                state robot::getStatus() const
+                {
+                    return status;
+                }
+
+                void robot::setStatus(const state &OnOrOff)
+                {
+                    status = OnOrOff;
+                }
+
+                void printNameOfRobot(robot *p)
+                {
+                    std::cout << p->getNameOfRobot() << std::endl;
+                }
+
+                void moveRobot(robot *p)
+                {
+                    p->move();
+                }
+
+            </code></pre>
+          </div>
 
           <h4><strong>b. deliveryRobot </strong>(Classe fille)</h4>
           <p>
@@ -68,7 +145,94 @@
             - Fonctionnalités spécifiques  : livrer des entités vers des zones prédéfinies (zone1, zone2), gèrer le nombre d'entités à livrer, implémenter un déplacement basé sur la zone          
           </p>
 
-          <h4><strong>c. deliveryRobot </strong>(Classe fille)</h4>
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-cpp')">Copier</button>
+              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+            </div>
+            <pre><code id="code-cpp">
+                #include "deliveryRobot.hpp"
+
+                deliveryRobot::deliveryRobot(zone ZONE, unsigned short nbrOfEntities, unsigned int Id, float x, float y)
+                    : robot(Id, x, y), entities(nbrOfEntities), Zone(ZONE) {}
+
+                deliveryRobot::deliveryRobot() : robot(), entities(0), Zone(keepYourPlace) {}
+
+                deliveryRobot::deliveryRobot(const deliveryRobot &rhs) : robot(rhs)
+                {
+                    if (this != &rhs)
+                    {
+                        entities = rhs.entities;
+                        Zone = rhs.Zone;
+                    }
+                }
+
+                deliveryRobot &deliveryRobot::operator=(const deliveryRobot &rhs)
+                {
+                    if (this != &rhs)
+                    {
+                        robot::operator=(rhs);
+                        entities = rhs.entities;
+                        Zone = rhs.Zone;
+                    }
+                    return *this;
+                }
+
+                deliveryRobot::~deliveryRobot() {}
+
+                void deliveryRobot::move()
+                {
+                    switch (Zone)
+                    {
+                    case keepYourPlace:
+                        break;
+                    case zone1:
+                        position.x = 10;
+                        position.y = 20;
+                        if (entities > 0)
+                            entities--;
+                        break;
+                    case zone2:
+                        position.x = 0;
+                        position.y = 30;
+                        if (entities > 0)
+                            entities--;
+                        break;
+                    default:
+                        Zone = keepYourPlace;
+                        break;
+                    }
+                }
+
+                std::string deliveryRobot::getNameOfRobot()
+                {
+                    return "Delivery Robot";
+                }
+
+                unsigned short deliveryRobot::getNbrOfEntities()
+                {
+                    return entities;
+                }
+
+                void deliveryRobot::setNbrOfEntities(unsigned short nbrOfEntities)
+                {
+                    entities = nbrOfEntities;
+                }
+
+                zone deliveryRobot::getZone()
+                {
+                    return Zone;
+                }
+
+                void deliveryRobot::setZone(zone ZONE)
+                {
+                    Zone = ZONE;
+                }
+
+            </code></pre>
+          </div>
+
+          <h4><strong>c. travellingRobot </strong>(Classe fille)</h4>
           <p>
             Il s'agit d'un robot qui se déplace librement, dérivé de <strong>robot</strong>.
           </p>
@@ -76,6 +240,80 @@
           <p>
             - Fonctionnalité spécifique  : se déplacer dans une direction donnée(avant, arrière, gauche, droite)       
           </p>
+
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-cpp')">Copier</button>
+              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+            </div>
+            <pre><code id="code-cpp">
+              #include "travellingRobot.hpp"
+
+              travellingRobot::travellingRobot(direction DIRECTION, unsigned int Id, float x, float y)
+                  : robot(Id, x, y), Direction(DIRECTION) {}
+
+              travellingRobot::travellingRobot() : robot(), Direction(Stop) {}
+
+              travellingRobot::travellingRobot(const travellingRobot &rhs) : robot(rhs)
+              {
+                  if (this != &rhs)
+                  {
+                      Direction = rhs.Direction;
+                  }
+              }
+
+              travellingRobot &travellingRobot::operator=(const travellingRobot &rhs)
+              {
+                  if (this != &rhs)
+                  {
+                      robot::operator=(rhs);
+                      Direction = rhs.Direction;
+                  }
+                  return *this;
+              }
+
+              travellingRobot::~travellingRobot() {}
+
+              void travellingRobot::move()
+              {
+                  switch (Direction)
+                  {
+                  case Stop:
+                      break;
+                  case Forward:
+                      position.y += 1;
+                      break;
+                  case Backward:
+                      position.y -= 1;
+                      break;
+                  case Right:
+                      position.x += 1;
+                      break;
+                  case Left:
+                      position.x -= 1;
+                      break;
+                  default:
+                      Direction = Stop;
+                      break;
+                  }
+              }
+
+              std::string travellingRobot::getNameOfRobot()
+              {
+                  return "Travelling Robot";
+              }
+
+              direction travellingRobot::getDirection()
+              {
+                  return Direction;
+              }
+
+              void travellingRobot::setDirection(direction DIRECTION)
+              {
+                  Direction = DIRECTION;
+              }
+            </code></pre>
+          </div>
 
           <h4><strong>d. armRobot </strong>(Classe fille)</h4>
           <p>
@@ -86,6 +324,73 @@
             - Fonctionnalité spécifique  : effectuer une rotation dans une direction     
           </p>
 
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-cpp')">Copier</button>
+              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+            </div>
+            <pre><code id="code-cpp">
+                #include "armRobot.hpp"
+
+                armRobot::armRobot()
+                  : robot(), angle(0), rotationalDirection(Clockwise) {}
+
+                armRobot::armRobot(rotate rotationalDirection, unsigned short initAngle, unsigned int id, float x, float y)
+                  : robot(id, x, y), angle(initAngle), rotationalDirection(rotationalDirection) {}
+
+                armRobot::armRobot(const armRobot &rhs)
+                  : robot(rhs), angle(rhs.angle), rotationalDirection(rhs.rotationalDirection) {}
+
+                armRobot &armRobot::operator=(const armRobot &rhs)
+                {
+                  if (this != &rhs)
+                  {
+                    robot::operator=(rhs);
+                    angle = rhs.angle;
+                    rotationalDirection = rhs.rotationalDirection;
+                  }
+                  return *this;
+                }
+
+                armRobot::~armRobot() {}
+
+                void armRobot::move()
+                {
+                  // Simuler un mouvement de rotation de 10 degrés
+                  if (rotationalDirection == Clockwise)
+                    angle = (angle + 10) % 360;
+                  else
+                    angle = (angle + 350) % 360; // recule de 10 degrés
+                }
+
+                std::string armRobot::getNameOfRobot()
+                {
+                  return "Arm Robot";
+                }
+
+                unsigned short armRobot::getAngle() const
+                {
+                  return angle;
+                }
+
+                void armRobot::setAngle(unsigned short angle_)
+                {
+                  angle = angle_;
+                }
+
+                rotate armRobot::getRotationalDirection() const
+                {
+                  return rotationalDirection;
+                }
+
+                void armRobot::setRotationalDirection(rotate rotationalDirection_)
+                {
+                  rotationalDirection = rotationalDirection_;
+                }
+
+            </code></pre>
+          </div>
+
         <h3>3. Concept de POO utilisés</h3>
             <ul>
             <li><strong>Encapsulation</strong> : Attributs privés, accès par getters/setters</li>
@@ -93,14 +398,6 @@
             <li><strong>Polymorphisme </strong> : Méthodes virtuelles (move, getNameOfRobot)</li>
             <li><strong>Surcharge </strong> : Constructeurs et opérateurs d’affectation</li>
           </ul>
-
-          <div class="image-container">
-            <img src="images/Test1/IT/code_it.png" alt="Code" class="image-centree" />
-            <p>
-              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/tree/29c205f31917e11acc9b94ef01549ebb94ee7ca4/Test1/IT" download class="download-link">lien vers les codes</a>
-            </p>
-          </div>
-
           
           <h3>4. Diagramme UML</h3>
           <div class="image-container">
@@ -114,6 +411,69 @@
             <li>Vérification des distances depuis l’origine</li>
             <li>Test du polymorphisme avec des pointeurs de type robot*</li>
           </ul>  
+
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-cpp')">Copier</button>
+              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+            </div>
+            <pre><code id="code-cpp">
+                #include "travellingRobot.hpp"
+                #include "deliveryRobot.hpp"
+                #include "armRobot.hpp"
+                #include &lt;iostream&gt;
+
+                std::string rotateToString(rotate r)
+                {
+                    switch (r)
+                    {
+                    case anticlockwise:
+                        return "Anticlockwise";
+                    case Clockwise:
+                        return "Clockwise";
+                    default:
+                        return "Unknown";
+                    }
+                }
+
+                int main()
+                {
+                    // ------------------Travelling Robot----------------------
+                    travellingRobot a(Forward, 111, 0, 0);
+                    printNameOfRobot(&a);
+                    moveRobot(&a);
+                    vect2D v = a.getPosition();
+                    std::cout << "\n"
+                              << v.x << " " << v.y << std::endl;
+                    std::cout << a.getID() << std::endl;
+                    std::cout << a.getDirection() << std::endl;
+
+                    // ------------------Delivery Robot-----------------------
+                    deliveryRobot b(zone1, 10, 222, 0, 0);
+                    printNameOfRobot(&b);
+                    moveRobot(&b);
+                    v = b.getPosition();
+                    std::cout << "\n"
+                              << v.x << " " << v.y << std::endl;
+                    std::cout << b.getID() << std::endl;
+                    std::cout << b.getNbrOfEntities() << std::endl;
+                    std::cout << b.getZone() << std::endl;
+
+                    // ------------------ARM Robot---------------------------
+                    armRobot c(anticlockwise, 0, 333, 0, 0);
+                    printNameOfRobot(&c);
+                    moveRobot(&c);
+                    v = c.getPosition();
+                    std::cout << "\n"
+                              << v.x << " " << v.y << std::endl;
+                    std::cout << c.getID() << std::endl;
+                    std::cout << c.getAngle() << std::endl;
+                    std::cout << rotateToString(c.getRotationalDirection()) << std::endl;
+
+                    return 0;
+                }
+            </code></pre>
+          </div>
 
           <h3>6. Résultats obtenus</h3>
             <ul>
@@ -201,5 +561,6 @@
       });
     });
   </script>
+  <script src="script_code.js"></script>
 </body>
 </html>
