@@ -30,6 +30,15 @@ ScrollReveal().reveal(".header__container h1", {
   delay: 500,
 });
 
+ScrollReveal().reveal(".header__container_team p", {
+  ...scrollRevealOption,
+});
+
+ScrollReveal().reveal(".header__container_team h1", {
+  ...scrollRevealOption,
+  delay: 100,
+});
+
 // about container
 ScrollReveal().reveal(".about__image img", {
   ...scrollRevealOption,
@@ -58,6 +67,12 @@ ScrollReveal().reveal(".about__btn", {
 
 // room container
 ScrollReveal().reveal(".room__card", {
+  ...scrollRevealOption,
+  interval: 500,
+});
+
+// grid
+ScrollReveal().reveal(".grid", {
   ...scrollRevealOption,
   interval: 500,
 });
