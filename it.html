@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Département IT – B2MS CleanTech</title>
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
   <link rel="stylesheet" href="style-commun.css" />
   <link rel="stylesheet" href="style-code.css" />
+  <title>Département IT – B2MS CleanTech</title>
 </head>
 <body>
-  <header>
-    <h1>Département IT – B2MS CleanTech</h1>
-  </header>
 
+    <header class="header">
+        <div class="section__container header__container_domaine">
+            <h2>Département IT</h2>
+        </div>
+        
+    </header>
+  
   <nav class="main-nav">
     <a href="index.html"><button>Accueil</button></a>
     <button class="tab-button active" data-target="it-content">IT</button>
@@ -63,7 +71,7 @@
           <div class="code-container">
             <div class="btn-bar">
               <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="telechargerCode('code-cpp', 'robot.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
                 #include "robot.hpp"
@@ -148,7 +156,7 @@
           <div class="code-container">
             <div class="btn-bar">
               <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="telechargerCode('code-cpp', 'deliveryRobot.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
                 #include "deliveryRobot.hpp"
@@ -244,7 +252,7 @@
           <div class="code-container">
             <div class="btn-bar">
               <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="telechargerCode('code-cpp', 'travellingRobot.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
               #include "travellingRobot.hpp"
@@ -327,7 +335,7 @@
           <div class="code-container">
             <div class="btn-bar">
               <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="telechargerCode('code-cpp', 'armRobot.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
                 #include "armRobot.hpp"
@@ -415,7 +423,7 @@
           <div class="code-container">
             <div class="btn-bar">
               <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="telechargerCode('code-cpp', 'main.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
                 #include "travellingRobot.hpp"
@@ -515,10 +523,424 @@
     </div>
 
     <div id="test2" class="subtab-content">
-      <h2>Test 2</h2>
-      
-      <p>Contenu du Test 2 :</p>
+      <h2>Introduction à ROS2 </h2>
+        <h3>1. Contexte et objectifs:</h3>
+          <p>
+            Ce projet introduit les mécanismes fondamentaux de publication
+            et de souscription dans le framework <strong>ROS2</strong> à travers un exemple
+            pratique de génération et d’évaluation de données de capteurs.
+          </p>
+          <p>   
+            L'objectif est de créer un package ROS2 nommé <strong>sensor_data_evaluation</strong> contenant :
+          </p>
+          <ul>
+            <li>Un <strong>node publisher</strong> qui publie toutes les 0,5 secondes des données simulées (température, humidité, pression).</li>
+            <li>Un <strong>node subscriber</strong> qui reçoit ces données et vérifie qu'elles sont dans les plages prédéfinies, en affichant les résultats dans le log.</li>
+            <li>Un <strong>fichier de lancement</strong> pour tout exécuter.</li>
+          </ul>
+          <h3>2. Technologies utilisées</h3>
+          <ul>
+            <li><strong>ROS2 Humble</strong> qui publie toutes les 0,5 secondes des données simulées (température, humidité, pression).</li>
+            <li><strong>C++</strong> et les libraries telles <strong>rclcpp, std_msgs</strong>
+            <li>Un <strong>fichier de lancement</strong> pour tout exécuter.</li>
+          </ul>
+
+          <h3>3. Structure du package et fonctionnement</h3>
+          <p>
+            Le package <strong>sensor_data_evaluation</strong> est composé de deux nodes:
+          </p>
+          <ul>
+            <li><strong>sensor_node_publisher</strong></li>
+            <li><strong>sensor_node_subscriber</strong></li>
+          </ul>
+
+          <h4><strong>a. Création du workspace</strong></h4>
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-txt')">Copier</button>
+              <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+            </div>
+            <pre><code id="code-txt">
+              user@user-VirtualBox:~$ cd Desktop
+              user@user-VirtualBox:~/Desktop$ mkdir -p workspace/src
+            </code></pre>
+          </div>
+
+          <h4><strong>a. Création du package et des nodes</strong></h4>
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-txt')">Copier</button>
+              <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+            </div>
+            <pre><code id="code-txt">
+              user@user-VirtualBox:~/Desktop$ cd workspace/src
+              user@user-VirtualBox:~/Desktop/workspace/src$ ros2 pkg create sensor_data_evaluation --build-type ament_cmake
+              going to create a new package
+              package name: sensor_data_evaluation
+              destination directory: /home/user/Desktop/workspace/src
+              package format: 3
+              version: 0.0.0
+              description: TODO: Package description
+              maintainer: [&apos;user &lt;user@todo.todo&gt;&apos;]
+              licenses: [&apos;TODO: License declaration&apos;]
+              build type: ament_cmake
+              dependencies: []
+              creating folder ./sensor_data_evaluation
+              creating ./sensor_data_evaluation/package.xml
+              creating source and include folder
+              creating folder ./sensor_data_evaluation/src
+              creating folder ./sensor_data_evaluation/include/sensor_data_evaluation
+              creating ./sensor_data_evaluation/CMakeLists.txt
+
+              [WARNING]: Unknown license &apos;TODO: License declaration&apos;.  This has been set in the package.xml, but no LICENSE file has been created.
+              It is recommended to use one of the ament license identitifers:
+              Apache-2.0
+              BSL-1.0
+              BSD-2.0
+              BSD-2-Clause
+              BSD-3-Clause
+              GPL-3.0-only
+              LGPL-3.0-only
+              MIT
+              MIT-0
+              user@user-VirtualBox:~/Desktop/workspace/src$ ls
+              sensor_data_evaluation
+              user@user-VirtualBox:~/Desktop/workspace/src$ cd sensor_data_evaluation
+              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation$ ls
+              CMakeLists.txt  include  package.xml  src
+              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation$ cd src
+              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_publisher.cpp
+              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_subscriber.cpp
+              chmod: cannot access &apos;data_node_subscriber.cpp&apos;: No such file or directory
+              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ touch data_node_publisher.cpp
+              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ touch data_node_subscriber.cpp
+              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_subscriber.cpp
+              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ ls
+              data_node_publisher.cpp  data_node_subscriber.cpp
+            </code></pre>
+          </div>
+          
+          <p>Les nodes sont dans le dossier <strong>workspace/src/sensor_data_evaluation/src</strong>.</p>
+          
+          <h4><strong>c. sensor_node_publisher</strong></h4>
+          <p>
+            Ce node publie des données aléatoires toutes les 0.5 secondes sur le topic <strong>/sensor_data</strong>:
+          </p>
+          <ul>
+            <li>Température : 15°C à 35°C</li>
+            <li>Humidité : 30% à 70%</li>
+            <li>Pression : 950 hPa à 1050 hPa</li>
+          </ul>
+
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-cpp')">Copier</button>
+              <button onclick="telechargerCode('code-cpp', 'sensor_node_publisher.cpp', 'text/x-c++src')">Télécharger</button>
+            </div>
+            <pre><code id="code-cpp">
+              
+                #include &lt;chrono&gt;
+                #include &lt;functional&gt;
+                #include &lt;memory&gt;
+                #include &lt;string&gt;
+                #include &lt;random&gt;
+
+                #include "rclcpp/rclcpp.hpp"
+                #include "std_msgs/msg/string.hpp"
+
+                using namespace std::chrono_literals;
+
+
+                class SensorPublisher : public rclcpp::Node
+                {
+                private:
+                  rclcpp::TimerBase::SharedPtr timer_;
+                  rclcpp::Publisher&lt;std_msgs::msg::String&gt;::SharedPtr publisher_;
+                  int temp, pression, hum;
+                  // float temp, pression, hum;
+                  void timer_callback()
+                  {
+                    temp = nbr_generator(15, 35);
+                    hum = nbr_generator(30, 70);
+                    pression = nbr_generator(950, 1050);
+                    auto message = std_msgs::msg::String();
+                    message.data = "T = " + std::to_string(temp) + "°C, H = " + std::to_string(hum) + "%, P = " + std::to_string(pression) + "hPa";
+                    RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+                    publisher_->publish(message);
+                  }
+
+                  int nbr_generator(int min_value, int max_value){
+                    static std::random_device rd;
+                    static std::mt19937 gen(rd());
+                    std::uniform_int_distribution&lt;int&gt; distrib(min_value, max_value);
+
+                    return distrib(gen);
+                }
+
+
+                public:
+                  SensorPublisher()
+                  : Node("sensor_node_publisher")
+                  {
+                    publisher_ = this->create_publisher&lt;std_msgs::msg::String&gt;("sensor_data", 10);
+                    timer_ = this->create_wall_timer(
+                      500ms, std::bind(&SensorPublisher::timer_callback, this));
+                  }
+                };
+
+                int main(int argc, char * argv[])
+                {
+                  rclcpp::init(argc, argv);
+                  rclcpp::spin(std::make_shared&lt;SensorPublisher&gt;());
+                  rclcpp::shutdown();
+                  return 0;
+                }
+
+            </code></pre>
+          </div>
+
+          <h4><strong>d. sensor_node_subscriber</strong></h4>
+          <p>
+            Ce node écoute le topic <strong>/sensor_data</strong> et vérifie que les données sont dans la bonne plage.
+          </p>
+          <p>
+            Il affiche dans le log les données réçues et un message indiquant si les valeurs sont correctes ou non.
+          </p>
+        
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-cpp')">Copier</button>
+              <button onclick="telechargerCode('code-cpp', 'sensor_node_subscriber.cpp', 'text/x-c++src')">Télécharger</button>
+            </div>
+            <pre><code id="code-cpp">
+
+                #include &lt;functional&gt;
+                #include &lt;memory&gt;
+                #include &lt;sstream&gt;
+
+                #include "rclcpp/rclcpp.hpp"
+                #include "std_msgs/msg/string.hpp"
+
+                using std::placeholders::_1;
+
+                class SensorSubscriber : public rclcpp::Node
+                {
+                public:
+                  SensorSubscriber()
+                  : Node("sensor_node_subscriber")
+                  {
+                    subscription_ = this->create_subscription&lt;std_msgs::msg::String&gt;(
+                      "sensor_data", 10, std::bind(&SensorSubscriber::sensor_callback, this, _1));
+                  }
+
+                private:
+                  void sensor_callback(const std_msgs::msg::String & msg) const
+                  {
+                    // std::string message = "Data received: " + msg.data + ": " + is_correct_value(msg.data);
+                    // RCLCPP_INFO(this->get_logger(), "%s", message.c_str());
+                    RCLCPP_INFO(this->get_logger(), "Data received: %s : %s", msg.data.c_str(), (is_correct_value(msg.data)).c_str());
+                  }
+                  rclcpp::Subscription&lt;std_msgs::msg::String&gt;::SharedPtr subscription_;
+
+                  std::string is_correct_value(const std::string &txt) const{
+                    std::stringstream ss(txt);
+                    std::string buffer;
+                    int T, H, P;
+
+                    ss >> buffer >> buffer >> T >> buffer  
+                      >> buffer >> buffer >> H >> buffer 
+                      >> buffer >> buffer >> P >> buffer;
+                    
+                    return (15 <= T && T <= 35 && 30 <= H && H <= 70 && 950 <= P && P <= 1050)? "correct values":"incorrect values";
+                }
+                };
+
+
+                int main(int argc, char * argv[])
+                {
+                  rclcpp::init(argc, argv);
+                  rclcpp::spin(std::make_shared&lt;SensorSubscriber&gt;());
+                  rclcpp::shutdown();
+                  return 0;
+                }
+
+            </code></pre>
+          </div>
+
+
+          <h4><strong>e. CMakeLists.txt </strong></h4>
+          <p>
+            Ce fichier permet notamment de créer les executables pour les nodes.
+          </p>
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-txt')">Copier</button>
+              <button onclick="telechargerCode('code-txt', 'CMakeLists.txt', 'text/txt')">Télécharger</button>
+            </div>
+            <pre><code id="code-txt">
+              cmake_minimum_required(VERSION 3.8)
+              project(sensor_data_evaluation)
+
+              if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+                add_compile_options(-Wall -Wextra -Wpedantic)
+              endif()
+
+              # find dependencies
+              find_package(ament_cmake REQUIRED)
+              find_package(rclcpp REQUIRED)
+              find_package(std_msgs REQUIRED)
+
+              # add the executable
+              add_executable(sensor_node_publisher src/sensor_node_publisher.cpp)
+              target_link_libraries(sensor_node_publisher PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
+
+              add_executable(sensor_node_subscriber src/sensor_node_subscriber.cpp)
+              target_link_libraries(sensor_node_subscriber PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
+
+              install(TARGETS
+                sensor_node_publisher
+                sensor_node_subscriber
+                DESTINATION lib/${PROJECT_NAME})
+
+
+              if(BUILD_TESTING)
+                find_package(ament_lint_auto REQUIRED)
+                # the following line skips the linter which checks for copyrights
+                # comment the line when a copyright and license is added to all source files
+                set(ament_cmake_copyright_FOUND TRUE)
+                # the following line skips cpplint (only works in a git repo)
+                # comment the line when this package is in a git repo and when
+                # a copyright and license is added to all source files
+                set(ament_cmake_cpplint_FOUND TRUE)
+                ament_lint_auto_find_test_dependencies()
+              endif()
+
+              ament_package()
+
+            </code></pre>
+          </div>
+
+          <h4><strong>f. package.xml </strong></h4>
+          <p>
+            Ce fichier permet d'inclure les ressources nécessaires pour le package.
+          </p>
+
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-xml')">Copier</button>
+              <button onclick="telechargerCode('code-xml', 'package.xml', 'text/xml')">Télécharger</button>
+            </div>
+            <pre><code id="code-xml">
+                &lt;?xml version="1.0"?&gt;
+                &lt;?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
+
+                &lt;package format="3"&gt;
+                  &lt;name&gt;sensor_data_evaluation&lt;/name&gt;
+                  &lt;version&gt;0.0.0&lt;/version&gt;
+                  &lt;description&gt;Sending and receiving data&lt;/description&gt;
+                  &lt;maintainer email="user@todo.todo"&gt;user&lt;/maintainer&gt;
+                  &lt;license&gt;TODO: License declaration&lt;/license&gt;
+
+                  &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+                  &lt;depend&gt;rclcpp&lt;/depend&gt;
+                  &lt;depend&gt;std_msgs&lt;/depend&gt;
+                  
+                  &lt;exec_depend&gt;ros2launch&lt;/exec_depend&gt;
+
+                  &lt;test_depend&gt;ament_lint_auto&lt;/test_depend&gt;
+                  &lt;test_depend&gt;ament_lint_common&lt;/test_depend&gt;
+
+                  &lt;export&gt;
+                    &lt;build_type&gt;ament_cmake&lt;/build_type&gt;
+                  &lt;/export&gt;
+                &lt;/package&gt;
+
+            </code></pre>
+          </div>
+
+        <h4><strong>g. Le fichier de lancement</strong></h4>
+          <p>
+            Nous avons opté pour un fichier xml pour sa facilité de prise en main.
+          </p>
+          <p>
+            Ce fichier se trouve dans: workspace/install/sensor_data_evaluation/share/sensor_data_evaluation
+          </p>
+          
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-xml')">Copier</button>
+              <button onclick="telechargerCode('code-xml', 'sensor_data_eval_launch.xml', 'text/xml')">Télécharger</button>
+            </div>
+            <pre><code id="code-xml">
+              &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+              &lt;launch&gt;
+                &lt;node pkg="sensor_data_evaluation" exec="sensor_node_publisher"/&gt;
+                &lt;node pkg="sensor_data_evaluation" exec="sensor_node_subscriber"/&gt;
+              &lt;/launch&gt;
+            </code></pre>
+          </div>
+
+
+        <h3>4. Tests réalisés </h3>
+            <p>
+              <strong>Compilation du package</strong> par <strong>colcon</strong>
+              et <strong>lancement des nodes</strong> via le launcher:
+            </p>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>                 
+                </div>
+                <pre><code id="code-txt">
+                  user@user-VirtualBox:~$ cd Desktop/workspace
+                  user@user-VirtualBox:~/Desktop/workspace$ colcon build --symlink-install
+                  user@user-VirtualBox:~/Desktop/workspace$ source install/setup.bash
+                  user@user-VirtualBox:~/Desktop/workspace$ ros2 launch sensor_data_evaluation sensor_data_eval_launch.xml
+                </code></pre>
+              </div>
+              
+          <video controls width=auto>
+            <source src="videos/Test2/IT/demo.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+       
+          
+          <h3>5. Limites et perspectives</h3>
+            <p>
+              En utilisant un launcher.xml, les deux nodes s'exécutent sur le même terminal
+              ce qui rend difficile la lecture.
+            </p>
+            <p>
+              Pour ne pas encombrer davantage l'affichage, nous avons opté pour des données entières
+              et une notification simple pour la vérification des plages des données.
+            </p>
+          
+            <p>
+              Pour résoudre ce problème, d'autres formats alternatifs existent pour le fichier
+              de lancement tel que le format <strong>.py</strong>. 
+            </p>
+
+        <h3>6. Conclusion</h3>    
+          <p>
+            Ce projet a permis de mettre en œuvre de manière concrète les mécanismes de publication
+            et de souscription dans ROS2 à travers un exemple simple mais représentatif d’un système de capteurs.
+            En simulant des données environnementales (température, humidité et pression) et en les évaluant en temps réel,
+            nous avons pu répondre au cahier de charge.
+          </p>
+        
+          <p>
+            Ce projet représente une étape clé dans l’apprentissage du framework ROS2
+            et de son écosystème autour de la robotique distribuée.
+          </p>
+
+          <h3>7. Ressources utiles</h3>
+            <p>
+              ROS2 Documentation: <a href="https://docs.ros.org/en/kilted/index.html" target="_blank">https://docs.ros.org/en/kilted/index.html</a>
+            </p>
+
+        
     </div>
+
+    
 
     <div id="test3" class="subtab-content">
       <h2>Test 3</h2>
