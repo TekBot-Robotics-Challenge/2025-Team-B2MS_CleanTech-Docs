@@ -63,3 +63,15 @@ pre::-webkit-scrollbar-thumb {
 .btn-bar button:hover {
   background-color: #666;
 }
+
+/* 
+.notif {
+  display: none;
+  color: green;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+
+.notif.visible {
+  display: inline;
+} */
