@@ -1017,11 +1017,73 @@
               <source src="https://github.com/user-attachments/assets/9b0e3092-58c1-435a-8556-9573676f7728" type="video/mp4">
               Votre navigateur ne supporte pas la vidéo HTML5.
             </video>
-        
+
+
+          <p>Code maitre: </p>
           <div class="code-container">
               <div class="btn-bar">
                 <button onclick="copierCode('code-ino')">Copier</button>
-                <button onclick="telechargerCode('code-ino', 'code.ino', 'text/plain')">Télécharger</button>
+                <button onclick="telechargerCode('code-ino', 'code_maitre.ino', 'text/plain')">Télécharger</button>
+              </div>
+              <pre><code id="code-ino">
+                  #include &lt;Wire.h&gt;        
+                  #include &lt;MPU6050.h&gt;  
+
+                  MPU6050 mpu;
+
+                  float ax, ay, az;
+                  const float threshold = 0.2;
+                  String direction = "";
+
+                  void setup() {
+                    Serial.begin(9600);
+                    Wire.begin();      // Maître
+                    mpu.initialize();
+
+                    if (!mpu.testConnection()) {
+                      Serial.println("Erreur MPU6050");
+                      while (1);
+                    }
+
+                    Serial.println("MPU6050 OK");
+                  }
+
+                  void loop() {
+                    int16_t rawAx, rawAy, rawAz;
+                    mpu.getAcceleration(&rawAx, &rawAy, &rawAz);
+
+                    ax = rawAx / 16384.0;
+                    ay = rawAy / 16384.0;
+                    az = rawAz / 16384.0;
+
+                    // Détection de direction
+                    if (ax > threshold) direction = "Gauche";
+                    else if (ax < -threshold) direction = "Droite";
+                    else if (ay > threshold) direction = "Arriere";
+                    else if (ay < -threshold) direction = "Avant";
+                    else if (az > threshold) direction = "Haut";
+                    else if (az < -threshold) direction = "Bas";
+                    else direction = "Stable";
+
+                    // Envoi vers esclave
+                    Wire.beginTransmission(8);         // adresse esclave
+                    Wire.write(direction.c_str());     // envoyer la direction comme texte
+                    Wire.endTransmission();
+
+                    Serial.print("Direction envoyée : ");
+                    Serial.println(direction);
+
+                    delay(300);
+                  }                  
+              
+              </code></pre>
+            </div>
+
+          <p>Code esclave: </p>
+          <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('code-ino')">Copier</button>
+                <button onclick="telechargerCode('code-ino', 'code_esclave.ino', 'text/plain')">Télécharger</button>
               </div>
               <pre><code id="code-ino">
                   #include &lt;Wire.h&gt;               // Bibliothèque pour communication I2C
