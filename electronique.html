@@ -1011,7 +1011,55 @@
               <source src="https://github.com/user-attachments/assets/9b0e3092-58c1-435a-8556-9573676f7728" type="video/mp4">
               Votre navigateur ne supporte pas la vidéo HTML5.
             </video>
+        
+          <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('code-ino')">Copier</button>
+                <button onclick="telechargerCode('code-ino', 'code.ino', 'text/plain')">Télécharger</button>
+              </div>
+              <pre><code id="code-ino">
+                  #include &lt;Wire.h&gt;               // Bibliothèque pour communication I2C
+                  #include &lt;LiquidCrystal_I2C.h&gt;  // Bibliothèque pour écran LCD I2C
+                  #include &lt;MPU6050.h&gt;  
+                  
+                  LiquidCrystal_I2C lcd(0x27, 16, 2);  // LCD I2C
 
+                  String receivedDirection = "";
+
+                  void setup() {
+                    Wire.begin(8);  // Adresse de l'esclave
+                    Wire.onReceive(receiveData);
+
+                    lcd.init();
+                    lcd.backlight();
+                    lcd.setCursor(0, 0);
+                    lcd.print("Pret a recevoir");
+                  }
+
+                  void loop() {
+                    // Affiche la dernière direction reçue
+                    lcd.setCursor(0, 0);
+                    lcd.print("Dir:            "); // Nettoyer la ligne
+                    lcd.setCursor(5, 0);
+                    lcd.print(receivedDirection);
+                    
+                    delay(200);
+                  }
+
+                  void receiveData(int bytes) {
+                    receivedDirection = ""; // réinitialiser
+
+                    while (Wire.available()) {
+                      char c = Wire.read();
+                      receivedDirection += c;
+                    }
+
+                    Serial.print("Recu : ");
+                    Serial.println(receivedDirection);
+                  }
+              
+              </code></pre>
+            </div>
              
         <h4>Pourquoi cette Démarche ?</h4>
         <p>
@@ -1156,6 +1204,13 @@
         <p class="txt_center">
           <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/tree/main/Test2/Electronique/control_sation/controle%20station" target="_blank" class="download-link">lien vers les fichiers du pcb de la station de contrôle</a>
         </p>
+
+
+    <h3>7. Prototype</h3>
+      <div class="image-container">
+        <img src="images/Test2/Electronique/prototype1.jpg" alt="pcb" class="image-mean" />
+        <img src="images/Test2/Electronique/prototype2.jpg" alt="pcb" class="image-mean" />
+      </div>
 
     </div>
 
