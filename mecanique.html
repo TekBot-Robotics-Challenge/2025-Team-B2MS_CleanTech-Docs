@@ -3,14 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Département Mécanique – B2MS CleanTech</title>
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
   <link rel="stylesheet" href="style-commun.css" />
-
+  <link rel="stylesheet" href="style-code.css" />
+  <title>Département Mécanique</title>
 </head>
 <body>
-  <header>
-    <h1>Département Mécanique – B2MS CleanTech</h1>
-  </header>
+
+    <header class="header">
+        <div class="section__container header__container_domaine">
+            <h2>Département Mécanique</h2>
+        </div>
+        
+    </header>
 
   <nav class="main-nav">
     <a href="index.html"><button>Accueil</button></a>
@@ -27,10 +35,9 @@
       <button class="subtab-button" data-target="test3">Niveau 3</button>
     </nav>
 
-
     <div id="test1" class="subtab-content active">
       <h2>Conception et assemblage des pièces</h2>
-        <h3>1. Objectifs:</h3>
+        <h3>Objectifs:</h3>
           <p>
             Cette partie vise à évaluer vos compétences de base en conception assistée par ordinateur (CAO) à l’aide de SolidWorks.
           </p>
@@ -48,8 +55,8 @@
             </li>
           </ul>
 
-          <h3>2. Conception de pièces 3D</h3>
-          <h4>Pièce I</h4>
+          <h3>Partie 1: Conception de pièces 3D</h3>
+          <h4>1. Pièce I</h4>
             <div class="image-container">
             <img src="images/Test1/Mecanique/Piece1/piece1a.png" alt="Piece" class="image-small" />
             <img src="images/Test1/Mecanique/Piece1/piece1b.png" alt="Piece" class="image-small" />
@@ -82,9 +89,7 @@
           </div>
           
           
-          
-
-          <h4>Pièce II</h4>
+          <h4>2. Pièce II</h4>
             <div class="image-container">
             <!-- <img src="images/Mecanique/Piece2/piece2a.png" alt="Piece" class="image-small" /> -->
             <img src="images/Test1/Mecanique/Piece2/piece2b.png" alt="Piece" class="image-small" />
@@ -117,7 +122,7 @@
             </p>
           </div>
           
-          <h4>Pièce III</h4>
+          <h4>3. Pièce III</h4>
             <div class="image-container">
             <img src="images/Test1/Mecanique/Piece3/piece3a.png" alt="Piece" class="image-small" />
             <img src="images/Test1/Mecanique/Piece3/piece3b.png" alt="Piece" class="image-small" />
@@ -146,7 +151,7 @@
             </p>
           </div>
 
-          <h4>Pièce IV</h4>
+          <h4>4. Pièce IV</h4>
             <div class="image-container">
             <img src="images/Test1/Mecanique/Piece4/piece4a.png" alt="Piece" class="image-small" />
             <img src="images/Test1/Mecanique/Piece4/piece4b.png" alt="Piece" class="image-small" />
@@ -179,7 +184,7 @@
             </p>
           </div>
 
-        <h3>3. Assemblage  d’une pince mécanique</h3>
+        <h3>Partie 2: Assemblage  d’une pince mécanique</h3>
         <p>
           Ayant les pièces fournies, nous avons suivi les plans ci-dessous :
         </p>
@@ -192,7 +197,7 @@
             <img src="images/Test1/Mecanique/Assemblage/plan2.png" alt="Piece" class="image-small" />
           </div>
 
-          <h4>Embout de vérin en position minimale</h4>
+          <h4>1. Embout de vérin en position minimale</h4>
           <div class="image-container">
             <img src="images/Test1/Mecanique/Assemblage/assemblage1.png" alt="Piece" class="image-center" />
             <img src="images/Test1/Mecanique/Assemblage/assemblage1_propriete.png" alt="Piece" class="image-small" />
@@ -201,9 +206,7 @@
             </p>
           </div>
 
-          
-
-          <h4>Embout de vérin en position maximale</h4>
+          <h4>2. Embout de vérin en position maximale</h4>
           <div class="image-container">
             <img src="images/Test1/Mecanique/Assemblage/assemblage2.png" alt="Piece" class="image-center" />
             <img src="images/Test1/Mecanique/Assemblage/assemblage2_propriete.png" alt="Piece" class="image-small" />
@@ -220,9 +223,266 @@
 
 
     <div id="test2" class="subtab-content">
-      <h2>Test 2</h2>
-      <p>Contenu du Test 2 : analyse, données, explications techniques, etc.</p>
+      <h2>Conception et assemblage des pièces</h2>
+        <h3>Objectifs:</h3>
+          <p>
+            Similaire au test de niveau débutant, le test intermédiaire est tiré d’un examen de 
+            certification Associate de Solidworks. Ce test vise à évaluer nos compétences en conception
+            assistée par ordinateur (CAO) à l’aide de <strong>SolidWorks</strong> sur des fonctions
+            plus poussées que lors du premier test. 
+          </p>
+          <p>
+            Il se déroule en trois phases :
+          </p>
+          <ul>
+            <li>Conception des pièces et détermination des masses</li>
+            <li>Modification des pièces déjà conceptionnées</li>
+            <li>Assemblage de maillon de chaîne</li>
+          </ul>
+
+          <h3>Partie 1 : Conception et modification des pièces</h3>
+          <h4>1. Contraintes</h4>
+          <p>
+            <ul>
+              <li><strong>Système d’unités: </strong> MMGS (millimètre, gramme, seconde)</li>
+              <li><strong>Précision: </strong> 2 décimales</li>
+              <li><strong>Croquis 2D: </strong> à base de cercles, rectangles, polygones...</li>
+              <li><strong>Opérations: </strong> extrusion, révolution, enlèvement de matière, etc.</li>
+              <li><strong>Tous les trous sont débouchants</strong> sauf indication contraire</li>
+            </ul>
+
+          
+          <h4>2. Pièces à réaliser</h4>
+           <h4>a. Pièce I:</h4> 
+           <ul>
+            <li><strong>A= 81.00 ; B= 57.00 ; C= 43.00:</strong></li>
+               <p>
+                On commence par définir des équations en tant que variables globales nommées A, B et C, afin de paramétrer la conception de la pièce.
+              <div class="image-container">
+                <img src="images/Test2/Mecanique/P1a/1.jpg" alt="Piece" class="image-mean"/>
+              </div>
+            </p>
+
+            <p>
+              Ensuite, on dessine l’esquisse de base en se référant aux dimensions définies par les variables globales précédemment créées.
+              <div class="image-container">
+                <img src="images/Test2/Mecanique/P1a/2.jpg" alt="Piece" class="image-mean"/>
+              </div>
+            </p>
+
+            <p>
+              Des chanfreins sont ensuite ajoutés directement sur l’esquisse afin d’adoucir certaines arêtes dès cette étape.
+              <div class="image-container">
+                <img src="images/Test2/Mecanique/P1a/3.jpg" alt="Piece" class="image-mean"/>
+              </div>
+            </p>
+
+            <p>
+              On applique une extrusion à l’esquisse afin de générer le volume principal de la pièce en 3D.
+              <div class="image-container">
+                <img src="images/Test2/Mecanique/P1a/4.jpg" alt="Piece" class="image-mean"/>
+              </div>
+            </p>
+
+            <p>
+              Le matériau AISI 1020 est ensuite attribué à la pièce pour refléter ses propriétés physiques et mécaniques.
+              <div class="image-container">
+                <img src="images/Test2/Mecanique/P1a/5.jpg" alt="Piece" class="image-mean"/>
+              </div>
+            </p>
+
+            <p>
+              On modifie ensuite l’apparence de la pièce en lui appliquant une couleur bleue pour faciliter son identification visuelle.
+              <div class="image-container">
+                <img src="images/Test2/Mecanique/P1a/6.jpg" alt="Piece" class="image-mean"/>
+              </div>
+            </p>
+
+            <p>
+              Enfin, une évaluation de la masse est effectuée : la pièce pèse 939,71 grammes selon les paramètres définis.
+              <div class="image-container">
+                <img src="images/Test2/Mecanique/P1a/7.jpg" alt="Piece" class="image-mean"/>
+              </div>
+            </p>
+
+            <p>
+              Une évaluation de la masse est effectuée et donne un résultat de <strong>628,34 grammes</strong>.
+              <div class="image-container">
+                <img src="images/Test2/Mecanique/P1a/8.jpg" alt="Piece" class="image-mean"/>
+              </div>
+            </p>
+
+            <p class="txt_center">
+                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test2/Mecanique/Test2_P1a.SLDPRT" download class="download-link">télécharger la pièce 1 pour A= 81.00 ; B= 57.00 ; C= 43.00</a>
+            </p>
+
+            <li><strong>A= 84.00 ; B= 59.00 ; C= 45.00:</strong></li>
+              <p>
+                Dans cette étape, on modifie les valeurs des variables globales A, B et C. Après avoir mis à jour la géométrie, on effectue une nouvelle évaluation de la masse de la pièce.
+              </p>
+              <p>
+                La masse obtenue est de <strong>1032,58 grammes</strong>.
+                <div class="image-container">
+                  <img src="images/Test2/Mecanique/P1b/1.jpg" alt="Piece" class="image-mean"/>
+                </div>
+              </p>
+
+              <p class="txt_center">
+                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test2/Mecanique/Test2_P1b.SLDPRT" download class="download-link">télécharger la pièce 1 pour A= 84.00 ; B= 59.00 ; C= 45.00</a>
+              </p>
+           </ul>
+           
+       
+          <h4>b. Pièce II:</h4>
+            <p>
+            On commence par dessiner l’esquisse présentée dans l’image suivante.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P2/1.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>
+
+           <p>
+            On enlève la matière selon l’esquisse précédente avec une profondeur de 19 mm.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P2/2.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>
+
+           <p>
+            Ensuite, on dessine une nouvelle esquisse correspondant à l’emplacement du trou.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P2/3.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>
+
+           <p>
+            On enlève la matière tout au long du cercle défini, ce qui crée un trou traversant.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P2/4.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>
+
+           <p>
+            On réalise une nouvelle esquisse comme montrée dans l’image suivante.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P2/5.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>
+
+           <p>
+            On enlève la matière selon cette dernière esquisse, en suivant la forme illustrée.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P2/6.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>
+
+           <p>
+            On obtient ainsi la pièce complète, prête pour évaluation.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P2/7.jpg" alt="Piece" class="image-small"/>
+              <img src="images/Test2/Mecanique/P2/8.jpg" alt="Piece" class="image-small"/>
+            </div>
+           </p>
+
+           <p>
+            Une évaluation de la masse est effectuée et donne un résultat de <strong>628,34 grammes</strong>.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P2/9.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>  
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test2/Mecanique/Test2_P2.SLDPRT" download class="download-link">télécharger la pièce 2</a>
+            </p>
+            
+          
+          <h4>c. Pièce III:</h4>
+            <p>
+            À partir de la <strong>pièce 2</strong>, on applique la fonction <strong>coque</strong> ainsi
+            que quelques suppressions de matière supplémentaires, ce qui permet d’obtenir la nouvelle géométrie.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P3/1.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>
+
+           <p>
+            On effectue une évaluation de la masse : la pièce obtenue pèse <strong>432,35 grammes</strong>.
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/P3/2.jpg" alt="Piece" class="image-mean"/>
+            </div>
+           </p>
+            
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test2/Mecanique/Test2_P3.SLDPRT" download class="download-link">télécharger la pièce 3</a>
+            </p>
+
+        <h3>Partie 2 : Assemblage de Maillon de chaîne </h3>
+          <p>
+            Nous avons à réaliser l'assemblage suivant :
+          </p>
+          <div class="image-container">
+            <img src="images/Test2/Mecanique/Assemblage/assemblage.png" alt="Piece" class="image-center" />
+          </div>
+
+          <p>
+            Consignes à respecter:
+          </p>
+          <ul>
+            <li>Les goupilles sont accouplées de manière concentrique aux trous des maillons
+              de la de la chaîne (pas de jeu). 
+            </li>
+            <li>Les faces d’extrémité des axes coïncident avec les faces latérales des maillons
+              de la de la chaîne (pas de jeu). 
+            </li>
+          </ul>
+
+          <p>
+            Les coordonnées du centre de masse de cet assemblage
+            (en milimètres) pour les paramètres A, B et C tels que:
+          </p>
+          <ul>
+            <li>
+              <strong>A = 25 ° ; B = 125 ° ; C = 130 °</strong> :
+            </li>
+            <video controls width=auto>
+              <source src="videos/Test2/Mecanique/Assemblage1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.                   
+            </video>
+            
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/Assemblage/A.png" alt="Piece" class="image-mean"/>
+              <p>
+              Le centre de gravité de l'objet : <strong>(331.66; -117.21; -85.50)</strong>
+              </p>
+            </div>
+           
+            <p class="txt_center">
+             <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test2/Mecanique/Assemblage1.SLDASM" download class="download-link">télécharger l'assemblage 1</a>
+            </p>
+
+            <li> 
+              <strong>A = 30 ° ; B = 115 ° ; C = 135 °</strong> :
+            </li>
+            <video controls width=auto>
+              <source src="videos/Test2/Mecanique/Assemblage2.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.                   
+            </video>
+            
+            <div class="image-container">
+              <img src="images/Test2/Mecanique/Assemblage/B.png" alt="Piece" class="image-mean"/>
+              <p>
+              Le centre de gravité de l'objet : <strong>(311.47; -126.42; -95.90)</strong>.
+            </p>
+            </div>
+            
+            <p class="txt_center">
+             <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Code/raw/refs/heads/main/Test2/Mecanique/Assemblage2.SLDASM" download class="download-link">télécharger l'assemblage 2</a>
+            </p>
+
+          </ul>
+
     </div>
+
 
     <div id="test3" class="subtab-content">
       <h2>Test 3</h2>
