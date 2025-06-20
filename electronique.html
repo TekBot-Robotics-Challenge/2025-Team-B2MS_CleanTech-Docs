@@ -637,7 +637,12 @@
           
           <h4>b. Bloc d’entrée(dans la boite noire)</h4>
           <p>
-            Nous avons choisi le capteur MPU6050 parce qu’il intègre un accéléromètre et un gyroscope dans un seul composant. Cela permet de mesurer les mouvements et les rotations de la main avec précision. Il est facile à utiliser grâce au protocole I2C, et il fonctionne bien avec le microcontrôleur ATmega328P. En plus, il est peu coûteux et largement utilisé dans les projets embarqués. D’autres capteurs peuvent faire un travail similaire, comme le MPU9250 (qui ajoute un magnétomètre), le LSM6DS3 (plus récent et plus économe), ou le ADXL34
+            Nous avons choisi le capteur MPU6050 parce qu’il intègre un accéléromètre et un 
+            gyroscope dans un seul composant. Cela permet de mesurer les mouvements et les rotations 
+            de la main avec précision. Il est facile à utiliser grâce au protocole I2C, et il fonctionne 
+            bien avec le microcontrôleur ATmega328P. En plus, il est peu coûteux et largement utilisé 
+            dans les projets embarqués. D’autres capteurs peuvent faire un travail similaire, comme le 
+            MPU9250 (qui ajoute un magnétomètre), le LSM6DS3 (plus récent et plus économe), ou le ADXL34
           </p>
           <div class="image-container">
             <img src="https://github.com/user-attachments/assets/2c989400-0c29-46dc-907c-dcd7208a431b" alt="schema"/>
@@ -647,7 +652,9 @@
             <ul>
               <li><strong>Étape 1 : Prise en main du microcontrôleur ATmega328P</strong></li>
             <p>
-              Avant de démarrer le système complet, l’équipe s’est d’abord focalisée sur le microcontrôleur ATmega328P. L’objectif était de comprendre pleinement sa structure interne, ses broches, ainsi que la manière de le configurer et de le simuler.
+              Avant de démarrer le système complet, l’équipe s’est d’abord focalisée sur le 
+              microcontrôleur ATmega328P. L’objectif était de comprendre pleinement sa structure 
+              interne, ses broches, ainsi que la manière de le configurer et de le simuler.
             </p>
             <p>
               Nous avons étudié ses principales caractéristiques et son brochage :
@@ -663,7 +670,8 @@
               <li>Les broches XTAL1/XTAL2 pour le quartz (utilisé plus tard)</li>
             </ul>
             <p>
-              Ces éléments nous ont permis de préparer une simulation fiable sous Proteus pour la suite du projet.
+              Ces éléments nous ont permis de préparer une simulation fiable sous Proteus 
+              pour la suite du projet.
             </p>
             <div class="image-container">
               <img src="https://github.com/user-attachments/assets/62775b28-f4f7-42ed-b677-140ee88c7769" alt="schema"/>
@@ -672,7 +680,9 @@
 
               <li><strong>Étape 2 : Simulation basique de l’ATmega328P dans Proteus</strong></li>
             <p>
-              Après avoir étudié la configuration du microcontrôleur, nous avons réalisé une première simulation simple sous Proteus, afin de valider son fonctionnement dans un environnement simulé.
+              Après avoir étudié la configuration du microcontrôleur, nous avons réalisé une première 
+              simulation simple sous Proteus, afin de valider son fonctionnement dans un environnement 
+              simulé.
             </p>
             <p>
               À ce stade :
@@ -686,11 +696,15 @@
             </p>
             <ul>
               <li>Un bouton poussoir est connecté à une entrée numérique.</li>
-              <li>Nous nous sommes concentrés sur le comportement des broches dans un exemple réel.Lorsqu’on appuie sur le bouton, l’ATmega active un relais via une sortie numérique.</li>
+              <li>
+                Nous nous sommes concentrés sur le comportement des broches dans un exemple réel. 
+                Lorsqu’on appuie sur le bouton, l’ATmega active un relais via une sortie numérique.
+              </li>
               <li>Ce relais commande une lampe LED 12V, simulant une charge réelle.</li>
             </ul>
             <p>
-              Le code Arduino correspondant a été compilé dans l’IDE Arduino, puis le fichier .hex généré a été intégré dans Proteus pour tester le comportement du circuit.
+              Le code Arduino correspondant a été compilé dans l’IDE Arduino, puis le fichier .hex 
+              généré a été intégré dans Proteus pour tester le comportement du circuit.
             </p>     
             <video controls width=auto>
             <source src="https://github.com/user-attachments/assets/d1cc5dd5-9109-4822-be6e-245693643c00" type="video/mp4">
@@ -708,7 +722,13 @@
 
             <h4>d. Bloc d’affichage de la station du controle</h4>
             <p>
-              Pour l’affichage des données au niveau de la station de contrôle, nous avons opté pour un écran LCD équipé d’un module I2C. Ce choix permet de simplifier le montage électronique en réduisant considérablement le nombre de connexions nécessaires entre le microcontrôleur et l’écran. Grâce à cette interface, seules deux lignes (SDA et SCL) suffisent pour transmettre les informations, ce qui laisse davantage de broches disponibles pour d’autres composants. L’écran LCD I2C assure ainsi une lecture claire et en temps réel des données de vitesse et d’orientation envoyées par la boîte noire.
+              Pour l’affichage des données au niveau de la station de contrôle, nous avons opté pour 
+              un écran LCD équipé d’un module I2C. Ce choix permet de simplifier le montage électronique 
+              en réduisant considérablement le nombre de connexions nécessaires entre le microcontrôleur 
+              et l’écran. Grâce à cette interface, seules deux lignes (SDA et SCL) suffisent pour 
+              transmettre les informations, ce qui laisse davantage de broches disponibles pour d’autres 
+              composants. L’écran LCD I2C assure ainsi une lecture claire et en temps réel des données 
+              de vitesse et d’orientation envoyées par la boîte noire.
             </p>
             <div class="image-container">
               <img src="https://github.com/user-attachments/assets/29db70ec-851d-4a14-a918-5cb94e43d4d7" alt="schema"/>
@@ -716,7 +736,12 @@
             
           <h4>e. La communication I2C</h4>
             <p>
-              Ce document constitue une présentation détaillée et approfondie du protocole I2C (Inter-Integrated Circuit), qui est un standard de communication série synchrone très répandu dans l’électronique embarquée. Ce protocole facilite l’échange d’informations entre un ou plusieurs maîtres et plusieurs périphériques esclaves en utilisant seulement deux fils, simplifiant ainsi les connexions matérielles tout en assurant une communication fiable et efficace.
+              Ce document constitue une présentation détaillée et approfondie du protocole I2C 
+              (Inter-Integrated Circuit), qui est un standard de communication série synchrone très 
+              répandu dans l’électronique embarquée. Ce protocole facilite l’échange d’informations 
+              entre un ou plusieurs maîtres et plusieurs périphériques esclaves en utilisant seulement 
+              deux fils, simplifiant ainsi les connexions matérielles tout en assurant une communication 
+              fiable et efficace.
             </p>
 
             <ul>
@@ -724,17 +749,30 @@
             <p>
               <a href="https://fr.wikipedia.org/wiki/I2C" target="_blank">Protocole I2C</a> (Inter-Integrated Circuit), développé par Philips (aujourd’hui NXP) dans les années 1980, 
               est un standard mondial pour la communication série entre circuits intégrés, 
-              surtout dans les systèmes embarqués. Il utilise un bus bidirectionnel à deux fils : SDA pour les données et SCL pour l’horloge, permettant à plusieurs périphériques de partager le même canal tout en gérant précisément l’accès.
-              Contrairement à des protocoles comme SPI, I2C minimise le nombre de connexions nécessaires, ce qui simplifie le routage sur circuit imprimé et réduit les coûts. Ce protocole est largement utilisé dans des domaines variés : automobile, domotique, informatique, etc.
+              surtout dans les systèmes embarqués. Il utilise un bus bidirectionnel à deux fils : 
+              SDA pour les données et SCL pour l’horloge, permettant à plusieurs périphériques de 
+              partager le même canal tout en gérant précisément l’accès.
+              Contrairement à des protocoles comme SPI, I2C minimise le nombre de connexions 
+              nécessaires, ce qui simplifie le routage sur circuit imprimé et réduit les coûts. 
+              Ce protocole est largement utilisé dans des domaines variés : 
+              automobile, domotique, informatique, etc.
             </p>
             <p>
               L'I2C fonctionne selon un modèle <a href="https://www.ionos.fr/digitalguide/serveur/know-how/le-principe-master/slave/" target="_blank">maître-esclave</a>: un ou plusieurs maîtres contrôlent la communication, et les esclaves répondent aux requêtes. 
-              Chaque communication commence par une condition <strong>Start</strong>, suivie de <strong>l’adresse de l’esclave</strong> et d’un bit de direction (lecture/écriture). Les données sont ensuite échangées octet par octet, chaque octet étant confirmé par un bit d’acquittement(ACK). 
+              Chaque communication commence par une condition <strong>Start</strong>, 
+              suivie de <strong>l’adresse de l’esclave</strong> et d’un bit de direction 
+              (lecture/écriture). Les données sont ensuite échangées octet par octet, 
+              chaque octet étant confirmé par un bit d’acquittement(ACK). 
               La communication se termine par une condition <strong>Stop</strong>, qui libère le bus.
             </p>
             <p>
-              Techniquement, I2C utilise des lignes ouvertes (open-drain) : les dispositifs ne peuvent que tirer les lignes vers le bas, tandis que des résistances pull-up maintiennent le niveau haut par défaut. Cela évite les conflits, notamment en mode multi-maîtres.
-              Enfin, I2C offre une grande flexibilité en termes de vitesse, du mode standard (100 kHz) au mode rapide (jusqu’à 3,4 MHz) et au-delà dans certaines variantes propriétaires.
+              Techniquement, I2C utilise des lignes ouvertes (open-drain) : 
+              les dispositifs ne peuvent que tirer les lignes vers le bas, 
+              tandis que des résistances pull-up maintiennent le niveau haut par défaut. 
+              Cela évite les conflits, notamment en mode multi-maîtres.
+              Enfin, I2C offre une grande flexibilité en termes de vitesse, du mode standard 
+              (100 kHz) au mode rapide (jusqu’à 3,4 MHz) et au-delà dans certaines variantes 
+              propriétaires.
             </p>
             
             <div class="image-container">
@@ -743,13 +781,22 @@
 
             <li><strong>Prise de contrôle du bus</strong></li>
             <p>
-              La prise de contrôle du bus par un maître débute par une condition Start (S), qui est un événement distinctif sur le bus. Cette condition correspond à une transition sur la ligne SDA de l’état haut à l’état bas, alors que la ligne SCL est maintenue à l’état haut. Cette séquence particulière est détectée par tous les périphériques connectés au bus, qui entrent alors en mode écoute, prêts à recevoir des données.
+              La prise de contrôle du bus par un maître débute par une condition Start (S), 
+              qui est un événement distinctif sur le bus. Cette condition correspond à une transition 
+              sur la ligne SDA de l’état haut à l’état bas, alors que la ligne SCL est maintenue à 
+              l’état haut. Cette séquence particulière est détectée par tous les périphériques 
+              connectés au bus, qui entrent alors en mode écoute, prêts à recevoir des données.
             </p>
             <p>
-              La condition Start joue un rôle fondamental : elle marque l’exclusivité du maître sur le bus, ce qui évite les collisions ou l’interférence avec d’autres maîtres éventuels. Elle sert aussi de synchronisation initiale à la transmission de données, en assurant que tous les appareils sont synchronisés sur le début de la communication.
+              La condition Start joue un rôle fondamental : elle marque l’exclusivité du maître sur 
+              le bus, ce qui évite les collisions ou l’interférence avec d’autres maîtres éventuels. 
+              Elle sert aussi de synchronisation initiale à la transmission de données, 
+              en assurant que tous les appareils sont synchronisés sur le début de la communication.
             </p>
             <p>
-              Les résistances pull-up sur les lignes SDA et SCL maintiennent ces lignes à un état logique haut par défaut, garantissant ainsi que le bus est en repos quand aucune communication n’a lieu.
+              Les résistances pull-up sur les lignes SDA et SCL maintiennent ces lignes à 
+              un état logique haut par défaut, garantissant ainsi que le bus est en repos 
+              quand aucune communication n’a lieu.
             </p>
 
             <div class="image-container">
@@ -763,30 +810,54 @@
 
             <li><strong>Transmission d'un octet</strong></li>
             <p>
-              La transmission des données sur le bus I2C s’effectue par octets (8 bits). Chaque bit est transmis séquentiellement, en commençant par le bit le plus significatif (MSB).
+              La transmission des données sur le bus I2C s’effectue par octets (8 bits). 
+              Chaque bit est transmis séquentiellement, en commençant par le bit le plus significatif 
+              (MSB).
             </p>
             <p>
-              Le protocole impose que chaque bit soit placé sur la ligne SDA pendant que la ligne SCL est à l’état bas. Ensuite, la ligne SCL passe à l’état haut, moment où le récepteur lit la valeur présente sur la ligne SDA. Lorsque la ligne SCL redescend à l’état bas, l’émetteur peut placer le bit suivant sur SDA, et ainsi de suite.
+              Le protocole impose que chaque bit soit placé sur la ligne SDA pendant que la ligne SCL 
+              est à l’état bas. Ensuite, la ligne SCL passe à l’état haut, moment où 
+              le récepteur lit la valeur présente sur la ligne SDA. 
+              Lorsque la ligne SCL redescend à l’état bas, 
+              l’émetteur peut placer le bit suivant sur SDA, et ainsi de suite.
             </p>
             <p>
-              Après l’envoi des 8 bits d’un octet, la ligne SDA est libérée pendant le 9e cycle d’horloge. C’est alors au récepteur de signaler par un bit d’acquittement (ACK) s’il a correctement reçu l’octet, en tirant la ligne SDA à l’état bas. S’il ne tire pas SDA à zéro, un bit de non-acquittement (NACK) est détecté, ce qui indique que la communication doit être interrompue ou qu’une erreur s’est produite.
+              Après l’envoi des 8 bits d’un octet, 
+              la ligne SDA est libérée pendant le 9e cycle d’horloge. 
+              C’est alors au récepteur de signaler par un bit d’acquittement (ACK) s’il a correctement 
+              reçu l’octet, en tirant la ligne SDA à l’état bas. S’il ne tire pas SDA à zéro, 
+              un bit de non-acquittement (NACK) est détecté, ce qui indique que la communication 
+              doit être interrompue ou qu’une erreur s’est produite.
             </p>
             <p>
-              Ce mécanisme d’<strong>ACK/NACK</strong> est crucial car il assure la fiabilité des transmissions, permettant au maître de savoir si l’esclave est disponible et prêt à recevoir ou envoyer des données.
+              Ce mécanisme d’<strong>ACK/NACK</strong> est crucial car il assure la fiabilité 
+              des transmissions, permettant au maître de savoir si l’esclave est disponible 
+              et prêt à recevoir ou envoyer des données.
             </p>
 
             <li><strong>Transmission d'une adresse</strong></li>
             <p>
-              Après la condition Start, le maître envoie un octet d’adresse pour identifier l’esclave avec lequel il souhaite communiquer. L’adresse est généralement codée sur 7 bits, suivis d’un bit R/W indiquant si la transaction sera une lecture ou une écriture.
+              Après la condition Start, le maître envoie un octet d’adresse pour 
+              identifier l’esclave avec lequel il souhaite communiquer. 
+              L’adresse est généralement codée sur 7 bits, suivis d’un bit R/W indiquant 
+              si la transaction sera une lecture ou une écriture.
             </p>
             <p>
-              Le protocole prévoit aussi une extension 10 bits pour les réseaux comportant un grand nombre de périphériques, mais cette extension est moins fréquemment utilisée.
+              Le protocole prévoit aussi une extension 10 bits 
+              pour les réseaux comportant un grand nombre de périphériques, 
+              mais cette extension est moins fréquemment utilisée.
             </p>
             <p>
-              Tous les périphériques esclaves surveillent le bus et comparent l’adresse reçue avec leur propre adresse. Celui qui reconnaît son adresse répond alors par un bit ACK en tirant la ligne SDA à l’état bas pendant le 9e bit. Les autres esclaves restent silencieux jusqu’à la prochaine séquence.
+              Tous les périphériques esclaves surveillent le bus 
+              et comparent l’adresse reçue avec leur propre adresse. 
+              Celui qui reconnaît son adresse répond alors par un bit ACK en tirant la ligne SDA 
+              à l’état bas pendant le 9e bit. Les autres esclaves restent silencieux 
+              jusqu’à la prochaine séquence.
             </p>
             <p>
-              Cette étape est essentielle car elle garantit que seules les communications destinées à un périphérique spécifique sont traitées, évitant ainsi toute interférence entre plusieurs périphériques sur le même bus.
+              Cette étape est essentielle car elle garantit que seules les communications 
+              destinées à un périphérique spécifique sont traitées, 
+              évitant ainsi toute interférence entre plusieurs périphériques sur le même bus.
             </p>
             <div class="image-container">
               <img src="https://github.com/user-attachments/assets/d0ee80b6-b169-4cd5-9149-25fd731a3583" alt="schema" class="image-mean"/>
@@ -794,7 +865,10 @@
 
             <li><strong>Écriture d'une donnée</strong></li>
             <p>
-              Une fois l’adresse reconnue par l’esclave, la phase de transfert des données peut commencer. Le maître transmet alors les octets de données à l’esclave, chaque octet étant suivi d’un bit ACK envoyé par l’esclave pour confirmer la bonne réception.  
+              Une fois l’adresse reconnue par l’esclave, 
+              la phase de transfert des données peut commencer. 
+              Le maître transmet alors les octets de données à l’esclave, 
+              chaque octet étant suivi d’un bit ACK envoyé par l’esclave pour confirmer la bonne réception.  
             </p>
             <p>
               Le protocole permet d’envoyer autant d’octets que nécessaire dans une même communication, ce qui permet des transferts efficaces et continus.
@@ -963,7 +1037,7 @@
 
         <h4>c. Étape 3 : Intégration avec ATmega328P (préparation au PCB)</h4>
             <p>
-             Afin de remplacer la carte Arduino par le **microcontrôleur brut** (ATmega328P), et de simuler les conditions réelles d’un circuit imprimé.
+             Afin de remplacer la carte Arduino par le <strong>microcontrôleur brut</strong> (ATmega328P), et de simuler les conditions réelles d’un circuit imprimé.
             </p>
             <p>
               Composants utilisés :
