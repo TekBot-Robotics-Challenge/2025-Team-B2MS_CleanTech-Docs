@@ -74,72 +74,72 @@
               <button onclick="telechargerCode('code-cpp', 'robot.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
-                #include "robot.hpp"
+    #include "robot.hpp"
 
-                robot::robot() : ID(0), position(0, 0), status(OFF) {}
+    robot::robot() : ID(0), position(0, 0), status(OFF) {}
 
-                robot::robot(unsigned int Id, float x, float y) : ID(Id), position(x, y), status(ON) {}
+    robot::robot(unsigned int Id, float x, float y) : ID(Id), position(x, y), status(ON) {}
 
-                robot::robot(const robot &rhs)
-                    : ID(rhs.ID), position(rhs.position), status(rhs.status) {}
+    robot::robot(const robot &rhs)
+        : ID(rhs.ID), position(rhs.position), status(rhs.status) {}
 
-                robot &robot::operator=(const robot &rhs)
-                {
-                    if (this != &rhs)
-                    {
-                        ID = rhs.ID;
-                        position = rhs.position;
-                        status = rhs.status;
-                    }
-                    return *this;
-                }
+    robot &robot::operator=(const robot &rhs)
+    {
+        if (this != &rhs)
+        {
+            ID = rhs.ID;
+            position = rhs.position;
+            status = rhs.status;
+        }
+        return *this;
+    }
 
-                robot::~robot() {}
+    robot::~robot() {}
 
-                float robot::distanceFromOrigin()
-                {
-                    return std::sqrt(position.x * position.x + position.y * position.y);
-                }
+    float robot::distanceFromOrigin()
+    {
+        return std::sqrt(position.x * position.x + position.y * position.y);
+    }
 
-                vect2D robot::getPosition() const
-                {
-                    return position;
-                }
+    vect2D robot::getPosition() const
+    {
+        return position;
+    }
 
-                void robot::setPosition(const vect2D &currentPosition)
-                {
-                    position = currentPosition;
-                }
+    void robot::setPosition(const vect2D &currentPosition)
+    {
+        position = currentPosition;
+    }
 
-                unsigned int robot::getID() const
-                {
-                    return ID;
-                }
+    unsigned int robot::getID() const
+    {
+        return ID;
+    }
 
-                void robot::setID(int Id)
-                {
-                    ID = Id;
-                }
+    void robot::setID(int Id)
+    {
+        ID = Id;
+    }
 
-                state robot::getStatus() const
-                {
-                    return status;
-                }
+    state robot::getStatus() const
+    {
+        return status;
+    }
 
-                void robot::setStatus(const state &OnOrOff)
-                {
-                    status = OnOrOff;
-                }
+    void robot::setStatus(const state &OnOrOff)
+    {
+        status = OnOrOff;
+    }
 
-                void printNameOfRobot(robot *p)
-                {
-                    std::cout << p->getNameOfRobot() << std::endl;
-                }
+    void printNameOfRobot(robot *p)
+    {
+        std::cout << p->getNameOfRobot() << std::endl;
+    }
 
-                void moveRobot(robot *p)
-                {
-                    p->move();
-                }
+    void moveRobot(robot *p)
+    {
+        p->move();
+    }
 
             </code></pre>
           </div>
@@ -159,83 +159,83 @@
               <button onclick="telechargerCode('code-cpp', 'deliveryRobot.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
-                #include "deliveryRobot.hpp"
+    #include "deliveryRobot.hpp"
 
-                deliveryRobot::deliveryRobot(zone ZONE, unsigned short nbrOfEntities, unsigned int Id, float x, float y)
-                    : robot(Id, x, y), entities(nbrOfEntities), Zone(ZONE) {}
+    deliveryRobot::deliveryRobot(zone ZONE, unsigned short nbrOfEntities, unsigned int Id, float x, float y)
+        : robot(Id, x, y), entities(nbrOfEntities), Zone(ZONE) {}
 
-                deliveryRobot::deliveryRobot() : robot(), entities(0), Zone(keepYourPlace) {}
+    deliveryRobot::deliveryRobot() : robot(), entities(0), Zone(keepYourPlace) {}
 
-                deliveryRobot::deliveryRobot(const deliveryRobot &rhs) : robot(rhs)
-                {
-                    if (this != &rhs)
-                    {
-                        entities = rhs.entities;
-                        Zone = rhs.Zone;
-                    }
-                }
+    deliveryRobot::deliveryRobot(const deliveryRobot &rhs) : robot(rhs)
+    {
+        if (this != &rhs)
+        {
+            entities = rhs.entities;
+            Zone = rhs.Zone;
+        }
+    }
 
-                deliveryRobot &deliveryRobot::operator=(const deliveryRobot &rhs)
-                {
-                    if (this != &rhs)
-                    {
-                        robot::operator=(rhs);
-                        entities = rhs.entities;
-                        Zone = rhs.Zone;
-                    }
-                    return *this;
-                }
+    deliveryRobot &deliveryRobot::operator=(const deliveryRobot &rhs)
+    {
+        if (this != &rhs)
+        {
+            robot::operator=(rhs);
+            entities = rhs.entities;
+            Zone = rhs.Zone;
+        }
+        return *this;
+    }
 
-                deliveryRobot::~deliveryRobot() {}
+    deliveryRobot::~deliveryRobot() {}
 
-                void deliveryRobot::move()
-                {
-                    switch (Zone)
-                    {
-                    case keepYourPlace:
-                        break;
-                    case zone1:
-                        position.x = 10;
-                        position.y = 20;
-                        if (entities > 0)
-                            entities--;
-                        break;
-                    case zone2:
-                        position.x = 0;
-                        position.y = 30;
-                        if (entities > 0)
-                            entities--;
-                        break;
-                    default:
-                        Zone = keepYourPlace;
-                        break;
-                    }
-                }
+    void deliveryRobot::move()
+    {
+        switch (Zone)
+        {
+        case keepYourPlace:
+            break;
+        case zone1:
+            position.x = 10;
+            position.y = 20;
+            if (entities > 0)
+                entities--;
+            break;
+        case zone2:
+            position.x = 0;
+            position.y = 30;
+            if (entities > 0)
+                entities--;
+            break;
+        default:
+            Zone = keepYourPlace;
+            break;
+        }
+    }
 
-                std::string deliveryRobot::getNameOfRobot()
-                {
-                    return "Delivery Robot";
-                }
+    std::string deliveryRobot::getNameOfRobot()
+    {
+        return "Delivery Robot";
+    }
 
-                unsigned short deliveryRobot::getNbrOfEntities()
-                {
-                    return entities;
-                }
+    unsigned short deliveryRobot::getNbrOfEntities()
+    {
+        return entities;
+    }
 
-                void deliveryRobot::setNbrOfEntities(unsigned short nbrOfEntities)
-                {
-                    entities = nbrOfEntities;
-                }
+    void deliveryRobot::setNbrOfEntities(unsigned short nbrOfEntities)
+    {
+        entities = nbrOfEntities;
+    }
 
-                zone deliveryRobot::getZone()
-                {
-                    return Zone;
-                }
+    zone deliveryRobot::getZone()
+    {
+        return Zone;
+    }
 
-                void deliveryRobot::setZone(zone ZONE)
-                {
-                    Zone = ZONE;
-                }
+    void deliveryRobot::setZone(zone ZONE)
+    {
+        Zone = ZONE;
+    }
 
             </code></pre>
           </div>
@@ -255,71 +255,71 @@
               <button onclick="telechargerCode('code-cpp', 'travellingRobot.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
-              #include "travellingRobot.hpp"
+    #include "travellingRobot.hpp"
 
-              travellingRobot::travellingRobot(direction DIRECTION, unsigned int Id, float x, float y)
-                  : robot(Id, x, y), Direction(DIRECTION) {}
+    travellingRobot::travellingRobot(direction DIRECTION, unsigned int Id, float x, float y)
+        : robot(Id, x, y), Direction(DIRECTION) {}
 
-              travellingRobot::travellingRobot() : robot(), Direction(Stop) {}
+    travellingRobot::travellingRobot() : robot(), Direction(Stop) {}
 
-              travellingRobot::travellingRobot(const travellingRobot &rhs) : robot(rhs)
-              {
-                  if (this != &rhs)
-                  {
-                      Direction = rhs.Direction;
-                  }
-              }
+    travellingRobot::travellingRobot(const travellingRobot &rhs) : robot(rhs)
+    {
+        if (this != &rhs)
+        {
+            Direction = rhs.Direction;
+        }
+    }
 
-              travellingRobot &travellingRobot::operator=(const travellingRobot &rhs)
-              {
-                  if (this != &rhs)
-                  {
-                      robot::operator=(rhs);
-                      Direction = rhs.Direction;
-                  }
-                  return *this;
-              }
+    travellingRobot &travellingRobot::operator=(const travellingRobot &rhs)
+    {
+        if (this != &rhs)
+        {
+            robot::operator=(rhs);
+            Direction = rhs.Direction;
+        }
+        return *this;
+    }
 
-              travellingRobot::~travellingRobot() {}
+    travellingRobot::~travellingRobot() {}
 
-              void travellingRobot::move()
-              {
-                  switch (Direction)
-                  {
-                  case Stop:
-                      break;
-                  case Forward:
-                      position.y += 1;
-                      break;
-                  case Backward:
-                      position.y -= 1;
-                      break;
-                  case Right:
-                      position.x += 1;
-                      break;
-                  case Left:
-                      position.x -= 1;
-                      break;
-                  default:
-                      Direction = Stop;
-                      break;
-                  }
-              }
+    void travellingRobot::move()
+    {
+        switch (Direction)
+        {
+        case Stop:
+            break;
+        case Forward:
+            position.y += 1;
+            break;
+        case Backward:
+            position.y -= 1;
+            break;
+        case Right:
+            position.x += 1;
+            break;
+        case Left:
+            position.x -= 1;
+            break;
+        default:
+            Direction = Stop;
+            break;
+        }
+    }
 
-              std::string travellingRobot::getNameOfRobot()
-              {
-                  return "Travelling Robot";
-              }
+    std::string travellingRobot::getNameOfRobot()
+    {
+        return "Travelling Robot";
+    }
 
-              direction travellingRobot::getDirection()
-              {
-                  return Direction;
-              }
+    direction travellingRobot::getDirection()
+    {
+        return Direction;
+    }
 
-              void travellingRobot::setDirection(direction DIRECTION)
-              {
-                  Direction = DIRECTION;
-              }
+    void travellingRobot::setDirection(direction DIRECTION)
+    {
+        Direction = DIRECTION;
+    }
             </code></pre>
           </div>
 
@@ -338,63 +338,63 @@
               <button onclick="telechargerCode('code-cpp', 'armRobot.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
-                #include "armRobot.hpp"
+    #include "armRobot.hpp"
 
-                armRobot::armRobot()
-                  : robot(), angle(0), rotationalDirection(Clockwise) {}
+    armRobot::armRobot()
+      : robot(), angle(0), rotationalDirection(Clockwise) {}
 
-                armRobot::armRobot(rotate rotationalDirection, unsigned short initAngle, unsigned int id, float x, float y)
-                  : robot(id, x, y), angle(initAngle), rotationalDirection(rotationalDirection) {}
+    armRobot::armRobot(rotate rotationalDirection, unsigned short initAngle, unsigned int id, float x, float y)
+      : robot(id, x, y), angle(initAngle), rotationalDirection(rotationalDirection) {}
 
-                armRobot::armRobot(const armRobot &rhs)
-                  : robot(rhs), angle(rhs.angle), rotationalDirection(rhs.rotationalDirection) {}
+    armRobot::armRobot(const armRobot &rhs)
+      : robot(rhs), angle(rhs.angle), rotationalDirection(rhs.rotationalDirection) {}
 
-                armRobot &armRobot::operator=(const armRobot &rhs)
-                {
-                  if (this != &rhs)
-                  {
-                    robot::operator=(rhs);
-                    angle = rhs.angle;
-                    rotationalDirection = rhs.rotationalDirection;
-                  }
-                  return *this;
-                }
+    armRobot &armRobot::operator=(const armRobot &rhs)
+    {
+      if (this != &rhs)
+      {
+        robot::operator=(rhs);
+        angle = rhs.angle;
+        rotationalDirection = rhs.rotationalDirection;
+      }
+      return *this;
+    }
 
-                armRobot::~armRobot() {}
+    armRobot::~armRobot() {}
 
-                void armRobot::move()
-                {
-                  // Simuler un mouvement de rotation de 10 degrés
-                  if (rotationalDirection == Clockwise)
-                    angle = (angle + 10) % 360;
-                  else
-                    angle = (angle + 350) % 360; // recule de 10 degrés
-                }
+    void armRobot::move()
+    {
+      // Simuler un mouvement de rotation de 10 degrés
+      if (rotationalDirection == Clockwise)
+        angle = (angle + 10) % 360;
+      else
+        angle = (angle + 350) % 360; // recule de 10 degrés
+    }
 
-                std::string armRobot::getNameOfRobot()
-                {
-                  return "Arm Robot";
-                }
+    std::string armRobot::getNameOfRobot()
+    {
+      return "Arm Robot";
+    }
 
-                unsigned short armRobot::getAngle() const
-                {
-                  return angle;
-                }
+    unsigned short armRobot::getAngle() const
+    {
+      return angle;
+    }
 
-                void armRobot::setAngle(unsigned short angle_)
-                {
-                  angle = angle_;
-                }
+    void armRobot::setAngle(unsigned short angle_)
+    {
+      angle = angle_;
+    }
 
-                rotate armRobot::getRotationalDirection() const
-                {
-                  return rotationalDirection;
-                }
+    rotate armRobot::getRotationalDirection() const
+    {
+      return rotationalDirection;
+    }
 
-                void armRobot::setRotationalDirection(rotate rotationalDirection_)
-                {
-                  rotationalDirection = rotationalDirection_;
-                }
+    void armRobot::setRotationalDirection(rotate rotationalDirection_)
+    {
+      rotationalDirection = rotationalDirection_;
+    }
 
             </code></pre>
           </div>
@@ -426,60 +426,60 @@
               <button onclick="telechargerCode('code-cpp', 'main.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
-                #include "travellingRobot.hpp"
-                #include "deliveryRobot.hpp"
-                #include "armRobot.hpp"
-                #include &lt;iostream&gt;
+    #include "travellingRobot.hpp"
+    #include "deliveryRobot.hpp"
+    #include "armRobot.hpp"
+    #include &lt;iostream&gt;
 
-                std::string rotateToString(rotate r)
-                {
-                    switch (r)
-                    {
-                    case anticlockwise:
-                        return "Anticlockwise";
-                    case Clockwise:
-                        return "Clockwise";
-                    default:
-                        return "Unknown";
-                    }
-                }
+    std::string rotateToString(rotate r)
+    {
+        switch (r)
+        {
+        case anticlockwise:
+            return "Anticlockwise";
+        case Clockwise:
+            return "Clockwise";
+        default:
+            return "Unknown";
+        }
+    }
 
-                int main()
-                {
-                    // ------------------Travelling Robot----------------------
-                    travellingRobot a(Forward, 111, 0, 0);
-                    printNameOfRobot(&a);
-                    moveRobot(&a);
-                    vect2D v = a.getPosition();
-                    std::cout << "\n"
-                              << v.x << " " << v.y << std::endl;
-                    std::cout << a.getID() << std::endl;
-                    std::cout << a.getDirection() << std::endl;
+    int main()
+    {
+        // ------------------Travelling Robot----------------------
+        travellingRobot a(Forward, 111, 0, 0);
+        printNameOfRobot(&a);
+        moveRobot(&a);
+        vect2D v = a.getPosition();
+        std::cout << "\n"
+                  << v.x << " " << v.y << std::endl;
+        std::cout << a.getID() << std::endl;
+        std::cout << a.getDirection() << std::endl;
 
-                    // ------------------Delivery Robot-----------------------
-                    deliveryRobot b(zone1, 10, 222, 0, 0);
-                    printNameOfRobot(&b);
-                    moveRobot(&b);
-                    v = b.getPosition();
-                    std::cout << "\n"
-                              << v.x << " " << v.y << std::endl;
-                    std::cout << b.getID() << std::endl;
-                    std::cout << b.getNbrOfEntities() << std::endl;
-                    std::cout << b.getZone() << std::endl;
+        // ------------------Delivery Robot-----------------------
+        deliveryRobot b(zone1, 10, 222, 0, 0);
+        printNameOfRobot(&b);
+        moveRobot(&b);
+        v = b.getPosition();
+        std::cout << "\n"
+                  << v.x << " " << v.y << std::endl;
+        std::cout << b.getID() << std::endl;
+        std::cout << b.getNbrOfEntities() << std::endl;
+        std::cout << b.getZone() << std::endl;
 
-                    // ------------------ARM Robot---------------------------
-                    armRobot c(anticlockwise, 0, 333, 0, 0);
-                    printNameOfRobot(&c);
-                    moveRobot(&c);
-                    v = c.getPosition();
-                    std::cout << "\n"
-                              << v.x << " " << v.y << std::endl;
-                    std::cout << c.getID() << std::endl;
-                    std::cout << c.getAngle() << std::endl;
-                    std::cout << rotateToString(c.getRotationalDirection()) << std::endl;
+        // ------------------ARM Robot---------------------------
+        armRobot c(anticlockwise, 0, 333, 0, 0);
+        printNameOfRobot(&c);
+        moveRobot(&c);
+        v = c.getPosition();
+        std::cout << "\n"
+                  << v.x << " " << v.y << std::endl;
+        std::cout << c.getID() << std::endl;
+        std::cout << c.getAngle() << std::endl;
+        std::cout << rotateToString(c.getRotationalDirection()) << std::endl;
 
-                    return 0;
-                }
+        return 0;
+    }
             </code></pre>
           </div>
 
@@ -561,62 +561,62 @@
               <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
             </div>
             <pre><code id="code-txt">
-              user@user-VirtualBox:~$ cd Desktop
-              user@user-VirtualBox:~/Desktop$ mkdir -p workspace/src
+  user@user-VirtualBox:~$ cd Desktop
+  user@user-VirtualBox:~/Desktop$ mkdir -p workspace/src
             </code></pre>
           </div>
 
-          <h4><strong>a. Création du package et des nodes</strong></h4>
+          <h4><strong>b. Création du package et des nodes</strong></h4>
           <div class="code-container">
             <div class="btn-bar">
               <button onclick="copierCode('code-txt')">Copier</button>
               <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
             </div>
             <pre><code id="code-txt">
-              user@user-VirtualBox:~/Desktop$ cd workspace/src
-              user@user-VirtualBox:~/Desktop/workspace/src$ ros2 pkg create sensor_data_evaluation --build-type ament_cmake
-              going to create a new package
-              package name: sensor_data_evaluation
-              destination directory: /home/user/Desktop/workspace/src
-              package format: 3
-              version: 0.0.0
-              description: TODO: Package description
-              maintainer: [&apos;user &lt;user@todo.todo&gt;&apos;]
-              licenses: [&apos;TODO: License declaration&apos;]
-              build type: ament_cmake
-              dependencies: []
-              creating folder ./sensor_data_evaluation
-              creating ./sensor_data_evaluation/package.xml
-              creating source and include folder
-              creating folder ./sensor_data_evaluation/src
-              creating folder ./sensor_data_evaluation/include/sensor_data_evaluation
-              creating ./sensor_data_evaluation/CMakeLists.txt
+    user@user-VirtualBox:~/Desktop$ cd workspace/src
+    user@user-VirtualBox:~/Desktop/workspace/src$ ros2 pkg create sensor_data_evaluation --build-type ament_cmake
+    going to create a new package
+    package name: sensor_data_evaluation
+    destination directory: /home/user/Desktop/workspace/src
+    package format: 3
+    version: 0.0.0
+    description: TODO: Package description
+    maintainer: [&apos;user &lt;user@todo.todo&gt;&apos;]
+    licenses: [&apos;TODO: License declaration&apos;]
+    build type: ament_cmake
+    dependencies: []
+    creating folder ./sensor_data_evaluation
+    creating ./sensor_data_evaluation/package.xml
+    creating source and include folder
+    creating folder ./sensor_data_evaluation/src
+    creating folder ./sensor_data_evaluation/include/sensor_data_evaluation
+    creating ./sensor_data_evaluation/CMakeLists.txt
 
-              [WARNING]: Unknown license &apos;TODO: License declaration&apos;.  This has been set in the package.xml, but no LICENSE file has been created.
-              It is recommended to use one of the ament license identitifers:
-              Apache-2.0
-              BSL-1.0
-              BSD-2.0
-              BSD-2-Clause
-              BSD-3-Clause
-              GPL-3.0-only
-              LGPL-3.0-only
-              MIT
-              MIT-0
-              user@user-VirtualBox:~/Desktop/workspace/src$ ls
-              sensor_data_evaluation
-              user@user-VirtualBox:~/Desktop/workspace/src$ cd sensor_data_evaluation
-              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation$ ls
-              CMakeLists.txt  include  package.xml  src
-              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation$ cd src
-              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_publisher.cpp
-              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_subscriber.cpp
-              chmod: cannot access &apos;data_node_subscriber.cpp&apos;: No such file or directory
-              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ touch data_node_publisher.cpp
-              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ touch data_node_subscriber.cpp
-              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_subscriber.cpp
-              user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ ls
-              data_node_publisher.cpp  data_node_subscriber.cpp
+    [WARNING]: Unknown license &apos;TODO: License declaration&apos;.  This has been set in the package.xml, but no LICENSE file has been created.
+    It is recommended to use one of the ament license identitifers:
+    Apache-2.0
+    BSL-1.0
+    BSD-2.0
+    BSD-2-Clause
+    BSD-3-Clause
+    GPL-3.0-only
+    LGPL-3.0-only
+    MIT
+    MIT-0
+    user@user-VirtualBox:~/Desktop/workspace/src$ ls
+    sensor_data_evaluation
+    user@user-VirtualBox:~/Desktop/workspace/src$ cd sensor_data_evaluation
+    user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation$ ls
+    CMakeLists.txt  include  package.xml  src
+    user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation$ cd src
+    user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_publisher.cpp
+    user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_subscriber.cpp
+    chmod: cannot access &apos;data_node_subscriber.cpp&apos;: No such file or directory
+    user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ touch data_node_publisher.cpp
+    user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ touch data_node_subscriber.cpp
+    user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x data_node_subscriber.cpp
+    user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ ls
+    data_node_publisher.cpp  data_node_subscriber.cpp
             </code></pre>
           </div>
           
@@ -638,64 +638,62 @@
               <button onclick="telechargerCode('code-cpp', 'sensor_node_publisher.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
-              
-                #include &lt;chrono&gt;
-                #include &lt;functional&gt;
-                #include &lt;memory&gt;
-                #include &lt;string&gt;
-                #include &lt;random&gt;
+    #include &lt;chrono&gt;
+    #include &lt;functional&gt;
+    #include &lt;memory&gt;
+    #include &lt;string&gt;
+    #include &lt;random&gt;
 
-                #include "rclcpp/rclcpp.hpp"
-                #include "std_msgs/msg/string.hpp"
+    #include "rclcpp/rclcpp.hpp"
+    #include "std_msgs/msg/string.hpp"
 
-                using namespace std::chrono_literals;
-
-
-                class SensorPublisher : public rclcpp::Node
-                {
-                private:
-                  rclcpp::TimerBase::SharedPtr timer_;
-                  rclcpp::Publisher&lt;std_msgs::msg::String&gt;::SharedPtr publisher_;
-                  int temp, pression, hum;
-                  // float temp, pression, hum;
-                  void timer_callback()
-                  {
-                    temp = nbr_generator(15, 35);
-                    hum = nbr_generator(30, 70);
-                    pression = nbr_generator(950, 1050);
-                    auto message = std_msgs::msg::String();
-                    message.data = "T = " + std::to_string(temp) + "°C, H = " + std::to_string(hum) + "%, P = " + std::to_string(pression) + "hPa";
-                    RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
-                    publisher_->publish(message);
-                  }
-
-                  int nbr_generator(int min_value, int max_value){
-                    static std::random_device rd;
-                    static std::mt19937 gen(rd());
-                    std::uniform_int_distribution&lt;int&gt; distrib(min_value, max_value);
-
-                    return distrib(gen);
-                }
+    using namespace std::chrono_literals;
 
 
-                public:
-                  SensorPublisher()
-                  : Node("sensor_node_publisher")
-                  {
-                    publisher_ = this->create_publisher&lt;std_msgs::msg::String&gt;("sensor_data", 10);
-                    timer_ = this->create_wall_timer(
-                      500ms, std::bind(&SensorPublisher::timer_callback, this));
-                  }
-                };
+    class SensorPublisher : public rclcpp::Node
+    {
+    private:
+      rclcpp::TimerBase::SharedPtr timer_;
+      rclcpp::Publisher&lt;std_msgs::msg::String&gt;::SharedPtr publisher_;
+      int temp, pression, hum;
+      // float temp, pression, hum;
+      void timer_callback()
+      {
+        temp = nbr_generator(15, 35);
+        hum = nbr_generator(30, 70);
+        pression = nbr_generator(950, 1050);
+        auto message = std_msgs::msg::String();
+        message.data = "T = " + std::to_string(temp) + "°C, H = " + std::to_string(hum) + "%, P = " + std::to_string(pression) + "hPa";
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+        publisher_->publish(message);
+      }
 
-                int main(int argc, char * argv[])
-                {
-                  rclcpp::init(argc, argv);
-                  rclcpp::spin(std::make_shared&lt;SensorPublisher&gt;());
-                  rclcpp::shutdown();
-                  return 0;
-                }
+      int nbr_generator(int min_value, int max_value){
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+        std::uniform_int_distribution&lt;int&gt; distrib(min_value, max_value);
 
+        return distrib(gen);
+    }
+
+
+    public:
+      SensorPublisher()
+      : Node("sensor_node_publisher")
+      {
+        publisher_ = this->create_publisher&lt;std_msgs::msg::String&gt;("sensor_data", 10);
+        timer_ = this->create_wall_timer(
+          500ms, std::bind(&SensorPublisher::timer_callback, this));
+      }
+    };
+
+    int main(int argc, char * argv[])
+    {
+      rclcpp::init(argc, argv);
+      rclcpp::spin(std::make_shared&lt;SensorPublisher&gt;());
+      rclcpp::shutdown();
+      return 0;
+    }
             </code></pre>
           </div>
 
@@ -713,57 +711,55 @@
               <button onclick="telechargerCode('code-cpp', 'sensor_node_subscriber.cpp', 'text/x-c++src')">Télécharger</button>
             </div>
             <pre><code id="code-cpp">
+    #include &lt;functional&gt;
+    #include &lt;memory&gt;
+    #include &lt;sstream&gt;
 
-                #include &lt;functional&gt;
-                #include &lt;memory&gt;
-                #include &lt;sstream&gt;
+    #include "rclcpp/rclcpp.hpp"
+    #include "std_msgs/msg/string.hpp"
 
-                #include "rclcpp/rclcpp.hpp"
-                #include "std_msgs/msg/string.hpp"
+    using std::placeholders::_1;
 
-                using std::placeholders::_1;
+    class SensorSubscriber : public rclcpp::Node
+    {
+    public:
+      SensorSubscriber()
+      : Node("sensor_node_subscriber")
+      {
+        subscription_ = this->create_subscription&lt;std_msgs::msg::String&gt;(
+          "sensor_data", 10, std::bind(&SensorSubscriber::sensor_callback, this, _1));
+      }
 
-                class SensorSubscriber : public rclcpp::Node
-                {
-                public:
-                  SensorSubscriber()
-                  : Node("sensor_node_subscriber")
-                  {
-                    subscription_ = this->create_subscription&lt;std_msgs::msg::String&gt;(
-                      "sensor_data", 10, std::bind(&SensorSubscriber::sensor_callback, this, _1));
-                  }
+    private:
+      void sensor_callback(const std_msgs::msg::String & msg) const
+      {
+        // std::string message = "Data received: " + msg.data + ": " + is_correct_value(msg.data);
+        // RCLCPP_INFO(this->get_logger(), "%s", message.c_str());
+        RCLCPP_INFO(this->get_logger(), "Data received: %s : %s", msg.data.c_str(), (is_correct_value(msg.data)).c_str());
+      }
+      rclcpp::Subscription&lt;std_msgs::msg::String&gt;::SharedPtr subscription_;
 
-                private:
-                  void sensor_callback(const std_msgs::msg::String & msg) const
-                  {
-                    // std::string message = "Data received: " + msg.data + ": " + is_correct_value(msg.data);
-                    // RCLCPP_INFO(this->get_logger(), "%s", message.c_str());
-                    RCLCPP_INFO(this->get_logger(), "Data received: %s : %s", msg.data.c_str(), (is_correct_value(msg.data)).c_str());
-                  }
-                  rclcpp::Subscription&lt;std_msgs::msg::String&gt;::SharedPtr subscription_;
+      std::string is_correct_value(const std::string &txt) const{
+        std::stringstream ss(txt);
+        std::string buffer;
+        int T, H, P;
 
-                  std::string is_correct_value(const std::string &txt) const{
-                    std::stringstream ss(txt);
-                    std::string buffer;
-                    int T, H, P;
-
-                    ss >> buffer >> buffer >> T >> buffer  
-                      >> buffer >> buffer >> H >> buffer 
-                      >> buffer >> buffer >> P >> buffer;
-                    
-                    return (15 <= T && T <= 35 && 30 <= H && H <= 70 && 950 <= P && P <= 1050)? "correct values":"incorrect values";
-                }
-                };
+        ss >> buffer >> buffer >> T >> buffer  
+          >> buffer >> buffer >> H >> buffer 
+          >> buffer >> buffer >> P >> buffer;
+        
+        return (15 <= T && T <= 35 && 30 <= H && H <= 70 && 950 <= P && P <= 1050)? "correct values":"incorrect values";
+    }
+    };
 
 
-                int main(int argc, char * argv[])
-                {
-                  rclcpp::init(argc, argv);
-                  rclcpp::spin(std::make_shared&lt;SensorSubscriber&gt;());
-                  rclcpp::shutdown();
-                  return 0;
-                }
-
+    int main(int argc, char * argv[])
+    {
+      rclcpp::init(argc, argv);
+      rclcpp::spin(std::make_shared&lt;SensorSubscriber&gt;());
+      rclcpp::shutdown();
+      return 0;
+    }
             </code></pre>
           </div>
 
@@ -778,45 +774,44 @@
               <button onclick="telechargerCode('code-txt', 'CMakeLists.txt', 'text/txt')">Télécharger</button>
             </div>
             <pre><code id="code-txt">
-              cmake_minimum_required(VERSION 3.8)
-              project(sensor_data_evaluation)
+    cmake_minimum_required(VERSION 3.8)
+    project(sensor_data_evaluation)
 
-              if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-                add_compile_options(-Wall -Wextra -Wpedantic)
-              endif()
+    if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+      add_compile_options(-Wall -Wextra -Wpedantic)
+    endif()
 
-              # find dependencies
-              find_package(ament_cmake REQUIRED)
-              find_package(rclcpp REQUIRED)
-              find_package(std_msgs REQUIRED)
+    # find dependencies
+    find_package(ament_cmake REQUIRED)
+    find_package(rclcpp REQUIRED)
+    find_package(std_msgs REQUIRED)
 
-              # add the executable
-              add_executable(sensor_node_publisher src/sensor_node_publisher.cpp)
-              target_link_libraries(sensor_node_publisher PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
+    # add the executable
+    add_executable(sensor_node_publisher src/sensor_node_publisher.cpp)
+    target_link_libraries(sensor_node_publisher PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
 
-              add_executable(sensor_node_subscriber src/sensor_node_subscriber.cpp)
-              target_link_libraries(sensor_node_subscriber PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
+    add_executable(sensor_node_subscriber src/sensor_node_subscriber.cpp)
+    target_link_libraries(sensor_node_subscriber PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
 
-              install(TARGETS
-                sensor_node_publisher
-                sensor_node_subscriber
-                DESTINATION lib/${PROJECT_NAME})
+    install(TARGETS
+      sensor_node_publisher
+      sensor_node_subscriber
+      DESTINATION lib/${PROJECT_NAME})
 
 
-              if(BUILD_TESTING)
-                find_package(ament_lint_auto REQUIRED)
-                # the following line skips the linter which checks for copyrights
-                # comment the line when a copyright and license is added to all source files
-                set(ament_cmake_copyright_FOUND TRUE)
-                # the following line skips cpplint (only works in a git repo)
-                # comment the line when this package is in a git repo and when
-                # a copyright and license is added to all source files
-                set(ament_cmake_cpplint_FOUND TRUE)
-                ament_lint_auto_find_test_dependencies()
-              endif()
+    if(BUILD_TESTING)
+      find_package(ament_lint_auto REQUIRED)
+      # the following line skips the linter which checks for copyrights
+      # comment the line when a copyright and license is added to all source files
+      set(ament_cmake_copyright_FOUND TRUE)
+      # the following line skips cpplint (only works in a git repo)
+      # comment the line when this package is in a git repo and when
+      # a copyright and license is added to all source files
+      set(ament_cmake_cpplint_FOUND TRUE)
+      ament_lint_auto_find_test_dependencies()
+    endif()
 
-              ament_package()
-
+    ament_package()
             </code></pre>
           </div>
 
@@ -831,30 +826,29 @@
               <button onclick="telechargerCode('code-xml', 'package.xml', 'text/xml')">Télécharger</button>
             </div>
             <pre><code id="code-xml">
-                &lt;?xml version="1.0"?&gt;
-                &lt;?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
+    &lt;?xml version="1.0"?&gt;
+    &lt;?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
 
-                &lt;package format="3"&gt;
-                  &lt;name&gt;sensor_data_evaluation&lt;/name&gt;
-                  &lt;version&gt;0.0.0&lt;/version&gt;
-                  &lt;description&gt;Sending and receiving data&lt;/description&gt;
-                  &lt;maintainer email="user@todo.todo"&gt;user&lt;/maintainer&gt;
-                  &lt;license&gt;TODO: License declaration&lt;/license&gt;
+    &lt;package format="3"&gt;
+      &lt;name&gt;sensor_data_evaluation&lt;/name&gt;
+      &lt;version&gt;0.0.0&lt;/version&gt;
+      &lt;description&gt;Sending and receiving data&lt;/description&gt;
+      &lt;maintainer email="user@todo.todo"&gt;user&lt;/maintainer&gt;
+      &lt;license&gt;TODO: License declaration&lt;/license&gt;
 
-                  &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
-                  &lt;depend&gt;rclcpp&lt;/depend&gt;
-                  &lt;depend&gt;std_msgs&lt;/depend&gt;
-                  
-                  &lt;exec_depend&gt;ros2launch&lt;/exec_depend&gt;
+      &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+      &lt;depend&gt;rclcpp&lt;/depend&gt;
+      &lt;depend&gt;std_msgs&lt;/depend&gt;
+      
+      &lt;exec_depend&gt;ros2launch&lt;/exec_depend&gt;
 
-                  &lt;test_depend&gt;ament_lint_auto&lt;/test_depend&gt;
-                  &lt;test_depend&gt;ament_lint_common&lt;/test_depend&gt;
+      &lt;test_depend&gt;ament_lint_auto&lt;/test_depend&gt;
+      &lt;test_depend&gt;ament_lint_common&lt;/test_depend&gt;
 
-                  &lt;export&gt;
-                    &lt;build_type&gt;ament_cmake&lt;/build_type&gt;
-                  &lt;/export&gt;
-                &lt;/package&gt;
-
+      &lt;export&gt;
+        &lt;build_type&gt;ament_cmake&lt;/build_type&gt;
+      &lt;/export&gt;
+    &lt;/package&gt;
             </code></pre>
           </div>
 
@@ -872,11 +866,11 @@
               <button onclick="telechargerCode('code-xml', 'sensor_data_eval_launch.xml', 'text/xml')">Télécharger</button>
             </div>
             <pre><code id="code-xml">
-              &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-              &lt;launch&gt;
-                &lt;node pkg="sensor_data_evaluation" exec="sensor_node_publisher"/&gt;
-                &lt;node pkg="sensor_data_evaluation" exec="sensor_node_subscriber"/&gt;
-              &lt;/launch&gt;
+    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;launch&gt;
+      &lt;node pkg="sensor_data_evaluation" exec="sensor_node_publisher"/&gt;
+      &lt;node pkg="sensor_data_evaluation" exec="sensor_node_subscriber"/&gt;
+    &lt;/launch&gt;
             </code></pre>
           </div>
 
@@ -891,10 +885,10 @@
                   <button onclick="copierCode('code-txt')">Copier</button>                 
                 </div>
                 <pre><code id="code-txt">
-                  user@user-VirtualBox:~$ cd Desktop/workspace
-                  user@user-VirtualBox:~/Desktop/workspace$ colcon build --symlink-install
-                  user@user-VirtualBox:~/Desktop/workspace$ source install/setup.bash
-                  user@user-VirtualBox:~/Desktop/workspace$ ros2 launch sensor_data_evaluation sensor_data_eval_launch.xml
+  user@user-VirtualBox:~$ cd Desktop/workspace
+  user@user-VirtualBox:~/Desktop/workspace$ colcon build --symlink-install
+  user@user-VirtualBox:~/Desktop/workspace$ source install/setup.bash
+  user@user-VirtualBox:~/Desktop/workspace$ ros2 launch sensor_data_evaluation sensor_data_eval_launch.xml
                 </code></pre>
               </div>
               
@@ -954,9 +948,637 @@
     
 
     <div id="test3" class="subtab-content">
-      <h2>Test 3</h2>
-      <p>Contenu du Test 3 :</p>
+      <h2>Algorithme de Pathfinding </h2>
+        <h3>1. Contexte et objectifs:</h3>
+          <p>
+            Avec l’essor des robots mobiles autonomes, la capacité à naviguer efficacement
+            dans des environnements complexes et dynamiques est devenue un enjeu majeur. 
+            Pour permettre à un robot de se déplacer de manière autonome, il est essentiel 
+            de lui fournir un système de navigation capable de planifier des trajectoires 
+            optimales tout en évitant les obstacles. 
+          </p>
+          <p>   
+            <strong>ROS2</strong>, combiné au simulateur <strong>Gazebo</strong>, offre un cadre complet pour développer, 
+            tester et valider ces systèmes dans un environnement virtuel proche du réel. 
+            Le robot TekBot, équipé de capteurs et d’une configuration prête à l’emploi, 
+            constitue une base idéale pour expérimenter et implémenter des 
+            <strong>algorithmes de pathfinding</strong> classiques dans un labyrinthe simulé. 
+          </p>
+          <p>
+            L’objectif principal de ce projet est de créer un système de navigation 
+            autonome pour un robot mobile en utilisant:
+          </p>
+          <ul>
+            <li><strong>ROS2 Humble</strong> sous Ubuntu 22.04</li>
+            <li><strong>Gazebo Classic</strong>: simulateur 3D permettant de visualiser l'environnement et le robot</li>
+            <li><strong>RViz</strong>: outil de visualisation pour les données et les capteurs ROS2.</li>
+            <li><strong>SLAM Toolbox</strong>: utilisé pour le mapping et la localisation simultanée. </li>
+            <li><strong>Nav2</strong>: framework pour la navigation autonome, intégrant le pathfinding et l'évitement d'obstacles.</li>
+          </ul>
+
+          <h3>2. Configurations nécessaires</h3>
+          <p>
+            ROS2, Rviz et Gazebo étant déjà installés, il ne reste qu'à y ajouter les packages manquants
+          </p>
+
+          <ul>
+            <li><strong>mise à jour</strong>:</li>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>
+                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+                </div>
+                <pre><code id="code-txt">
+  user@user:~$ sudo apt update
+  user@user:~$ sudo apt upgrade
+                </code></pre>
+              </div>
+            <li><strong>teleop_joy</strong>:</li>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>
+                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+                </div>
+                <pre><code id="code-txt">
+  user@user:~$ sudo apt install ros-humble-teleop-twist-joy
+                </code></pre>
+              </div>
+            <li><strong>robot_localization</strong>:</li>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>
+                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+                </div>
+                <pre><code id="code-txt">
+  user@user:~$ sudo apt install ros-humble-robot-localization
+                </code></pre>
+              </div>
+            <li><strong>rqt</strong>:</li>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>
+                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+                </div>
+                <pre><code id="code-txt">
+  user@user:~$ sudo apt install ros-humble-rqt*
+                </code></pre>
+              </div>
+              <li><strong>SLAM_toolbox</strong>:</li>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>
+                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+                </div>
+                <pre><code id="code-txt">
+  user@user:~$ sudo apt install ros-humble-slam-toolbox
+                </code></pre>
+              </div>
+              <li><strong>Nav2</strong>:</li>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>
+                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+                </div>
+                <pre><code id="code-txt">
+  user@user:~$ sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup
+                </code></pre>
+              </div>
+          </ul>
+
+
+          <h3>3. Prise en main du package <strong>tekbot_sim</strong></h3>
+            <p>
+              Le robot et l'environnement sont mis à disposition.
+            </p>
+            <ul>
+            <li><strong>Clonage du metapackage tekbot_sim</strong> depuis GitHub: </li>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>
+                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+                </div>
+                <pre><code id="code-txt">
+  user@user:~$ git clone https://github.com/charif-tekbot/tekbot_sim.git
+                </code></pre>
+              </div>
+            <li><strong>Compilation et configuration</strong> du workspace: </li>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-txt')">Copier</button>
+                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+                </div>
+                <pre><code id="code-txt">
+  user@user:~$ cd tekbot_sim
+  user@user:~/tekbot_sim$ chmod +x configure.sh (optional)
+  user@user:~/tekbot_sim$ source configure.sh
+                </code></pre>
+              </div>
+          </ul>
+
+          <p>
+            tekbot_ws contient plusieurs packages dont:
+            <ul>
+              <li><strong>maze_solving</strong>: pour l'environnement</li>
+              <li><strong>tekbot</strong>: pour le robot(tekbot_control et tekbot_description)</li>
+            </ul>
+          </p>
+
+          <div class="arbo">
+            <ul>
+                <li class="folder">tekbot_ws
+                  <ul>
+                    <li class="folder">build</li>
+                    <li class="folder">install</li>
+                    <li class="folder">log</li>
+
+                    <li class="folder">src
+                      <ul>
+                        <li class="folder">tekbot_sim
+                            <ul>
+                                <li class="folder">maze_solving</li>
+                                <li class="folder">tekbot
+                                    <ul>
+                                        <li class="folder">tekbot_control</li>
+                                        <li class="folder">tekbot_description</li>
+                                    </ul>
+                                </li>
+                                <li class="file">README.md</li>
+                                <li class="file">configure.sh</li>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+          
+          <h4><strong>a. L'environnement</strong></h4>
+          <p>
+            L'environnement dans lequel le robot évoluera est contenu dans le package maze_solving. 
+            Cet environnement comprend un labyrinthe adapté pour les tests de navigation et 
+            d'évitement d'obstacles. Les simulations s'exécutent principalement dans Gazebo, un 
+            simulateur robotique 3D. Pour le lancer avec le robot:
+          </p>
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('code-txt')">Copier</button>
+              <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+            </div>
+            <pre><code id="code-txt">
+  user@user:~/tekbot_ws$ source install/setup.bash
+  user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
+            </code></pre>
+          </div>
+          <div class="image-container">
+            <img src="images/Test3/IT/gazebo.png" alt="gazebo" class="image-mean"/>
+            <p>
+              Gazebo simulant le robot dans un labyrinthe
+            </p>
+          </div>
+          <div class="image-container">
+            <img src="images/Test3/IT/rqt.png" alt="gazebo" class="image-mean"/>
+            <p>
+              rqt_graph montrant les nodes et topics
+            </p>
+          </div>
+
+          <p>
+            Le package maze_solving contient d'autres launchers:
+          </p>
+          <div class="image-container">
+            <img src="images/Test3/IT/maze.png" alt="maze" class="image-mean"/>
+          </div>
+          
+
+          <h4><strong>b. Le robot</strong></h4>
+          <p>
+            Le robot est préconstruit avec des capteurs intégrés 
+            permettant de naviguer dans des environnements simulés.
+          </p>
+          <p>
+            Sa configuration est prédéfinie dans le package <strong>tekbot_description</strong>.
+          </p>
+          <p>
+            Et il est possible de le commander grâce au package <strong>tekbot_control</strong> basé sur teleop_joy.
+          </p>
+
+          <div class="image-container">
+            <img src="images/Test3/IT/tekbot1.png" alt="arborescence" class="image-small"/>
+            <img src="images/Test3/IT/tekbot2.png" alt="arborescence" class="image-small"/>
+          </div>
+            
+        <h3>4. Navigation du robot</h3>
+            <p>
+              Le package <strong>tekbot_navigation</strong> a été crée afin de travailler 
+              sur la navigation du robot dans le labyrinthe.
+            </p>
+
+            <p>
+              Cette partie se divise en deux étapes:
+              <ul>
+                <li><strong>Mapping</strong>: l'environnement est cartographiée manuellement.</li>
+                <li><strong>Navigation autonome</strong>: le robot se déplace juste en indiquant le point d'arriver.</li>
+              </ul>
+
+              <div class="arbo">
+                <ul>
+                  <li class="folder">tekbot_ws/src/tekbot_sim
+                    <ul>
+                        <li class="folder">maze_solving</li>
+                        <li class="folder">tekbot
+                        <li class="folder">tekbot_navigation</li>
+                        <li class="file">README.md</li>
+                        <li class="file">configure.sh</li>
+                    </ul> 
+                  </li>
+                </ul>
+              </div>
+
+              <p>
+                <strong>NB:</strong> Pour une meilleure lisibilité et accessibilité, nous avons utilisé des <strong>launcher</strong> dans chacune de ces étapes.
+              </p>
+
+              <h4>a. Mapping de l'environnement</h4>
+              <p>
+                <strong>SLAM_toolbox</strong> a permis de cartographier le labyrinthe.
+              </p>
+              <p>
+                N'ayant pas de manette(nécessaire pour commander le robot via <strong>teleop_joy</strong>), 
+                nous nous sommes rabattus sur <strong>teleop_twist_keyboard</strong>, 
+                ce qui nous a permis de controller le robot avec le clavier.
+              </p>
+
+              <p>
+                Le launcher <strong>tekbot_mapping2_b2ms.launch.py</strong> permet de lancer avec des configurations spécifiques:
+                <ul>
+                  <li>
+                    <strong>SLAM_toolbox</strong>: 
+                    <ul>
+                      <li>online_async_launch.py: données en temps réel et traitement de scans non bloquant(plus fluide)</li>
+                      <li>use_sim_time: true (utilise le temps de simulation)</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>RVIZ2</strong>: 
+                    <ul>
+                      <li>
+                        tekbot_config_b2ms.rviz: configuration initiale pour RViz: 
+                        <ul>
+                          <li>map sur le topic /map,</li>
+                          <li>TF: map et basic_link,</li>
+                          <li>RobotModel: visualisation du robot,</li>
+                          <li>Laserscan sur /scan: visualisation des données des capteurs.</li>
+                        </ul>
+                      </li>
+                      <li>use_sim_time: true (utilise le temps de simulation)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </p>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-py')">Copier</button>
+                  <button onclick="telechargerCode('code-py', 'tekbot_mapping2_b2ms.launch.py', 'text/py')">Télécharger</button>
+                </div>
+                <pre><code id="code-txt">
+    from launch import LaunchDescription
+    from launch_ros.actions import Node
+    from launch.actions import IncludeLaunchDescription
+    from launch.substitutions import PathJoinSubstitution
+    from launch_ros.substitutions import FindPackageShare
+    from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+    def generate_launch_description():
+
+        # Fichier de config RViz
+        rviz_config_file = PathJoinSubstitution([
+            FindPackageShare("tekbot_navigation"),
+            "rviz",
+            "tekbot_config_b2ms.rviz"
+        ])
+
+        # Lancement de slam_toolbox avec use_sim_time activé
+        slam_toolbox_launch = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                PathJoinSubstitution([
+                    FindPackageShare("slam_toolbox"),
+                    "launch",
+                    "online_async_launch.py"
+                ])
+            ]),
+            launch_arguments={'use_sim_time': 'true'}.items()
+        )
+
+        return LaunchDescription([
+            slam_toolbox_launch,
+
+            Node(
+                package='rviz2',
+                executable='rviz2',
+                name='rviz2',
+                output='screen',
+                parameters=[{'use_sim_time': True}],
+                arguments=['-d', rviz_config_file]
+            )
+        ])
+                </code></pre>
+              </div>
+
+             
+              <ul>
+                <li>Terminal 1: lancement de tekbot_maze.launch.py</li>
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code-txt')">Copier</button>                 
+                  </div>
+                  <pre><code id="code-txt">
+  user@user:~/tekbot_ws$ colcon build --symlink-install
+  user@user:~/tekbot_ws$ source install/setup.bash
+  user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
+                  </code></pre>
+                </div>
+
+                <li>Terminal 2: lancement de tekbot_mapping2_b2ms.launch.py</li>
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code-txt')">Copier</button>                 
+                  </div>
+                  <pre><code id="code-txt">
+  user@user:~/tekbot_ws$ source install/setup.bash
+  user@user:~/tekbot_ws$ ros2 launch tekbot_navigation tekbot_mapping2_b2ms.launch.py
+                  </code></pre>
+                </div>
+
+                <li>Terminal 3: execution de teleop_twist_keyboard</li>
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code-txt')">Copier</button>                 
+                  </div>
+                  <pre><code id="code-txt">
+  user@user:~/tekbot_ws$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
+                  </code></pre>
+                </div>
+              </ul>
+
+              <video controls width=auto>
+                <source src="videos/Test3/IT/Mapping.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+              <div class="image-container">
+                <img src="images/Test3/IT/map.png" alt="carte" class="image-mean"/>
+                <p>
+                  La carte générée a été sauvergadée dans <strong>tekbot_ws</strong> 
+                  puis déplacée dans <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/maps/</strong> 
+                </p>
+              </div>
+              
+            <h4>b. Navigation autonome</h4>
+              <p>
+                Pour la cette étape, nous avons utilisé:
+                <ul>
+                  <li><strong>Nav2</strong>: permet de planifier et de suivre les trajectoires sur la carte</li>
+                  <li><strong>AMCL</strong>(Adaptive Monte Carlo localization): localise le robot</li>
+                </ul>
+              </p>
+            
+              <p>
+                Le launcher <strong>tekbot_nav_b2ms.launch.py</strong> permet de lancer avec des configurations spécifiques:
+                <ul>
+                  <li>
+                    <strong>AMCL</strong>: 
+                    <ul>
+                      <li>localization_launch.py: localization du robot en temps réel</li>
+                      <li>map: tekbot_map.yaml (carte générée par SLAM_toolbox)</li>
+                      <li>use_sim_time: true (utilise le temps de simulation)</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Nav2</strong>: 
+                    <ul>
+                      <li>navigation_launch.py: itinéraire et calcul de navigation</li>
+                      <li>map_subscriber_transient_local: true (permet aux nodes de recevoir la carte publiée par le map_server)</li>
+                      <li>use_sim_time: true (utilise le temps de simulation)</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>RVIZ2</strong>: 
+                    <ul>
+                      <li>
+                        tekbot_config_nav_b2ms.rviz: 
+                        <ul>
+                          <li>premier map sur le topic /map(affichage de la carte cartographiée),</li>
+                          <li>deuxième map sur le topic /global_costmap/costmap_updates,</li>
+                          <li>TF: map et basic_link,</li>
+                          <li>RobotModel: visualisation du robot,</li>
+                          <li>Laserscan sur /scan: visualisation des données des capteurs.</li>
+                          <li>Path: sur le topic /plan(visualisation du chemin calculé par l'algorithme)</li>
+                        </ul>
+                      </li>
+                      <li>use_sim_time: true (utilise le temps de simulation)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </p>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('code-py')">Copier</button>
+                  <button onclick="telechargerCode('code-py', 'tekbot_nav_b2ms.launch.py', 'text/py')">Télécharger</button>
+                </div>
+                <pre><code id="code-txt">
+    from launch import LaunchDescription
+    from launch_ros.actions import Node
+    from launch.actions import IncludeLaunchDescription
+    from launch.substitutions import PathJoinSubstitution
+    from launch_ros.substitutions import FindPackageShare
+    from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+
+
+    def generate_launch_description():
+
+        # Chemin du fichier RViz
+        rviz_config_file = PathJoinSubstitution([
+            FindPackageShare("tekbot_navigation"),
+            "rviz",
+            "tekbot_config_nav_b2ms.rviz"
+        ])
+
+        # Chemin de la carte YAML
+        my_map = PathJoinSubstitution([
+            FindPackageShare("tekbot_navigation"),
+            "maps",
+            "tekbot_map.yaml"
+        ])
+
+        # Lancement de la localisation (amcl)
+        nav2_launch_localization = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                PathJoinSubstitution([
+                    FindPackageShare("nav2_bringup"),
+                    "launch",
+                    "localization_launch.py"
+                ])
+            ]),
+            launch_arguments={
+                'use_sim_time': 'true',
+                'map': my_map
+            }.items()
+        )
+
+        # Lancement de la navigation
+        nav2_launch_navigation = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                PathJoinSubstitution([
+                    FindPackageShare("nav2_bringup"),
+                    "launch",
+                    "navigation_launch.py"
+                ])
+            ]),
+            launch_arguments={
+                'use_sim_time': 'true',
+                'map_subscriber_transient_local': 'true'
+            }.items()
+        )
+
+        # Lancement de RViz
+        rviz_node = Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            output='screen',
+            parameters=[{'use_sim_time': True}],
+            arguments=['-d', rviz_config_file]
+        )
+
+        return LaunchDescription([
+            nav2_launch_localization,
+            nav2_launch_navigation,
+            rviz_node
+        ])
+                </code></pre>
+              </div>
+
+             
+              <ul>
+                <li>Terminal 1: lancement de tekbot_maze.launch.py</li>
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code-txt')">Copier</button>                 
+                  </div>
+                  <pre><code id="code-txt">
+  user@user:~/tekbot_ws$ colcon build --symlink-install
+  user@user:~/tekbot_ws$ source install/setup.bash
+  user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
+                  </code></pre>
+                </div>
+
+                <li>Terminal 2: lancement de tekbot_nav_b2ms.launch.py</li>
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code-txt')">Copier</button>                 
+                  </div>
+                  <pre><code id="code-txt">
+  user@user:~/tekbot_ws$ source install/setup.bash
+  user@user:~/tekbot_ws$ ros2 launch tekbot_navigation tekbot_nav_b2ms.launch.py
+                  </code></pre>
+                </div>
+              </ul>
+
+              <video controls width=auto>
+                <source src="videos/Test3/IT/Demo2.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+              <p>
+                Le robot effectue le trajet du point de départ à la sortie du labyrinthe de manière autonome.
+              </p>
+
+          <p  class="txt_center">
+            !<a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/main/Test3/IT/tekbot_sim" target="_blank">lien vers le repository github</a>
+          </p>
+
+
+          <h4>Explication supplémentaire(Notion sur <strong>Nav2</strong>)</h4>
+              <p>
+                Le package <strong>nav2_bringup</strong> est composé de plusieurs launcher, notamment:
+                <ul>
+                  <li>
+                <strong>localization_launch.py</strong> qui permet de lancer AMCL pour la localisation d'un objet sur une carte, 
+                  </li>
+                  <li>
+                 <strong>navigation2_launch.py</strong> qui permet de lancer plusieurs nodes pour la navigation.
+                  </li>
+                </ul> 
+              </p>
+
+              <p>
+                <strong>planner_server</strong> est un des nodes de ROS2 lancé par <strong>navigation.launch.py</strong>.
+                Son rôle est de calculer un chemin global depuis la position actuelle du robot (fournie par AMCL) jusqu’à une destination donnée.
+                Il utilise des algorithmes de pathfinding sur la carte d’occupation pour générer ce chemin.
+                Il peut utiliser différents algorithmes, selon la configuration.
+              </p>
+
+              <p>
+                Nous avons opté pour les paramètres par défaut.
+                De ce fait, <strong>l'algorithme de pathfinding</strong> utilisé par 
+                <strong>planner_server</strong> est <strong>NavFnPlanner</strong> 
+                qui est basé sur <strong>Dijkstra</strong>.
+                Dijkstra explore tous les chemins pour trouver celui avec le coût total le plus faible.
+                Il est robuste, fiable et est suffisant pour notre simulation.
+              </p>
+
+              <p>
+                Ces paramètres par défaut sont dans le fichier ~/nav2_bringup/params/<strong>nav2_params.yaml</strong>.
+              </p>
+
+              <div class="image-container">
+                <img src="images/Test3/IT/nav2_params.png" alt="params" class="image-mean"/>
+                <p>
+                  Aperçu du fichier <strong>nav2_params.yaml</strong>
+                </p>
+              </div>
+              
+
+          <h3>5. Limites et perspectives</h3>
+            <p>
+              Lors des tests, nous sommes obligés d'initialiser à chaque fois la position initale du robot 
+              dans <strong>RVIZ2</strong> pour que <strong>AMCL</strong> se mette à fonctionner.
+              Ceci peut être éviter en initialisation cette position dans le launcher. 
+            </p>
+
+
+        <h3>6. Conclusion</h3>    
+          <p>
+            Ce projet permet d’évaluer la maîtrise des concepts fondamentaux de la navigation 
+            autonome grâce à <strong>SLAM</strong> et <strong>Nav2</strong> 
+            qui garantissent une navigation sûre et optimale dans un environnement complexe.
+          </p>
+          <p>
+            La simulation d’un robot mobile à l'aide de <strong>Gazebo</strong> dans un labyrinthe 
+            a permis de valider et d'affiner les performances de ces outils.
+          </p>
+          <p>
+            Ce travail constitue une étape clé vers le développement de robots mobiles autonomes 
+            capables d’évoluer avec succès dans des espaces structurés et dynamiques.
+          </p>
+
+          <h3>7. Ressources utiles</h3>
+            <p>
+              <ul>
+                <li>
+                  ROS2 Documentation: <a href="https://docs.ros.org/en/kilted/index.html" target="_blank">https://docs.ros.org/en/kilted/index.html</a>
+                </li>
+                <li>
+                  Metapackage tekbot_sim : <a href="https://github.com/charif-tekbot/tekbot_sim" target="_blank">lien vers le repository github</a>
+                </li>
+              </ul>
+            </p>
+
+
     </div>
+
   </section>
 
   <footer>
