@@ -242,3 +242,32 @@ video {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+
+
+
+.arbo ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.arbo .folder,
+.arbo .file {
+  margin-left: 20px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.arbo .folder > ul,
+.arbo .file > ul {
+  padding-left: 15px; 
+}
+
+.arbo .folder::before {
+  content: "📁 ";
+}
+
+.arbo .file::before {
+  content: "📄 ";
+}
