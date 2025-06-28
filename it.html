@@ -70,10 +70,10 @@
 
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'robot.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="copierCode('robot-cpp', this)">📋</button>
+              <button onclick="telechargerCode('robot-cpp', 'robot.cpp', 'text/x-c++src', this)">🡇</button>
             </div>
-            <pre><code id="code-cpp">
+            <pre><code id="robot-cpp">
     #include "robot.hpp"
 
     robot::robot() : ID(0), position(0, 0), status(OFF) {}
@@ -155,10 +155,10 @@
 
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'deliveryRobot.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="copierCode('deliveryRobot-cpp', this)">📋</button>
+              <button onclick="telechargerCode('deliveryRobot-cpp', 'deliveryRobot.cpp', 'text/x-c++src', this)">🡇</button>
             </div>
-            <pre><code id="code-cpp">
+            <pre><code id="deliveryRobot-cpp">
     #include "deliveryRobot.hpp"
 
     deliveryRobot::deliveryRobot(zone ZONE, unsigned short nbrOfEntities, unsigned int Id, float x, float y)
@@ -251,10 +251,10 @@
 
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'travellingRobot.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="copierCode('travellingRobot-cpp', this)">📋</button>
+              <button onclick="telechargerCode('travellingRobot-cpp', 'travellingRobot.cpp', 'text/x-c++src', this)">🡇</button>
             </div>
-            <pre><code id="code-cpp">
+            <pre><code id="travellingRobot-cpp">
     #include "travellingRobot.hpp"
 
     travellingRobot::travellingRobot(direction DIRECTION, unsigned int Id, float x, float y)
@@ -334,10 +334,10 @@
 
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'armRobot.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="copierCode('armRobot-cpp', this)">📋</button>
+              <button onclick="telechargerCode('armRobot-cpp', 'armRobot.cpp', 'text/x-c++src', this)">🡇</button>
             </div>
-            <pre><code id="code-cpp">
+            <pre><code id="armRobot-cpp">
     #include "armRobot.hpp"
 
     armRobot::armRobot()
@@ -422,10 +422,10 @@
 
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'main.cpp', 'text/x-c++src')">Télécharger</button>
+              <button onclick="copierCode('main-cpp', this)">📋</button>
+              <button onclick="telechargerCode('main-cpp', 'main.cpp', 'text/x-c++src', this)">🡇</button>
             </div>
-            <pre><code id="code-cpp">
+            <pre><code id="main-cpp">
     #include "travellingRobot.hpp"
     #include "deliveryRobot.hpp"
     #include "armRobot.hpp"
@@ -557,10 +557,9 @@
           <h4><strong>a. Création du workspace</strong></h4>
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('code-txt')">Copier</button>
-              <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+              <button onclick="copierCode('test2_T1', this)">📋</button>
             </div>
-            <pre><code id="code-txt">
+            <pre><code id="test2_T1">
   user@user-VirtualBox:~$ cd Desktop
   user@user-VirtualBox:~/Desktop$ mkdir -p workspace/src
             </code></pre>
@@ -569,10 +568,9 @@
           <h4><strong>b. Création du package et des nodes</strong></h4>
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('code-txt')">Copier</button>
-              <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+              <button onclick="copierCode('test2_T2', this)">📋</button>
             </div>
-            <pre><code id="code-txt">
+            <pre><code id="test2_T2">
     user@user-VirtualBox:~/Desktop$ cd workspace/src
     user@user-VirtualBox:~/Desktop/workspace/src$ ros2 pkg create sensor_data_evaluation --build-type ament_cmake
     going to create a new package
@@ -633,11 +631,14 @@
           </ul>
 
           <div class="code-container">
+            <p>
+              <strong>sensor_node_publisher.cpp</strong>
+            </p>
             <div class="btn-bar">
-              <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'sensor_node_publisher.cpp', 'text/x-c++src')">Télécharger</button>
-            </div>
-            <pre><code id="code-cpp">
+              <button onclick="copierCode('sensor_node_publisher-cpp', this)">📋</button>
+              <button onclick="telechargerCode('sensor_node_publisher-cpp', 'sensor_node_publisher.cpp', 'text/x-c++src', this)">🡇</button>
+               </div>
+            <pre><code id="sensor_node_publisher-cpp">
     #include &lt;chrono&gt;
     #include &lt;functional&gt;
     #include &lt;memory&gt;
@@ -706,11 +707,14 @@
           </p>
         
           <div class="code-container">
+            <p>
+              <strong>sensor_node_subscriber.cpp</strong>
+            </p>
             <div class="btn-bar">
-              <button onclick="copierCode('code-cpp')">Copier</button>
-              <button onclick="telechargerCode('code-cpp', 'sensor_node_subscriber.cpp', 'text/x-c++src')">Télécharger</button>
-            </div>
-            <pre><code id="code-cpp">
+              <button onclick="copierCode('sensor_node_subscriber-cpp', this)">📋</button>
+              <button onclick="telechargerCode('sensor_node_subscriber-cpp', 'sensor_node_subscriber.cpp', 'text/x-c++src', this)">🡇</button>
+               </div>
+            <pre><code id="sensor_node_subscriber-cpp">
     #include &lt;functional&gt;
     #include &lt;memory&gt;
     #include &lt;sstream&gt;
@@ -768,12 +772,16 @@
           <p>
             Ce fichier permet notamment de créer les executables pour les nodes.
           </p>
+          
           <div class="code-container">
+            <p>
+              <strong>CMakeLists.txt</strong>
+            </p>
             <div class="btn-bar">
-              <button onclick="copierCode('code-txt')">Copier</button>
-              <button onclick="telechargerCode('code-txt', 'CMakeLists.txt', 'text/txt')">Télécharger</button>
-            </div>
-            <pre><code id="code-txt">
+              <button onclick="copierCode('CMakeLists-txt', this)">📋</button>
+              <button onclick="telechargerCode('CMakeLists-txt', 'CMakeLists.txt', 'text/txt', this)">🡇</button>
+               </div>
+            <pre><code id="CMakeLists-txt">
     cmake_minimum_required(VERSION 3.8)
     project(sensor_data_evaluation)
 
@@ -821,11 +829,14 @@
           </p>
 
           <div class="code-container">
+            <p>
+              <strong>package.xml</strong>
+            </p>
             <div class="btn-bar">
-              <button onclick="copierCode('code-xml')">Copier</button>
-              <button onclick="telechargerCode('code-xml', 'package.xml', 'text/xml')">Télécharger</button>
-            </div>
-            <pre><code id="code-xml">
+              <button onclick="copierCode('package-xml', this)">📋</button>
+              <button onclick="telechargerCode('package-xml', 'package.xml', 'text/xml', this)">🡇</button>
+               </div>
+            <pre><code id="package-xml">
     &lt;?xml version="1.0"?&gt;
     &lt;?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
 
@@ -859,13 +870,16 @@
           <p>
             Ce fichier se trouve dans: workspace/install/sensor_data_evaluation/share/sensor_data_evaluation
           </p>
-          
+
           <div class="code-container">
+            <p>
+              <strong>sensor_data_eval_launch.xml</strong>
+            </p>
             <div class="btn-bar">
-              <button onclick="copierCode('code-xml')">Copier</button>
-              <button onclick="telechargerCode('code-xml', 'sensor_data_eval_launch.xml', 'text/xml')">Télécharger</button>
-            </div>
-            <pre><code id="code-xml">
+              <button onclick="copierCode('sensor_data_eval_launch-xml', this)">📋</button>
+              <button onclick="telechargerCode('sensor_data_eval_launch-xml', 'sensor_data_eval_launch.xml', 'text/xml', this)">🡇</button>
+               </div>
+            <pre><code id="sensor_data_eval_launch-xml">
     &lt;?xml version="1.0" encoding="UTF-8"?&gt;
     &lt;launch&gt;
       &lt;node pkg="sensor_data_evaluation" exec="sensor_node_publisher"/&gt;
@@ -882,9 +896,9 @@
             </p>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>                 
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test2_T3', this)">📋</button>
+            </div>
+            <pre><code id="test2_T3">
   user@user-VirtualBox:~$ cd Desktop/workspace
   user@user-VirtualBox:~/Desktop/workspace$ colcon build --symlink-install
   user@user-VirtualBox:~/Desktop/workspace$ source install/setup.bash
@@ -985,10 +999,9 @@
             <li><strong>mise à jour</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>
-                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test3_T1', this)">📋</button>
+            </div>
+            <pre><code id="test3_T1">
   user@user:~$ sudo apt update
   user@user:~$ sudo apt upgrade
                 </code></pre>
@@ -996,50 +1009,45 @@
             <li><strong>teleop_joy</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>
-                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test3_T2', this)">📋</button>
+            </div>
+            <pre><code id="test3_T2">
   user@user:~$ sudo apt install ros-humble-teleop-twist-joy
                 </code></pre>
               </div>
             <li><strong>robot_localization</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>
-                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test3_T3', this)">📋</button>
+            </div>
+            <pre><code id="test3_T3">
   user@user:~$ sudo apt install ros-humble-robot-localization
                 </code></pre>
               </div>
             <li><strong>rqt</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>
-                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test3_T4', this)">📋</button>
+            </div>
+            <pre><code id="test3_T4">
   user@user:~$ sudo apt install ros-humble-rqt*
                 </code></pre>
               </div>
               <li><strong>SLAM_toolbox</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>
-                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test3_T5', this)">📋</button>
+            </div>
+            <pre><code id="test3_T5">
   user@user:~$ sudo apt install ros-humble-slam-toolbox
                 </code></pre>
               </div>
               <li><strong>Nav2</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>
-                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test3_T6', this)">📋</button>
+            </div>
+            <pre><code id="test3_T6">
   user@user:~$ sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup
                 </code></pre>
               </div>
@@ -1054,20 +1062,18 @@
             <li><strong>Clonage du metapackage tekbot_sim</strong> depuis GitHub: </li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>
-                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test3_T7', this)">📋</button>
+            </div>
+            <pre><code id="test3_T7">
   user@user:~$ git clone https://github.com/charif-tekbot/tekbot_sim.git
                 </code></pre>
               </div>
             <li><strong>Compilation et configuration</strong> du workspace: </li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-txt')">Copier</button>
-                  <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
-                </div>
-                <pre><code id="code-txt">
+                  <button onclick="copierCode('test3_T8', this)">📋</button>
+            </div>
+            <pre><code id="test3_T8">
   user@user:~$ cd tekbot_sim
   user@user:~/tekbot_sim$ chmod +x configure.sh (optional)
   user@user:~/tekbot_sim$ source configure.sh
@@ -1122,10 +1128,9 @@
           </p>
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('code-txt')">Copier</button>
-              <!-- <button onclick="telechargerCode('code-cpp', 'code.cpp', 'text/x-c++src')">Télécharger</button> -->
+              <button onclick="copierCode('test3_T9', this)">📋</button>
             </div>
-            <pre><code id="code-txt">
+            <pre><code id="test3_T9">
   user@user:~/tekbot_ws$ source install/setup.bash
   user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
             </code></pre>
@@ -1237,11 +1242,14 @@
                 </ul>
               </p>
               <div class="code-container">
+                <p>
+                  <strong>tekbot_mapping2_b2ms.launch.py</strong>
+                </p>
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-py')">Copier</button>
-                  <button onclick="telechargerCode('code-py', 'tekbot_mapping2_b2ms.launch.py', 'text/py')">Télécharger</button>
+                  <button onclick="copierCode('tekbot_mapping2_b2ms-py', this)">📋</button>
+                  <button onclick="telechargerCode('tekbot_mapping2_b2ms-py', 'tekbot_mapping2_b2ms.launch.py', 'text/py', this)">🡇</button>
                 </div>
-                <pre><code id="code-txt">
+                <pre><code id="tekbot_mapping2_b2ms-py">
     from launch import LaunchDescription
     from launch_ros.actions import Node
     from launch.actions import IncludeLaunchDescription
@@ -1290,9 +1298,9 @@
                 <li>Terminal 1: lancement de tekbot_maze.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('code-txt')">Copier</button>                 
-                  </div>
-                  <pre><code id="code-txt">
+                    <button onclick="copierCode('0', this)">📋</button>
+            </div>
+            <pre><code id="test3_T10">
   user@user:~/tekbot_ws$ colcon build --symlink-install
   user@user:~/tekbot_ws$ source install/setup.bash
   user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
@@ -1302,9 +1310,9 @@
                 <li>Terminal 2: lancement de tekbot_mapping2_b2ms.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('code-txt')">Copier</button>                 
-                  </div>
-                  <pre><code id="code-txt">
+                    <button onclick="copierCode('test3_T11', this)">📋</button>
+            </div>
+            <pre><code id="test3_T11">
   user@user:~/tekbot_ws$ source install/setup.bash
   user@user:~/tekbot_ws$ ros2 launch tekbot_navigation tekbot_mapping2_b2ms.launch.py
                   </code></pre>
@@ -1313,9 +1321,9 @@
                 <li>Terminal 3: execution de teleop_twist_keyboard</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('code-txt')">Copier</button>                 
-                  </div>
-                  <pre><code id="code-txt">
+                    <button onclick="copierCode('test3_T12', this)">📋</button>
+            </div>
+            <pre><code id="test3_T12">
   user@user:~/tekbot_ws$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
                   </code></pre>
                 </div>
@@ -1381,19 +1389,22 @@
                   </li>
                 </ul>
               </p>
+
               <div class="code-container">
+                <p>
+                  <strong>tekbot_nav_b2ms.launch.py</strong>
+                </p>
                 <div class="btn-bar">
-                  <button onclick="copierCode('code-py')">Copier</button>
-                  <button onclick="telechargerCode('code-py', 'tekbot_nav_b2ms.launch.py', 'text/py')">Télécharger</button>
+                  <button onclick="copierCode('tekbot_nav_b2ms-py', this)">📋</button>
+                  <button onclick="telechargerCode('tekbot_nav_b2ms-py', 'tekbot_nav_b2ms.launch.py', 'text/py', this)">🡇</button>
                 </div>
-                <pre><code id="code-txt">
+                <pre><code id="tekbot_nav_b2ms-py">
     from launch import LaunchDescription
     from launch_ros.actions import Node
     from launch.actions import IncludeLaunchDescription
     from launch.substitutions import PathJoinSubstitution
     from launch_ros.substitutions import FindPackageShare
     from launch.launch_description_sources import PythonLaunchDescriptionSource
-
 
 
     def generate_launch_description():
@@ -1465,9 +1476,9 @@
                 <li>Terminal 1: lancement de tekbot_maze.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('code-txt')">Copier</button>                 
-                  </div>
-                  <pre><code id="code-txt">
+                    <button onclick="copierCode('test3_T13', this)">📋</button>
+            </div>
+            <pre><code id="test3_T13">
   user@user:~/tekbot_ws$ colcon build --symlink-install
   user@user:~/tekbot_ws$ source install/setup.bash
   user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
@@ -1477,9 +1488,9 @@
                 <li>Terminal 2: lancement de tekbot_nav_b2ms.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('code-txt')">Copier</button>                 
-                  </div>
-                  <pre><code id="code-txt">
+                    <button onclick="copierCode('test3_T14', this)">📋</button>
+            </div>
+            <pre><code id="test3_T14">
   user@user:~/tekbot_ws$ source install/setup.bash
   user@user:~/tekbot_ws$ ros2 launch tekbot_navigation tekbot_nav_b2ms.launch.py
                   </code></pre>
@@ -1494,11 +1505,6 @@
               <p>
                 Le robot effectue le trajet du point de départ à la sortie du labyrinthe de manière autonome.
               </p>
-
-          <p  class="txt_center">
-            <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/main/Test3/IT/tekbot_sim" target="_blank">lien vers le repository github</a>
-          </p>
-
 
           <h4>Explication supplémentaire(Notion sur <strong>Nav2</strong>)</h4>
               <p>
@@ -1531,25 +1537,205 @@
 
               <p>
                 Ces paramètres par défaut sont dans le fichier ~/nav2_bringup/params/<strong>nav2_params.yaml</strong>.
+                Pour l'adapter à nos besoins, nous l'avons copié et modifié.
               </p>
 
               <div class="image-container">
-                <img src="images/Test3/IT/nav2_params.png" alt="params" class="image-mean"/>
+                <img src="images/Test3/IT/nav2_params2.png" alt="params" class="image-mean"/>
                 <p>
                   Aperçu du fichier <strong>nav2_params.yaml</strong>
                 </p>
               </div>
               
 
-          <h3>5. Limites et perspectives</h3>
+          <h4>c. Résultat final</h4>
             <p>
               Lors des tests, nous sommes obligés d'initialiser à chaque fois la position initale du robot 
               dans <strong>RVIZ2</strong> pour que <strong>AMCL</strong> se mette à fonctionner.
-              Ceci peut être éviter en initialisation cette position dans le launcher. 
+              De même pour la position finale.
+              Ceci peut être éviter en initialisation les positions dans le launcher. 
+            </p>
+            <p>
+              Par la même occasion, nous avons inclus dans un seul launcher le lancement de tous les launchers pour 
+              gazebo, rqt_graph, ...
+            </p>
+            <p>
+
+            </p>
+
+            <div class="code-container">
+                <p>
+                  <strong>tekbot_nav2_b2ms.launch.py</strong>
+                </p>
+                <div class="btn-bar">
+                  <button onclick="copierCode('tekbot_nav2_b2ms-py', this)">📋</button>
+                  <button onclick="telechargerCode('tekbot_nav2_b2ms-py', 'tekbot_nav2_b2ms.launch.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code id="tekbot_nav2_b2ms-py">
+    import os
+    from launch import LaunchDescription
+    from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
+    from launch.launch_description_sources import PythonLaunchDescriptionSource
+    from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+    from launch_ros.actions import Node
+    from launch_ros.substitutions import FindPackageShare
+    from launch.actions import ExecuteProcess, TimerAction
+
+    ARGUMENTS = [
+        DeclareLaunchArgument('x_init',
+                default_value='-2.5',
+                description='robot initial x'),
+        DeclareLaunchArgument('y_init',
+                default_value='-0.5',
+                description='robot initial y'),
+        DeclareLaunchArgument('z_init',
+                default_value='0.0',
+                description='robot initial z'),
+        DeclareLaunchArgument('yaw_init',
+                default_value='0.0',
+                description='robot initial yaw')
+    ]
+
+    def generate_launch_description():    
+
+        tekbot_maze_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [PathJoinSubstitution([
+                FindPackageShare("maze_solving"),
+                "launch",
+                "tekbot_maze.launch.py"
+            ])]
+        ),
+        launch_arguments={
+            'x_init': LaunchConfiguration('x_init'),
+            'y_init': LaunchConfiguration('y_init'),
+            'z_init': LaunchConfiguration('z_init'),
+            'yaw_init': LaunchConfiguration('yaw_init'),
+        }.items()
+    )
+
+
+        # Chemin de la configuration de nav2 (avec Hybrid-A*)
+        params_file = PathJoinSubstitution([
+            FindPackageShare("tekbot_navigation"),
+            "config",
+            "nav2_params.yaml"
+        ])
+
+
+        # Chemin du fichier RViz
+        rviz_config_file = PathJoinSubstitution([
+            FindPackageShare("tekbot_navigation"),
+            "rviz",
+            "tekbot_config_nav_b2ms.rviz"
+        ])
+
+        # Chemin de la carte YAML
+        my_map = PathJoinSubstitution([
+            FindPackageShare("tekbot_navigation"),
+            "maps",
+            "tekbot_map.yaml"
+        ])
+
+        # Lancement de la localisation (amcl)
+        nav2_launch_localization = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                PathJoinSubstitution([
+                    FindPackageShare("nav2_bringup"),
+                    "launch",
+                    "localization_launch.py"
+                ])
+            ]),
+            launch_arguments={
+                'use_sim_time': 'true',
+                'map': my_map,
+            }.items()
+        )
+
+
+        nav2_launch_navigation = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                PathJoinSubstitution([
+                    FindPackageShare("nav2_bringup"),
+                    "launch",
+                    "navigation_launch.py"
+                ])
+            ]),
+            launch_arguments={
+                'use_sim_time': 'true',
+                'params_file': params_file,
+                'map_subscriber_transient_local': 'true'
+            }.items()
+        )
+
+        # Lancement de RViz
+        rviz_node = Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            output='screen',
+            parameters=[{'use_sim_time': True}],
+            arguments=['-d', rviz_config_file]
+        )
+
+
+        # donne la position initiale après 3s via /initialpose
+        publish_initialpose = TimerAction(
+        period=3.0,  
+        actions=[
+            ExecuteProcess(
+            cmd=[
+                'ros2', 'topic', 'pub', '--once', '/initialpose', 'geometry_msgs/msg/PoseWithCovarianceStamped',
+                '{header: {frame_id: "map"}, pose: {pose: {position: {x: -2.5, y: -0.5, z: 0.0}}}}'
+            ],
+            output='screen'
+            )
+            ]
+        )
+      
+        # donne la position à atteindre après 6s via /goal_pose
+        publish_goalpose = TimerAction(
+        period=6.0,  
+        actions=[
+            ExecuteProcess(
+            cmd=[
+                'ros2', 'topic', 'pub', '--once', '/goal_pose', 'geometry_msgs/msg/PoseStamped',
+                '{header: {frame_id: "odom"}, pose: {position: {x: 2.5, y: 2.5, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}}}'
+            ],
+            output='screen'
+            )
+            ]
+        )
+        
+        
+        # Create the launch description and populate
+        ld = LaunchDescription(ARGUMENTS)
+        
+        ld.add_action(tekbot_maze_launch)
+
+
+        ld.add_action(nav2_launch_localization)
+        ld.add_action(nav2_launch_navigation)
+        ld.add_action(rviz_node)
+
+        ld.add_action(publish_initialpose) 
+        ld.add_action(publish_goalpose) 
+
+        return ld
+                </code></pre>
+              </div>
+
+            <video controls width=auto>
+              <source src="videos/Test3/IT/Demo_final.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+            <p  class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/main/Test3/IT/tekbot_sim" target="_blank">lien vers le repository github</a>
             </p>
 
 
-        <h3>6. Conclusion</h3>    
+        <h3>5. Conclusion</h3>    
           <p>
             Ce projet permet d’évaluer la maîtrise des concepts fondamentaux de la navigation 
             autonome grâce à <strong>SLAM</strong> et <strong>Nav2</strong> 
@@ -1564,7 +1750,7 @@
             capables d’évoluer avec succès dans des espaces structurés et dynamiques.
           </p>
 
-          <h3>7. Ressources utiles</h3>
+          <h3>6. Ressources utiles</h3>
             <p>
               <ul>
                 <li>
