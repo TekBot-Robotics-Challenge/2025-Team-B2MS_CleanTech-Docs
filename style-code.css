@@ -30,6 +30,10 @@ pre {
 
 pre, code {
   font-size: 15px;
+  padding: 0px;
+  margin: 0;
+  white-space: pre;
+  font-family: 'Courier New', monospace;
 }
 
 pre::-webkit-scrollbar {
@@ -42,7 +46,6 @@ pre::-webkit-scrollbar-thumb {
   border-radius: 4px;
 }
 
-
 .btn-bar {
   position: absolute;
   top: 10px;
@@ -50,10 +53,10 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .btn-bar button {
-  background-color: #444;
+  background-color: transparent;
   color: white;
   border: none;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   margin-left: 5px;
   border-radius: 3px;
   cursor: pointer;
@@ -64,14 +67,16 @@ pre::-webkit-scrollbar-thumb {
   background-color: #666;
 }
 
-/* 
 .notif {
-  display: none;
-  color: green;
+  display: inline-block;
   margin-left: 10px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: #6cf57c;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .notif.visible {
-  display: inline;
-} */
+  opacity: 1;
+}
+
