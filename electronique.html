@@ -168,11 +168,10 @@
   
             <div class="code-container">
               <div class="btn-bar">
-                <button onclick="copierCode('code-ino')">Copier</button>
-                <button onclick="telechargerCode('code-ino', 'code.ino', 'text/plain')">Télécharger</button>
+                <button onclick="copierCode('code_mpu1-ino', this)">📋</button>
+                <button onclick="telechargerCode('code_mpu1-ino', 'code_mpu1.ino', 'text/ino', this)">🡇</button>
               </div>
-
-              <pre><code id="code-ino">
+              <pre><code id="code_mpu1-ino">
     #include &lt;Wire.h&gt;               // Bibliothèque pour communication I2C
     #include &lt;LiquidCrystal_I2C.h&gt;  // Bibliothèque pour écran LCD I2C
     #include &lt;MPU6050.h&gt;            // Bibliothèque pour capteur MPU6050
@@ -279,10 +278,10 @@
 
             <div class="code-container">
               <div class="btn-bar">
-                <button onclick="copierCode('code-ino')">Copier</button>
-                <button onclick="telechargerCode('code-ino', 'code.ino', 'text/plain')">Télécharger</button>
+                <button onclick="copierCode('code_mpu2-ino', this)">📋</button>
+                <button onclick="telechargerCode('code_mpu2-ino', 'code_mpu2.ino', 'text/ino', this)">🡇</button>
               </div>
-              <pre><code id="code-ino">
+              <pre><code id="code_mpu2-ino">
     #include &lt;Wire.h&gt;               // Bibliothèque pour la communication I2C
     #include &lt;LiquidCrystal_I2C.h&gt;      // Bibliothèque pour gérer l'écran LCD I2C
 
@@ -467,14 +466,6 @@
 
 
           <h3>6. Conception d'un prototype et démonstration</h3>
-          <!-- <ul>
-              <li> 
-                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/e5c868a970dbb57e96550918782e5e32cda997c2/images/Test1/Electronique" download class="download-link">lien vers les images</a>
-             </li>
-              <li>
-                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/e5c868a970dbb57e96550918782e5e32cda997c2/videos/Test1/Electronique" download class="download-link">lien vers les vidéos</a>
-              </li>
-            </ul>  -->
           
           <div class="image-container">
             <img src="images/Test1/Electronique/electronique1.jpg" alt="Prototype" class="image-small" />
@@ -1094,13 +1085,13 @@
             </video>
 
 
-          <p>Code maitre: </p>
           <div class="code-container">
-              <div class="btn-bar">
-                <button onclick="copierCode('code-ino')">Copier</button>
-                <button onclick="telechargerCode('code-ino', 'code_maitre.ino', 'text/plain')">Télécharger</button>
-              </div>
-              <pre><code id="code-ino">
+            <p>Code_maitre.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_maitre-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_maitre-ino', 'Code_maitre.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code id="Code_maitre-ino">
     #include &lt;Wire.h&gt;        
     #include &lt;MPU6050.h&gt;  
 
@@ -1153,13 +1144,13 @@
               </code></pre>
             </div>
 
-          <p>Code esclave: </p>
           <div class="code-container">
-              <div class="btn-bar">
-                <button onclick="copierCode('code-ino')">Copier</button>
-                <button onclick="telechargerCode('code-ino', 'code_esclave.ino', 'text/plain')">Télécharger</button>
-              </div>
-              <pre><code id="code-ino">
+            <p>Code_esclave.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_esclave-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_esclave-ino', 'Code_esclave.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code id="Code_esclave-ino">
     #include &lt;Wire.h&gt;               // Bibliothèque pour communication I2C
     #include &lt;LiquidCrystal_I2C.h&gt;  // Bibliothèque pour écran LCD I2C
     #include &lt;MPU6050.h&gt;  
@@ -1455,12 +1446,12 @@
             </p>
 
             <div class="code-container">
+            <p>Code_servo_basique.ino </p>
             <div class="btn-bar">
-              <button onclick="copierCode('code-ino')">Copier</button>
-              <button onclick="telechargerCode('code-ino', 'code_basique_servo.ino', 'text/c++')">Télécharger</button>
+              <button onclick="copierCode('Code_servo_basique-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_servo_basique-ino', 'Code_servo_basique.ino', 'text/ino', this)">🡇</button>
             </div>
-
-            <pre><code id="code-ino">
+            <pre><code id="Code_servo_basique-ino">
     // Test utilisation servomoteur SG90
     #include &lt;Servo.h&gt;
     Servo monservo; // Crée l’objet pour contrôler le servomoteur
@@ -1597,11 +1588,12 @@
 
 
             <div class="code-container">
-              <div class="btn-bar">
-                <button onclick="copierCode('code-ino')">Copier</button>
-                <button onclick="telechargerCode('code-ino', 'code_servo.ino', 'text/plain')">Télécharger</button>
-              </div>
-              <pre><code id="code-ino">
+            <p>Code_servo_7seg.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_servo_7seg-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_servo_7seg-ino', 'Code_servo_7seg.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code id="Code_servo_7seg-ino">
     #include &lt;Servo.h&gt;  // Inclusion de la bibliothèque standard Servo
 
     // Définition des angles pour contrôler les segments
