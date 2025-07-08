@@ -746,9 +746,40 @@ nav {
 }
 
 
+@media (max-width: 768px) {
+  .header__container h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
 
+  .header__container_team h1 {
+    font-size: 4rem;
+    line-height: 3.5rem;
+  }
 
+  .header__container_team h2 {
+    font-size: 2.5rem;
+    line-height: 2rem;
+  }
 
+  .section__header,
+  .section__header_about {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .banner__card h4 {
+    font-size: 1.5rem;
+  }
+
+  .section__container_about {
+    font-size: 1.1rem;
+  }
+}
 
 .grid {
   display: flex;
