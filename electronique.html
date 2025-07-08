@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="stylesheet" href="styles/style-commun.css" />
+  <link rel="stylesheet" href="styles/style-code.css" />
+  <title>Département Électronique</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Département Électronique</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="it.html" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        
+        <div class="nav-section">
+         <button class="tab-button active" data-target="electronique-content"><i class="fas fa-microchip"></i> Électronique</button>
+          <div class="sub-links">
+            <a class="subtab-button active" data-target="test1" href="#projet1">Projet 1</a>
+
+            <nav class="project-subnav active" id="subnav-test1">
+              <a href="#1-test1">1. Contexte et objectifs</a>
+              <a href="#2-test1">2. Choix du capteur</a>
+              <a href="#3-test1">3. Principe de fonctionnement</a>
+              <a href="#4-test1">4. Schéma électronique sous KICAD</a>
+              <a href="#5-test1">5. Codage</a>
+              <a href="#6-test1">6. Conception et démonstration</a>
+              <a href="#7-test1">7. Remarques</a>
+              <a href="#8-test1">8. Conclusion</a>
+            </nav>
+
+            <a class="subtab-button" data-target="test2" href="#projet2">Projet 2</a>
+            <nav class="project-subnav" id="subnav-test2">
+              <a href="#1-test2">1. Introduction</a>
+              <a href="#2-test2">2. Cahier des charges</a>
+              <a href="#3-test2">3. Schéma synoptique</a>
+              <a href="#4-test2">4. Description fonctionnelle</a>
+              <a href="#5-test2">5. Etapes de validation</a>
+              <a href="#6-test2">6. Réalisation du PCB</a>
+              <a href="#7-test2">7. Prototype</a>
+            </nav>
+
+            <a class="subtab-button" data-target="test3" href="#projet3">Projet 3</a>
+            <nav class="project-subnav" id="subnav-test3">
+              <a href="#1-test3">1. Objectifs</a>
+              <a href="#2-test3">2. Cahier des charges</a>
+              <a href="#3-test3">3. Architecture Générale</a>
+              <a href="#4-test3">4. Fonctionnement global</a>
+              <a href="#5-test3">5. Fonctionnement du Servomoteur</a>
+              <a href="#6-test3">6. Utilisation de Servomoteurs</a>
+              <a href="#7-test3">7. Bibliothèque nécessaire</a>
+              <a href="#8-test3">8. Code</a>
+              <a href="#9-test3">9. Test et Démonstration</a>
+              <a href="#10-test3">10. Realisation du PCB</a>
+            </nav>
+          </div>
+        </div>
+
+        <a href="mecanique.html" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="convoyeur.html" class="nav-link"></i><i class="fas fa-robot"></i> Convoyeur</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="electronique-content" class="tab-content active">
+
+        <div id="test1" class="subtab-content active">
+          <h2 id="projet1" class="projet-titre">Projet 1 - Gyroscope et Accéléromètre MPU6050</h2>
+
+          <h3 id="1-test1">1. Contexte et objectifs:</h3>
+          <p>
+            Les données de navigation telles que la direction et l'accélération sont essentielles dans la conception d’un robot.
+            Ce projet utilise un module MPU6050, combinant un gyroscope et un accéléromètre, pour mesurer l’orientation et les mouvements.
+          </p>
+          <p>
+            Ce projet a pour objectif de :
+          </p>
+          <ul>
+            <li>Comprendre le fonctionnement d’un capteur inertiel (IMU).</li>
+            <li>afficher en temps réel les directions (haut, bas, gauche, droite) ainsi que les données d’accélération sur un écran LCD.</li>
+            <li>Utiliser le protocole de communication I2C.</li>
+            <li>Appliquer les bonnes pratiques de conception logicielle (structure modulaire, classes bien définies, etc.).</li>
+          </ul>
+
+          <h3 id="2-test1">2. Choix du capteur : MPU6050</h3>
+
+          <p>
+           Le <strong>MPU6050</strong> est un capteur IMU (Inertial Measurement Unit) 6 axes qui combine :
+            <ul>
+            <li>Un accéléromètre 3 axes</li>
+            <li>Un gyroscope 3 axes</li>
+            </ul>
+          </p>
+        
+          <p>
+            Il utilise une interface I2C, parfaitement compatible avec les
+            microcontrôleurs comme l’Arduino, ce qui facilite la lecture des
+            données avec un minimum de fils et une consommation réduite.
+          </p>
+
+          <p>
+            Il est largement utilisé dans la communauté Arduino, avec de
+            nombreuses bibliothèques disponibles (comme MPU6050.h ou
+            Wire.h), ce qui simplifie le développement et le débogage
+          </p>
+
+          <p>
+          <strong>Caractéristiques principales</strong> : <a href="https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf" download class="download-link">datasheet du MPU6050</a>
+            <ul>
+            <li>Interface I2C (adresse par défaut : `0x68`)</li>
+            <li>Plage de mesure accéléromètre : ±2g, ±4g, ±8g, ±16g</li>
+            <li>Tension d’alimentation : 3.3V – 5V</li>
+            </ul>
+            
+          </p>
+          
+
+        <h3 id="3-test1">3. Principe de fonctionnement</h3>
+            <p>
+             Le capteur MPU6050 combine deux fonctions principales : un accéléromètre et un gyroscope.
+            L’accéléromètre permet de mesurer l’accélération linéaire sur les trois axes (X, Y, Z), ce qui
+            permet de détecter les mouvements de la main vers le haut, le bas, la gauche, la droite, l’avant
+            ou l’arrière. De son côté, le gyroscope mesure la vitesse angulaire sur ces mêmes axes, ce qui
+            permet de connaître l’orientation de la main, comme une inclinaison ou une rotation.
+          </p>
+
+          <p>
+           Pour transmettre les données au microcontrôleur, le MPU6050 utilise le protocole de
+            communication I2C. Ce protocole est simple et efficace, car il ne nécessite que deux fils : la
+            ligne SCL (pour l’horloge) et la ligne SDA (pour les données). Grâce à cette liaison, le
+            microcontrôleur peut envoyer des commandes au capteur et lire ses valeurs en temps réel.
+          </p>
+
+          <p>
+           Pour que le MPU6050 envoie les données, il ne suffit pas
+          de simplement le connecter. Étant donné qu’on utilise
+          une communication I2C, il faut suivre un protocole bien
+          défini :
+          </p>
+
+          <h4>a. Envoi d’une commande au capteur</h4>
+  
+            <p>
+            Avant de lire une donnée, l’Arduino doit envoyer l’adresse du registre souhaité. Cette adresse indique quel type de
+              donnée on veut (accélération, vitesse angulaire)
+            </p>
+
+            <div class="image-container">
+              <img src="images/Test1/Electronique/registre_electronique1.png" alt="Registre" class="image-centree" />
+            </div>
+            <div class="image-container">
+              <img src="images/Test1/Electronique/registre_electronique2.png" alt="Registre" class="image-centree" />
+            </div>
+
+          <h4>b. Structure des données reçues</h4>
+
+            <p>
+              Chaque mesure (accélération ou rotation) est codée sur 16 bits (2 octets) :  
+            </p>
+              <ul>
+              <li>8 bits MSB (poids fort)</li>
+              <li>8 bits LSB (poids faible)</li>
+            </ul> 
+            <p>
+              Les valeurs sont en complément à deux (signed integer), ce qui permet d'indiquer un sens positif ou négatif du mouvement. 
+            </p>
+
+          <h4>c. Conversion des données brutes</h4>
+  
+            <p>
+            Pour exploiter les mesures, il faut les convertir en unités physiques :
+            </p>
+            <ul>
+              <li> Accélération en g (gravité terrestre)</li>
+              <li> Rotation en °/s (degrés par seconde)</li>
+            </ul> 
+
+            <div class="image-container">
+              <img src="images/Test1/Electronique/converesion_electro1.png" alt="Conversion" class="image-centree" />
+            </div>
+            <div class="image-container">
+              <img src="images/Test1/Electronique/converesion_electro2.png" alt="Conversion" class="image-centree" />
+            </div>
+
+          
+          <h3 id="4-test1">4. Schéma électronique sous KICAD</h3>
+          <div class="image-container">
+            <img src="images/Test1/Electronique/schema_electro.png" alt="Schéma électronique sous KICAD" class="image-centree" />
+          </div>
+
+          <h3 id="5-test1">5. Codage</h3> 
+          <h4>a. Code 1: </h4> 
+            <p>
+              Ce code utilise la librairie MPU6050 sur Arduino IDE.
+            </p>
+  
+            <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('code_mpu1-ino', this)">📋</button>
+                <button onclick="telechargerCode('code_mpu1-ino', 'code_mpu1.ino', 'text/ino', this)">🡇</button>
+              </div>
+              <pre><code id="code_mpu1-ino">
+    #include &lt;Wire.h&gt;               // Bibliothèque pour communication I2C
+    #include &lt;LiquidCrystal_I2C.h&gt;  // Bibliothèque pour écran LCD I2C
+    #include &lt;MPU6050.h&gt;            // Bibliothèque pour capteur MPU6050
+
+    // Initialisation écran LCD avec adresse I2C 0x27, 16 colonnes et 2 lignes
+    LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+    // Création instance MPU6050
+    MPU6050 mpu;
+
+    // Variables pour stocker l'accélération en g (gravité)
+    float ax, ay, az;
+
+    // Norme totale de l'accélération (valeur absolue)
+    float accel_norm;
+
+    // Seuil d'accélération (en g) pour détecter un mouvement significatif
+    const float threshold = 0.2;
+
+    void setup() {
+      Serial.begin(9600);  // Initialisation communication série à 9600 bauds (pour debug éventuel)
+      Wire.begin();        // Initialisation bus I2C
+
+      lcd.init();          // Initialisation écran LCD
+      lcd.backlight();     // Allumer rétroéclairage LCD
+
+      // Initialisation MPU6050
+      mpu.initialize();
+
+      // Vérification de la connexion avec MPU6050
+      if (!mpu.testConnection()) {
+        lcd.print("MPU6050 error"); // Affiche erreur si capteur non détecté
+        while (1);                  // Bloque le programme ici (boucle infinie)
+      }
+
+      lcd.clear();
+      lcd.print("MPU6050 OK"); // Confirmation que capteur est prêt
+      delay(1000);
+      lcd.clear();
+    }
+
+    void loop() {
+      // Variables pour stocker les valeurs brutes (raw) lues depuis MPU6050
+      int16_t rawAx, rawAy, rawAz;
+
+      // Lecture des valeurs d'accélération brute sur 3 axes
+      mpu.getAcceleration(&rawAx, &rawAy, &rawAz);
+
+      // Conversion des valeurs brutes en unités g (gravité)
+      // Selon datasheet, la sensibilité est 16384 LSB/g en mode ±2g
+      ax = rawAx / 16384.0;
+      ay = rawAy / 16384.0;
+      az = rawAz / 16384.0;
+
+      // Calcul de la norme de l'accélération totale vectorielle
+      // sqrt(x² + y² + z²) -> donne l'intensité totale ressentie
+      accel_norm = sqrt(ax * ax + ay * ay + az * az);
+
+      // Détection de la direction dominante en fonction du seuil
+      String direction = "";    // Texte à afficher (direction détectée)
+      if (ax > threshold) { 
+        direction = "Gauche";   // Si acceleration sur axe X positive > seuil
+      }
+      else if (ax < -threshold) {
+        direction = "Droite";   // Si acceleration sur axe X négative < -seuil
+      }
+      else if (ay > threshold) {
+        direction = "Arriere";  // Si acceleration sur axe Y positive > seuil
+      }
+      else if (ay < -threshold) {
+        direction = "Avant";    // Si acceleration sur axe Y négative < -seuil
+      }
+      else if (az > threshold) {
+        direction = "Haut";      // Si acceleration sur axe Z positive > seuil
+      }
+      else if (az < -threshold) {
+        direction = "Bas";       // Si acceleration sur axe Z négative < -seuil
+      }
+      else {
+        direction = "Stable";    // Si aucune acceleration significative détectée
+      }
+    
+      // Affichage sur l'écran LCD
+      lcd.clear();              // Efface l'écran à chaque boucle
+      lcd.setCursor(0, 0);      // Position curseur ligne 0, colonne 0
+      lcd.print("Dir: ");       // Affiche label "Direction"
+      lcd.print(direction);     // Affiche la direction détectée
+
+      lcd.setCursor(0, 1);      // Position curseur ligne 1, colonne 0
+      lcd.print("Accel: ");     // Affiche label "Accélération"
+      lcd.print(accel_norm, 2); // Affiche la norme de l'accélération avec 2 décimales
+      lcd.print(" g");          // Affiche unité g (gravité)
+
+      delay(300);               // Pause de 300 ms avant prochaine lecture
+    }
+              </code></pre>
+              </div>
+
+
+          <h4>b. Code 2: </h4> 
+            <p>
+              Ce code n'utilise pas la librairie MPU6050 sur Arduino IDE.
+            </p>
+
+            <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('code_mpu2-ino', this)">📋</button>
+                <button onclick="telechargerCode('code_mpu2-ino', 'code_mpu2.ino', 'text/ino', this)">🡇</button>
+              </div>
+              <pre><code id="code_mpu2-ino">
+    #include &lt;Wire.h&gt;               // Bibliothèque pour la communication I2C
+    #include &lt;LiquidCrystal_I2C.h&gt;      // Bibliothèque pour gérer l'écran LCD I2C
+
+    const int MPU = 0x68;                // Adresse I2C du capteur MPU6050 (valeur par défaut)
+
+    LiquidCrystal_I2C lcd(0x27, 16, 2); // Initialisation de l'écran LCD I2C (adresse 0x27, 16 colonnes, 2 lignes)
+
+    // Variables pour stocker les données d'accélération
+    float AccX, AccY, AccZ;
+    // Variables pour stocker les données de gyroscope
+    float GyroX, GyroY, GyroZ;
+
+    // Angles calculés à partir de l'accéléromètre
+    float accAngleX, accAngleY;
+    // Angles calculés à partir du gyroscope (intégrés)
+    float gyroAngleX, gyroAngleY, gyroAngleZ;
+
+    // Angles fusionnés (roll, pitch, yaw)
+    float roll, pitch, yaw;
+
+    // Erreurs calculées lors de la calibration (offsets à enlever)
+    float AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+
+    // Variables pour gérer le temps écoulé entre deux mesures
+    float elapsedTime, currentTime, previousTime;
+
+    // Compteur utilisé pour la calibration
+    int c = 0;
+
+    void setup() {
+      Serial.begin(19200);         // Initialisation du port série à 19200 bauds pour debug
+      Wire.begin();                // Démarrage de la communication I2C
+
+      // Réveil du MPU6050 qui est en veille par défaut
+      Wire.beginTransmission(MPU); // Démarrer la transmission vers MPU
+      Wire.write(0x6B);            // Registre PWR_MGMT_1 (gestion alimentation)
+      Wire.write(0x00);            // Mettre à 0 pour sortir du mode veille
+      Wire.endTransmission(true);  // Fin de la transmission
+
+      // Initialisation de l'écran LCD
+      lcd.begin(16, 2);            // Définir taille LCD (16x2)
+      lcd.backlight();             // Activer rétroéclairage
+      lcd.setCursor(0, 0);         // Positionner curseur au début ligne 0
+      lcd.print("Initialisation..."); // Message de démarrage
+      delay(1000);                 // Pause d'1 seconde
+      lcd.clear();                 // Effacer écran
+
+      // Calibration automatique du capteur (calcul des erreurs à soustraire)
+      calculate_IMU_error();
+      delay(20);                   // Petite pause
+    }
+
+    void loop() {
+      // === Lecture des valeurs brutes de l'accéléromètre ===
+      Wire.beginTransmission(MPU);
+      Wire.write(0x3B);                    // Adresse du registre de début des données Accel
+      Wire.endTransmission(false);        // Garder la communication ouverte
+      Wire.requestFrom(MPU, 6, true);     // Lire 6 octets (2 par axe X,Y,Z)
+
+      // Conversion des données brutes en valeurs en g (gravité)
+      AccX = (Wire.read() << 8 | Wire.read()) / 16384.0; // Accélération X
+      AccY = (Wire.read() << 8 | Wire.read()) / 16384.0; // Accélération Y
+      AccZ = (Wire.read() << 8 | Wire.read()) / 16384.0; // Accélération Z
+
+      // Calcul des angles d'inclinaison (roll, pitch) avec accéléromètre
+      accAngleX = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / PI) - AccErrorX;
+      accAngleY = (atan(-AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / PI) - AccErrorY;
+
+      // === Lecture des valeurs brutes du gyroscope ===
+      previousTime = currentTime;           // Sauvegarde du temps précédent
+      currentTime = millis();                // Temps actuel en ms
+      elapsedTime = (currentTime - previousTime) / 1000;  // Temps écoulé en secondes
+
+      Wire.beginTransmission(MPU);
+      Wire.write(0x43);                    // Adresse du registre de début des données Gyro
+      Wire.endTransmission(false);        // Garder la communication ouverte
+      Wire.requestFrom(MPU, 6, true);     // Lire 6 octets (2 par axe X,Y,Z)
+
+      // Conversion des données brutes en degrés/seconde
+      GyroX = (Wire.read() << 8 | Wire.read()) / 131.0;
+      GyroY = (Wire.read() << 8 | Wire.read()) / 131.0;
+      GyroZ = (Wire.read() << 8 | Wire.read()) / 131.0;
+
+      // Soustraction des erreurs calculées lors de la calibration
+      GyroX = GyroX - GyroErrorX;
+      GyroY = GyroY - GyroErrorY;
+      GyroZ = GyroZ - GyroErrorZ;
+
+      // Intégration des vitesses angulaires pour obtenir les angles
+      gyroAngleX += GyroX * elapsedTime;
+      gyroAngleY += GyroY * elapsedTime;
+      yaw += GyroZ * elapsedTime;
+
+      // Application d'un filtre complémentaire pour combiner accéléromètre et gyroscope
+      // On donne plus de poids au gyroscope (0.96) car plus précis sur court terme
+      // L'accéléromètre corrige la dérive du gyroscope sur le long terme (0.04)
+      roll = 0.96 * gyroAngleX + 0.04 * accAngleX;
+      pitch = 0.96 * gyroAngleY + 0.04 * accAngleY;
+
+      // === Détection simple de la direction du mouvement en fonction des angles ===
+      String direction = "haut"; // Valeur par défaut
+
+      if (roll < -40 ) direction = "Avant";
+      else if (roll < 80 && roll > 60) direction = "Arriere";
+      else if (pitch > 15) direction = "Droite";
+      else if (pitch < -15) direction = "Gauche";
+      else if (pitch > 30) direction = "Haut";
+      else if (pitch > 120 && roll > 100) direction = "Bas";
+
+      // === Affichage de la direction détectée sur l'écran LCD ===
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Direction:");
+      lcd.setCursor(0, 1);
+      lcd.print(direction);
+
+      // Affichage des angles pour debug sur moniteur série
+      Serial.print("Roll: "); Serial.print(roll);
+      Serial.print(" | Pitch: "); Serial.print(pitch);
+      Serial.print(" | Yaw: "); Serial.println(yaw);
+
+      delay(300); // Pause avant prochaine lecture
+    }
+
+    // === Fonction pour calibrer automatiquement le capteur au démarrage ===
+    void calculate_IMU_error() {
+      // Calibration accéléromètre : moyenne des angles calculés sur plusieurs mesures
+      while (c < 200) {
+        Wire.beginTransmission(MPU);
+        Wire.write(0x3B);
+        Wire.endTransmission(false);
+        Wire.requestFrom(MPU, 6, true);
+
+        AccX = (Wire.read() << 8 | Wire.read()) / 16384.0;
+        AccY = (Wire.read() << 8 | Wire.read()) / 16384.0;
+        AccZ = (Wire.read() << 8 | Wire.read()) / 16384.0;
+
+        // Calcul des angles roll et pitch à partir de l'accéléromètre
+        AccErrorX += atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / PI;
+        AccErrorY += atan(-AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / PI;
+
+        c++;
+      }
+      // Moyenne des erreurs calculées
+      AccErrorX /= 200;
+      AccErrorY /= 200;
+      c = 0; // Réinitialisation compteur
+
+      // Calibration gyroscope : moyenne des valeurs lues au repos
+      while (c < 200) {
+        Wire.beginTransmission(MPU);
+        Wire.write(0x43);
+        Wire.endTransmission(false);
+        Wire.requestFrom(MPU, 6, true);
+
+        GyroX = Wire.read() << 8 | Wire.read();
+        GyroY = Wire.read() << 8 | Wire.read();
+        GyroZ = Wire.read() << 8 | Wire.read();
+
+        GyroErrorX += GyroX / 131.0;
+        GyroErrorY += GyroY / 131.0;
+        GyroErrorZ += GyroZ / 131.0;
+
+        c++;
+      }
+      // Moyenne des erreurs gyroscopiques
+      GyroErrorX /= 200;
+      GyroErrorY /= 200;
+      GyroErrorZ /= 200;
+
+      // Affichage des résultats de calibration dans le moniteur série
+      Serial.println("Calibration Terminee:");
+      Serial.print("AccErrorX: "); Serial.println(AccErrorX);
+      Serial.print("AccErrorY: "); Serial.println(AccErrorY);
+      Serial.print("GyroErrorX: "); Serial.println(GyroErrorX);
+      Serial.print("GyroErrorY: "); Serial.println(GyroErrorY);
+      Serial.print("GyroErrorZ: "); Serial.println(GyroErrorZ);
+    }
+              </code></pre>
+
+            </div>
+
+
+          <h3 id="6-test1">6. Conception d'un prototype et démonstration</h3>
+          
+          <div class="image-container">
+            <img src="images/Test1/Electronique/electronique1.jpg" alt="Prototype" class="image-small" />
+            <img src="images/Test1/Electronique/electronique2.jpg" alt="Prototype" class="image-small" />
+            <img src="images/Test1/Electronique/electronique3.jpg" alt="Prototype" class="image-small" />
+            <img src="images/Test1/Electronique/electronique4.jpg" alt="Prototype" class="image-small" />
+          </div>
+
+          <video controls width=auto>
+            <source src="videos/Test1/Electronique/final_trial.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+
+          <video controls width=auto>
+            <source src="videos/Test1/Electronique/prototype.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+
+          <h3 id="7-test1">7. Remarques</h3>
+            <ul>
+            <li>
+              Pour des lectures plus stables et précises, il est possible d'intégrer
+              un filtre complémentaire ou un filtre de Kalman.</li>
+            <li>
+              Ce projet constitue une excellente base pour des systèmes plus avancés,
+              tels que les contrôleurs, les robots auto-équilibrés ou les plateformes de stabilisation.</li>
+          </ul> 
+          
+    
+        <h3 id="8-test1">8. Conclusion</h3>
+          <p>
+            Ce projet nous a permis d’explorer l’intégration d’un capteur inertiel dans un système embarqué, ainsi que de mettre en œuvre la détection
+            et l’affichage en temps réel des mouvements de la main.
+          </p>
+           
+          <p>
+            Le module MPU6050 s’est révélé être un outil efficace et accessible
+            pour la détection de l’orientation et des mouvements.
+          </p>
+
+          <p>
+            Grâce à sa compatibilité avec l’écosystème Arduino et à la disponibilité de bibliothèques
+            dédiées, le MPU6050 peut être facilement intégré dans divers projets éducatifs ou de prototypage.
+          </p>
+
+          <p>
+            L’affichage des directions détectées et des valeurs d’accélération sur un écran LCD 16x2
+            offre une visualisation claire et pédagogique, idéale pour l’apprentissage des capteurs,
+            de la programmation de microcontrôleurs et des interfaces homme-machine.
+          </p>      
+          
+          <p>
+            Au-delà de son intérêt pédagogique, ce système peut être étendu à des applications telles
+            que le contrôle par gestes, la réalité virtuelle ou la robotique, avec la possibilité
+            d’ajouter une communication Bluetooth ou Wi-Fi pour renforcer l’interactivité.
+          </p>      
+
+    </div>
+
+
+        <div id="test2" class="subtab-content">
+          <h2 id="projet2" class="projet-titre">Projet 2 - Boîte noire</h2>
+        <h3 id="1-test2">1. Introduction</h3>
+        <p>
+          Dans les systèmes embarqués modernes, la collecte et l’analyse de données 
+          en temps réel sont essentielles pour le suivi et la sécurité des équipements, 
+          notamment dans des domaines critiques comme l’automobile, l’aviation ou le 
+          ferroviaire. S’inspirant du fonctionnement des boîtes noires utilisées dans 
+          ces industries, ce projet a pour objectif de concevoir un système embarqué 
+          capable d’enregistrer et de transmettre en temps réel des données de mouvement 
+          (vitesse et orientation) à l’aide d’un capteur inertiel. 
+          Les informations sont ensuite visualisées sur une station de contrôle via 
+          un écran LCD. Ce projet s’inscrit dans le cadre du Tekbot Robotics Challenge 
+          et fait appel à plusieurs compétences majeures : programmation directe des 
+          microcontrôleurs ATmega328P sans utiliser de carte Arduino, communication via 
+          le protocole I2C, conception de circuits imprimés avec KiCAD, réalisation 
+          d’un boîtier cubique de 7 cm, intégration matérielle sur veroboard ou PCB,
+          ainsi que la conception d’une alimentation spécifique.
+        </p>
+
+        <h3 id="2-test2">2. Cahier des charges</h3>
+          <h4>a. Objectifs fonctionnels</h4>
+            <ul>
+              <li>Lire les données de vitesse et d’orientation à l’aide du MPU6050</li>
+              <li>Utiliser le microcontrôleur ATmega328P sans carte Arduino</li>
+              <li>Concevoir un circuit imprimé (PCB) et une alimentation autonome</li>
+              <li>Transmettre les données à une station de contrôle via I2C</li>
+              <li>Afficher les données sur un écran LCD en mode 4 bits</li>
+            </ul>
+
+          <h4>b. Contraintes techniques</h4>
+            <ul>
+              <li>Le cube doit mesurer 7x7x7 cm, avec une face ouverte pour voir le circuit</li>
+              <li>Le microcontrôleur du cube agit en maître I2C</li>
+              <li>Le microcontrôleur de la station agit en esclave I2C</li>
+              <li>Alimentation externe obligatoire, hors du cube</li>
+              <li>Schéma et PCB réalisés avec KiCad</li>
+            </ul>
+          <h4>c. Matériels utilisés</h4>
+            <ul>
+              <li>ATmega328P ×2 : <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf" target="_blank">datasheet</a></li>
+              <li>MPU6050 : <a href="https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf" target="_blank">datasheet</a></li>
+              <li>LCD 16x2 (mode 4 bits) : <a href="https://www.gotronic.fr/pj2-sbc-lcd16x2-fr-1441.pdf?srsltid=AfmBOopmg8VyH8PQXxRcqE7GEvoyRwGRHeKVU9ZsKwGmKu13oZXhPhaJ" target="_blank">datasheet</a></li>
+              <li>Alimentation</li>
+            </ul>
+
+        <h3 id="3-test2">3. Schéma synoptique</h3>
+        <p>
+          Ce système embarqué est composé de deux unités :
+          une <strong>boîte noire</strong> et une <strong>station de contrôle</strong>, 
+          connectées via le bus I2C.
+          La boîte noire comprend un capteur MPU6050 qui détecte les mouvements de la main 
+          et envoie les données à un microcontrôleur ATmega328P configuré en maître. 
+          Celui-ci traite les données et les transmet à la station de contrôle, 
+          où un autre ATmega328P, configuré en esclave, les reçoit. 
+          Les informations sont ensuite affichées sur un écran LCD.
+          Chaque unité est alimentée séparément par une source de 5V.
+        </p>
+        <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/8b703337-a753-49e2-947b-a988aeb19c89" alt="Prototype"/>
+        </div>
+
+        <h3 id="4-test2">4. Description fonctionnelle des différents blocs du système</h3>
+          <h4>a. Bloc d’alimentation</h4>
+            <ul>
+              <li><strong>Fonction principale</strong></li>
+            <p>
+              Ce bloc a pour objectif de fournir une tension continue et stable de 5V nécessaire 
+              au fonctionnement des différents composants électroniques du système, 
+              notamment le capteur <strong>MPU6050</strong>, les <strong>microcontrôleurs ATmega328P</strong> et l'écran <strong>LCD</strong>.
+            </p>
+
+              <li><strong>Fonctionnement</strong></li>
+            <p>
+              On utilise trois batteries de Li-Ion 3,7V rechargeables montées en série pour obtenir environ 12V.
+            </p>
+            <p>
+              Le <strong>régulateur L7805</strong> reçoit ce 12V en entrée (Vin) et fournit du 5V en sortie (Vout).
+            </p>
+            <p>
+              Deux condensateurs (330nF <strong>à l’entrée</strong> et 100nF <strong>à la sortie</strong>) sont utilisés pour stabiliser la tension et filtrer les parasites:
+            </p>
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/690d4b70-85dd-4cbb-bff8-a1c31e7033fd" alt="schema"/>
+            </div>
+            <p>
+               La simulation sur proteus : Les condensateurs de filtrage ont été omis dans ce schéma pour simplifier la représentation, bien qu’ils soient indispensables en pratique pour assurer la stabilité et réduire le bruit.
+            </p>
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/a75470b7-4158-495d-adb8-76909df0c935" alt="schema"/>
+            </div>
+
+            <video controls width=auto>
+              <source src="videos/Test2/Electronique/test.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.                   
+            </video>
+
+            </ul>
+          
+          <h4>b. Bloc d’entrée(dans la boite noire)</h4>
+          <p>
+            Nous avons choisi le capteur MPU6050 parce qu’il intègre un accéléromètre et un 
+            gyroscope dans un seul composant. Cela permet de mesurer les mouvements et les rotations 
+            de la main avec précision. Il est facile à utiliser grâce au protocole I2C, et il fonctionne 
+            bien avec le microcontrôleur ATmega328P. En plus, il est peu coûteux et largement utilisé 
+            dans les projets embarqués. D’autres capteurs peuvent faire un travail similaire, comme le 
+            MPU9250 (qui ajoute un magnétomètre), le LSM6DS3 (plus récent et plus économe), ou le ADXL34
+          </p>
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/2c989400-0c29-46dc-907c-dcd7208a431b" alt="schema"/>
+          </div>
+
+          <h4>c. Bloc de commande(dans la boite noire)</h4>
+            <ul>
+              <li><strong>Étape 1 : Prise en main du microcontrôleur ATmega328P</strong></li>
+            <p>
+              Avant de démarrer le système complet, l’équipe s’est d’abord focalisée sur le 
+              microcontrôleur ATmega328P. L’objectif était de comprendre pleinement sa structure 
+              interne, ses broches, ainsi que la manière de le configurer et de le simuler.
+            </p>
+            <p>
+              Nous avons étudié ses principales caractéristiques et son brochage :
+            </p>
+            <ul>
+              <li>Le format DIP à 28 broches, comme dans les cartes Arduino Uno</li>
+              <li>Les broches d’E/S numériques D0 à D13, pour piloter des LED, relais, etc.</li>
+              <li>Les entrées analogiques A0 à A5, pour la lecture de capteurs</li>
+              <li>L’interface I2C via SDA (PC4) et SCL (PC5)</li>
+              <li>La communication série UART via TX (PD1) et RX (PD0)</li>
+              <li>Les broches d’alimentation : VCC, GND, AVCC, AREF</li>
+              <li>La broche RESET, généralement tirée à l’état haut via une résistance</li>
+              <li>Les broches XTAL1/XTAL2 pour le quartz (utilisé plus tard)</li>
+            </ul>
+            <p>
+              Ces éléments nous ont permis de préparer une simulation fiable sous Proteus 
+              pour la suite du projet.
+            </p>
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/62775b28-f4f7-42ed-b677-140ee88c7769" alt="schema"/>
+            </div>
+
+
+              <li><strong>Étape 2 : Simulation basique de l’ATmega328P dans Proteus</strong></li>
+            <p>
+              Après avoir étudié la configuration du microcontrôleur, nous avons réalisé une première 
+              simulation simple sous Proteus, afin de valider son fonctionnement dans un environnement 
+              simulé.
+            </p>
+            <p>
+              À ce stade :
+            </p>
+            <ul>
+              <li>Nous n'avons pas utilisé les connexions d’alimentation (VCC/AVCC) ni de quartz externe, car elles ne sont pas obligatoires pour les logiques simples dans Proteus.</li>
+              <li>Nous nous sommes concentrés sur le comportement des broches dans un exemple réel.</li>
+            </ul>
+            <p>
+              Scénario de simulation : Nous avons conçu un système simple dans lequel :
+            </p>
+            <ul>
+              <li>Un bouton poussoir est connecté à une entrée numérique.</li>
+              <li>
+                Nous nous sommes concentrés sur le comportement des broches dans un exemple réel. 
+                Lorsqu’on appuie sur le bouton, l’ATmega active un relais via une sortie numérique.
+              </li>
+              <li>Ce relais commande une lampe LED 12V, simulant une charge réelle.</li>
+            </ul>
+            <p>
+              Le code Arduino correspondant a été compilé dans l’IDE Arduino, puis le fichier .hex 
+              généré a été intégré dans Proteus pour tester le comportement du circuit.
+            </p>     
+            <video controls width=auto>
+            <source src="https://github.com/user-attachments/assets/d1cc5dd5-9109-4822-be6e-245693643c00" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+            <p>
+              Observation :
+            </p>
+            <ul>
+              <li>Lorsque le bouton est pressé, le relais s’active et allume la LED.</li>
+              <li>Le comportement observé est conforme à la logique attendue et cohérente.</li>
+            </ul>
+          </ul>
+
+            <h4>d. Bloc d’affichage de la station du controle</h4>
+            <p>
+              Pour l’affichage des données au niveau de la station de contrôle, nous avons opté pour 
+              un écran LCD équipé d’un module I2C. Ce choix permet de simplifier le montage électronique 
+              en réduisant considérablement le nombre de connexions nécessaires entre le microcontrôleur 
+              et l’écran. Grâce à cette interface, seules deux lignes (SDA et SCL) suffisent pour 
+              transmettre les informations, ce qui laisse davantage de broches disponibles pour d’autres 
+              composants. L’écran LCD I2C assure ainsi une lecture claire et en temps réel des données 
+              de vitesse et d’orientation envoyées par la boîte noire.
+            </p>
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/29db70ec-851d-4a14-a918-5cb94e43d4d7" alt="schema"/>
+            </div>
+            
+          <h4>e. La communication I2C</h4>
+            <p>
+              Ce document constitue une présentation détaillée et approfondie du protocole I2C 
+              (Inter-Integrated Circuit), qui est un standard de communication série synchrone très 
+              répandu dans l’électronique embarquée. Ce protocole facilite l’échange d’informations 
+              entre un ou plusieurs maîtres et plusieurs périphériques esclaves en utilisant seulement 
+              deux fils, simplifiant ainsi les connexions matérielles tout en assurant une communication 
+              fiable et efficace.
+            </p>
+
+            <ul>
+              <li><strong>Principe de fonctionnement</strong></li>
+            <p>
+              <a href="https://fr.wikipedia.org/wiki/I2C" target="_blank">Protocole I2C</a> (Inter-Integrated Circuit), développé par Philips (aujourd’hui NXP) dans les années 1980, 
+              est un standard mondial pour la communication série entre circuits intégrés, 
+              surtout dans les systèmes embarqués. Il utilise un bus bidirectionnel à deux fils : 
+              SDA pour les données et SCL pour l’horloge, permettant à plusieurs périphériques de 
+              partager le même canal tout en gérant précisément l’accès.
+              Contrairement à des protocoles comme SPI, I2C minimise le nombre de connexions 
+              nécessaires, ce qui simplifie le routage sur circuit imprimé et réduit les coûts. 
+              Ce protocole est largement utilisé dans des domaines variés : 
+              automobile, domotique, informatique, etc.
+            </p>
+            <p>
+              L'I2C fonctionne selon un modèle <a href="https://www.ionos.fr/digitalguide/serveur/know-how/le-principe-master/slave/" target="_blank">maître-esclave</a>: un ou plusieurs maîtres contrôlent la communication, et les esclaves répondent aux requêtes. 
+              Chaque communication commence par une condition <strong>Start</strong>, 
+              suivie de <strong>l’adresse de l’esclave</strong> et d’un bit de direction 
+              (lecture/écriture). Les données sont ensuite échangées octet par octet, 
+              chaque octet étant confirmé par un bit d’acquittement(ACK). 
+              La communication se termine par une condition <strong>Stop</strong>, qui libère le bus.
+            </p>
+            <p>
+              Techniquement, I2C utilise des lignes ouvertes (open-drain) : 
+              les dispositifs ne peuvent que tirer les lignes vers le bas, 
+              tandis que des résistances pull-up maintiennent le niveau haut par défaut. 
+              Cela évite les conflits, notamment en mode multi-maîtres.
+              Enfin, I2C offre une grande flexibilité en termes de vitesse, du mode standard 
+              (100 kHz) au mode rapide (jusqu’à 3,4 MHz) et au-delà dans certaines variantes 
+              propriétaires.
+            </p>
+            
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/18f95ad8-0fa3-49cb-99ce-52408ff42054" alt="schema"/>
+            </div>
+
+            <li><strong>Prise de contrôle du bus</strong></li>
+            <p>
+              La prise de contrôle du bus par un maître débute par une condition Start (S), 
+              qui est un événement distinctif sur le bus. Cette condition correspond à une transition 
+              sur la ligne SDA de l’état haut à l’état bas, alors que la ligne SCL est maintenue à 
+              l’état haut. Cette séquence particulière est détectée par tous les périphériques 
+              connectés au bus, qui entrent alors en mode écoute, prêts à recevoir des données.
+            </p>
+            <p>
+              La condition Start joue un rôle fondamental : elle marque l’exclusivité du maître sur 
+              le bus, ce qui évite les collisions ou l’interférence avec d’autres maîtres éventuels. 
+              Elle sert aussi de synchronisation initiale à la transmission de données, 
+              en assurant que tous les appareils sont synchronisés sur le début de la communication.
+            </p>
+            <p>
+              Les résistances pull-up sur les lignes SDA et SCL maintiennent ces lignes à 
+              un état logique haut par défaut, garantissant ainsi que le bus est en repos 
+              quand aucune communication n’a lieu.
+            </p>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/592b1e08-6f4c-4e0a-972b-d53158d6ed80" alt="schema" class="image-mean"/>
+              <!-- <img src="https://github.com/user-attachments/assets/2eeeefcc-9f5b-47ae-8ac2-8a300c7d97c5" alt="schema" class="image-mean"/> -->
+            </div>
+            <div class="image-container">
+              <!-- <img src="https://github.com/user-attachments/assets/592b1e08-6f4c-4e0a-972b-d53158d6ed80" alt="schema" class="image-mean"/> -->
+              <img src="https://github.com/user-attachments/assets/2eeeefcc-9f5b-47ae-8ac2-8a300c7d97c5" alt="schema" class="image-mean"/>
+            </div>
+
+            <li><strong>Transmission d'un octet</strong></li>
+            <p>
+              La transmission des données sur le bus I2C s’effectue par octets (8 bits). 
+              Chaque bit est transmis séquentiellement, en commençant par le bit le plus significatif 
+              (MSB).
+            </p>
+            <p>
+              Le protocole impose que chaque bit soit placé sur la ligne SDA pendant que la ligne SCL 
+              est à l’état bas. Ensuite, la ligne SCL passe à l’état haut, moment où 
+              le récepteur lit la valeur présente sur la ligne SDA. 
+              Lorsque la ligne SCL redescend à l’état bas, 
+              l’émetteur peut placer le bit suivant sur SDA, et ainsi de suite.
+            </p>
+            <p>
+              Après l’envoi des 8 bits d’un octet, 
+              la ligne SDA est libérée pendant le 9e cycle d’horloge. 
+              C’est alors au récepteur de signaler par un bit d’acquittement (ACK) s’il a correctement 
+              reçu l’octet, en tirant la ligne SDA à l’état bas. S’il ne tire pas SDA à zéro, 
+              un bit de non-acquittement (NACK) est détecté, ce qui indique que la communication 
+              doit être interrompue ou qu’une erreur s’est produite.
+            </p>
+            <p>
+              Ce mécanisme d’<strong>ACK/NACK</strong> est crucial car il assure la fiabilité 
+              des transmissions, permettant au maître de savoir si l’esclave est disponible 
+              et prêt à recevoir ou envoyer des données.
+            </p>
+
+            <li><strong>Transmission d'une adresse</strong></li>
+            <p>
+              Après la condition Start, le maître envoie un octet d’adresse pour 
+              identifier l’esclave avec lequel il souhaite communiquer. 
+              L’adresse est généralement codée sur 7 bits, suivis d’un bit R/W indiquant 
+              si la transaction sera une lecture ou une écriture.
+            </p>
+            <p>
+              Le protocole prévoit aussi une extension 10 bits 
+              pour les réseaux comportant un grand nombre de périphériques, 
+              mais cette extension est moins fréquemment utilisée.
+            </p>
+            <p>
+              Tous les périphériques esclaves surveillent le bus 
+              et comparent l’adresse reçue avec leur propre adresse. 
+              Celui qui reconnaît son adresse répond alors par un bit ACK en tirant la ligne SDA 
+              à l’état bas pendant le 9e bit. Les autres esclaves restent silencieux 
+              jusqu’à la prochaine séquence.
+            </p>
+            <p>
+              Cette étape est essentielle car elle garantit que seules les communications 
+              destinées à un périphérique spécifique sont traitées, 
+              évitant ainsi toute interférence entre plusieurs périphériques sur le même bus.
+            </p>
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/d0ee80b6-b169-4cd5-9149-25fd731a3583" alt="schema" class="image-mean"/>
+            </div>
+
+            <li><strong>Écriture d'une donnée</strong></li>
+            <p>
+              Une fois l’adresse reconnue par l’esclave, 
+              la phase de transfert des données peut commencer. 
+              Le maître transmet alors les octets de données à l’esclave, 
+              chaque octet étant suivi d’un bit ACK envoyé par l’esclave pour confirmer la bonne réception.  
+            </p>
+            <p>
+              Le protocole permet d’envoyer autant d’octets que nécessaire dans une même communication, ce qui permet des transferts efficaces et continus.
+            </p>
+            <p>
+              Pour terminer la communication, le maître génère une condition Stop (P), qui correspond à une transition de la ligne SDA de l’état bas à l’état haut alors que la ligne SCL est haute. Cette séquence indique à tous les périphériques que la transmission est terminée et que le bus est libéré pour une autre communication.
+            </p>
+            <p>
+              Il existe également une condition Restart, qui est une condition Start générée sans condition Stop préalable, permettant de chaîner plusieurs opérations sur le même bus sans interruption.
+            </p>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/cd3818b4-20a3-4ab2-8ad2-63cb27b47d49" alt="schema" class="image-mean"/>
+            </div>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/61143d18-67bd-4ae0-a9b4-aafa01f3786f" alt="schema" class="image-mean"/>
+            </div>
+
+            <li><strong>Arbitration</strong></li>
+            <p>
+              Le protocole I2C est conçu pour supporter un mode multi-maîtres, où plusieurs maîtres peuvent tenter d’accéder au bus simultanément. Pour éviter les conflits, un mécanisme d’arbitrage est mis en place.
+            </p>
+            <p>
+              Lorsqu’un maître commence à transmettre, il surveille la ligne SDA et la compare avec ce qu’il souhaite envoyer. Si un maître détecte que la ligne SDA est forcée à l’état bas par un autre maître alors qu’il tente de la maintenir haute, il comprend qu’il a perdu l’arbitrage et abandonne immédiatement la transmission, laissant le bus libre au maître dominant.
+            </p>
+            <p>
+              Ce mécanisme garantit qu’aucune collision électrique ne se produit sur le bus et que seule une source transmet à un instant donné. C’est une des forces du protocole I2C, qui permet une coexistence harmonieuse de plusieurs maîtres sur un même bus.
+            </p>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/2a51d266-e7b7-4805-9f25-3cc9b081af5d" alt="schema" class="image-mean"/>
+            </div>
+
+            <li><strong>Clock Stretching</strong></li>
+            <p>
+              Le clock stretching est une fonctionnalité du protocole I2C qui permet à un esclave de ralentir temporairement la communication lorsqu’il n’est pas prêt à envoyer ou recevoir des données. Cela se fait en gardant la ligne SCL à l’état bas (LOW), empêchant ainsi le maître de continuer à envoyer des impulsions d’horloge. Une fois que l’esclave est prêt, il libère la ligne SCL, permettant au maître de reprendre la transmission. Cette technique est utile, par exemple, lorsque le capteur a besoin de plus de temps pour traiter ou préparer les données. Le maître doit respecter cet étirement d’horloge pour éviter des erreurs de communication.
+            </p>
+            
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/3b85fa91-3ed1-4b41-8336-1256be15648b" alt="schema" class="image-mean"/>
+            </div>
+
+            </ul>
+
+        <h4>f. Communication I2C entre MPU6050 et ATmega328P</h4>
+            <p>
+              Dans notre projet, le microcontrôleur ATmega328P communique avec le capteur MPU6050 à l’aide du protocole I2C. Ce protocole permet de transmettre les données d’accélération et de rotation via deux fils (SDA et SCL). Le MPU6050 agit comme esclave, et l’ATmega328P comme maître.
+            </p>
+            <ul>
+              <li><strong>Fonctionnement de la liaison I2C</strong></li>
+            <p>
+              La connexion matérielle entre le MPU6050 et l’ATmega328P s’effectue via le protocole I2C (Inter-Integrated Circuit), qui utilise deux lignes de communication :
+            </p>
+            <ul>
+              <li>SDA (Serial Data Line) : ligne bidirectionnelle pour l’échange des données, connectée à la broche PC4 de l’ATmega328P.</li>
+              <li>SCL (Serial Clock Line) : ligne d’horloge générée par le maître, connectée à la broche PC5 de l’ATmega328P.</li>
+            </ul>
+            <p>
+              Sur le bus I2C, le dispositif qui initie la communication est appelé maître, tandis que celui qui répond s’appelle esclave. Dans notre cas :
+              L’ATmega328P joue le rôle de maître, c’est lui qui contrôle le bus, génère l’horloge, et initie les échanges.
+              Le MPU6050 est l’esclave, il attend que le maître lui demande des données spécifiques.
+              Le maître démarre la communication en envoyant une adresse unique correspondant à l’esclave (ici l’adresse I2C du MPU6050, généralement 0x68), suivie d’une commande indiquant quel registre ou donnée il souhaite lire.
+              </p>
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/6cea5b00-bb19-4816-af14-adf2e965201a" alt="schema"/>
+            </div>
+
+
+              <li><strong>Envoi des commandes et réception des données</strong></li>
+            <p>
+              La communication suit ce processus 
+            </p>
+            <ul>
+              <li>Le maître (ATmega328P) commence par envoyer une commande au MPU6050, qui consiste à spécifier l’adresse du registre interne dont il souhaite lire la valeur. Par exemple, pour lire l’accélération sur l’axe X, il envoie l’adresse du registre ACCEL_XOUT_H.</li>
+              <li>Cette commande est envoyée via le bus I2C sous forme d’une trame contenant l’adresse de l’esclave, suivie de l’adresse du registre ciblé.</li>
+              <li>Une fois la commande reçue, le MPU6050 prépare la donnée correspondante et la transmet dès que le maître la demande.</li>
+              <li>Le maître récupère alors la ou les valeurs envoyées par le capteur, généralement sur plusieurs octets, qu’il traite ensuite pour en extraire l’information de mouvement (accélération, rotation, température).</li>
+            </ul>
+            
+          </ul>
+
+      <h3 id="5-test2">5. Etapes de validation avant PCB</h3>
+          <h4>a. Étape 1 : Communication I2C entre deux Arduino (Test de base)</h4>
+            <p>
+              Afin de valider le fonctionnement de la communication I2C entre deux microcontrôleurs en utilisant un exemple simple : un bouton poussoir et une LED.
+            </p>
+            <p>
+              Composants utilisés :
+            </p>
+            <ul>
+              <li>2 cartes Arduino UNO</li>
+              <li>1 bouton poussoir (sur le maître)</li>
+              <li>1 LED (sur l’esclave)</li>
+              <li>Câblage SDA/SCL entre les deux cartes</li>
+            </ul>
+
+            <p>
+              Fonctionnement  :
+            </p>
+            <ul>
+              <li>L’Arduino maître lit l’état d’un bouton poussoir connecté en entrée.</li>
+              <li>Cet état (appuyé ou relâché) est transmis à l’Arduino esclave via le protocole I2C.</li>
+              <li>L’esclave reçoit cette donnée et contrôle une LED : elle s’allume si le bouton est appuyé, s’éteint sinon.</li>
+            </ul>
+
+            <p>
+              But de l'étape : 
+            </p>
+            <ul>
+              <li>Apprendre à configurer le bus I2C (maître/esclave).</li>
+              <li>Vérifier la synchronisation et la fiabilité de la communication.</li>
+              <li>Observer une réponse simple à un signal I2C.</li>
+            </ul>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/88f6527a-9f2b-40c0-a4ea-c1e3489a3cf6" alt="schema"/>
+            </div>
+
+            <video controls width=auto>
+              <source src="https://github.com/user-attachments/assets/f24d194f-d3f9-40da-8c5a-b3b9a5e75ebc" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+        
+        <h4>b. Étape 2 : Remplacement par des modules réels (MPU6050 et LCD)</h4>
+            <p>
+              Pour simuler une application plus réaliste en utilisant des capteurs réels(MPU6050) et un afficheur(lCD), tout en gardant la communication I2C entre deux cartes.
+            </p>
+            <p>
+              Composants utilisés :
+            </p>
+            <ul>
+              <li>MPU6050 (capteur accéléromètre/gyroscope) sur le maître</li>
+              <li>Écran LCD (type I2C 16x2) sur l’esclave</li>
+              <li>Deux cartes Arduino</li>
+            </ul>
+
+            <p>
+              Fonctionnement  :
+            </p>
+            <ul>
+              <li>Le capteur MPU6050 collecte les données d’accélération et de rotation.</li>
+              <li>Ces données sont lues par l’Arduino maître via I2C.</li>
+              <li>Le maître envoie ensuite les valeurs traitées à l’esclave.</li>
+              <li>L’Arduino esclave reçoit les données et les affiche sur le LCD.</li>
+            </ul>
+
+            <p>
+              But de l'étape : 
+            </p>
+            <ul>
+              <li>Remplacer des composants de test par des modules intelligents.</li>
+              <li>Manipuler un capteur complexe avec acquisition de données.</li>
+              <li>Gérer l'affichage distant d'informations, toujours via I2C.</li>
+              <li>Approfondir le protocole I2C dans un cas concret (multi-esclaves potentiels, synchronisation).</li>
+            </ul>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/4bf55be3-fb1c-43e9-98be-2359a4609619" alt="schema"/>
+            </div>
+
+            <video controls width=auto>
+              <source src="https://github.com/user-attachments/assets/1c67d0e5-90eb-4aa1-bebf-cd58e934528a" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+        <h4>c. Étape 3 : Intégration avec ATmega328P (préparation au PCB)</h4>
+            <p>
+             Afin de remplacer la carte Arduino par le <strong>microcontrôleur brut</strong> (ATmega328P), et de simuler les conditions réelles d’un circuit imprimé.
+            </p>
+            <p>
+              Composants utilisés :
+            </p>
+            <ul>
+              <li>2× ATmega328P</li>
+              <li>2× Quartz</li>
+              <li>4× Condensateurs 22 pF</li>
+              <li>1× MPU6050</li>
+              <li>1× Écran LCD 16x2 avec interface I2C</li>
+              <li>2× Boutons poussoirs</li>
+              <li>2× Résistances 10 kΩ</li>
+              <li>Fils de connexion (Dupont)</li>
+              <li>Breadboard</li>
+            </ul>
+
+            <p>
+              Fonctionnement  :
+            </p>
+            <ul>
+              <li>L’ATmega328P est programmé avec le même code que celui utilisé sur une carte Arduino, à l’aide d’un programmateur externe (comme USBasp ou Arduino as ISP).</li>
+              <li>Les deux ATmega328P communiquent via le protocole I2C :</li>
+              <ul>
+                <li>L’un joue le rôle de maître (elle collecte les données du MPU6050).</li>
+                <li>L’autre joue le rôle d’esclave (elle affiche les données sur un écran LCD I2C).</li>
+              </ul>
+              <li>Les microcontrôleurs sont utilisés en mode "standalone" (hors carte de développement).</li>
+              <li>Connectés sur breadboard avec :</li>
+              <ul>
+                <li>Un quartz et deux condensateurs 22 pF pour chaque ATMEGA328P pour générer l’horloge.</li>
+                <li>Une alimentation 5V stable.</li>
+                <li>Un bouton poussoir relié à la broche RESET de chaque ATmega.</li>
+                <li>Une résistance de 10 kΩ connectée entre la broche RESET et VCC, pour garantir un redémarrage stable.</li>
+              </ul>
+            </ul>
+            
+            <p>
+              But de l'étape : 
+            </p>
+            <ul>
+              <li>S’assurer que le microcontrôleur fonctionne correctement en mode autonome.</li>
+              <li>Tester la communication I2C dans les conditions matérielles réelles du futur PCB.</li>
+              <li>Préparer l’intégration finale des composants sur un PCB personnalisé.</li>
+            </ul>
+
+            <div class="image-container">
+              <img src="images/Test2/Electronique/image.png" alt="schema" class="image-small"/>              
+              <!-- <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/215927366/457011835-60ee4f9b-8e22-4bce-a59e-369cb7b13c1f.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250619%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250619T145330Z&X-Amz-Expires=300&X-Amz-Signature=d162c0993c215ea0a0799f3edb3868bd47548c3773ec9747b8ee027303135831&X-Amz-SignedHeaders=host" alt="schema" class="image-small"/> -->
+            </div>
+
+            <video controls width=auto>
+              <source src="https://github.com/user-attachments/assets/9b0e3092-58c1-435a-8556-9573676f7728" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+
+          <div class="code-container">
+            <p>Code_maitre.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_maitre-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_maitre-ino', 'Code_maitre.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code id="Code_maitre-ino">
+    #include &lt;Wire.h&gt;        
+    #include &lt;MPU6050.h&gt;  
+
+    MPU6050 mpu;
+
+    float ax, ay, az;
+    const float threshold = 0.2;
+    String direction = "";
+
+    void setup() {
+      Serial.begin(9600);
+      Wire.begin();      // Maître
+      mpu.initialize();
+
+      if (!mpu.testConnection()) {
+        Serial.println("Erreur MPU6050");
+        while (1);
+      }
+
+      Serial.println("MPU6050 OK");
+    }
+
+    void loop() {
+      int16_t rawAx, rawAy, rawAz;
+      mpu.getAcceleration(&rawAx, &rawAy, &rawAz);
+
+      ax = rawAx / 16384.0;
+      ay = rawAy / 16384.0;
+      az = rawAz / 16384.0;
+
+      // Détection de direction
+      if (ax > threshold) direction = "Gauche";
+      else if (ax < -threshold) direction = "Droite";
+      else if (ay > threshold) direction = "Arriere";
+      else if (ay < -threshold) direction = "Avant";
+      else if (az > threshold) direction = "Haut";
+      else if (az < -threshold) direction = "Bas";
+      else direction = "Stable";
+
+      // Envoi vers esclave
+      Wire.beginTransmission(8);         // adresse esclave
+      Wire.write(direction.c_str());     // envoyer la direction comme texte
+      Wire.endTransmission();
+
+      Serial.print("Direction envoyée : ");
+      Serial.println(direction);
+
+      delay(300);
+    }                      
+              </code></pre>
+            </div>
+
+          <div class="code-container">
+            <p>Code_esclave.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_esclave-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_esclave-ino', 'Code_esclave.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code id="Code_esclave-ino">
+    #include &lt;Wire.h&gt;               // Bibliothèque pour communication I2C
+    #include &lt;LiquidCrystal_I2C.h&gt;  // Bibliothèque pour écran LCD I2C
+    #include &lt;MPU6050.h&gt;  
+    
+    LiquidCrystal_I2C lcd(0x27, 16, 2);  // LCD I2C
+
+    String receivedDirection = "";
+
+    void setup() {
+      Wire.begin(8);  // Adresse de l'esclave
+      Wire.onReceive(receiveData);
+
+      lcd.init();
+      lcd.backlight();
+      lcd.setCursor(0, 0);
+      lcd.print("Pret a recevoir");
+    }
+
+    void loop() {
+      // Affiche la dernière direction reçue
+      lcd.setCursor(0, 0);
+      lcd.print("Dir:            "); // Nettoyer la ligne
+      lcd.setCursor(5, 0);
+      lcd.print(receivedDirection);
+      
+      delay(200);
+    }
+
+    void receiveData(int bytes) {
+      receivedDirection = ""; // réinitialiser
+
+      while (Wire.available()) {
+        char c = Wire.read();
+        receivedDirection += c;
+      }
+
+      Serial.print("Recu : ");
+      Serial.println(receivedDirection);
+    }         
+              </code></pre>
+            </div>
+             
+        <h4>Pourquoi cette Démarche ?</h4>
+        <p>
+          La réalisation d’un PCB nécessite des choix précis de composants et un bon fonctionnement garanti en amont. Cette démarche par étapes nous a permis de :
+        </p>
+        <ul>
+          <li>Identifier les erreurs éventuelles (bruit sur la ligne I2C, mauvais câblage, alimentation instable…).</li>
+          <li>Tester progressivement les modules dans un environnement de développement.</li>
+          <li>Réduire le risque d’erreur lors de la conception du PCB.</li>
+          <li>Avoir une base fonctionnelle avant le passage à la fabrication.</li>
+        </ul>
+      
+
+      <h3 id="6-test2">6. Réalisation du PCB</h3>
+        <h4>a. PCB de la boite noire</h4>
+        <div class="image-container">
+          <img src="https://github.com/user-attachments/assets/4daa371b-60f8-45ec-88ee-bb22b75d8ffa" alt="pcb" class="image-mean" />
+          <p class = "txt_center">
+            Conception du schéma intégrant le microcontrôleur ATmega328P, le capteur MPU-6050 et les connecteurs.
+          </p>
+        </div>
+        
+        <div class="image-container">
+          <img src="https://github.com/user-attachments/assets/f9ea1c3f-b691-48d5-a4c3-829fab5aea9e" alt="pcb" class="image-mean" />
+          <p class = "txt_center">
+            Attribution des empreintes physiques correspondant aux composants.
+          </p>
+        </div>
+     
+        <div class="image-container">
+          <img src="https://github.com/user-attachments/assets/c029f01b-0e0d-4864-b490-48a2cf801f62" alt="pcb" class="image-mean" />
+          <p class = "txt_center">
+            Verificaton des erreurs (DRC)
+          </p>
+        </div>
+        
+        <div class="image-container">
+          <img src="https://github.com/user-attachments/assets/64ee506b-c1e7-46de-824a-649cb73a8f54" alt="pcb" class="image-mean" />
+          <p class = "txt_center">
+            Ajustement de la disposition pour optimiser l’espace et faciliter le routage.
+          </p>
+        </div>
+
+        <div class="image-container">
+          <img src="https://github.com/user-attachments/assets/968138f4-4dd2-4971-a71d-c887548e13d0" alt="pcb" class="image-mean" />
+          <p class = "txt_center">
+            Routage des pistes
+          </p>
+        </div>
+        
+
+        <div class="image-container">
+          <img src="https://github.com/user-attachments/assets/32678869-7ea0-4449-a07f-74b8b4168ad1" alt="pcb" class="image-mean" />
+          <p class = "txt_center">
+            Définition des contours du PCB (Edge Cuts)
+          </p>
+        </div>
+
+        <div class="image-container">
+          <p class = "txt_center">
+            Visualisation 3D du PCB
+          </p>
+          <img src="https://github.com/user-attachments/assets/0b16bd0a-1850-40e2-8e45-25d22ce4fcd2" alt="pcb" class="image-mean" />
+        </div>
+        <video controls width=auto>
+          <source src="https://github.com/user-attachments/assets/f897ede6-44c2-42a2-96d0-31dc648d50c1" type="video/mp4">
+          Votre navigateur ne supporte pas la vidéo HTML5.                   
+        </video>
+
+        <p class="txt_center">
+          <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/main/Test2/Electronique/boite_noire" target="_blank" class="download-link">lien vers les fichiers du pcb de la boite noire</a>
+        </p>
+
+      <h4>b. PCB de la station de contrôle</h4>
+       
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/9f6d6881-972e-4cf5-aead-8e29ac9a7a28" alt="pcb" class="image-mean"/>
+            <p class = "txt_center">
+              Conception du schéma intégrant le microcontrôleur ATmega328P, le capteur MPU-6050 et les connecteurs.
+            </p>
+          </div>
+        
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/f0cfca43-da82-427a-95cb-d35d16d0c2fa" alt="pcb" class="image-mean" />
+            <p class = "txt_center">
+              Anotation
+            </p>
+          </div>
+        
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/281e78ea-b57c-46fb-bf95-157df926afa8" alt="pcb" class="image-mean" />
+            <p class = "txt_center">
+              Attribution des empreintes physiques correspondant aux composants.
+            </p>
+          </div>
+        
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/c2f14007-8ee4-48d3-a43c-2045063d54e4" alt="pcb" class="image-mean" />
+            <p class = "txt_center">
+            Verificaton des erreurs (DRC)
+          </p>
+          </div>
+
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/d452cbd4-1514-47d7-be36-b994db5ffae6" alt="pcb" class="image-mean" />
+            <p class = "txt_center">
+              Organisation du PCB
+            </p>
+          </div>
+          
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/14793231-34de-4975-bb9c-2c221a570426" alt="pcb" class="image-mean" />
+            <p class = "txt_center">
+              Définition des contours du PCB (Edge Cuts)
+            </p>
+          </div>
+            
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/7bf3e68c-8578-4ddb-849d-672ac3639993" alt="pcb" class="image-mean" />
+            <p class = "txt_center">
+              Plan de masse GND  
+            </p>
+          </div>
+        
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/d20a6e74-2798-4ae9-a9ba-9a0280a9abcb" alt="pcb" class="image-mean" />
+            <p class = "txt_center">
+              Routage
+            </p>
+          </div>
+
+          <div class="image-container">
+            <p class = "txt_center">
+              Visualisation 3D du PCB
+            </p>
+            <img src="https://github.com/user-attachments/assets/3e2ea849-39b4-47cb-a77e-ba3574701d50" alt="pcb" class="image-mean" />
+          </div>
+          <video controls width=auto>
+            <source src="https://github.com/user-attachments/assets/c5784cd8-9c96-4c7d-97fa-074df501b6cc" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.                   
+          </video>
+        <p class="txt_center">
+          <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/main/Test2/Electronique/control_sation/controle%20station" target="_blank" class="download-link">lien vers les fichiers du pcb de la station de contrôle</a>
+        </p>
+
+
+    <h3 id="7-test2">7. Prototype</h3>
+      <div class="image-container">
+        <img src="images/Test2/Electronique/prototype0.png" alt="pcb" class="image-mean" />
+      </div>
+
+      <video controls width=auto>
+        <source src="https://github.com/user-attachments/assets/31437a9f-915f-4c3a-84a9-cc7a7483c2a1" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo HTML5.                   
+      </video>
+
+
+      <div class="image-container">
+        <img src="images/Test2/Electronique/prototype1.jpg" alt="pcb" class="image-mean" />
+        <img src="images/Test2/Electronique/prototype2.jpg" alt="pcb" class="image-mean" />
+      </div>
+
+    </div>
+
+
+        <div id="test3" class="subtab-content">
+          <h2 id="projet3" class="projet-titre">Projet 3 - Afficheur 7 Segments à Servomoteurs</h2>
+            <h3 id="1-test3">1. Objectifs:</h3>
+          <p>
+            Créer un afficheur 7 segments mécanique utilisant **7 servomoteurs **, pilotés par un ATmega328P nu (sans carte Arduino), pour afficher les chiffres de 0 à 9, puis de 9 à 0. Le tout doit être alimenté par une batterie Li-ion, et le code doit être non bloquant (sans delay()), avec un affichage toutes les secondes.
+          </p>
+          <p>
+            Ce projet a pour objectif de :
+          </p>
+          <ul>
+            <li>Comprendre le fonctionnement d’un capteur inertiel (IMU).</li>
+            <li>afficher en temps réel les directions (haut, bas, gauche, droite) ainsi que les données d’accélération sur un écran LCD.</li>
+            <li>Utiliser le protocole de communication I2C.</li>
+            <li>Appliquer les bonnes pratiques de conception logicielle (structure modulaire, classes bien définies, etc.).</li>
+          </ul>
+
+          <h3 id="2-test3">2. Cahier des charges</h3>
+            <h4>Objectifs fonctionnels :</h4>
+              <ul>
+              <li>Créer un afficheur 7 segments mécanique utilisant <strong>des servomoteurs</strong>></li>
+              <li>Contrôler les servomoteurs avec un <strong>ATmega328P</strong></li>
+              <li>Générer un affichage fluide des chiffres de 0 à 9 puis 9 à 0, sans blocage</li>
+              <li>Utiliser un signal PWM avec la bibliothèque <strong>Servo.h</strong></li>
+              <li>Concevoir un circuit imprimé (PCB) optimisé et compact</li>
+              <li>Alimenter le système avec une batterie Li-ion via un <strong>régulateur AMS1117</strong></li>
+              </ul>
+        
+            <h4>Contraintes techniques :</h4>
+              <ul>
+              <li>Le système doit être autonome (sans PC ni carte Arduino)</li>
+              <li>Les segments doivent être entièrement visibles mécaniquement</li>
+              <li>Aucun delay() ne doit être utilisé dans le code (gestion avec <strong>millis()</strong>)</li>
+              <li>Le PCB doit intégrer le régulateur, le quartz, les résistances et les condensateurs</li>
+              <li>L’ensemble doit être testé en simulation et en maquette avant production</li>
+              </ul>
+
+        <h3 id="3-test3">3. Architecture Générale</h3>
+          <h4>Matériel Utilisé:</h4>
+              <ul>
+              <li>Microcontrôleur: <strong>ATmega328P</strong></li>
+              <li>Servomoteurs: <strong>SG90/Parallax</strong>(7)</li>
+              <li>Régulateur: <strong>LM7805 5V</strong></li>
+              <li>Quartz: <strong>16 MHz</strong></li>
+              <li>Condensateurs: <strong>22pF</strong>(2)</li>
+              <li>Résistance Pull-up: <strong>10kΩ (reset)</strong></li>
+              <li>Batterie Li-ion: <strong>3.7V</strong></li>
+              <li>Veroboard</li>
+              <li>Fils & connecteurs</li>
+              </ul>
+
+        <h3 id="4-test3">4. Fonctionnement global</h3>
+          <p>
+            Le principe de fonctionnement repose sur l’utilisation de 7 servomoteurs, chacun étant affecté à un segment de l’afficheur (de a à g). Ces segments ne sont pas lumineux, mais déplacés mécaniquement à l’aide des bras des servomoteurs, ce qui crée une représentation physique du chiffre souhaité. Pour chaque chiffre (de 0 à 9), une configuration particulière des segments doit être activée ou désactivée. Cela signifie que certains servomoteurs se positionnent dans une position visible (par exemple 90° pour un segment « allumé ») tandis que d’autres se rétractent (0° pour un segment « éteint »). L’ensemble est piloté par un microcontrôleur ATmega328P, qui génère un signal PWM adapté à chaque servo pour lui indiquer sa position. Le code est conçu pour éviter toute fonction bloquante comme delay() ; les changements de chiffres sont gérés toutes les secondes à l’aide de la fonction millis(), garantissant un comportement fluide et réactif du système. 
+          </p>
+
+        <h3 id="5-test3">5. Fonctionnement détaillé du Servomoteur SG90</h3>
+          <p>
+            Un servomoteur est un moteur équipé d’un réducteur et d’un potentiomètre qui permet un contrôle précis de l’angle de rotation, généralement entre 0° et 180°.
+          </p>
+          <div class="image-container">
+            <img src="https://github.com/user-attachments/assets/0b8a4a6c-d0d1-4a34-965a-7431a619ccf9" alt="image" class="image-centree" />
+          </div>
+
+          <h4>Caractéristiques techniques du SG90</h4>
+            <ul>
+              <li>Dimensions: 22 x 11.5 x 27 mm</li>
+              <li>Poids: 	9 g</li>
+              <li>Tension d’alimentation: 4.8 V à 6 V</li>
+              <li>Vitesse: 0.12 s / 60°</li>
+              <li>Couple: 1.2 kg/cm</li>
+              <li>Angle de rotation: 	0° à 180°</li>
+            </ul>
+
+            <h4>Signal PWM</h4>
+            <p>
+              Le servomoteur SG90 est commandé par un signal PWM (Pulse Width Modulation), qui est une suite d'impulsions répétées périodiquement. La largeur de l'impulsion (temps pendant lequel le signal est à l'état haut) détermine l'angle de positionnement du servomoteur.
+            </p>
+            <p>En général :</p>
+            <ul>
+              <li>Une impulsion de 1 ms positionne l'axe à 0° (gauche)</li>
+              <li>Une impulsion de 1.5 ms positionne l'axe à 90° (milieu)</li>
+              <li>Une impulsion de 2 ms positionne l'axe à 180° (droite)</li>
+            </ul>
+            <p>
+              Ce signal est répété <strong>toutes les 20 ms</strong>, soit une fréquence de 50 Hz. Le microcontrôleur doit maintenir cette fréquence et adapter la durée de l'impulsion pour indiquer la position voulue. Si la fréquence est trop basse ou si le signal n’est pas stable, le servomoteur risque de vibrer ou de perdre sa position.
+            </p>
+
+            <div class="code-container">
+            <p>Code_servo_basique.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_servo_basique-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_servo_basique-ino', 'Code_servo_basique.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code id="Code_servo_basique-ino">
+    // Test utilisation servomoteur SG90
+    #include &lt;Servo.h&gt;
+    Servo monservo; // Crée l’objet pour contrôler le servomoteur
+
+    void setup() {
+      monservo.attach(9);     // Utilise la broche 9 pour le contrôle
+      monservo.write(0);      // Positionne le servomoteur à 0° (repos)
+    }
+
+    void loop() {
+      // Boucle vide pour ce test
+    }
+            </code></pre>
+            </div>
+
+            <p>
+            Ce code représente la toute première étape de l’utilisation d’un servomoteur. Il permet de l’attacher à une broche numérique (ici D9) et de le positionner à un angle précis (ici 0°).
+            Ce code utilise millis() pour gérer la temporisation, ce qui permet d'éviter toute fonction bloquante comme delay().
+            </p>
+                
+          <h3 id="6-test3">6. Utilisation de Deux Types de Servomoteurs (SG90 & Parallax)</h3>
+            <p>
+              Pendant le développement, nous n’avons pas pu trouver 7 servomoteurs SG90 identiques. Pour contourner ce problème, nous avons utilisé une combinaison de servomoteurs SG90 et Parallax Continuous Rotation.
+            </p>
+
+            <h4>Adaptation du fonctionnement :</h4>
+            <p>
+              Les SG90 ont été utilisés normalement pour représenter les segments ON/OFF via des angles précis.
+              Les Parallax Continuous Rotation (rotation continue) ont été calibrés pour tourner brièvement dans un sens ou l’autre (ON ou OFF), puis s’arrêter.
+            </p>
+
+            <h4>Fonctionnement détaillé du Servomoteur Parallax Continuous Rotation :</h4>
+            <p>
+              Ce type de servo ne peut pas se positionner à un angle fixe. Il tourne dans un sens ou l’autre à une certaine vitesse selon le signal PWM reçu.
+            </p>
+
+            <ul>
+              <li>Caractéristiques techniques:</li>
+              <ul>
+                  <li>Type: Rotation continue</li>
+                  <li>Tension: 4.8 – 6 V</li>
+                  <li>Signal neutre: 1500 µs (arrêt)</li>
+                  <li>Vitesse max: ~60 tr/min</li>
+                  <li>Contrôle: Par largeur d’impulsion</li>
+                  <li>Angle de positionnement: Non applicable</li>     
+              </ul>
+              <li>Signal de contrôle:</li>
+              <ul>
+                  <li>< 1500 µs: Rotation sens horaire</li>
+                  <li>> 1500 µs: Rotation sens antihoraire</li>
+                  <li>= 1500 µs: Arrêt (neutre)</li>    
+              </ul>
+              <li>Utilisation dans notre projet</li>
+              <ul>
+                  <li>ON: 1300 µs pendant 200 m</li>
+                  <li>OFF: 1700 µs pendant 200 ms</li>
+                  <li>Arrêt: 1500 µs</li>    
+              </ul>
+            </ul>
+            <p>
+              <strong>NB:</strong> Comme ces moteurs ne retournent pas à une position fixe, chaque moteur a été calibré manuellement pour assurer l’alignement visuel des segments.
+            </p>
+      
+          <h3 id="7-test3">7. Bibliothèque nécessaire: <strong>Servo.h</strong></h3>  
+            <p>
+              La bibliothèque <strong>Servo.h</strong> est une bibliothèque native d'Arduino qui permet de contrôler facilement les servomoteurs à l’aide d’un signal PWM.
+            </p>
+            <p>Elle prend en charge :</p>
+            <ul>
+              <li>L’attachement d’un servomoteur à une broche numérique via <strong>servo.attach(pin)</strong>;</li>
+              <li>L’envoi d’un angle de rotation avec <strong>servo.write(angle)</strong>;</li>
+              <li>La gestion du signal PWM en arrière-plan sans que l’utilisateur ait à le générer manuellement.</li>
+            </ul>
+            
+            <p>
+              Cette bibliothèque est <strong>incluse par défaut</strong> avec l’IDE Arduino. Aucun téléchargement supplémentaire n’est nécessaire.
+            </p>
+
+
+          <h3 id="8-test3">8. Code Arduino (version multi-servos)</h3> 
+            <p>
+              Dans ce projet, le code Arduino est structuré pour contrôler 7 servomoteurs, chacun correspondant à un segment (de a à g) de l’afficheur 7 segments mécanique.
+            </p>
+            <p>
+              Voici les points clés du code :
+            </p>
+            <ul>
+              <li><strong>Utilisation de la bibliothèque Servo.h</strong>:</li>
+              <p>
+                Cette bibliothèque facilite le contrôle des servomoteurs en générant automatiquement le signal PWM nécessaire sur les broches numériques du microcontrôleur.
+              </p>
+              <li><strong>Création de 7 objets Servo distincts</strong>: </li>
+              <p>
+                Chaque segment (a, b, c, d, e, f, g) est associé à un objet Servo différent.
+                Cela permet de commander individuellement chaque servomoteur en lui envoyant un angle spécifique.
+              </p>
+              <li><strong>Définition d’un tableau chiffres[10][7]</strong>:</li>
+              <p>
+                Ce tableau contient la configuration des segments pour chaque chiffre de 0 à 9.
+              </p>
+              <ul>
+                <li>Chaque ligne du tableau correspond à un chiffre.</li>
+                <li>Chaque colonne correspond à un segment (a à g).</li>
+                <li>La valeur 1 signifie que le segment doit être activé (servo en position « ON », par exemple 90°).</li>
+                <li>La valeur 0 signifie que le segment doit être désactivé (servo en position « OFF », par exemple 0°).</li>
+              </ul>
+              <p>
+                Cela permet d’activer ou désactiver facilement les segments nécessaires pour afficher un chiffre donné en parcourant simplement ce tableau.
+              </p>
+              <li><strong>Gestion de la temporisation avec millis()</strong></li>
+              <p>
+                Pour que le programme reste réactif et évite les blocages, la fonction millis() est utilisée pour déclencher le changement de chiffre toutes les secondes.
+              </p>
+              <p>
+                <strong>millis()</strong> retourne le nombre de millisecondes écoulées depuis le démarrage du programme.
+              </p>
+              <p>
+                En stockant la dernière valeur de millis() lors d’un changement, on peut comparer à la valeur actuelle pour savoir quand une seconde s’est écoulée sans utiliser delay().
+              </p>
+              <p>
+                Cela permet au microcontrôleur de continuer à gérer les servomoteurs et autres tâches sans interruption ni blocage.
+              </p>
+            </ul>
+
+            <div class="image-container">
+              <img src="images/Test3/Electronique/tableau.png" alt="image" class="image-centree" />
+              <p>
+                Tableau logique des chiffres (Segments activés)
+              </p>
+            </div>
+            <p>
+              Chaque ligne correspond à un chiffre et chaque colonne (a–g) représente un segment :
+            </p>
+
+
+            <div class="code-container">
+            <p>Code_servo_7seg.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_servo_7seg-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_servo_7seg-ino', 'Code_servo_7seg.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code id="Code_servo_7seg-ino">
+    #include &lt;Servo.h&gt;  // Inclusion de la bibliothèque standard Servo
+
+    // Définition des angles pour contrôler les segments
+    #define ANGLE_ON  0     // Angle correspondant à un segment "allumé"
+    #define ANGLE_OFF 90    // Angle correspondant à un segment "éteint"
+
+    // Déclaration du nombre total de segments (7 segments A à G)
+    const int NUM_SEGMENTS = 7;
+
+    // Tableau des broches reliées aux servomoteurs pour les segments A à G
+    const int servoPins[NUM_SEGMENTS] = {2, 3, 4, 5, 6, 7, 8};
+
+    // Tableau d’objets Servo, un pour chaque segment
+    Servo servos[NUM_SEGMENTS];
+
+    // Définition de l’état ON (0°) ou OFF (90°) pour chaque chiffre de 0 à 9
+    // Chaque ligne correspond à un chiffre, chaque colonne à un segment : A B C D E F G
+    const bool digits[10][7] = {
+      {0, 0, 0, 1, 1, 1, 1}, // 0
+      {1, 0, 0, 0, 0, 0, 1}, // 1
+      {0, 0, 1, 1, 1, 0, 0}, // 2
+      {0, 0, 0, 1, 0, 0, 0}, // 3
+      {1, 0, 0, 0, 0, 1, 0}, // 4
+      {0, 1, 0, 1, 0, 1, 0}, // 5
+      {0, 1, 0, 1, 1, 1, 0}, // 6
+      {0, 0, 0, 0, 0, 0, 1}, // 7
+      {0, 0, 0, 1, 1, 1, 0}, // 8
+      {0, 0, 0, 1, 0, 1, 0}  // 9
+    };
+
+    // Variables pour gérer la temporisation sans bloquer le code
+    unsigned long previousMillis = 0;         // Mémorise le temps du dernier changement
+    const unsigned long interval = 1000;      // Intervalle entre les changements (1 seconde)
+
+    // Variables pour suivre le chiffre actuel et la direction du comptage
+    int digit = 0;        // Chiffre actuellement affiché
+    int direction = 1;    // 1 = incrémenter, -1 = décrémenter
+
+    // Fonction d'initialisation : attache chaque servo à sa broche
+    void setup() {
+      for (int i = 0; i < NUM_SEGMENTS; i++) {
+        servos[i].attach(servoPins[i]);  // Initialise chaque servo
+      }
+
+      displayDigit(digit);  // Affiche le premier chiffre (0)
+    }
+
+    // Boucle principale qui s’exécute en continu
+    void loop() {
+      unsigned long currentMillis = millis();  // Temps écoulé depuis le démarrage
+
+      // Si une seconde s'est écoulée, on change de chiffre
+      if (currentMillis - previousMillis >= interval) {
+        previousMillis = currentMillis;  // Met à jour le temps du dernier changement
+
+        digit += direction;  // Incrémente ou décrémente le chiffre
+
+        // Si on dépasse 9, on repart dans l'autre sens (compte à rebours)
+        if (digit > 9) {
+          digit = 9;
+          direction = -1;
+        }
+
+        // Si on descend en dessous de 0, on repart vers le haut
+        else if (digit < 0) {
+          digit = 0;
+          direction = 1;
+        }
+
+        // Affiche le chiffre actuel sur les servos
+        displayDigit(digit);
+      }
+    }
+
+    // Fonction qui positionne les servos en fonction du chiffre à afficher
+    void displayDigit(int d) {
+      for (int i = 0; i < NUM_SEGMENTS; i++) {
+        // Si la valeur est 0 → servo à ANGLE_ON (segment allumé)
+        // Si la valeur est 1 → servo à ANGLE_OFF (segment éteint)
+        servos[i].write(digits[d][i] ? ANGLE_ON : ANGLE_OFF);
+      }
+    }
+              </code></pre>
+            </div>
+
+
+          <h3 id="9-test3">9. Test et Démonstration</h3>
+          <video controls width=auto>
+            <source src="https://github.com/user-attachments/assets/130669d9-22cf-476d-a163-3bf61610d7c9" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+
+          <h3 id="10-test3">10. Realisation du PCB</h3>
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/0e23648c-f8ee-45c9-9850-5ba5f6db3ad8" alt="image" class="image-centree" />
+              <p>
+                Création du schéma électronique
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/98b6fc98-13e5-4ba5-ab2b-7872c209b878" alt="image" class="image-centree" />
+              <p>
+                Footprints
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/a87adc71-6bbc-463b-8c03-43fbccf6e10f" alt="image" class="image-centree" />
+              <p>
+                Organisation du PCB
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/c9062dbf-42e9-4f3e-bfb0-2ad89b12f901" alt="image" class="image-centree" />
+              <p>
+                Définition des contours du PCB (Edge Cuts)
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/f97bfb1f-24de-4170-b13e-9195898db0dc" alt="image" class="image-centree" />
+              <p>
+                Routage
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="https://github.com/user-attachments/assets/4f33d491-1f5b-4613-8751-e815a7be874e" alt="image" class="image-centree" />
+              <p>
+                Visualisation 3D du PCB
+              </p>
+            </div>
+
+            <video controls width=auto>
+              <source src="https://github.com/user-attachments/assets/e0e40ae5-1763-425d-8a55-42d6e8e38461 " type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+          <p class="txt_center">
+            <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test3/Electronique/afficheur7segment.zip" download class="download-link">télécharger les fichiers PCB</a>
+          </p>
+          
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="scripts/script_commun.js"></script>
+  <script src="scripts/script_code.js"></script>
+</body>
+</html>
