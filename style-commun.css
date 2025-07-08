@@ -18,14 +18,22 @@ h2 {
   margin-bottom: 0.3rem;
 }
 
-h3, h4 {
+h3 {
   margin-top: 0rem;
   margin-bottom: 0.3rem;
+  font-size: 1.5rem;
+}
+
+h4{
+  margin-top: 0rem;
+  margin-bottom: 0.3rem;
+  font-size: 1.35rem;
 }
 
 p, ul {
   margin-top: 0;
   margin-bottom: 0.3rem;
+  font-size: 1.25rem;
 }
 
 .txt_center {
