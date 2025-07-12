@@ -18,12 +18,10 @@ ColorPAL colorSensor;
 #define in1 10
 #define in2 9
 
+int red = 0, green = 0, blue = 0;
+
 long distance = 0;
 char color_detected = 'U';
-unsigned long   previous_time;
-unsigned long   current_time;
-unsigned long   delta_T = 2.5; // in seconds
-
 
 void setup()
 {
@@ -38,66 +36,67 @@ void setup()
   pinMode(ECHO_PIN, INPUT);
 
    // Capteur de couleur
-  colorSensor.attachPAL(colorSensorPin);                 // Attaches color sensor           
+  colorSensor.attachPAL(colorSensorPin);        // Attaches color sensor           
 
   pinMode(RED_PIN, OUTPUT);
   pinMode(GREEN_PIN, OUTPUT);
   pinMode(BLUE_PIN, OUTPUT);
   
   pinMode(LED0, OUTPUT);
+  digitalWrite(LED0, HIGH);
+
 
   Serial.begin(9600);
-  distance = getDistance();
 }
 
+void loop(){
+  distance = getDistance();
+  //Serial.println(distance);
 
+  if(distance < 65){
+    if(9 < distance && distance < 13){
+      analogWrite(enA, 0);
+      digitalWrite(in2, LOW);
+      digitalWrite(in1, LOW);
 
-void loop() { 
-  if (distance < 25) {
-    for (int i = 0; i <= 20; i++)
-    color_detected = readColor();
-    Serial.println(color_detected);
-    digitalWrite(LED0, LOW);
-    switch(color_detected){
-      case 'R':
-        setColor(250, 0, 0); //red
-        break;
-      case 'G':
-        setColor(0, 250, 0); //green
-        break;
-      case 'B':
-        setColor(0, 0, 250); //blue
-        break;
-      case 'Y':
-        setColor(200, 250, 0); //yellow
-        break;
-      default:
-        setColor(60, 100, 100);
-        break;
-   }
-    delay(2000);
-    while (distance < 25) {
+      //detection de couleur
+      color_detected = readColor();
+
+      Serial.println(color_detected);
+      digitalWrite(LED0, LOW);
+      switch(color_detected){
+        case 'R':
+          setColor(250, 0, 0); //red
+          break;
+        case 'G':
+          setColor(0, 250, 0); //green
+          break;
+        case 'B':
+          setColor(0, 0, 250); //blue
+          break;
+        case 'Y':
+          setColor(200, 250, 0); //yellow
+          break;
+        default:
+          setColor(60, 100, 100);
+          break;
+      }
       analogWrite(enA, 100);
       digitalWrite(in2, HIGH);
       digitalWrite(in1, LOW);
-      delay(50);
-      distance = getDistance(); // Mettre à jour la distance
+      delay(500);
     }
-  } else {
-   previous_time= millis();
-   current_time= previous_time;
-   while((current_time - previous_time)/1000 < delta_T){
-      analogWrite(enA, 100);
-      digitalWrite(in2, HIGH);
-      digitalWrite(in1, LOW);
-      current_time= millis();
-   }
-  analogWrite(enA, 0);
-  digitalWrite(in2, LOW);
-  digitalWrite(in1, LOW);
-  while(distance >= 25) {distance = getDistance();
+    analogWrite(enA, 100);
+    digitalWrite(in2, HIGH);
+    digitalWrite(in1, LOW);
+    delay(20);
   }
-}}
+  else{
+    analogWrite(enA, 0);
+    digitalWrite(in2, LOW);
+    digitalWrite(in1, LOW);
+  }
+}
 
 
 // Function to set color for all LEDs
@@ -109,13 +108,22 @@ void setColor(int red, int green, int blue) {
 
 // Fonction pour lire la couleur via TCS3200
 char readColor() {
-  int red = colorSensor.redPAL();     
-  int green = colorSensor.greenPAL(); 
-  int blue = colorSensor.bluePAL();   
-  
-  if(50 < red && red < 255 && 0 < green && green < 17 && 0 < blue && blue < 17) return 'R';  // Rouge
-  else if (0 < red && red < 17 && 16 < green && green < 255 && 0 < blue && blue < 30) return 'G';  // Vert
-  else if (0 < red && red < 17 && 16 < green && green < 255 && 30 < blue && blue < 255) return 'B';  // Bleu
+  red = 0;
+  green = 0;
+  blue = 0;
+  // 10 echantillons de chaque valeur RGB
+  for(int i = 0; i < 10; i++){
+    red += colorSensor.redPAL();     
+    green += colorSensor.greenPAL(); 
+    blue += colorSensor.bluePAL();   
+  }
+  red = red/10;
+  green = green/10;
+  blue = blue/10;
+
+  if(40 < red && red < 255 && 0 < green && green < 17 && 0 < blue && blue < 17) return 'R';  // Rouge
+  else if (0 < red && red < 17 && 10 < green && green < 255 && 0 < blue && blue < 30) return 'G';  // Vert
+  else if (0 < red && red < 17 && 0 < green && green < 255 && 30 < blue && blue < 255) return 'B';  // Bleu
 
   return 'Y'; // Yellow
 }
