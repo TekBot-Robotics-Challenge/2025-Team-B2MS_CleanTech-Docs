@@ -1,0 +1,2460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="stylesheet" href="styles/style-commun.css" />
+  <link rel="stylesheet" href="styles/style-code.css" />
+  <title>Système de convoyeur</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Conception d'un convoyeur</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="it.html" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="electronique.html" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="mecanique.html" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        
+        <div class="nav-section">
+         <button class="tab-button active" data-target="conveyor-content"><i class="fas fa-robot"></i> Convoyeur</button>
+          <div class="sub-links">
+            <a class="subtab-button active" data-target="intro" href="#introduction">Généralité</a>
+
+            <nav class="project-subnav active" id="subnav-intro">
+              <a href="#1-intro">1. Contexte</a>
+              <a href="#2-intro">2. Objectifs</a>
+              <a href="#3-intro">3. Présentation du système</a>
+              <a href="#4-intro">4. Technologies utilisées</a>
+            </nav>
+
+            <a class="subtab-button" data-target="cahier" href="#cahier_de_charge">Cahier de charge</a>
+            <nav class="project-subnav" id="subnav-cahier">
+              <a href="#1-cahier">1. Besoins fonctionnels</a>
+              <a href="#2-cahier">2. Contraintes</a>
+            </nav>
+
+            <a class="subtab-button" data-target="meca" href="#mecanique">Partie mécanique</a>
+            <nav class="project-subnav" id="subnav-meca">
+              <a href="#1-meca">1. Étude de conception mécanique</a>
+              <a href="#2-meca">2. Choix des composants mécaniques</a>
+              <a href="#3-meca">3. Modélisation CAO (SolidWorks)</a>
+              <a href="#4-meca">4. Réalisation</a>
+            </nav>
+
+            <a class="subtab-button" data-target="electro" href="#electronique">Partie électronique</a>
+            <nav class="project-subnav" id="subnav-electro">
+              <a href="#1-electro">1. Choix et rôle des composants</a>
+              <a href="#2-electro">2. Schéma électronique</a>
+              <a href="#3-electro">3. PCB</a>
+              <a href="#4-electro">4. Réalisation</a>
+            </nav>
+
+            <a class="subtab-button" data-target="info" href="#informatique">Partie informatique</a>
+            <nav class="project-subnav" id="subnav-info">
+              <a href="#1-info">1. Détection intelligente et automatisation</a>
+              <a href="#2-info">2. Interface Web</a>
+              <a href="#3-info">3. Architecture technique</a>
+              <a href="#4-info">4. Description des composants de l’interface</a>
+              <a href="#5-info">5. Communication série et Traitement des Données</a>
+              <a href="#6-info">6. Instructions d'utilisation</a>
+            </nav>
+
+            <a class="subtab-button" data-target="test" href="#validation">Test et validation</a>
+            <nav class="project-subnav" id="subnav-test">
+              <a href="#1-test">1. Assemblage du convoyeur</a>
+              <a href="#2-test">2. Protocole de test</a>
+              <a href="#3-test">3. Résultats et démonstration</a>
+            </nav>
+
+            <a class="subtab-button" data-target="concl" href="#conclusion">Conclusion et Annexes</a>
+            <nav class="project-subnav" id="subnav-concl">
+              <a href="#1-concl">1. Conclusion et perspectives</a>
+              <a href="#2-concl">2. Annexes</a>
+            </nav>
+
+          </div>
+        </div>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="convoyeur-content" class="tab-content active">
+
+        <div id="introduction" class="subtab-content active">
+          <h2 id="intro" class="projet-titre">Introduction générale</h2>
+          <h3 id="1-intro">1. Contexte:</h3>
+            <p>
+               Dans le cadre du développement durable et de l’optimisation des processus industriels, 
+               la ville industrielle de TEKBOT CITY souhaite accueillir une nouvelle entreprise spécialisée dans le recyclage des déchets. 
+               Afin de <strong>moderniser</strong> ses infrastructures et de renforcer l’efficacité du <strong>tri</strong>, 
+               il est envisagé d’installer un <strong>système intelligent de convoyeur</strong> capable d’identifier, 
+               trier et comptabiliser automatiquement différents types de déchets.
+            </p>
+
+            <p>
+              Ce projet s'inscrit dans le cadre de la TRC 2025, un challenge technologique pluridisciplinaire visant à combiner la <strong>mécanique</strong>, 
+              l’<strong>électronique</strong> et l’<strong>informatique embarquée</strong> pour résoudre des problématiques industrielles concrètes.
+            </p>
+          <h3 id="2-intro">2. Objectifs</h3>
+            <p>
+              L’objectif principal de ce projet est de concevoir, réaliser et tester 
+              un <strong>système de convoyeur intelligent</strong> capable de :
+              <ul>
+                <li>Détecter la présence d’un objet(un déchet) sur un tapis roulant,</li>
+                <li>Identifier sa couleur et son type(Rouge, Vert, Jaune, Bleu) à l’aide d’un capteur adapté,</li>
+                <li>Compter chaque type de déchet détecté,</li>
+                <li>Et afficher en temps réel ces données sur une interface web destinée aux administrateurs</li>
+              </ul>
+            </p>
+          <h3 id="3-intro">3. Présentation du système</h3>
+            <p>
+              Le système est composé de trois grandes parties interconnectées :
+            </p>
+            <ul>
+              <li>
+                <strong>La bande transporteuse</strong>(convoyeur) reste immobile en l’absence de déchet 
+                et s’active automatiquement dès qu’un objet est détecté par un capteur de présence. 
+                Elle transporte le déchet jusqu’à une zone de dépôt.
+              </li>
+              <li>
+                <strong>Le module de tri</strong> utilise un capteur de couleur pour identifier l’objet. 
+                Un algorithme embarqué analyse cette couleur et classe le déchet dans une catégorie définie. 
+                En fin de course, une indication visuelle informe l’équipe de collecte sur le bac approprié.
+              </li>
+              <li>
+                <strong>L’interface web</strong> reçoit les données via une communication série (Web Serial API) 
+                et affiche dynamiquement le nombre de déchets triés par couleur. Elle offre une visualisation claire, et permet un suivi en direct.
+              </li>
+            </ul>
+          <h3 id="4-intro">4. Technologies utilisées</h3>
+            <p>
+              Le projet exploite un ensemble cohérent de technologies issues des trois domaines du projet :
+            </p>
+            <table border="2" cellspacing="1" cellpadding="6" style="margin-left: 2rem;">
+              <thead>
+                <tr>
+                  <th>Domaine</th>
+                  <th>Technologies / Outils utilisés</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Électronique</strong></td>
+                  <td>Arduino Nano, capteur de couleur(ColorPal), capteur de présence(Ultrason), moteur DC, LED RGB, driver moteur, alimentation Li‑Ion</td>
+                </tr>
+                <tr>
+                  <td><strong>Informatique</strong></td>
+                  <td>HTML, CSS, JavaScript (Web Serial API), Python, Chart.js pour les graphiques, communication série USB</td>
+                </tr>
+                <tr>
+                  <td><strong>Mécanique</strong></td>
+                  <td>Conception CAO sur SolidWorks, tapis roulant, structure en bois et plastique</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <div id="cahier" class="subtab-content">
+          <h2 id="cahier_de_charge" class="projet-titre">Cahier de charge</h2>
+          <h3 id="1-cahier">1. Besoins fonctionnels</h3>
+            <p>
+              Le système de convoyeur doit répondre aux besoins suivants
+            </p>
+            <ul>
+              <li>
+                <strong>Tri intelligent de 4 types de déchets</strong>, représentés par des objets de couleurs différentes:
+                <ul>
+                  <li>Rouge → Type 1</li>
+                  <li>Vert → Type 2</li>
+                  <li>Jaune → Type 3</li>
+                  <li>Bleu → Type 4</li>
+                </ul>
+              </li>
+              <li><strong>Détection automatique de la présence</strong> d’un objet sur la bande transporteuse à l’aide d’un capteur de présence</li>
+              <li><strong>Identification précise</strong> de la couleur du déchet via un capteur de couleur.</li>
+              <li><strong>Activation automatique</strong> du convoyeur uniquement lorsqu’un objet est détecté.</li>
+              <li><strong>Indication claire de la catégorie de tri</strong>, pour permettre une collecte manuelle efficace dans les bacs correspondants.</li>
+              <li><strong>Visualisation en temps réel</strong>l sur une interface web intuitive, permettant à l’administrateur de :</li>
+              <ul>
+                <li>Suivre le nombre de déchets triés par type.</li>
+                <li>Suivre la performance du système</li>
+                <li>Intervenir en cas de problème</li>
+              </ul>
+            </ul>
+
+
+          <h3 id="2-cahier">2. Contraintes</h3>
+            <p>
+              Le système doit respecter un ensemble de contraintes techniques fixées :
+            </p>
+            <ul>
+              <li>
+                <strong>Alimentation autonome</strong> à partir d’un bloc de batteries lithium, garantissant une mobilité et une sécurité énergétique.
+              </li>
+              <li>
+                <strong>Détection obligatoire par un système de capteurs imposés :</strong>
+                <ul>
+                  <li>Capteur de présence</li>
+                  <li>Capteur de couleur</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Microcontrôleur imposé :</strong> Arduino Nano ou ATmega
+              </li>
+              <li>
+                <strong>Contraintes mécaniques précises :</strong>
+                <ul>
+                  <li>Longueur du convoyeur : 650 mm.</li>
+                  <li>Hauteur du tapis par rapport au sol : 100 mm.</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Poids et dimensions des objets à trier :</strong>
+                <ul>
+                  <li>Forme : cube.</li>
+                  <li>Taille : 30 mm de côté.</li>
+                </ul>
+              </li>
+            </ul>
+        </div>
+
+        <div id="mecanique" class="subtab-content">
+          <h2 id="meca" class="projet-titre">Partie mécanique</h2>
+          <h3 id="1-meca">1. Étude de conception mécanique(Analyse fonctionnelle)</h3>
+              <p>
+                L’analyse fonctionnelle est une démarche essentielle dans la conception d’un système technique. 
+                Elle vise à identifier, comprendre et formaliser les besoins réels des utilisateurs ainsi que les fonctions que le système doit remplir pour y répondre. 
+                Dans le cadre de ce projet, qui consiste à développer un système de convoyeur intelligent pour le tri de déchets(considérés ici comme des objets colorés), l’analyse fonctionnelle permettra de structurer la réflexion en distinguant les fonctions principales, les contraintes techniques, et les interactions entre les différents composants. 
+              </p>
+            
+            <h4>a. Analyse de besoin:</h4>
+              <p>
+                La bête à cornes est un diagramme représenté sous forme de graphique. 
+                Il permet de savoir si un produit ou un service répond aux besoins des utilisateurs. 
+                Elle est appelée bête à corne, car elle ressemble à une tête de taureau avec la ligne reliant les deux boules en haut du diagramme.
+                Pour débuter, nous allons commencer par faire une analyse de besoin en utilisant ce diagramme de bête à corne qui va nous permettre de répondre aux trois questions suivantes:
+                <ul>
+                  <li>Qui utilise le système ?</li>
+                  <li>Sur quoi agit-il ?</li>
+                  <li>Dans quel but ?</li>
+                </ul>
+              </p>
+              <div class="image-container">
+                <img src="images/Test4/Mecanique/analyse1.png" alt="analyse" class="image-mean"/>
+              </div>
+
+              <h4>b. Énoncé du besoin</h4>
+                <p>
+                  Notre système de convoyeur rend service à une entreprise de recyclage dans la zone industrielle de TECHBOT CITY 
+                  en permettant de trier automatiquement des déchets en fonction de leurs couleurs afin de faciliter la collecte.  
+                </p>
+
+              <h4>c. Analyse fonctionnelle du besoin (AFB)</h4>
+                <p>
+                  Une analyse fonctionnelle de besoin se concentre sur l'identification de deux types principaux de fonctions: les fonctions principales et les fonctions contraintes.
+                  Les fonctions principales décrivent ce que le produit ou système doit faire pour satisfaire le besoin de l'utilisateur, tandis que les fonctions contraintes 
+                  définissent les limites ou les conditions dans lesquelles ces fonctions principales doivent être réalisées.
+                </p>
+                <p>
+                  <strong>Fonctions principales:</strong>
+                  <ul>
+                    <li>Elles sont la raison d'être du produit ou du système.</li>
+                    <li>Elles répondent directement au besoin de l'utilisateur. </li>
+                    <li>Elles peuvent être décomposées en fonctions élémentaires pour une analyse plus détaillée.</li>
+                  </ul>
+                </p>
+
+                <p>
+                  <strong>Fonctions contraintes</strong>
+                  <ul>
+                    <li>Elles limitent les choix du concepteur et du produit.</li>
+                    <li>Elles peuvent être liées à la sécurité, l'environnement, l'ergonomie, etc.</li>
+                    <li>Exemple: "Être compatible avec les normes de sécurité" pour une voiture. </li>
+                  </ul>
+                </p>
+
+                <p>
+                  En plus de ces fonctions principales et les fonctions de contraintes, 
+                  nous allons ajouter et détailler des fonctions de services pour mieux satisfaire les besoins de l’entreprise de faire le système de tri avec le convoyeur.
+                </p>
+                <p>
+                  En résumé, l'analyse fonctionnelle de besoin vise à identifier 
+                  et à caractériser ces deux types de fonctions afin de bien comprendre les exigences du produit et de garantir sa pertinence par rapport au besoin initial. 
+                </p>
+                
+                <p>
+                  Pour bien étudier notre système et pour définir les fonctions principales et les fonctions de contraintes, nous allons utiliser le diagramme de pieuvre.
+                </p>
+                <div class="image-container">
+                  <p>Diagramme de pieuvre:</p>
+                  <img src="images/Test4/Mecanique/analyse2.png" alt="analyse" class="image-mean"/>
+                </div>
+
+                <table border="2" cellspacing="1" cellpadding="6" style="margin-left: 16rem;">
+                <tbody>
+                  <tr>
+                    <td>FP1</td>
+                    <td>transférer les déchets</td>
+                  </tr>
+                  <tr>
+                    <td>FP2</td>
+                    <td>trier les déchets</td>
+                  </tr>
+                  <tr>
+                    <td>FP3</td>
+                    <td>interface web pour affichage</td>
+                  </tr>
+                  <tr>
+                    <td>FC1</td>
+                    <td>utiliser l'arduino nano</td>
+                  </tr>
+                  <tr>
+                    <td>FC2</td>
+                    <td>alimentation batterie lithium</td>
+                  </tr>
+                  <tr>
+                    <td>FC3</td>
+                    <td>le convoyeur ne doit fonctionner que si un déchet est présent</td>
+                  </tr>
+                  <tr>
+                    <td>FC4</td>
+                    <td>le capteur de présence(Ultrason)</td>
+                  </tr>
+                  <tr>
+                    <td>FC5</td>
+                    <td>
+                      dimension:
+                      <ul>
+                        <li style="font-size: 1rem;">longueur du convoyeur: 650 mm</li>
+                        <li style="font-size: 1rem;">hauteur du tapis: 100 mm</li>
+                        <li style="font-size: 1rem;">largeur du tapis: 50 mm</li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>FC6</td>
+                    <td>les déchets sous formes de cubes de 30 mm</td>
+                  </tr>
+                  <tr>
+                    <td>FS1</td>
+                    <td>détecter la présence d'un déchet</td>
+                  </tr>
+                  <tr>
+                    <td>FS2</td>
+                    <td>identifier la couleur du déchet</td>
+                  </tr>
+                  <tr>
+                    <td>FS3</td>
+                    <td>déplacer le tapis du convoyeur</td>
+                  </tr>
+                  <tr>
+                    <td>FS4</td>
+                    <td>afficher les statistiques de tri en temps réel sur une interface web</td>
+                  </tr>
+                  <tr>
+                    <td>FS5</td>
+                    <td>indiquer à l'utilisateur dans quelle benne placer le déchet</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            <h4>d. Diagramme FAST</h4>
+              <p>
+                Le diagramme FAST (Function Analysis System Technique) est la représentation visuelle d'un produit ou d’un système et de toutes ses fonctions.
+                Ce diagramme est un outil utilisé par les entreprises pour obtenir une vision globale d'un produit existant ou en cours de création. Il représente schématiquement toutes les fonctions de l'article et la manière dont il les met en œuvre.
+              </p>
+              <p><strong>À quoi sert le diagramme FAST ?</strong></p>
+              <p>
+                Il répond à trois grandes questions pour chaque fonction :
+                <ul>
+                  <li>Pourquoi ?</li>
+                  <li>Comment ?</li>
+                  <li>Quand ?</li>
+                </ul>
+              </p>
+              <p>
+                Il représente <strong>graphiquement</strong> les relations entre les fonctions principales (FP) et les fonctions de service (FS)
+              </p>
+              <div class="image-container">
+                <img src="images/Test4/Mecanique/analyse3.png" alt="analyse" class="image-mean"/>
+              </div>
+            <h4>e. Conclusion générale de l’analyse fonctionnelle</h4>
+              <p>
+                L’analyse fonctionnelle a permis d’identifier clairement les fonctions principales du système de convoyeur : trier automatiquement les déchets selon leur couleur.
+                Pour répondre efficacement à ce besoin, plusieurs fonctions de service ont été définies, telles que la détection de présence, l’identification de couleur, le déplacement du tapis et l’affichage des statistiques en temps réel.
+              </p>
+              <p>
+                Les fonctions contraintes imposées par le cahier des charges (composants à utiliser, dimensions, alimentation etc.) ont été intégrées dans la conception dès les premières étapes
+              </p>
+              <p>
+                Cette analyse permet ainsi de poser une base solide pour la phase de conception et garantit que le système répondra aux attentes techniques, fonctionnelles et ergonomiques de l’entreprise utilisatrice.
+              </p>
+            
+            
+
+          <h3 id="2-meca">2. Choix des composants mécaniques</h3>
+            <p>
+              Ayant déjà du bois comme matière première, nous avons décidé de l’utiliser, 
+              ainsi que d’autres composants déjà en notre possession tels que le tapis et les roulements.
+            </p>
+            <p>
+              Voici donc le tableau récapitulatif des composants utilisés et de leur rôle :
+            </p>
+            <table border="2" cellspacing="1" cellpadding="6" style="margin-left: 20rem;">
+              <thead>
+                <tr>
+                  <th>Composants</th>
+                  <th>Matériaux</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Parois latérales</strong></td>
+                  <td>Bois</td>
+                </tr>
+                <tr>
+                  <td><strong>Tapis</strong></td>
+                  <td>Textile</td>
+                </tr>
+                <tr>
+                  <td><strong>Roulements</strong></td>
+                  <td>Acier</td>
+                </tr>
+                <tr>
+                  <td><strong>Tambours</strong></td>
+                  <td>Plastique</td>
+                </tr>
+                <tr>
+                  <td><strong>Supports des tambours</strong></td>
+                  <td>Plastique</td>
+                </tr>
+                <tr>
+                  <td><strong>Supports des composants électroniques</strong></td>
+                  <td>Plastique</td>
+                </tr>
+              </tbody>
+            </table>
+          <h3 id="3-meca">3. Modélisation CAO (SolidWorks)</h3>
+            <p>
+              Nous avons conçu les différentes pièces puis avons assemblé sur <strong>SolidWorks</strong> 
+              en respectant les dimensions du cahier de charge.
+            </p>
+            <h4>a. Parois latérales</h4>
+              <p>
+                Il s'agit de la structure principale du convoyeur.
+              </p>
+              <div class="image-container">
+                <img src="images/Test4/Mecanique/parois1.png" alt="parois" class="image-mean"/>
+                <img src="images/Test4/Mecanique/parois2.png" alt="parois" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Bord.SLDPRT" download class="download-link">télécharger la parois latérale</a>
+                </p> 
+              </div>
+
+            <h4>b. Tapis</h4>
+              <p>
+                Il s'agit de la structure principale du convoyeur.
+              </p>
+              <div class="image-container">
+                <img src="images/Test4/Mecanique/tapis1.png" alt="tapis" class="image-mean"/>
+                <img src="images/Test4/Mecanique/tapis2.png" alt="tapis" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Tapis.SLDPRT" download class="download-link">télécharger le tapis</a>
+                </p> 
+              </div>
+
+            <h4>c. Roulements</h4>
+              <p>
+                Il s'agit de la structure principale du convoyeur.
+              </p>
+
+              <div class="image-container">
+                <p>Interieur du roulement:</p>
+                <img src="images/Test4/Mecanique/roulements1.png" alt="roulements" class="image-small"/>
+                <img src="images/Test4/Mecanique/roulements2.png" alt="roulements" class="image-small"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Bearing__Type-1__Inner.SLDPRT" download class="download-link">télécharger l'interieur du roulement</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Exterieur du roulement:</p>
+                <img src="images/Test4/Mecanique/roulements3.png" alt="roulements" class="image-small"/>
+                <img src="images/Test4/Mecanique/roulements4.png" alt="roulements" class="image-small"/>
+                <img src="images/Test4/Mecanique/roulements5.png" alt="roulements" class="image-small"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Bearing__Type-1__Outer.SLDPRT" download class="download-link">télécharger l'exterieur du roulement</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Le roulement assemblé:</p>
+                <img src="images/Test4/Mecanique/roulements6.png" alt="roulements" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Bearing__Type-1.SLDASM" download class="download-link">télécharger le roulement assemblé</a>
+                </p> 
+              </div>
+
+            <h4>d. Tambours</h4>
+              <p>
+                Les deux tambours entrainent le tapis en rotation.
+                L'un des tambours est connecté au moteur.
+              </p>
+              
+              <div class="image-container">
+                <p>Tambour connecté au moteur</p>
+                <img src="images/Test4/Mecanique/tambours_motor1.png" alt="tambours_motor" class="image-small"/>
+                <img src="images/Test4/Mecanique/tambours_motor2.png" alt="tambours_motor" class="image-small"/>
+                <img src="images/Test4/Mecanique/tambours_motor3.png" alt="tambours_motor" class="image-small"/>
+                <img src="images/Test4/Mecanique/tambours_motor4.png" alt="tambours_motor" class="image-small"/>             
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Cylindre%20convoyeur%20moteur.SLDPRT" download class="download-link">télécharger le tambour connecté au moteur</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Tambour libre</p>
+                <img src="images/Test4/Mecanique/tambours_libre1.png" alt="tambours_libre" class="image-small"/>
+                <img src="images/Test4/Mecanique/tambours_libre2.png" alt="tambours_libre" class="image-small"/>
+                <img src="images/Test4/Mecanique/tambours_libre3.png" alt="tambours_libre" class="image-small"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Cylindre%20conv.SLDPRT" download class="download-link">télécharger le tambour libre</a>
+                </p> 
+              </div>
+              
+            <h4>e. Supports des tambours</h4>
+              <p>
+                Ils permettent de relier les parois, les roulement et les tambours.
+              </p>
+              <div class="image-container">
+                <p>Support du tambour côté moteur</p>
+                <img src="images/Test4/Mecanique/support_tambours_motor1.png" alt="support_tambours_motor" class="image-small"/>
+                <img src="images/Test4/Mecanique/support_tambours_motor2.png" alt="support_tambours_motor" class="image-small"/>
+                <img src="images/Test4/Mecanique/support_tambours_motor3.png" alt="support_tambours_motor" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Roller__Holder_inside.SLDPRT" download class="download-link">télécharger le support du tambour côté moteur</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Support des tambours libres</p>
+                <img src="images/Test4/Mecanique/support_tambours_libre1.png" alt="support_tambours_libre" class="image-small"/>
+                <img src="images/Test4/Mecanique/support_tambours_libre2.png" alt="support_tambours_libre" class="image-small"/>
+                <img src="images/Test4/Mecanique/support_tambours_libre3.png" alt="support_tambours_libre" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Roller__Holder.SLDPRT" download class="download-link">télécharger le support du tambour libre</a>
+                </p> 
+              </div>
+            
+            <h4>f. Supports des composants électroniques</h4>
+              <p>
+                Ils permettent de supporter et de fixer les composants électroniques.
+              </p>
+              <div class="image-container">
+                <p>Support Ultrason et moteur</p>
+                <img src="images/Test4/Mecanique/support_composant1.png" alt="support_composant" class="image-small"/>
+                <img src="images/Test4/Mecanique/support_composant2.png" alt="support_composant" class="image-small"/>
+                <img src="images/Test4/Mecanique/support_composant3.png" alt="support_composant" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Support_Ultrason.SLDPRT" download class="download-link">télécharger le support Ultrason et moteur</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Support du circuit</p>
+                <img src="images/Test4/Mecanique/support_composant4.png" alt="support_composant" class="image-small"/>
+                <img src="images/Test4/Mecanique/support_composant5.png" alt="support_composant" class="image-small"/>
+                <img src="images/Test4/Mecanique/support_composant6.png" alt="support_composant" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Support%20PCB.SLDPRT" download class="download-link">télécharger le support du circuit</a>
+                </p> 
+              </div>
+
+            <h4>g. Moteur DC</h4>
+              <p>
+                Il s'agit de la structure principale du convoyeur.
+              </p>
+              <div class="image-container">
+                <img src="images/Test4/Mecanique/moteur1.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur2.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur3.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur4.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur5.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur6.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur7.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur8.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur9.png" alt="moteur" class="image-small"/>
+                <img src="images/Test4/Mecanique/moteur10.png" alt="moteur" class="image-small"/>
+              </div>
+
+              <div class="image-container">
+                <img src="images/Test4/Mecanique/moteur11.png" alt="moteur" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Motor%20DC.rar" download class="download-link">télécharger le moteur DC</a>
+                </p> 
+              </div>
+
+            <h4>h. Le convoyeur assemblé</h4>
+              <p>
+                A partir de ces pièces, nous avons assemblé le convoyeur.
+              </p>
+              <div class="image-container">
+                <img src="images/Test4/Mecanique/assemblage1.png" alt="assemblage" class="image-small"/>
+                <img src="images/Test4/Mecanique/assemblage2.png" alt="assemblage" class="image-small"/>
+                <img src="images/Test4/Mecanique/assemblage3.png" alt="assemblage" class="image-mean"/>
+                <img src="images/Test4/Mecanique/assemblage4.png" alt="assemblage" class="image-mean"/>
+                <img src="images/Test4/Mecanique/assemblage5.png" alt="assemblage" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Assemblage1.SLDASM" download class="download-link">télécharger le convoyeur assemblé</a>
+                </p> 
+              </div>
+
+            <p class="txt_center">
+              Télécharger l'ensemble(pièces et assemblages) <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/B2MS_convoyeur_CAO.rar" download class="download-link">ici</a>
+            </p> 
+
+          <h4 id="4-meca">4. Réalisation</h4>
+           <p>
+            Les pièces en plastique nécessaires au montage ont été modélisées puis imprimées à l’aide d’une imprimante 3D.
+           </p>
+           <div class="image-container">
+              <img src="images/Test4/Mecanique/impression3d1.jpg" alt="impression" class="image-small"/>
+              <img src="images/Test4/Mecanique/impression3d2.jpg" alt="impression" class="image-small"/>
+            </div>
+
+            <video controls width=30%>
+              <source src="videos/Test4/Mecanique/impression3d1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+            <video controls width=30%>
+              <source src="videos/Test4/Mecanique/impression3d2.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+           <p>
+            Le bois a été découpé en respectant les dimensions définies sur SolidWorks, garantissant une structure précise.
+            Pour la fabrication du tapis roulant, un textile robuste utilisé habituellement pour les sacs a été choisi, assurant une bonne résistance.
+           </p>
+           <div class="image-container">
+              <img src="images/Test4/Mecanique/realisation_piece1.jpg" alt="realisation_piece" class="image-small"/>
+              <img src="images/Test4/Mecanique/realisation_piece2.jpg" alt="realisation_piece" class="image-small"/>
+              <img src="images/Test4/Mecanique/realisation_conv1.jpg" alt="realisation_conv" class="image-mean"/>
+              <img src="images/Test4/Mecanique/realisation_conv2.jpg" alt="realisation_conv" class="image-small"/>
+            </div>
+   
+            <p>
+              Cette méthode a permis d’obtenir des composants parfaitement adaptés au système.
+            L'ensemble a été assemblé avec soin pour assurer la stabilité et la fonctionnalité du convoyeur.
+            </p>
+
+            <div class="image-container">
+              <img src="images/Test4/Mecanique/realisation_conv3.jpg" alt="realisation_conv" class="image-mean"/>
+            </div>
+
+        </div>
+
+        <div id="electronique" class="subtab-content">
+          <h2 id="electro" class="projet-titre">Partie électronique</h2>
+          <h3 id="1-electro">1. Choix et rôle des composants</h3>
+            <p>
+            Pour ce test, nous avons opté pour les composants suivants:
+            </p>            
+            <h4>a. Arduino Nano</h4>
+              <p>
+                L'Arduino Nano est une carte microcontrôleur compacte et polyvalente basée sur l'ATmega328P. 
+                Ses broches et ses caractéristiques techniques lui confèrent de nombreuses fonctionnalités.
+              </p>
+              <div class="image-container">
+                <img src="images/Test4/Electronique/arduino_nano.png" alt="nano" class="image-mean"/>
+              </div>
+              <p>
+                Il contrôle le système électronique et envoit les données vers l'interface web par connexion USB.
+              </p>
+
+              <h4>b. Le capteur de couleur <strong>ColorPal</strong></h4>
+                <p>
+                  Ce capteur sera utilisé pour détecter la couleur des objets.
+                  Il lit les couleurs RGB(avec redPal(), greenPal(), bluePAL()) d'un objet ce qui nous permet d'identifier sa couleur.
+                </p>
+                <div class="image-container">
+                  <img src="images/Test4/Electronique/colorpal.jpg" alt="colorpal" class="image-mean"/>
+                </div>
+                
+                <p>
+                  Pour l'utiliser, nous avons installé la librairie correspondante: <a href="https://github.com/westpoint-robotics/ColorPAL/archive/refs/heads/master.zip" target="_blank"><strong>ColorPal</strong></a>.
+                </p>
+                <div class="code-container">
+                  <p>code_colorpal.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_colorpal-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_colorpal-ino', 'code_colorpal.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code id="code_colorpal-ino">
+    #include &lt;ColorPAL.h&gt;
+
+    ColorPAL sensor;
+
+    void setup()
+    {
+      sensor.attachPAL(12);                 // Attaches sensor to digital pin 12
+      Serial.begin(9600);
+    }
+
+    void loop()
+    {
+      int red = sensor.redPAL();            // Reads sensors and returns red value
+      int green = sensor.greenPAL();        // Reads sensors and returns green value
+      int blue = sensor.bluePAL();          // Reads sensors and returns blue value
+      Serial.print(red); Serial.print(" ");
+      Serial.print(green); Serial.print(" ");
+      Serial.println(blue);
+    }
+                </code></pre>
+              </div>
+
+            <h4>c. Le capteur de présence <strong>Ultrasonic HC</strong></h4>
+                <P>
+                  Le capteur à ultrasons détermine la distance d’un objet par rapport à sa position.
+                  Il génère un signal à bande étroite à une fréquence de 40 kHz et capte le signal réfléchi(écho). 
+                  Sur la base du temps de propagation du son vers et depuis l’objet, la distance (en centimètres) peut être déterminée assez précisément.
+                  Ce capteur permet donc de détecter la présence d'une pièce tout le long du convoyeur.                 
+                </P>
+                <div class="image-container">
+                  <img src="images/Test4/Electronique/ultrasonic.jpg" alt="Ultrason" class="image-mean"/>
+                </div>
+
+                <p>
+                  <ul>
+                    <li>
+                      <strong>TRIG</strong>(OUTPUT) envoie une impulsion électrique de 10 microsecondes pour déclencher la mesure. 
+                      Cette impulsion commande au capteur d’émettre une onde ultrasonore.
+                    </li>
+                    <li>
+                      <strong>Echo</strong>(INPUT) reçoit l’onde ultrasonore réfléchie par un objet et passe à l’état HAUT pendant une durée proportionnelle à la distance mesurée. 
+                      Cette durée est utilisée pour calculer la distance entre le capteur et l’objet.
+                    </li>
+                  </ul>
+                </p>
+                
+                <div class="code-container">
+                  <p>code_ultrasonic.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_ultrasonic-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_ultrasonic-ino', 'code_ultrasonic.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code id="code_ultrasonic-ino">
+    #define trigPin 2 // Définir la broche 2 pour le Trig
+    #define echoPin 3 // Définir la broche 3 pour l'Echo
+
+    long duration; // Variable pour la durée de l'écho
+    int distance; // Variable pour la distance calculée
+
+    void setup() {
+      pinMode(trigPin, OUTPUT); // Configurer trigPin en sortie
+      pinMode(echoPin, INPUT); // Configurer echoPin en entrée
+      Serial.begin(9600); // Initialiser la communication série à 9600 bauds
+    }
+
+    void loop() {
+      // Envoyer une impulsion ultrasonique de 10 µs
+      digitalWrite(trigPin, LOW); 
+      delayMicroseconds(2); 
+      digitalWrite(trigPin, HIGH); 
+      delayMicroseconds(10); 
+      digitalWrite(trigPin, LOW);
+
+      // Lire la durée de l'écho
+      duration = pulseIn(echoPin, HIGH);
+
+      // Calculer la distance en utilisant la formule
+      distance = duration * 0.034 / 2; 
+
+      // Afficher la distance sur le moniteur série
+      Serial.print("Distance: ");
+      Serial.print(distance);
+      Serial.println(" cm");
+
+      delay(1000); // Attendre 1 seconde avant de refaire une lecture
+    }
+                </code></pre>
+              </div>
+
+              <h4>d. RGB LED 5050</h4>
+                <p>
+                  Bien que nous ayons 8 leds sur ce composant, nous allons utiliser qu'une seule pour afficher différentes couleurs 
+                  selon la couleur de l'objet détécté.
+                </p>
+                <p>
+                  Cette led s'allume selon la couleur de l'objet.
+                </p>
+                <div class="image-container">
+                  <img src="images/Test4/Electronique/led.jpg" alt="LED" class="image-mean"/>
+                </div>
+                
+                <div class="code-container">
+                  <p>code_led.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_led-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_led-ino', 'code_led.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code id="code_led-ino">
+    const int ledCount = 8;    // Number of LEDs on the module
+    const int colourCount = 3; // Number of colors (RGB)
+    int ledPins[] = { 6, 7, 8, 9, 10, 11, 12, 13 }; // Assign pin numbers to each LED
+    int colourPins[] = { 3, 4, 5 }; // Assign pin numbers to RGB color channels
+
+    void setup() {
+      for (int thisLed = 0; thisLed < ledCount; thisLed++) {
+        pinMode(ledPins[thisLed], OUTPUT);
+        digitalWrite(ledPins[thisLed], HIGH);
+      }
+      for (int thisColour = 0; thisColour < colourCount; thisColour++) {
+        pinMode(colourPins[thisColour], OUTPUT);
+        digitalWrite(colourPins[thisColour], HIGH);
+      }
+    }
+
+    void loop() {
+      for (int thisColour = 0; thisColour < colourCount; thisColour++) {
+        digitalWrite(colourPins[thisColour], LOW);
+
+        for (int thisLed = 0; thisLed < ledCount; thisLed++) {
+          digitalWrite(ledPins[thisLed], LOW);
+          delay(100);
+          digitalWrite(ledPins[thisLed], HIGH);
+        }
+        
+        digitalWrite(colourPins[thisColour], HIGH);
+      }
+    }
+                </code></pre>
+              </div>
+
+              <video controls width=50%>
+                <source src="videos/Test4/Electronique/led.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+              <h4>e. Motor driver L298N</h4>
+                <p>
+                  Un motor driver permet de piloter un moteur avec un microcontrôleur en gérant la puissance, la direction, et parfois la vitesse, tout en protégeant le système.
+                  Il agit comme un commutateur électronique qui :
+                  <ul>
+                    <li>Reçoit les signaux de commande du microcontrôleur</li>
+                    <li>Fournit le courant nécessaire au moteur à partir d'une source d’alimentation externe</li>
+                  </ul>
+                </p>
+                <div class="image-container">
+                  <img src="images/Test4/Electronique/motor_driver.jpg" alt="Motor Driver" class="image-mean"/>
+                </div>
+
+                <h4>f. Moteur DC</h4>
+                <p>
+                  C'est le moteur qui fera tourner le convoyeur.
+                </p>
+                <div class="image-container">
+                  <img src="images/Test4/Electronique/moteur_dc.jpg" alt="Moteur" class="image-small"/>
+                </div>
+
+                <h4>g. Piles lithium</h4>
+                <p>
+                  L'alimentation sera assurée par trois piles lithium(3.7V chacune).
+                </p>
+                <div class="image-container">
+                  <img src="images/Test4/Electronique/pile.jpg" alt="Pile" class="image-small"/>
+                </div>
+          
+          <h3 id="2-electro">2. Schéma et montage électronique</h3>
+            <p>
+              Nous avons modélisé le schéma électronique sur Kicad.
+            </p>
+            <div class="image-container">
+              <img src="images/Test4/Electronique/schema_electronique.png" alt="schema" class="image-mean"/>
+            </div>
+
+            <p>
+              Puis, nous avons réalisé les branchements sur un breadboard pour les tests.
+            </p>
+            <div class="image-container">
+              <img src="images/Test4/Electronique/test_breadboard1.jpg" alt="test" class="image-small"/>
+              <img src="images/Test4/Electronique/test_breadboard2.jpg" alt="test" class="image-small"/>
+            </div>
+
+            
+          <h3 id="3-electro">3. PCB</h3>
+            <p>
+              Nous avons réalisé un PCB sur Kicad au préalable comme suit:
+            </p>
+            <div class="image-container">
+              <img src="images/Test4/Electronique/schema_electronique.png" alt="pcb" class="image-mean" />
+              <p>
+                Conception du schéma électronique.
+              </p>
+            </div>
+            
+            <div class="image-container">
+              <img src="images/Test4/Electronique/pcb1.png" alt="pcb" class="image-mean" />
+              <p>
+                Attribution des empreintes.
+              </p>
+            </div>
+        
+            <div class="image-container">
+              <img src="images/Test4/Electronique/pcb2.png" alt="pcb" class="image-mean" />
+              <p>
+                Verificaton des erreurs (DRC)
+              </p>
+            </div>
+            
+            <div class="image-container">
+              <img src="images/Test4/Electronique/pcb3.png" alt="pcb" class="image-small" />
+              <p>
+                Ajustement de la disposition.
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="images/Test4/Electronique/pcb4.png" alt="pcb" class="image-small" />
+              <p>
+                Routage des pistes et définition des contours du PCB (Edge Cuts).
+              </p>
+            </div>
+            
+
+            <div class="image-container">
+              <img src="images/Test4/Electronique/pcb5.png" alt="pcb" class="image-small" />
+              <p>
+                Plan de masse GND
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="images/Test4/Electronique/pcb6.png" alt="pcb" class="image-mean" />
+              <p>
+                Ajout du model 3D de l'arduino nano.
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="images/Test4/Electronique/pcb7.png" alt="pcb" class="image-small" />
+              <p>
+                Ajout des textes sur la plaque.
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="images/Test4/Electronique/pcb8.png" alt="pcb" class="image-mean" />
+              <p>
+                Visualisation 3D
+              </p>
+            </div>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Electronique/convoyeur_pcb.rar" target="_blank" class="download-link">télécharger les fichiers du PCB</a>
+            </p>
+
+          <h3 id="4-electro">4. Réalisation</h3>
+            <p>
+              Après les tests sur le breadboard et la conception du PCB, il est temps de réaliser le circuit final.
+              Nous utilisons ici un veroboard, tout en respectant les pins utilisées dans la conception du PCB.
+            </p>
+            <div class="image-container">
+              <img src="images/Test4/Electronique/circuit1.jpg" alt="circuit" class="image-mean"/>
+              <img src="images/Test4/Electronique/circuit2.jpg" alt="circuit" class="image-mean"/>
+              <img src="images/Test4/Electronique/circuit3.jpg" alt="circuit" class="image-mean"/>
+            </div>
+        </div>
+
+        <div id="informatique" class="subtab-content">
+          <h2 id="info" class="projet-titre">Partie informatique</h2>
+          <h3 id="1-info">1. Détection intelligente et automatisation</h3>
+            <p>
+              La détection intelligente repose sur un système de reconnaissance de couleur embarqué utilisant le capteur <strong>ColorPAL</strong>, piloté par une carte <strong>Arduino Nano</strong>. 
+              Ce système a pour mission d’identifier la couleur d’un objet (représentant un type de déchet) à son passage sur un tapis <strong>convoyeur automatisé</strong>.
+            </p>
+            <p>
+              Détails techniques:
+              <ul>
+                <li>
+                  Le capteur ColorPAL envoie des signaux RGB que l'Arduino interprète pour les mapper à une couleur prédéfinie (Rouge, Vert, Bleu, Jaune).
+                </li>
+                <li>
+                  Les données sont codées sous forme de lettres majuscules (R, G, B, Y, U) pour les entrées.
+                </li>
+                <li>
+                  La détection se fait sans intervention humaine : dès qu’un objet entre dans le champ de lecture du capteur, la donnée est générée automatiquement.
+                </li>
+              </ul>
+            </p>
+            <p>
+              Cycle typique:
+              <ul>
+                <li>
+                  L’objet est posé sur le tapis.
+                </li>
+                <li>
+                  Le convoyeur s’arrête devant le capteur.
+                </li>
+                <li>
+                  La couleur est détectée (ex. B pour bleu).
+                </li>
+                <li>
+                  Le caractère est envoyé au serveur Python.
+                </li>
+                <li>
+                  Le tapis redémarre.
+                </li>
+              </ul>
+            </p>
+
+            <p>
+              De plus, le convoyeur transporte les déchets devant le capteur:
+              <ul>
+                <li>Moteur DC pour faire avancer le tapis roulant.</li>
+                <li>Driver L298N pour commander le moteur à partir de l’Arduino.</li>
+                <li>Capteur de présence en fin de ligne pour détecter quand un objet sort.</li>
+              </ul>
+            </p>
+            <p>
+              En effet:
+              <ul>
+                <li>Lorsqu'un objet est détecté, le moteur démarre et fait tourner le tapis.</li>
+                <li>Le capteur de couleur s'active lorsque la pièce se trouve à son niveau.</li>
+                <li>Le moteur s'arrête lorsque l'objet n'est plus dans la zone de vision du capteur Ultrason.</li>
+              </ul>
+            </p>
+
+            <div class="code-container">
+              <p>code_convoyeur.ino</p>
+              <div class="btn-bar">
+                <button onclick="copierCode('code_convoyeur-ino', this)">📋</button>
+                <button onclick="telechargerCode('code_convoyeur-ino', 'code_convoyeur.ino', 'text/ino', this)">🡇</button>
+              </div>
+              <pre><code id="code_convoyeur-ino">
+    #include &lt;ColorPAL.h&gt;
+
+    #define colorSensorPin 12
+    ColorPAL colorSensor;
+
+    #define RED_PIN 3  // Pin for red color
+    #define GREEN_PIN 5  // Pin for green color
+    #define BLUE_PIN 6 // Pin for blue color
+
+    #define LED0 2 //led
+
+    // Capteur ultrason
+    #define TRIG_PIN 18
+    #define ECHO_PIN 19
+
+    // Contrôle moteur
+    #define enA 11
+    #define in1 10
+    #define in2 9
+
+    int red = 0, green = 0, blue = 0;
+
+    long distance = 0;
+    char color_detected = 'U';
+
+    void setup()
+    {
+      // Moteur
+      pinMode(enA, OUTPUT);
+      pinMode(in1, OUTPUT);
+      pinMode(in2, OUTPUT);
+
+      // Ultrason
+      pinMode(TRIG_PIN, OUTPUT);
+      pinMode(ECHO_PIN, INPUT);
+
+      // Capteur de couleur
+      colorSensor.attachPAL(colorSensorPin);        // Attaches color sensor           
+
+      pinMode(RED_PIN, OUTPUT);
+      pinMode(GREEN_PIN, OUTPUT);
+      pinMode(BLUE_PIN, OUTPUT);
+      
+      pinMode(LED0, OUTPUT);
+      digitalWrite(LED0, HIGH);  //LED désactivé
+
+
+      Serial.begin(9600);
+    }
+
+    void loop(){
+      //distance de l'objet par rapport au capteur
+      distance = getDistance();
+
+      if(distance < 65){
+        //zone de détection de couleur
+        if(9 < distance && distance < 13){
+          //arrêt du moteur
+          analogWrite(enA, 0);
+          digitalWrite(in2, LOW);
+          digitalWrite(in1, LOW);
+
+          color_detected = readColor();  //detection de couleur
+
+          Serial.println(color_detected);  //envoie de la couleur à l'interface
+          digitalWrite(LED0, LOW);    //LED activé
+          switch(color_detected){
+            case 'R':
+              setColor(250, 0, 0); //red
+              break;
+            case 'G':
+              setColor(0, 250, 0); //green
+              break;
+            case 'B':
+              setColor(0, 0, 250); //blue
+              break;
+            case 'Y':
+              setColor(200, 250, 0); //yellow
+              break;
+            default:
+              setColor(60, 100, 100);
+              break;
+          }
+          //redemarrage du moteur
+          analogWrite(enA, 100);
+          digitalWrite(in2, HIGH);
+          digitalWrite(in1, LOW);
+          delay(500);
+        }
+        analogWrite(enA, 100);
+        digitalWrite(in2, HIGH);
+        digitalWrite(in1, LOW);
+        delay(20);
+      }
+      else{
+        //arrêt du moteur
+        analogWrite(enA, 0);
+        digitalWrite(in2, LOW);
+        digitalWrite(in1, LOW);
+      }
+    }
+
+
+    // Function to set color for LEDs
+    void setColor(int red, int green, int blue) {
+      analogWrite(RED_PIN, red);
+      analogWrite(GREEN_PIN, green);
+      analogWrite(BLUE_PIN, blue);
+    }
+
+    // Fonction pour lire la couleur
+    char readColor() {
+      red = 0;
+      green = 0;
+      blue = 0;
+      // 10 echantillons de chaque valeur RGB pour de meilleurs résultats
+      for(int i = 0; i < 10; i++){
+        red += colorSensor.redPAL();     
+        green += colorSensor.greenPAL(); 
+        blue += colorSensor.bluePAL();   
+      }
+      red = red/10;
+      green = green/10;
+      blue = blue/10;
+
+      if(40 < red && red < 255 && 0 < green && green < 17 && 0 < blue && blue < 17) return 'R';  // Rouge
+      else if (0 < red && red < 17 && 10 < green && green < 255 && 0 < blue && blue < 30) return 'G';  // Vert
+      else if (0 < red && red < 17 && 0 < green && green < 255 && 30 < blue && blue < 255) return 'B';  // Bleu
+
+      return 'Y'; // Yellow
+    }
+
+    // Fonction pour lire la distance avec le capteur ultrason
+    long getDistance() {
+      digitalWrite(TRIG_PIN, LOW);
+      delayMicroseconds(2);
+      digitalWrite(TRIG_PIN, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(TRIG_PIN, LOW);
+
+      long duration = pulseIn(ECHO_PIN, HIGH);
+      long distance = (duration / 2.0) * 0.0344;
+      return distance;
+    }
+              </code></pre>
+            </div>
+
+            <p class="txt_center">
+              <strong>NB:</strong> Les commentaires expliquent en détail le code.
+            </p>
+            
+
+          <h3 id="2-info">2. Interface Web</h3>
+            <p>
+              L’interface web du projet <strong>Convoyeur Intelligent</strong> permet la visualisation en temps réel des données reçues du capteur de couleurs Arduino. 
+              Elle affiche les compteurs de déchets selon leur couleur (Rouge, Vert, Bleu, Jaune, Autre), ainsi que les dernières entrées et sorties détectées. 
+              L’interface facilite le suivi du tri des déchets automatisé sur le convoyeur.
+            </p>
+            <h4>Fonctionnalités principales</h4>
+              <div class="image-container">
+                <img src="images/Test4/IT/web1.png" alt="web" class="image-mean"/>
+              </div>
+              <ul>
+                <li>Affichage des compteurs:</li>
+                <p>
+                  Visualisation en temps réel du nombre de déchets détectés par couleur, pour les entrées et les sorties.
+                </p>
+                <li>Affichage des dernières actions:</li>
+                <p>
+                  Indication claire de la dernière action réalisée : entrée ou sortie, avec la couleur correspondante et l’heure.
+                </p>
+                <li>Notifications en temps réel:</li>
+                <p>
+                  Messages contextuels envoyés aux utilisateurs à chaque détection, précisant la couleur et l’action (entrée ou sortie).
+                </p>
+                <li>Réinitialisation des compteurs:</li>
+                <p>
+                  Bouton permettant de remettre les compteurs à zéro, avec mise à jour instantanée.
+                </p>
+                <div class="image-container">
+                  <img src="images/Test4/IT/web2.png" alt="web" class="image-mean"/>
+                </div>
+                <li>Historiques des déchets:</li>
+                <p>
+                  <ul>
+                    <li>Journal détaillé de toutes les détections d’objets triés (entrées et sorties), avec horodatage et couleur</li>
+                    <li>Permet de consulter les événements passés pour analyse ou vérification.</li>
+                  </ul>
+                </p>
+                <div class="image-container">
+                  <img src="images/Test4/IT/web3.png" alt="web" class="image-mean"/>
+                </div>
+              </ul>
+
+          <h3 id="3-info">3. Architecture technique</h3>
+            <p>
+              Voici l'arborescence du dossier
+            </p>
+            <div class="arbo">
+              <ul>
+                <li class="folder">convoyeur_web
+                  <ul>
+                    <li class="folder">__pycache</li>
+                    <li class="folder">static
+                      <ul>                        
+                        <li class="file">style.css</li>
+                        <li class="file">tekbot_logo.png</li>
+                      </ul>
+                    </li>
+                    <li class="folder">templates
+                      <ul>                        
+                        <li class="file">index.html</li>
+                      </ul>
+                    </li>
+                    <li class="folder">venv</li>
+                    <li class="file">app.py</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <ul>
+              <li><strong>Backend (Serveur Flask + SocketIO):</strong></li>
+                <ul>
+                  <li>
+                    Connexion série avec l’Arduino pour recevoir les données (lettres représentant couleurs et type d’action).
+                  </li>
+                  <li>
+                    Traitement des données et mise à jour des compteurs.
+                  </li>
+                  <li>
+                    Emission d’événements WebSocket pour mise à jour instantanée côté client.
+                  </li>
+                </ul>
+
+                <div class="code-container">
+                  <p>app.py</p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('app-py', this)">📋</button>
+                    <button onclick="telechargerCode('app-py', 'app.py', 'text/py', this)">🡇</button>
+                  </div>
+                  <pre><code id="app-py">  
+    from flask import Flask, render_template, jsonify, request
+    from flask_socketio import SocketIO, emit
+    import serial
+    import threading
+    import time
+    from datetime import datetime
+
+    app = Flask(__name__)
+    app.secret_key = "tekbot2025"
+
+    # Configuration SocketIO
+    socketio = SocketIO(app,
+                      cors_allowed_origins="*",
+                      async_mode="threading",
+                      logger=True,
+                      engineio_logger=True)
+
+    # Données initiales
+    compteurs = {'Rouge': 0, 'Bleu': 0, 'Vert': 0, 'Jaune': 0, 'Inconnu': 0}
+    historique = []
+    derniers_dechets = {'entree': None, 'sortie': None}
+    totaux = {'entrees': 0, 'sorties': 0}
+    arduino = None
+    arduino_connected = False
+
+    # Connexion Arduino
+
+
+    def connect_arduino():
+      global arduino, arduino_connected
+      try:
+          arduino = serial.Serial("COM3", 9600, timeout=1)
+          arduino_connected = True
+          print("Connexion Arduino réussie")
+          socketio.emit('notification', {'message': 'Arduino connecté'})
+      except Exception as e:
+          print(f"Échec connexion Arduino: {e}")
+          arduino_connected = False
+          socketio.emit('notification', {
+                        'message': f'Échec connexion Arduino: {e}'})
+
+    # Notification via WebSocket
+
+
+    def envoyer_notification(couleur, action):
+      timestamp = datetime.now().strftime("%H:%M:%S")
+      message = f"Déchet {couleur} {action} à {timestamp}"
+
+      socketio.emit('notification', {
+          'message': message,
+          'couleur': couleur,
+          'action': action,
+          'timestamp': timestamp
+      })
+
+    # Traduction des caractères vers des couleurs
+
+
+    def identifier_couleur(char):
+      color_map = {'R': 'Rouge', 'G': 'Vert', 'B': 'Bleu', 'Y': 'Jaune'}
+      return color_map.get(char.upper(), 'Inconnu')
+
+    # Historique
+
+
+    def enregistrer_historique(couleur, action):
+      entry = {
+          'couleur': couleur,
+          'action': action,
+          'timestamp': datetime.now().isoformat()
+      }
+      historique.append(entry)
+      if len(historique) > 100:
+          historique.pop(0)
+      return entry
+
+    # Lecture Arduino en boucle
+
+
+    def lecture_arduino():
+      while True:
+          if arduino_connected and arduino.in_waiting:
+              try:
+                  data = arduino.readline().decode().strip()
+                  if not data:
+                      continue
+
+                  print(f"[Arduino] => {data}")
+
+                  if data in ['R', 'G', 'B', 'Y']:
+                      couleur = identifier_couleur(data)
+                      compteurs[couleur] += 1
+                      derniers_dechets['sortie'] = derniers_dechets['entree']
+                      totaux['entrees'] += 1
+                      totaux['sorties'] = totaux['entrees'] - 1
+                      derniers_dechets['entree'] = couleur
+
+                      action = 'entrée'
+
+                      # Historique + notification
+                      entry = enregistrer_historique(couleur, action)
+                      envoyer_notification(couleur, f"est {action}")
+
+                      # Mise à jour via WebSocket
+                      socketio.emit('update_data', {
+                          'compteurs': compteurs,
+                          'derniers': derniers_dechets,
+                          'totaux': totaux,
+                          'last_action': {
+                              'type': action,
+                              'couleur': couleur,
+                              'timestamp': entry['timestamp']
+                          },
+                          'last_update': datetime.now().isoformat()
+                      })
+
+              except Exception as e:
+                  print(f"Erreur lecture Arduino: {e}")
+                  time.sleep(1)
+
+          time.sleep(0.1)
+
+    # Routes Flask
+
+
+    @app.route('/')
+    def index():
+      return render_template('index.html')
+
+
+    @app.route('/status')
+    def status():
+      return jsonify({
+          'arduino_connected': arduino_connected,
+          'last_update': datetime.now().isoformat()
+      })
+
+
+    @app.route('/historique')
+    def get_historique():
+      return jsonify(historique[-15:][::-1])
+
+
+    @app.route('/reset', methods=['POST'])
+    def reset():
+      data = request.get_json()
+      if data and data.get('code_secret') == '1234':
+          for couleur in compteurs:
+              compteurs[couleur] = 0
+          historique.clear()
+          derniers_dechets.update({'entree': None, 'sortie': None})
+          totaux.update({'entrees': 0, 'sorties': 0})
+
+          socketio.emit('update_data', {
+              'compteurs': compteurs,
+              'derniers': derniers_dechets,
+              'totaux': totaux,
+              'reset': True,
+              'last_update': datetime.now().isoformat()
+          })
+          return '', 204
+      return '', 403
+
+
+    @socketio.on('connect')
+    def handle_connect():
+      emit('update_data', {
+          'compteurs': compteurs,
+          'derniers': derniers_dechets,
+          'totaux': totaux,
+          'last_update': datetime.now().isoformat()
+      })
+
+
+    # Lancement de l’application
+    if __name__ == '__main__':
+      connect_arduino()
+
+      if arduino_connected:
+          thread = threading.Thread(target=lecture_arduino)
+          thread.daemon = True
+          thread.start()
+
+      socketio.run(app, host='0.0.0.0', port=5000,
+                    debug=False, allow_unsafe_werkzeug=True)
+                  </code></pre>
+                </div>
+
+              <li><strong>Frontend (HTML, CSS, JavaScript avec Socket.IO):</strong></li>
+                <ul>
+                  <li>Affichage dynamique des données reçues via WebSocket.</li>
+                  <li>Gestion des notifications et des mises à jour en temps réel.</li>
+                </ul>
+
+                  <div class="code-container">
+                    <p>index.html</p>
+                    <div class="btn-bar">
+                      <button onclick="copierCode('index-html', this)">📋</button>
+                      <button onclick="telechargerCode('index-html', 'index.html', 'text/html', this)">🡇</button>
+                    </div>
+                    <pre><code id="index-html">
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="fr"&gt;
+    &lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;title&gt;Convoyeur Intelligent - B2MS CleanTech&lt;/title&gt;
+      &lt;link rel="stylesheet" href="{% static 'style.css' %}"&gt;
+      &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+      &lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;
+      &lt;script src="https://cdn.socket.io/4.7.2/socket.io.min.js"&gt;&lt;/script&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+      &lt;style&gt;
+        .notification-badge {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          font-size: 0.7rem;
+        }
+        .card-couleur {
+          transition: all 0.3s ease;
+        }
+        .card-couleur:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .flash {
+          animation: flash 1s;
+        }
+        @keyframes flash {
+          0% { opacity: 0.5; }
+          50% { opacity: 1; }
+          100% { opacity: 1; }
+        }
+      &lt;/style&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div class="container text-center my-4 p-4 rounded shadow-sm bg-white"&gt;
+        &lt;img src="{{ url_for('static', filename='tekbot_logo.png') }}" height="70" alt="Logo TEKBOT"&gt;
+        &lt;h1 class="mt-3"&gt;Convoyeur Intelligent&lt;/h1&gt;
+        &lt;h4 class="mb-2"&gt;Par l'équipe &lt;strong&gt;B2MS CleanTech&lt;/strong&gt;&lt;/h4&gt;
+        
+        &lt;!-- Zone de notification --&gt;
+        &lt;div class="alert-container mt-3 mb-4"&gt;
+          &lt;div id="lastActionAlert" class="alert alert-dismissible fade show" style="display:none;"&gt;
+            &lt;button type="button" class="btn-close" onclick="dismissAlert()"&gt;&lt;/button&gt;
+            &lt;div class="d-flex justify-content-between align-items-center"&gt;
+              &lt;span&gt;
+                &lt;span id="actionIcon" class="me-2"&gt;&lt;/span&gt;
+                &lt;strong id="actionText"&gt;&lt;/strong&gt;
+              &lt;/span&gt;
+              &lt;small id="actionTime" class="text-muted"&gt;&lt;/small&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;p class="lead"&gt;
+          🌍 Suivi en temps réel des déchets sur le convoyeur&lt;br&gt;
+          ♻️ Système de tri automatisé et traçabilité complète
+        &lt;/p&gt;
+
+        &lt;!-- Statistiques globales --&gt;
+        &lt;div class="row justify-content-center mt-4"&gt;
+          &lt;div class="col-md-6 mb-3"&gt;
+            &lt;div class="card border-primary h-100"&gt;
+              &lt;div class="card-body position-relative"&gt;
+                &lt;h5 class="text-primary">📥 Dernière entrée&lt;/h5&gt;
+                &lt;div id="derniereEntree" class="display-4 my-3"&gt;-&lt;/div&gt;
+                &lt;div class="progress"&gt;
+                  &lt;div class="progress-bar bg-primary" style="width: 100%"&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="mt-2"&gt;
+                  &lt;span class="badge bg-primary"&gt;Total: &lt;span id="totalEntrees"&gt;0&lt;/span&gt;&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          
+          &lt;div class="col-md-6 mb-3"&gt;
+            &lt;div class="card border-success h-100"&gt;
+              &lt;div class="card-body position-relative"&gt;
+                &lt;h5 class="text-success"&gt;📤 Dernière sortie&lt;/h5&gt;
+                &lt;div id="derniereSortie" class="display-4 my-3"&gt;-&lt;/div&gt;
+                &lt;div class="progress"&gt;
+                  &lt;div class="progress-bar bg-success" style="width: 100%"&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="mt-2"&gt;
+                  &lt;span class="badge bg-success"&gt;Total: &lt;span id="totalSorties"&gt;0&lt;/span&gt;&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Compteurs par couleur --&gt;
+        &lt;div class="row justify-content-center g-3 mt-2"&gt;
+          &lt;div class="col-6 col-md-3" id="Rouge"&gt;&lt;/div&gt;
+          &lt;div class="col-6 col-md-3" id="Bleu"&gt;&lt;/div&gt;
+          &lt;div class="col-6 col-md-3" id="Vert"&gt;&lt;/div&gt;
+          &lt;div class="col-6 col-md-3" id="Jaune"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Graphique --&gt;
+        &lt;div class="chart-container mt-4" style="position: relative; height:300px;">
+          &lt;canvas id="camembert"&gt;&lt;/canvas&gt;
+        &lt;/div>
+
+        &lt;!-- Boutons --&gt;
+        &lt;button class="btn btn-danger mt-3 px-4" onclick="resetCompteurs()"&gt;
+          🔄 Réinitialiser les compteurs
+        &lt;/button&gt;
+
+        &lt;!-- Historique complet --&gt;
+        &lt;h5 class="mt-4 mb-2 text-start"&gt;📜 Historique complet des actions :&lt;/h5&gt;
+        &lt;ul class="list-group text-start" id="historique"&gt;&lt;/ul&gt;
+
+        &lt;footer class="mt-4 text-muted small text-center"&gt;
+          &copy; 2025 - DEMIS CEGEITECH | Suivi temps réel par SocketIO
+        &lt;/footer&gt;
+      &lt;/div&gt;
+
+      &lt;script&gt;
+        // Configuration
+        const couleurs = {
+          'Rouge': { color: '#dc3545', nom: 'Rouge', icon: '🔴' },
+          'Bleu': { color: '#0d6efd', nom: 'Bleu', icon: '🔵' },
+          'Vert': { color: '#198754', nom: 'Vert', icon: '🟢' },
+          'Jaune': { color: '#ffc107', nom: 'Jaune', icon: '🟡' },
+          'Inconnu': { color: '#6c757d', nom: 'Inconnu', icon: '⚫' }
+        };
+        
+        let chart;
+        const socket = io();
+
+        // Initialisation
+        function init() {
+          initChart();
+          setupSocketIO();
+          loadHistory();
+        }
+
+        // Configuration SocketIO
+        function setupSocketIO() {
+          socket.on('connect', () => {
+            console.log('Connecté au serveur Socket.IO');
+          });
+
+          socket.on('update_data', (data) => {
+            console.log('Nouvelle donnée reçue:', data);
+            updateCompteurs(data.compteurs);
+            updateDerniersDechets(data.derniers);
+            updateTotaux(data.totaux);
+            updateCamembert(data.compteurs);
+            
+            if (data.last_action) {
+              showActionAlert(
+                `Déchet ${data.last_action.couleur} ${data.last_action.type}`,
+                data.last_action.couleur, 
+                data.last_action.type
+              );
+              addToHistory({
+                couleur: data.last_action.couleur,
+                action: data.last_action.type,
+                timestamp: data.last_update
+              });
+            }
+            
+            if (data.reset) {
+              showActionAlert("Compteurs réinitialisés", "Inconnu", "reset");
+              document.getElementById('historique').innerHTML = '';
+            }
+          });
+
+          socket.on('notification', (data) => {
+            console.log('Notification:', data.message);
+          });
+        }
+
+        // Chargement de l'historique
+        function loadHistory() {
+          fetch('/historique')
+            .then(res => res.json())
+            .then(data => {
+              const historiqueList = document.getElementById('historique');
+              historiqueList.innerHTML = '';
+              
+              if (data.length === 0) {
+                historiqueList.innerHTML = 
+                  '&lt;li class="list-group-item text-center text-muted"&gt;Aucun historique disponible&lt;/li&gt;';
+                return;
+              }
+
+              data.forEach(item => {
+                addToHistory(item, false);
+              });
+            })
+            .catch(err => console.error('Erreur historique:', err));
+        }
+
+        // Mise à jour des compteurs
+        function updateCompteurs(compteurs) {
+          for (const couleur in couleurs) {
+            const count = compteurs[couleur] || 0;
+            const elem = document.getElementById(couleur);
+            
+            if (elem) {
+              elem.innerHTML = `
+                &lt;div class="card shadow-sm card-couleur flash" 
+                    style="border-left: 4px solid ${couleurs[couleur].color}"&gt;
+                  &lt;div class="card-body"&gt;
+                    &lt;h4 style="color:${couleurs[couleur].color}; margin-bottom:8px;"&gt;
+                      ${couleurs[couleur].icon} ${couleur}
+                    &lt;/h4&gt;
+                    &lt;h2&gt;${count}&lt;/h2&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;`;
+            }
+          }
+        }
+
+        // Mise à jour derniers déchets
+        function updateDerniersDechets(derniers) {
+          const entreeElem = document.getElementById("derniereEntree");
+          const sortieElem = document.getElementById("derniereSortie");
+          
+          if (derniers.entree) {
+            const couleur = couleurs[derniers.entree];
+            entreeElem.innerHTML = `&lt;span style="color:${couleur.color}"&gt;${couleur.icon} ${derniers.entree}&lt;/span&gt;`;
+            entreeElem.parentElement.parentElement.classList.add('flash');
+          }
+          
+          if (derniers.sortie) {
+            const couleur = couleurs[derniers.sortie];
+            sortieElem.innerHTML = `&lt;span style="color:${couleur.color}"&gt;${couleur.icon} ${derniers.sortie}&lt;/span&gt;`;
+            sortieElem.parentElement.parentElement.classList.add('flash');
+          }
+        }
+
+        // Mise à jour des totaux
+        function updateTotaux(totaux) {
+          document.getElementById("totalEntrees").textContent = totaux.entrees;
+          document.getElementById("totalSorties").textContent = totaux.sorties;
+        }
+
+        // Ajout à l'historique
+        function addToHistory(item, prepend = true) {
+          const list = document.getElementById('historique');
+          
+          if (list.children.length === 1 && list.children[0].classList.contains('text-muted')) {
+            list.innerHTML = '';
+          }
+
+          const li = document.createElement('li');
+          li.className = 'list-group-item d-flex justify-content-between align-items-center';
+          
+          const date = new Date(item.timestamp).toLocaleTimeString();
+          const couleur = couleurs[item.couleur] || couleurs['Inconnu'];
+          const actionIcon = item.action === 'entrée' ? '📥' : '📤';
+          
+          li.innerHTML = `
+            &lt;span&gt;
+              &lt;span class="badge" style="background-color:${couleur.color}"&gt;
+                ${couleur.icon} ${item.couleur}
+              &lt;/span&gt;
+              &lt;small class="ms-2"&gt;${actionIcon} ${date}&lt;/small&gt;
+            &lt;/span&gt;
+            &lt;span class="badge bg-${item.action === 'entrée' ? 'primary' : 'success'} rounded-pill"&gt;${item.action}&lt;/span&gt;
+          `;
+          
+          if (prepend) {
+            list.insertBefore(li, list.firstChild);
+            if (list.children.length > 15) {
+              list.removeChild(list.lastChild);
+            }
+          } else {
+            list.appendChild(li);
+          }
+        }
+
+        // Affichage alerte action
+        function showActionAlert(text, couleur, action) {
+          const alert = document.getElementById('lastActionAlert');
+          const actionText = document.getElementById('actionText');
+          const actionTime = document.getElementById('actionTime');
+          const actionIcon = document.getElementById('actionIcon');
+          
+          alert.style.display = 'block';
+          alert.className = `alert alert-dismissible fade show flash alert-${
+            action.includes('entrée') ? 'primary' : action.includes('sortie') ? 'success' : 'info'
+          }`;
+          actionText.textContent = text;
+          actionText.style.color = getColorCode(couleur);
+          actionTime.textContent = new Date().toLocaleTimeString();
+          actionIcon.textContent = couleurs[couleur]?.icon || '⚪';
+          
+          setTimeout(dismissAlert, 5000);
+        }
+
+        function dismissAlert() {
+          document.getElementById('lastActionAlert').style.display = 'none';
+        }
+
+        // Initialisation du graphique
+        function initChart() {
+          const ctx = document.getElementById('camembert').getContext('2d');
+          chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+              labels: Object.keys(couleurs),
+              datasets: [{
+                data: Object.keys(couleurs).map(() => 0),
+                backgroundColor: Object.values(couleurs).map(c => c.color),
+                borderWidth: 2,
+                borderColor: '#fff'
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: {
+                    font: {
+                      size: 14
+                    },
+                    usePointStyle: true,
+                    pointStyle: 'circle'
+                  }
+                }
+              },
+              cutout: '65%'
+            }
+          });
+        }
+
+        function updateCamembert(data) {
+          chart.data.datasets[0].data = Object.keys(couleurs).map(c => data[c] || 0);
+          chart.update();
+        }
+
+        // Réinitialisation
+        function resetCompteurs() {
+          const code = prompt("Entrez le code secret (1234) pour réinitialiser :");
+          if (code) {
+            fetch('/reset', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ code_secret: code })
+            }).then(res => {
+              if (res.status !== 204) {
+                alert("Code secret incorrect !");
+              }
+            });
+          }
+        }
+
+        // Helper function
+        function getColorCode(couleur) {
+          return couleurs[couleur]?.color || '#6c757d';
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+      &lt;/script&gt;
+    </body>
+    </html>
+                  </code></pre>
+                </div>
+
+                <div class="code-container">
+                  <p>style.css</p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('style-css', this)">📋</button>
+                    <button onclick="telechargerCode('style-css', 'style.css', 'text/css', this)">🡇</button>
+                  </div>
+                  <pre><code id="style-css">
+    ::root {
+      --rouge: #dc3545;
+      --bleu: #0d6efd;
+      --vert: #198754;
+      --jaune: #ffc107;
+      --inconnu: #6c757d;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
+      --gris-fonce: #212529;
+      --noir: #000000;
+      
+      --espace-sm: 0.5rem;
+      --espace-md: 1rem;
+      --espace-lg: 1.5rem;
+      --espace-xl: 2rem;
+      
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 1rem;
+      
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--gris-clair);
+      color: var(--gris-fonce);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: var(--espace-xl) auto;
+      padding: var(--espace-lg);
+      background-color: var(--blanc);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: var(--bleu);
+      margin-bottom: var(--espace-sm);
+      font-weight: 700;
+    }
+
+    h4 {
+      color: var(--gris-fonce);
+      margin-bottom: var(--espace-lg);
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      margin-bottom: var(--espace-lg);
+      color: var(--gris-fonce);
+    }
+
+    .alert-container {
+      min-height: 60px;
+      margin: var(--espace-lg) 0;
+    }
+
+    .alert {
+      padding: var(--espace-md);
+      border-radius: var(--radius-md);
+      border-left: 5px solid;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .alert-entree {
+      border-left-color: var(--bleu);
+      background-color: rgba(13, 110, 253, 0.1);
+    }
+
+    .alert-sortie {
+      border-left-color: var(--vert);
+      background-color: rgba(25, 135, 84, 0.1);
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+
+    .btn-close:hover {
+      opacity: 1;
+    }
+
+    .card {
+      border: none;
+      border-radius: var(--radius-md);
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+      padding: var(--espace-lg);
+    }
+
+    .display-4 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      min-height: 60px;
+      margin: var(--espace-md) 0;
+    }
+
+    .card-couleur {
+      border-left: 5px solid;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .card-couleur h4 {
+      margin-bottom: var(--espace-sm);
+      font-size: 1.1rem;
+    }
+
+    .card-couleur h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 300px;
+      margin: var(--espace-lg) 0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: var(--radius-sm);
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .progress-bar {
+      border-radius: var(--radius-sm);
+      transition: width 0.6s ease;
+    }
+
+    .list-group {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .list-group-item {
+      border-radius: var(--radius-md) !important;
+      margin-bottom: var(--espace-sm);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .list-group-item:hover {
+      background-color: var(--gris-clair);
+    }
+
+    .badge {
+      font-weight: 500;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+    }
+
+    .btn {
+      font-weight: 500;
+      border-radius: 50px;
+      padding: 0.5rem 1.5rem;
+      transition: var(--transition);
+      letter-spacing: 0.5px;
+    }
+
+    .btn-danger {
+      background-color: var(--rouge);
+      border-color: var(--rouge);
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #bb2d3b;
+      border-color: #bb2d3b;
+      transform: translateY(-2px);
+      color: white;
+    }
+
+    @keyframes flash {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .flash-animation {
+      animation: flash 1.5s;
+    }
+
+    .changed {
+      animation: fadeHighlight 2s;
+    }
+
+    @keyframes fadeHighlight {
+      0% { background-color: rgba(13, 110, 253, 0.2); }
+      100% { background-color: transparent; }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--espace-md);
+        margin: var(--espace-md);
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .card-couleur {
+        height: 90px;
+      }
+      
+      .card-couleur h4 {
+        font-size: 1rem;
+      }
+      
+      .card-couleur h2 {
+        font-size: 1.5rem;
+      }
+      
+      .display-4 {
+        font-size: 2rem;
+      }
+      
+      .chart-container {
+        height: 250px;
+      }
+    }
+
+    .text-rouge { color: var(--rouge); }
+    .text-bleu { color: var(--bleu); }
+    .text-vert { color: var(--vert); }
+    .text-jaune { color: var(--jaune); }
+    .text-inconnu { color: var(--inconnu); }
+
+    .bg-rouge { background-color: var(--rouge); }
+    .bg-bleu { background-color: var(--bleu); }
+    .bg-vert { background-color: var(--vert); }
+    .bg-jaune { background-color: var(--jaune); }
+    .bg-inconnu { background-color: var(--inconnu); }
+
+    footer {
+      margin-top: var(--espace-xl);
+      padding-top: var(--espace-md);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      color: var(--inconnu);
+      font-size: 0.9rem;
+    }
+                  </code></pre>
+                </div>
+
+            </ul>
+
+          <h3 id="4-info">4. Description des composants de l’interface</h3>
+          <ul>
+            <lI>Déscription générale</lI>
+            <table border="2" cellspacing="1" cellpadding="6" style="margin-left: 2rem;">
+              <thead>
+                <tr>
+                  <th>Élément</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Compteurs de déchets</strong></td>
+                  <td>Affiche le nombre total d’objets triés par couleur (Rouge, Vert, Bleu, Jaune)</td>
+                </tr>
+                <tr>
+                  <td><strong>Dernière entrée</strong></td>
+                  <td>Affiche la couleur et l’heure de la dernière entrée détectée</td>
+                </tr>
+                <tr>
+                  <td><strong>Dernière sortie</strong></td>
+                  <td>Affiche la couleur et l’heure de la dernière sortie détectée (actuellement à compléter)</td>
+                </tr>
+                <tr>
+                  <td><strong>Notifications</strong></td>
+                  <td>Pop-up ou messages dans la page pour informer chaque nouvelle détection</td>
+                </tr>
+                <tr>
+                  <td><strong>Bouton Réinitialiser</strong></td>
+                  <td>Permet de remettre les compteurs et l’historique à zéro</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <lI>Connexions matérielles</lI>
+            <table border="2" cellspacing="1" cellpadding="6" style="margin-left: 18rem;">
+              <thead>
+                <tr>
+                  <th>Élément</th>
+                  <th>Connexion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Arduino Nano</strong></td>
+                  <td>USB vers PC(via un port)</td>
+                </tr>
+                <tr>
+                  <td><strong>Capteur ColorPAL</strong></td>
+                  <td>Pin 12 de l'arduino nano</td>
+                </tr>
+                <tr>
+                  <td><strong>Moteur DC</strong></td>
+                  <td>Motor Driver L298N</td>
+                </tr>
+                <tr>
+                  <td><strong>Capteur Ultrason</strong></td>
+                  <td>
+                    <ul>
+                      <li>TRIG: Pin 18 de l'arduino nano</li>
+                      <li>Echo: Pin 19 de l'arduino nano</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <lI>Technologies Utilisées</lI>
+            <table border="2" cellspacing="1" cellpadding="6" style="margin-left: 15rem;">
+              <thead>
+                <tr>
+                  <th>Domaine</th>
+                  <th>Langages / Outils</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Web Backend</strong></td>
+                  <td>Flask, Python, SocketIO</td>
+                </tr>
+                <tr>
+                  <td><strong>Web Frontend</strong></td>
+                  <td>HTML, CSS, JS, Bootstrap 5, Chart.js</td>
+                </tr>
+                <tr>
+                  <td><strong>Communication PC-Arduino</strong></td>
+                  <td>USB, PySerial(port, 9600 bauds)</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </ul>
+
+          <h3 id="5-info">5. Communication série et Traitement des Données</h3>
+            <p>
+              La communication série entre l'Arduino et l'ordinateur (serveur Python) est essentielle. 
+              Elle se fait par port USB en utilisant un port COM (ex: COM3).
+            </p>
+            
+              <h4>Schéma de communication:</h4>
+                <ul>
+                  <li>
+                    <strong>Arduino → PC</strong>: Envoie une lettre (R, G, B, Y) chaque fois qu’un objet est détecté.
+                  </li>
+                  <li>
+                    <strong>PC (Python) → Web</strong>: Reçoit la lettre, l’interprète, met à jour les compteurs, et l’envoie en temps réel à l’interface web via WebSocket.
+                  </li>
+                </ul>
+
+              <h4>Détails techniques:</h4>
+                <ul>
+                  <li>
+                    <strong>Vitesse de transmission</strong>: 9600 bauds (via Serial.begin(9600)).
+                  <li>
+                    <strong>Traitement des données</strong> via le module pyserial en Python.
+                  </li>
+                  <li>
+                    Le port série est ouvert au démarrage du serveur <strong>Flask</strong>.
+                  </li>
+                </ul>
+              <h4>Traitements des données</h4>
+                <p>
+                  Les données reçues de l’Arduino sont traitées en temps réel côté serveur comme suit:
+                  <ul>
+                    <li>Lecture d'un caractère ('R', 'G', etc.)</li>
+                    <li>Mise à jour des compteurs</li>
+                    <li>Ajout à l'historique (type, couleur, heure)</li>
+                    <li>Emission d'événement vers l'interface</li>
+                  </ul>
+                </p>
+
+          <h3 id="6-info">6. Instructions d'utilisation</h3>
+            <p>
+              Voici les étapes pour lancer et manipuler l'interface web:
+              <ul>
+                <li><strong>Lancement du serveur</strong></li>
+                <p>
+                  Lancer le serveur Flask via la commande <strong>python app.py</strong>. 
+                  Le serveur se connecte automatiquement à l’Arduino via le port série configuré.
+                </p>
+                <li><strong>Accès à l’interface</strong></li>
+                <p>
+                  Ouvrir un navigateur et aller à l’adresse <strong>http://localhost:5000</strong> ou l’adresse IP indiquée dans la console.
+                </p>
+                <li><strong>Visualisation des données</strong></li>
+                <p>
+                  Les compteurs s’incrémentent automatiquement à chaque détection de déchet.
+                </p>
+                <li><strong>Réinitialisation</strong></li>
+                <p>
+                  Cliquer sur le bouton <strong>Réinitialiser</strong> pour remettre les compteurs à zéro.
+                </p>
+              </ul>
+            </p>
+
+            <div class="image-container">
+              <img src="images/Test4/IT/web4.png" alt="web" class="image-mean"/>
+              <img src="images/Test4/IT/web5.jpg" alt="web" class="image-mean"/>
+            </div>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/IT/convoyeur_web.zip" download class="download-link">télécharger les fichiers de l'interface web</a>
+            </p>
+
+
+        </div>
+
+        <div id="validation" class="subtab-content">
+          <h2 id="test" class="projet-titre">Tests et validation</h2>
+          <h3 id="1-test">1. Assemblage du convoyeur</h3>
+            <p>
+              Voici le système de convoyeur que nous avons conçu:
+            </p>
+            <div class="image-container">
+              <img src="images/Test4/Convoyeur/realisation1.jpg" alt="realisation" class="image-small"/>
+              <img src="images/Test4/Convoyeur/realisation2.jpg" alt="realisation" class="image-small"/>
+              <img src="images/Test4/Convoyeur/realisation3.jpg" alt="realisation" class="image-small"/>
+              <img src="images/Test4/Convoyeur/realisation4.jpg" alt="realisation" class="image-small"/>
+              <img src="images/Test4/Convoyeur/realisation5.jpg" alt="realisation" class="image-small"/>
+              <img src="images/Test4/Convoyeur/realisation6.jpg" alt="realisation" class="image-small"/>
+              <img src="images/Test4/Convoyeur/realisation7.jpg" alt="realisation" class="image-small"/>
+            </div>
+
+            <video controls width=30%>
+              <source src="videos/Test4/Convoyeur/convoyeur1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+          <h3 id="2-test">2. Protocole de test</h3>
+            <p>
+              Les tests individuels de chaque domaine ayant déjà été effectués, cette section est consacrée à l’évaluation du système global. 
+              L’objectif est de vérifier l’intégration de tous les modules pour garantir le bon fonctionnement de l’ensemble. 
+              Il s’agit donc de s’assurer que chaque domaine interagit correctement avec les autres dans un environnement complet et cohérent. 
+            
+              <ul>
+                <li>
+                  Nous avons commencé par tester l'intégration de l'électronique et de la détection intelligente avec la structure du convoyeur à l'aide d'un petit code.
+                </li>
+                <video controls width=auto>
+                  <source src="videos/Test4/Convoyeur/test2.mp4" type="video/mp4">
+                  Votre navigateur ne supporte pas la vidéo HTML5.
+                </video>
+
+                <li>
+                  Puis, nous avons testé le système avec l'interface web.
+                </li>
+                <video controls width=auto>
+                  <source src="videos/Test4/Convoyeur/test3.mp4" type="video/mp4">
+                  Votre navigateur ne supporte pas la vidéo HTML5.
+                </video>
+              </ul>
+              
+            </p>
+
+          <h3 id="3-test">3. Résultats et démonstration</h3>
+            <p>
+              Après plusieurs tests et modifications, nous sommes parvenus à réaliser le système de convoyeur répondant au cahier de charge.
+              En effet, le convoyeur respecte les contraintes de dimension(longueur et hauteur).
+              Le tapis du convoyeur reste immobile et ne se meut que lorsque le système détecte des déchets.
+              Ensuite, les déchets passent par la zone de détection avant d’arriver à la fin du convoyeur ou ils  seront colectés manuelement.
+              Nous avons aussi mis en place une interface web pour permettre un suivi en temps réel du tri des déchets.
+            </p>
+            <p>
+              Voici des images et videos montrant notre travail:
+            </p>
+            <div class="image-container">
+              <img src="images/Test4/Convoyeur/realisation8.jpg" alt="realisation" class="image-small"/>
+            </div>
+
+            <video controls width=auto>
+              <source src="videos/Test4/Convoyeur/demo1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+        </div>
+
+        <div id="conclusion" class="subtab-content">
+          <h2 id="concl" class="projet-titre">Conclusion et Annexes</h2>
+          <h3 id="1-concl">1. Conclusion et perspectives</h3>
+            <h4>Conclusion</h4>
+            <p>
+              Ce projet de convoyeur intelligent s’inscrit dans une dynamique de modernisation des processus industriels en intégrant des technologies issues de la mécanique, de l’électronique embarquée et de l’informatique. 
+              À travers ce système, nous avons démontré la possibilité de concevoir un dispositif autonome capable de détecter, identifier, trier et comptabiliser des déchets selon leur couleur, 
+              tout en assurant une visualisation en temps réel via une interface web conviviale.
+            </p>
+            <p>
+              L’intégration réussie des différents modules (capteurs, motorisation, contrôle Arduino, communication série, interface web) confirme la faisabilité technique du système. 
+              Les tests ont permis de valider le bon fonctionnement global, avec une réactivité satisfaisante, une précision correcte dans l’identification des couleurs et une visualisation instantanée des données.
+            </p>
+            <h4>Perspectives</h4>
+              <p>
+                Afin d’améliorer et de faire évoluer ce système, plusieurs pistes peuvent être envisagées :
+                <ul>
+                  <li>
+                    Tri physique automatisé : 
+                    Ajouter des actionneurs (comme des bras ou des trappes motorisées) 
+                    pour permettre un tri automatique dans les bacs, sans intervention humaine.
+                  </li>
+                  <li>
+                    Reconnaissance avancée : Intégrer des capteurs plus précis 
+                    ou une caméra avec vision par ordinateur pour reconnaître non seulement la couleur, mais aussi la forme ou la matière du déchet.
+                  </li>
+                  <li>
+                    Interface distante : Permettre un accès à distance à l’interface via le cloud, 
+                    pour un suivi en temps réel depuis n’importe quel appareil connecté.
+                  </li>
+                </ul>
+              </p>
+              <p>
+                Ce projet, en plus de sa portée pédagogique, constitue une base solide pour des applications concrètes dans le domaine du tri des déchets, 
+                contribuant ainsi à une gestion plus durable des ressources.
+              </p>
+          <h3 id="2-concl">2. Annexes</h3>
+            <p>
+              Fiches techniques des composants électroniques:
+            </p>
+              <ul>
+                <li>
+                  Microcontrôleur: 
+                  <a href="https://docs.arduino.cc/resources/datasheets/A000005-datasheet.pdf" target="_blank">Arduino nano</a>
+                </li>
+                <li>
+                  Capteur de couleur: 
+                  <a href="https://www.mouser.com/datasheet/2/321/28380-ColorPAL-Documentation-370265.pdf?srsltid=AfmBOoqGq8vwQaI62oqMLZm4TdE2iRID73yldqJOA6wBk9wV9HYMWR5j" target="_blank">ColorPal</a>
+                </li>
+                <li>
+                  Capteur de présence: 
+                  <a href="https://www.robot-maker.com/shop/img/cms/datasheet-capteur-ultrasons-hc-sr04.pdf" download target="_blank">Ultrason</a>
+                </li>
+                <li>
+                  Affichage visuelle: 
+                  <a href="https://www.cybertice.com/product/4382/hw-43-5050-rgb-full-color-rgb-8-led-module-for-arduino" download target="_blank">LED RGB</a>
+                </li>
+              </ul>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="scripts/script_commun.js"></script>
+  <script src="scripts/script_code.js"></script>
+</body>
+</html>
