@@ -413,3 +413,7 @@ video {
 .arbo .file::before {
   content: "📄 ";
 }
+
+table{
+  margin: auto;
+}
