@@ -53,34 +53,34 @@ ScrollReveal().reveal(".about__content .section__subheader", {
 
 ScrollReveal().reveal(".about__content .section__header", {
   ...scrollRevealOption,
-  delay: 1000,
+  delay: 500,
 });
 
 ScrollReveal().reveal(".about__content .section__description", {
   ...scrollRevealOption,
-  delay: 1500,
+  delay: 500,
 });
 
 ScrollReveal().reveal(".about__btn", {
   ...scrollRevealOption,
-  delay: 2000,
+  delay: 500,
 });
 
 // room container
 ScrollReveal().reveal(".room__card", {
   ...scrollRevealOption,
-  interval: 500,
+  interval: 100,
 });
 
 // grid
 ScrollReveal().reveal(".grid", {
   ...scrollRevealOption,
-  interval: 500,
+  interval: 100,
 });
 
 // service container
 ScrollReveal().reveal(".service__list li", {
   ...scrollRevealOption,
-  interval: 500,
+  interval: 100,
   origin: "right",
 });
