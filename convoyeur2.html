@@ -1568,17 +1568,260 @@
             </ul>
 
 
-            <!-- <div class="code-container">
+            <div class="code-container">
               <p>code_convoyeur.ino</p>
               <div class="btn-bar">
                 <button onclick="copierCode('code_convoyeur-ino', this)">📋</button>
                 <button onclick="telechargerCode('code_convoyeur-ino', 'code_convoyeur.ino', 'text/ino', this)">🡇</button>
               </div>
               <pre><code id="code_convoyeur-ino">
+    // boutons marche arrêt & urgence
+    #define pinStart 7
+    #define pinStop = 2;
 
+    // Contrôle moteur
+    #define pinMotor 3
 
+    // Définir les broches du capteur de couleur
+    #define LED_R 9
+    #define LED_G 10
+    #define LED_B 11
+
+    // capteur de couleur
+    #define S0 14
+    #define S1 15
+    #define S2 16
+    #define S3 17
+    #define Out 18
+
+    // capteur infrarouge
+    #define infraredSensor 19
+
+    // capteur Ultrason
+    #define trigPin 5
+    #define echoPin 6
+
+    unsigned int redFrequency = 0, greenFrequency = 0, blueFrequency = 0, infraredValue = 0;
+    const int nbEchantillon = 5;
+    unsigned long distance = 0, lastInterrupt = 0;
+    char color_detected = 'U';
+    bool finTapis = true;
+    volatile String state = "OFF";
+
+    void setup()
+    {
+        pinMode(LED_R, OUTPUT);
+        pinMode(LED_G, OUTPUT);
+        pinMode(LED_B, OUTPUT);
+        setColor(0, 0, 0); // blanc
+
+        // Ultrason
+        pinMode(trigPin, OUTPUT);
+        pinMode(echoPin, INPUT);
+
+        // Infrarouge
+        pinMode(infraredSensor, INPUT);
+
+        // capteur de couleur
+        pinMode(S0, OUTPUT);
+        pinMode(S1, OUTPUT);
+        pinMode(S2, OUTPUT);
+        pinMode(S3, OUTPUT);
+        pinMode(Out, INPUT);
+
+        // Configurer l'échelle de fréquence à 100%
+        digitalWrite(S0, HIGH);
+        digitalWrite(S1, HIGH);
+
+        // boutons poussoirs
+        pinMode(pinStart, INPUT_PULLUP);
+        pinMode(pinStop, INPUT_PULLUP);
+        attachInterrupt(digitalPinToInterrupt(pinStop), interrupt_routine, FALLING);
+
+        Serial.begin(9600);
+        delay(100);
+        Serial.println(state);
+    }
+
+    void loop()
+    {
+        if (state == "OFF")
+        {
+            analogWrite(pinMotor, 0);
+            while (digitalRead(pinStart))
+            {
+                // clignotement de la led pour indiquer que le système peut être lancé
+                setColor(255, 165, 0);
+                delay(100);
+                setColor(0, 0, 0);
+                delay(100);
+            }
+            state = "ON";
+            Serial.println(state);
+        }
+        else
+        {
+            // distance de l'objet par rapport au capteur
+            distance = getDistance();
+            infraredValue = digitalRead(infraredSensor);
+
+            if (infraredValue)
+            {
+                finTapis = true;
+                analogWrite(pinMotor, 0);
+            }
+
+            else if (distance < 50 || !finTapis)
+            {
+                // zone de détection de couleur
+                if (9 < distance && distance < 13)
+                {
+                    finTapis = false;
+                    // arrêt du moteur
+                    analogWrite(pinMotor, 0);
+
+                    color_detected = getColor(); // detection de couleur
+
+                    Serial.println(color_detected); // envoie de la couleur à l'interface
+
+                    // redemarrage du moteur
+                    analogWrite(pinMotor, 100);
+                    delay(500);
+                }
+
+                analogWrite(pinMotor, 100);
+                delay(20);
+            }
+
+            else
+            {
+                // arrêt du moteur
+                analogWrite(pinMotor, 0);
+            }
+        }
+    }
+
+    void setColor(unsigned int red, unsigned int green, unsigned int blue)
+    {
+        red = map(red, 0, 255, 255, 0);
+        green = map(green, 0, 255, 255, 0);
+        blue = map(blue, 0, 255, 255, 0);
+        analogWrite(LED_R, red);
+        analogWrite(LED_G, green);
+        analogWrite(LED_B, blue);
+    }
+
+    void getFrequencyColor()
+    {
+        redFrequency = 0;
+        greenFrequency = 0;
+        blueFrequency = 0;
+
+        for (unsigned int i = 0; i < nbEchantillon; i++)
+        {
+            // Sélectionner filtre rouge
+            digitalWrite(S2, LOW);
+            digitalWrite(S3, LOW);
+            redFrequency += pulseIn(Out, LOW); // Mesure la frequence du rouge
+
+            // Sélectionner filtre vert
+            digitalWrite(S2, HIGH);
+            digitalWrite(S3, HIGH);
+            greenFrequency += pulseIn(Out, LOW); // Mesure la frequence du vert
+
+            // Sélectionner filtre bleu
+            digitalWrite(S2, LOW);
+            digitalWrite(S3, HIGH);
+            blueFrequency += pulseIn(Out, LOW); // Mesure la frequence du bleu
+        }
+        redFrequency /= nbEchantillon;
+        greenFrequency /= nbEchantillon;
+        blueFrequency /= nbEchantillon;
+        /*
+            // Afficher les valeurs pour la configuration
+            Serial.print("R:");
+            Serial.print(redFrequency);
+            Serial.print(" G:");
+            Serial.print(greenFrequency);
+            Serial.print("B:");
+            Serial.println(blueFrequency);
+        */
+    }
+
+    char getColor()
+    {
+        setColor(0, 0, 0);
+        getFrequencyColor();
+
+        if (redFrequency > 25 && greenFrequency > 30 && blueFrequency > 25)
+        {
+            setColor(50, 50, 50);
+            return 'U'; // Pas de couleur détectée
+        }
+
+        if (redFrequency < 15)
+        {
+            int diffRG = greenFrequency - redFrequency; // Calculer la différence entre vert et rouge
+
+            if (diffRG < 5)
+            {
+                setColor(100, 100, 0); // jaune
+                return 'Y';
+            }
+            else if (diffRG >= 5)
+            {
+                setColor(100, 0, 0); // rouge
+                return 'R';
+            }
+        }
+        else if (greenFrequency < redFrequency && greenFrequency < blueFrequency && greenFrequency < 20)
+        {                        // Si vert dominant et faible
+            setColor(0, 100, 0); // vert
+            return 'G';
+        }
+        else if (blueFrequency < redFrequency && blueFrequency < greenFrequency && blueFrequency < 20)
+        {
+            setColor(0, 0, 100); // bleu
+            return 'B';
+        }
+        else
+        {
+            setColor(50, 50, 50);
+            return 'U';
+        }
+    }
+
+    // Fonction pour lire la distance avec le capteur ultrason
+    long getDistance()
+    {
+        digitalWrite(trigPin, LOW);
+        delayMicroseconds(2);
+        digitalWrite(trigPin, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(trigPin, LOW);
+
+        long duration = pulseIn(echoPin, HIGH);
+        long distance = (duration / 2.0) * 0.0344;
+        return distance;
+    }
+
+    void interrupt_routine()
+    {
+    }
+
+    void interrupt_routine()
+    {
+        unsigned long currentMillis = millis();
+        if (currentMillis - lastInterrupt > 50)
+        { // anti-rebond de 50 ms
+            // arrêt moteur
+            analogWrite(pinMotor, 0);
+            state = "OFF";
+            Serial.println(state);
+        }
+    }
               </code></pre>
-            </div> -->
+            </div>
 
             <p class="txt_center">
               <strong>NB:</strong> Les commentaires expliquent en détail le code.
@@ -3507,3 +3750,4 @@
   <script src="scripts/script_code.js"></script>
 </body>
 </html>
+          
