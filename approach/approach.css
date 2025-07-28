@@ -1,0 +1,222 @@
+ 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #007b5f;
+  --primary-color-dark: #009572;
+  --primary-color-under-ligne: #ffffff;
+  --text-dark: #0c0a09;
+  --text-light: #78716c;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+  
+.approach_container  { 
+  width: 100%;
+  padding: 40px 50px 40px 40px;
+  margin: 0 20px; 
+}
+.approach_container  .topic {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.approach_container .approach_content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.approach_container .approach_content .list {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+  margin-right: 50px;
+  position: relative;
+}
+.approach_container .approach_content .list label {
+  height: 60px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 60px;
+  cursor: pointer;
+  padding-left: 25px;
+  transition: all 0.5s ease-in-out;
+  color: var(--text-dark);
+  z-index: 12;
+}
+#robot:checked ~ .list label.robot,
+#blog:checked ~ .list label.blog,
+#help:checked ~ .list label.help,
+#code:checked ~ .list label.code,
+#abouts:checked ~ .list label.abouts,
+#robot:checked ~ .list label.robot i,
+#blog:checked ~ .list label.blog i,
+#help:checked ~ .list label.help i,
+#code:checked ~ .list label.code i,
+#abouts:checked ~ .list label.abouts i {
+  color: var(--primary-color-under-ligne);
+}
+.approach_container .approach_content .list label:hover {
+  color: var(--primary-color);
+}
+.approach_container .approach_content .slider {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 60px;
+  width: 100%;
+  border-radius: 12px;
+  background: var(--primary-color);
+  transition: all 0.4s ease;
+}
+#robot:checked ~ .list .slider {
+  top: 0;
+}
+#blog:checked ~ .list .slider {
+  top: 60px;
+}
+#help:checked ~ .list .slider {
+  top: 120px;
+}
+#code:checked ~ .list .slider {
+  top: 180px;
+}
+#abouts:checked ~ .list .slider {
+  top: 240px;
+}
+.approach_container .approach_content .text-content {
+  width: 80%;
+  height: 100%;
+}
+.approach_container .approach_content .text {
+  display: none;
+}
+.approach_container .approach_content .text .title {
+  font-size: 25px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.approach_container .approach_content .text p {
+  text-align: justify;
+}
+.approach_container .approach_content .text-content .robot {
+  display: block;
+}
+#robot:checked ~ .text-content .robot,
+#blog:checked ~ .text-content .blog,
+#help:checked ~ .text-content .help,
+#code:checked ~ .text-content .code,
+#abouts:checked ~ .text-content .abouts {
+  display: block;
+}
+#blog:checked ~ .text-content .robot,
+#help:checked ~ .text-content .robot,
+#code:checked ~ .text-content .robot,
+#abouts:checked ~ .text-content .robot {
+  display: none;
+}
+.approach_container .approach_content input {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .approach_container  {
+    padding: 30px 20px;
+    margin: 0 10px;
+  }
+
+  .approach_container .approach_content {
+    flex-direction: column;
+  }
+
+  .approach_container .approach_content .list {
+    flex-direction: row;
+    width: 100%;
+    margin: 0 0 20px 0;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .approach_container .approach_content .list label {
+    flex: 1;
+    font-size: 16px;
+    padding-left: 0;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+  }
+
+  .approach_container .approach_content .list label .title {
+    display: none;
+  }
+
+  .approach_container .approach_content .list label:hover .title::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: var(--primary-color);
+  }
+
+  .approach_container .approach_content .slider {
+    height: 50px;
+    width: 20%;
+    border-radius: 8px;
+    background: var(--primary-color);
+  }
+
+  /* Slider horizontal positions */
+  #robot:checked ~ .list .slider {
+    top: auto;
+    left: 0%;
+  }
+  #blog:checked ~ .list .slider {
+    top: auto;
+    left: 20%;
+  }
+  #help:checked ~ .list .slider {
+    top: auto;
+    left: 40%;
+  }
+  #code:checked ~ .list .slider {
+    top: auto;
+    left: 60%;
+  }
+  #abouts:checked ~ .list .slider {
+    top: auto;
+    left: 80%;
+  }
+
+  .approach_container .approach_content .text-content {
+    width: 100%;
+  }
+
+  .approach_container .approach_content .text .title {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .approach_container .approach_content .text p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.approach_container .approach_content .list label i {
+  color: var(--primary-color-dark);
+  font-size: 22px;
+}
