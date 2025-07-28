@@ -94,9 +94,10 @@
                 <button onclick="telechargerCode('code_convoyeur-ino', 'code_convoyeur.ino', 'text/ino', this)">🡇</button>
               </div>
               <pre><code id="code_convoyeur-ino">
+
     // boutons marche arrêt & urgence
     #define pinStart 7
-    #define pinStop = 2;
+    #define pinStop 2
 
     // Contrôle moteur
     #define pinMotor 3
@@ -124,11 +125,16 @@
     const int nbEchantillon = 5;
     unsigned long distance = 0, lastInterrupt = 0;
     char color_detected = 'U';
-    bool finTapis = true;
-    volatile String state = "OFF";
+    bool finTapis = true, been_detected = false;
+    volatile bool is_on = false;
 
     void setup()
     {
+        // Moteur
+        pinMode(pinMotor, OUTPUT);
+        analogWrite(pinMotor, 0); // arrêt initial
+
+        // LED
         pinMode(LED_R, OUTPUT);
         pinMode(LED_G, OUTPUT);
         pinMode(LED_B, OUTPUT);
@@ -148,9 +154,9 @@
         pinMode(S3, OUTPUT);
         pinMode(Out, INPUT);
 
-        // Configurer l'échelle de fréquence à 20%
+        // Configurer l'échelle de fréquence à 100%
         digitalWrite(S0, HIGH);
-        digitalWrite(S1, LOW);
+        digitalWrite(S1, HIGH);
 
         // boutons poussoirs
         pinMode(pinStart, INPUT_PULLUP);
@@ -159,24 +165,24 @@
 
         Serial.begin(9600);
         delay(100);
-        Serial.println(state);
+        Serial.println("OFF");
     }
 
     void loop()
     {
-        if (state == "OFF")
+        if (!is_on)
         {
             analogWrite(pinMotor, 0);
             while (digitalRead(pinStart))
             {
-                // clignotement de la led pour indiquer que le système peut être lancé
+                // clignotement de la led pour indiquer que le système est en stop
                 setColor(255, 165, 0);
-                delay(100);
+                delay(400);  // pour avoir un clignotement réaliste et une réactivité satisfaisante
                 setColor(0, 0, 0);
-                delay(100);
+                delay(400);
             }
-            state = "ON";
-            Serial.println(state);
+            is_on = true;
+            Serial.println("ON");
         }
         else
         {
@@ -193,23 +199,25 @@
             else if (distance < 50 || !finTapis)
             {
                 // zone de détection de couleur
-                if (9 < distance && distance < 13)
+                if (8 < distance && distance < 11 && !been_detected) //detection de couleur une seule fois
                 {
                     finTapis = false;
+                    been_detected = true;
                     // arrêt du moteur
                     analogWrite(pinMotor, 0);
+                    delay(500);
 
                     color_detected = getColor(); // detection de couleur
 
-                    Serial.println(color_detected); // envoie de la couleur à l'interface
-
-                    // redemarrage du moteur
-                    analogWrite(pinMotor, 100);
-                    delay(500);
+                    Serial.println(color_detected); // envoie de la couleur à l'interface                   
+                }
+                
+                if((distance > 20 && been_detected)){
+                    been_detected = false;  // active la zone de detection une fois
                 }
 
                 analogWrite(pinMotor, 100);
-                delay(20);
+                delay(100);
             }
 
             else
@@ -326,17 +334,13 @@
 
     void interrupt_routine()
     {
-    }
-
-    void interrupt_routine()
-    {
         unsigned long currentMillis = millis();
         if (currentMillis - lastInterrupt > 50)
         { // anti-rebond de 50 ms
             // arrêt moteur
             analogWrite(pinMotor, 0);
-            state = "OFF";
-            Serial.println(state);
+            is_on = false;
+            Serial.println("OFF");
         }
     }
               </code></pre>
@@ -1535,7 +1539,7 @@
     const tabs = document.querySelectorAll('.tab-btn');
     const sections = document.querySelectorAll('main section');
 
-    const DELAI_ANIM = 3000;
+    const DELAI_ANIM = 2500;
 
     // Données système
     let systemActif = false;
