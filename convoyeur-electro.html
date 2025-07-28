@@ -298,7 +298,7 @@
       digitalWrite(trigPin, LOW);
 
       // Mesurer la durée de l'écho
-      long duration = pulseIn(ECHO_PIN, HIGH);
+      long duration = pulseIn(echoPin, HIGH);
       
       // Calculer la distance en cm
       long distance = (duration / 2) * 0.0344;  // Vitesse du son = 0.0344 cm/µs
