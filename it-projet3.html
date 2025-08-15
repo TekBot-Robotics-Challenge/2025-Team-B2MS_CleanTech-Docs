@@ -304,14 +304,114 @@
 
               <h4>a. Mapping de l'environnement</h4>
               <p>
-                <strong>SLAM_toolbox</strong> a permis de cartographier le labyrinthe.
+                Pour cette partie, nous utilisons <strong>SLAM</strong>(Simultaneous Localization and Mapping) afin de construire la carte de l'environnement et estimer la position du robot.
               </p>
               <p>
-                N'ayant pas de manette(nécessaire pour commander le robot via <strong>teleop_joy</strong>), 
-                nous nous sommes rabattus sur <strong>teleop_twist_keyboard</strong>, 
-                ce qui nous a permis de controller le robot avec le clavier.
+                <strong>SLAM_toolbox</strong> est un package ROS conçu pour faire du SLAM en temps réel, sauvegarder et recharger des cartes.
+                <br>Il permet de:
+                <ul>
+                  <li>Construire progressivement la carte du labyrinthe.</li>
+                  <li>Éviter de se perdre grâce à la localisation continue.</li>
+                  <li>Obtenir une carte utilisable ensuite pour la navigation autonome.</li>
+                </ul>
+              </p>
+              <p>
+                Le processus est comme suit:
+                <ul>
+                  <li>
+                    Le robot se déplace et mesure son environnement grâce au capteur(LIDAR).
+                  </li>
+                  <li>
+                    SLAM Toolbox associe les nouvelles mesures aux parties déjà cartographiées.
+                  </li>
+                  <li>
+                    Il met à jour la carte tout en ajustant la position estimée du robot.
+                  </li>
+                  <li>
+                    Une fois le parcours terminé, la carte finale peut être sauvegardée.
+                  </li>
+                </ul>
               </p>
 
+              <h5>&#10022; Les commandes utilisées</h5>
+                <p>
+                  Cette partie présente les commandes nécessaires pour réaliser la cartographie.
+                  Elles seront regroupées plus tard dans un fichier launch pour simplifier leur exécution.
+                </p>
+                <ul>
+                  <li>
+                    <strong>Environnement et robot</strong>: 
+                  </li>
+                  <p>
+                    Il faut d’abord lancer l’environnement et le robot avec la commande:
+                  </p>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('cmd_a1', this)">📋</button>
+                      </div>
+                      <pre><code id="cmd_a1">
+  user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
+                      </code></pre>
+                    </div>
+                  <li>
+                    <strong>SLAM_toolbox</strong>: 
+                  </li>
+                  <p>
+                    Puis, il faut démarrer le SLAM pour permettre la cartographie du labyrinthe:
+                  </p>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('cmd_a2', this)">📋</button>
+                      </div>
+                      <pre><code id="cmd_a2">
+  user@user:~/tekbot_ws$ ros2 launch slam_toolbox online_async_launch.py
+                      </code></pre>
+                    </div>
+
+                  <li>
+                    <strong>RVIZ2</strong>: 
+                  </li>
+                    <p>
+                      Pour visualiser les données générées par la cartographie, il faut lancer RVIZ2 par:
+                    </p>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('cmd_a3', this)">📋</button>
+                      </div>
+                      <pre><code id="cmd_a3">
+  user@user:~/tekbot_ws$ rviz2
+                      </code></pre>
+                    </div>
+                    <p style="margin-top: -1.5rem;">
+                      Il faut ensuite configurer RViz2 pour afficher les éléments suivants:
+                      <ul>
+                        <li>Map: affichée à partir du topic /map.</li>
+                        <li>TF: affichage des repères map et basic_link.</li>
+                        <li>RobotModel: représentation du robot.</li>
+                        <li>LaserScan: affichage des données des capteurs depuis le topic /scan.</li>
+                      </ul>
+                      Une fois la configuration terminée, nous l’avons enregistrée sous le nom: <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/rviz/tekbot_config_b2ms.rviz</strong>.
+                    </p>
+
+                  <li>
+                    <strong>Controle du robot</strong>:
+                  </li>
+                    <p>
+                      N'ayant pas de manette(nécessaire pour commander le robot via <strong>teleop_joy</strong>), 
+                      nous nous sommes rabattus sur <strong>teleop_twist_keyboard</strong>, 
+                      ce qui nous a permis de controller le robot avec le clavier.
+                    </p>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('cmd_a4', this)">📋</button>
+                      </div>
+                      <pre><code id="cmd_a4">
+  user@user:~/tekbot_ws$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
+                      </code></pre>
+                    </div>
+                </ul>
+
+              <h5>&#10022; Launcher pour la cartographie</h5>
               <p>
                 Le launcher <strong>tekbot_mapping2_b2ms.launch.py</strong> permet de lancer avec des configurations spécifiques:
                 <ul>
@@ -326,7 +426,7 @@
                     <strong>RVIZ2</strong>: 
                     <ul>
                       <li>
-                        tekbot_config_b2ms.rviz: configuration initiale pour RViz: 
+                        tekbot_config_b2ms.rviz: configuration de RViz au lancement: 
                         <ul>
                           <li>map sur le topic /map,</li>
                           <li>TF: map et basic_link,</li>
@@ -391,15 +491,47 @@
                 </code></pre>
               </div>
 
-             
+            <h5>&#10022; Lancement de la cartographie</h5>
+              <p>
+                Avant de lancer les fichiers launcher, il faut configurer le package <strong>tekbot_navigation</strong> pour y inclure les fichiers et les dépendances pour la cartographie.
+                <ul>
+                  <li><strong>CMakeLists.txt</strong>: on y ajoute</li>
+                  <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('test3_CMake1', this)">📋</button>
+            </div>
+            <pre><code id="test3_CMake1">
+    find_package(ament_cmake REQUIRED)
+
+    install(
+      DIRECTORY launch rviz
+      DESTINATION share/${PROJECT_NAME}
+    )
+                  </code></pre>
+                </div>
+
+                <li><strong>package.xml</strong>: on y ajoute</li>
+                  <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('test3_package', this)">📋</button>
+            </div>
+            <pre><code id="test3_package">
+    &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+                  </code></pre>
+                </div>
+                </ul>
+              </p>
+              <p>
+                Nous pouvons maintenant commencer la cartographie.
+              </p>
               <ul>
                 <li>Terminal 1: lancement de tekbot_maze.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('0', this)">📋</button>
+                    <button onclick="copierCode('test3_T10', this)">📋</button>
             </div>
             <pre><code id="test3_T10">
-  user@user:~/tekbot_ws$ colcon build --symlink-install
+  user@user:~/tekbot_ws$ colcon build
   user@user:~/tekbot_ws$ source install/setup.bash
   user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
                   </code></pre>
@@ -427,6 +559,7 @@
                 </div>
               </ul>
 
+
               <video controls width=auto>
                 <source src="videos/Test3/IT/Mapping.mp4" type="video/mp4">
                 Votre navigateur ne supporte pas la vidéo HTML5.
@@ -435,20 +568,178 @@
               <div class="image-container">
                 <img src="images/Test3/IT/map.webp" alt="carte" class="image-mean"/>
                 <p>
-                  La carte générée a été sauvergadée dans <strong>tekbot_ws</strong> 
-                  puis déplacée dans <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/maps/</strong> 
+                  Les différents fichiers générés ont été sauvergadés dans <strong>tekbot_ws</strong> 
+                  puis déplacés dans <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/maps/</strong> 
                 </p>
               </div>
+
+              <p style="margin-bottom: 1.5rem;">
+                <strong>NB:</strong> Il est important de cartographier soigneusement la zone pour qu’elle soit exploitable par la suite.
+              </p>
               
             <h4>b. Navigation autonome</h4>
               <p>
-                Pour la cette étape, nous avons utilisé:
+                Pour cette étape, nous avons utilisé:
                 <ul>
                   <li><strong>Nav2</strong>: permet de planifier et de suivre les trajectoires sur la carte</li>
                   <li><strong>AMCL</strong>(Adaptive Monte Carlo localization): localise le robot</li>
                 </ul>
               </p>
-            
+              
+              <h5>&#10022; Notions sur la navigation autonome dans ROS2</h5>
+                <p>
+                  Cette partie présente les notions sur <strong>Nav2</strong> pour la navigation autonome du robot.
+                </p>
+
+                <p>
+                  Le package <strong>nav2_bringup</strong> est composé de plusieurs launcher, notamment:
+                  <ul>
+                    <li>
+                  <strong>localization_launch.py</strong> qui permet de lancer AMCL pour la localisation d'un objet sur une carte, 
+                    </li>
+                    <li>
+                  <strong>navigation_launch.py</strong> qui permet de lancer plusieurs nodes pour la navigation(map_server, planner,...).
+                    </li>
+                  </ul> 
+                </p>
+
+                <p>
+                  <strong>planner_server</strong> est un des nodes de ROS2 lancé par <strong>navigation.launch.py</strong>.
+                  Son rôle est de calculer un chemin global depuis la position actuelle du robot (fournie par AMCL) jusqu’à une destination donnée.
+                  Il utilise des algorithmes de pathfinding sur la carte d’occupation pour générer ce chemin.
+                  Il peut utiliser différents algorithmes, selon la configuration.
+                </p>
+
+                <p>
+                  Nous avons opté pour les paramètres par défaut.
+                  De ce fait, <strong>l'algorithme de pathfinding</strong> utilisé par 
+                  <strong>planner_server</strong> est <strong>NavFnPlanner</strong> 
+                  qui est basé sur <strong>Dijkstra</strong>.
+                  Dijkstra explore tous les chemins pour trouver celui avec le coût total le plus faible.
+                  Il est robuste, fiable et est suffisant pour notre simulation.
+                </p>
+
+                <p>
+                  Ces paramètres par défaut sont dans le fichier <strong>/opt/ros/humble/share/nav2_bringup/params/nav2_params.yaml</strong>.
+                  Pour l'adapter à nos besoins, nous l'avons copié et modifié dans <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml</strong>.
+                </p>
+
+                <div class="image-container">
+                  <img src="images/Test3/IT/nav2_params2.webp" alt="params" class="image-mean"/>
+                  <p>
+                    Aperçu du fichier <strong>nav2_params.yaml</strong>
+                  </p>
+                </div>
+
+              <h5>&#10022; Les commandes utilisées</h5>
+                <p>
+                  Cette partie présente les différentes commandes pour la navigation autonome du robot.
+                  Elles seront regroupées plus tard dans un fichier launch pour simplifier leur exécution.
+                </p>
+                <p>
+                  <strong>NB:</strong> La carte doit être correctement cartographiée.
+                </p>
+
+                <ul>
+                  <li>
+                    <strong>Environnement et robot</strong>: 
+                  </li>
+                  <p>
+                    Il faut d’abord lancer l’environnement et le robot avec la commande:
+                  </p>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('cmd_b1', this)">📋</button>
+                      </div>
+                      <pre><code id="cmd_b1">
+  user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
+                      </code></pre>
+                    </div>
+                  <li>
+                    <strong>Localisation</strong>: 
+                  </li>
+                  <p>
+                    Puis, il faut lancer la localisation du robot sur la carte:
+                  </p>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('cmd_b2', this)">📋</button>
+                      </div>
+                      <pre><code id="cmd_b2">
+  user@user:~/tekbot_ws$ ros2 launch nav2_bringup localization_launch.py map:=./src/tekbot_sim/tekbot_navigation/maps/tekbot_map.yaml use_sim_time:=true
+                      </code></pre>
+                    </div>
+
+                  <li>
+                    <strong>Navigation</strong>:
+                  </li>
+                  <p>
+                    Ensuite, il faut lancer la navigaton autonome du robot sur la carte:
+                  </p>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('cmd_b3', this)">📋</button>
+                      </div>
+                      <pre><code id="cmd_b3">
+  user@user:~/tekbot_ws$ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true map_subscriber_transient_local:=true params_file:=./src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml
+                      </code></pre>
+                    </div>
+                    <p style="margin-top: -1.5rem; margin-bottom: 1.5rem">
+                      <em><strong>map_subscriber_transient_local:=true</strong></em> permet aux nodes de recevoir la carte publiée par le map_server.<br>
+                      <em><strong>params_file:=./src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml</strong></em> permet de spécifier des paramètres personnalisés pour la navigation. Si ce paramètre n'est pas défini, les valeurs par défaut seront utilisées.
+                    </p>
+                    <li>
+                    <strong>RVIZ2</strong>: 
+                  </li>
+                    <p>
+                      Pour visualiser et interagir pendant la navigation, il faut lancer RViz2 avec la commande:
+                    </p>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('cmd_b4', this)">📋</button>
+                      </div>
+                      <pre><code id="cmd_b4">
+  user@user:~/tekbot_ws$ rviz2
+                      </code></pre>
+                    </div>
+                    <p style="margin-top: -1.5rem;">
+                      Il faut ensuite configurer RViz2 pour afficher les éléments suivants:
+                      <ul>
+                        <li>Carte cartographiée: topic /map et Durability Policy: Transient Local.</li>
+                        <li>Carte globale du robot: topic /global_costmap/costmap_updates et Color Schema: costmap.</li>
+                        <li>TF: repères map et basic_link.</li>
+                        <li>RobotModel: représentation du robot, description Topic: /robot_description.</li>
+                        <li>LaserScan: données des capteurs sur le topic /scan.</li> 
+                        <li>Path: chemin calculé par l’algorithme, affiché sur le topic /plan.</li>
+                        <li>Polygon: espace occupé par le robot, topic /global_costmap/published_footprint.</li>
+                      </ul>
+                      Une fois la configuration terminée, nous l’avons enregistrée sous le nom: <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/rviz/tekbot_config_nav_b2ms.rviz</strong>.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                      <strong>NB:</strong> Cette configuration de RViz est essentielle au bon fonctionnement de la navigation. Il est important de respecter chaque paramètre indiqué et de laisser les autres réglages par défaut.
+                    </p>
+                </ul>
+
+                <p style="margin-top: 1.5rem;">
+                  À ce stade, une erreur persiste dans la section <strong>Global Status</strong> de RViz. 
+                  Pour la corriger, il suffit de définir la position initiale du robot à l'aide de <strong>2D Pose Estimate</strong>.
+                  Une fois cette étape effectuée, tout est prêt : nous pouvons alors indiquer la position finale souhaitée avec <strong>2D Goal Pose</strong>.
+                </p>
+                <p style="margin-top: 1.5rem;">
+                  Il est possible d'indiquer ces positions par des lignes de commandes comme suit:
+                </p>
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('cmd_b5', this)">📋</button>
+                  </div>
+                  <pre><code id="cmd_b5">
+  user@user:~/tekbot_ws$ ros2 topic pub --once /initialpose geometry_msgs/msg/PoseWithCovarianceStamped "{header: {frame_id: 'map'}, pose: {pose: {position: {x: -2.5, y: -0.5, z: 0.0}}}}"
+
+  user@user:~/tekbot_ws$ ros2 topic pub --once /goal_pose geometry_msgs/msg/PoseStamped "{header: {frame_id: 'odom'}, pose: {position: {x: 2.5, y: 2.5, z: 0.0}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}}}"
+                  </code></pre>
+                </div>
+
+              <h5>&#10022; Le launcher pour la navigation autonome</h5>
               <p>
                 Le launcher <strong>tekbot_nav_b2ms.launch.py</strong> permet de lancer avec des configurations spécifiques:
                 <ul>
@@ -472,14 +763,15 @@
                     <strong>RVIZ2</strong>: 
                     <ul>
                       <li>
-                        tekbot_config_nav_b2ms.rviz: 
+                        tekbot_config_nav_b2ms.rviz : il s’agit du fichier de configuration enregistré précédemment.
                         <ul>
-                          <li>premier map sur le topic /map(affichage de la carte cartographiée),</li>
-                          <li>deuxième map sur le topic /global_costmap/costmap_updates,</li>
-                          <li>TF: map et basic_link,</li>
-                          <li>RobotModel: visualisation du robot,</li>
-                          <li>Laserscan sur /scan: visualisation des données des capteurs.</li>
-                          <li>Path: sur le topic /plan(visualisation du chemin calculé par l'algorithme)</li>
+                          <li>Carte cartographiée: topic /map et Durability Policy: Transient Local.</li>
+                          <li>Carte globale du robot: topic /global_costmap/costmap_updates et Color Schema: costmap.</li>
+                          <li>TF: repères map et basic_link.</li>
+                          <li>RobotModel: représentation du robot, description Topic: /robot_description.</li>
+                          <li>LaserScan: données des capteurs sur le topic /scan.</li> 
+                          <li>Path: chemin calculé par l’algorithme, affiché sur le topic /plan.</li>
+                          <li>Polygon: espace occupé par le robot, topic /global_costmap/published_footprint.</li>
                         </ul>
                       </li>
                       <li>use_sim_time: true (utilise le temps de simulation)</li>
@@ -506,6 +798,13 @@
 
 
     def generate_launch_description():
+
+        # Chemin de la configuration de nav2 
+        params_file = PathJoinSubstitution([
+            FindPackageShare("tekbot_navigation"),
+            "config",
+            "nav2_params.yaml"
+        ])
 
         # Chemin du fichier RViz
         rviz_config_file = PathJoinSubstitution([
@@ -547,6 +846,7 @@
             ]),
             launch_arguments={
                 'use_sim_time': 'true',
+                'params_file': params_file,
                 'map_subscriber_transient_local': 'true'
             }.items()
         )
@@ -569,7 +869,44 @@
                 </code></pre>
               </div>
 
-             
+              <h5>&#10022; Lancement de la navigation</h5>
+              <p>
+                Avant de lancer les fichiers launcher, il faut configurer le package <strong>tekbot_navigation</strong> pour y inclure les fichiers et les dépendances pour la navigation autonome.
+                <ul>
+                  <li><strong>CMakeLists.txt</strong>: on y ajoute</li>
+                  <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('test3_CMake1', this)">📋</button>
+            </div>
+            <pre><code id="test3_CMake1">
+    find_package(nav2_bringup REQUIRED)
+
+    install(
+      DIRECTORY launch maps config rviz
+      DESTINATION share/${PROJECT_NAME}
+    )
+                  </code></pre>
+                </div>
+
+                <li><strong>package.xml</strong>: on y ajoute</li>
+                  <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('test3_package', this)">📋</button>
+            </div>
+            <pre><code id="test3_package">
+    &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+
+    &lt;exec_depend&gt;nav2_bringup&lt;/exec_depend&gt;
+    &lt;exec_depend&gt;nav2_map_server&lt;/exec_depend&gt;
+    &lt;exec_depend&gt;nav2_amcl&lt;/exec_depend&gt;
+                  </code></pre>
+                </div>
+                </ul>
+              </p>
+              <p>
+                Nous pouvons maintenant commencer la navigation autonome.
+              </p>
+
               <ul>
                 <li>Terminal 1: lancement de tekbot_maze.launch.py</li>
                 <div class="code-container">
@@ -577,7 +914,7 @@
                     <button onclick="copierCode('test3_T13', this)">📋</button>
             </div>
             <pre><code id="test3_T13">
-  user@user:~/tekbot_ws$ colcon build --symlink-install
+  user@user:~/tekbot_ws$ colcon build
   user@user:~/tekbot_ws$ source install/setup.bash
   user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
                   </code></pre>
@@ -600,65 +937,16 @@
                 Votre navigateur ne supporte pas la vidéo HTML5.
               </video>
 
-              <p>
-                Le robot effectue le trajet du point de départ à la sortie du labyrinthe de manière autonome.
-              </p>
-
-          <h4>Explication supplémentaire(Notion sur <strong>Nav2</strong>)</h4>
-              <p>
-                Le package <strong>nav2_bringup</strong> est composé de plusieurs launcher, notamment:
-                <ul>
-                  <li>
-                <strong>localization_launch.py</strong> qui permet de lancer AMCL pour la localisation d'un objet sur une carte, 
-                  </li>
-                  <li>
-                 <strong>navigation2_launch.py</strong> qui permet de lancer plusieurs nodes pour la navigation.
-                  </li>
-                </ul> 
-              </p>
-
-              <p>
-                <strong>planner_server</strong> est un des nodes de ROS2 lancé par <strong>navigation.launch.py</strong>.
-                Son rôle est de calculer un chemin global depuis la position actuelle du robot (fournie par AMCL) jusqu’à une destination donnée.
-                Il utilise des algorithmes de pathfinding sur la carte d’occupation pour générer ce chemin.
-                Il peut utiliser différents algorithmes, selon la configuration.
-              </p>
-
-              <p>
-                Nous avons opté pour les paramètres par défaut.
-                De ce fait, <strong>l'algorithme de pathfinding</strong> utilisé par 
-                <strong>planner_server</strong> est <strong>NavFnPlanner</strong> 
-                qui est basé sur <strong>Dijkstra</strong>.
-                Dijkstra explore tous les chemins pour trouver celui avec le coût total le plus faible.
-                Il est robuste, fiable et est suffisant pour notre simulation.
-              </p>
-
-              <p>
-                Ces paramètres par défaut sont dans le fichier ~/nav2_bringup/params/<strong>nav2_params.yaml</strong>.
-                Pour l'adapter à nos besoins, nous l'avons copié et modifié.
-              </p>
-
-              <div class="image-container">
-                <img src="images/Test3/IT/nav2_params2.webp" alt="params" class="image-mean"/>
-                <p>
-                  Aperçu du fichier <strong>nav2_params.yaml</strong>
-                </p>
-              </div>
-              
 
           <h4>c. Résultat final</h4>
             <p>
-              Lors des tests, nous sommes obligés d'initialiser à chaque fois la position initale du robot 
-              dans <strong>RVIZ2</strong> pour que <strong>AMCL</strong> se mette à fonctionner.
-              De même pour la position finale.
-              Ceci peut être éviter en initialisation les positions dans le launcher. 
+              Lors des launcements, il est nécessaire d'initialiser à chaque fois la position initiale du robot dans <strong>RViz2</strong> 
+              afin qu'<strong>AMCL</strong> puisse fonctionner, puis de définir la position finale. 
+              Ce processus peut être évité en indiquant directement ces positions dans le fichier launcher.<br>
+              Des délais ont été ajoutés afin de laisser le temps aux différents composants de s'exécuter avant de définir ces positions, grâce à <strong>TimerAction</strong>.
             </p>
             <p>
-              Par la même occasion, nous avons inclus dans un seul launcher le lancement de tous les launchers pour 
-              gazebo, rqt_graph, ...
-            </p>
-            <p>
-
+              Par ailleurs, nous avons regroupé dans un seul launcher le démarrage de tous les composants (Gazebo, rqt_graph, RViz, etc.).
             </p>
 
             <div class="code-container">
@@ -829,7 +1117,7 @@
             </video>
 
             <p  class="txt_center">
-              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/tree/main/Test3/IT/tekbot_sim" target="_blank">lien vers le repository github</a>
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test3/IT/tekbot_sim.rar" target="_blank" class="download-link">télécharger tekbot_sim</a>
             </p>
 
 
@@ -855,7 +1143,7 @@
                   ROS2 Documentation: <a href="https://docs.ros.org/en/kilted/index.html" target="_blank">https://docs.ros.org/en/kilted/index.html</a>
                 </li>
                 <li>
-                  Metapackage tekbot_sim : <a href="https://github.com/charif-tekbot/tekbot_sim" target="_blank">lien vers le repository github</a>
+                  Metapackage tekbot_sim mise à disposition: <a href="https://github.com/charif-tekbot/tekbot_sim" target="_blank">lien vers le repository github</a>
                 </li>
               </ul>
             </p>
