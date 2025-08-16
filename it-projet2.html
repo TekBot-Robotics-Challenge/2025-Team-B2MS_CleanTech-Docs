@@ -40,7 +40,7 @@
             <a href="./it-projet2" class="subtab-button active">Projet 2</a>
               <nav class="project-subnav active" id="subnav-test2">
                 <a href="#1-test2">1. Contexte et objectifs</a>
-                <a href="#2-test2">2. Technologies utilisées</a>
+                <a href="#2-test2">2. Notion de base sur ROS2</a>
                 <a href="#3-test2">3. Structure du package et fonctionnement</a>
                 <a href="#4-test2">4. Tests réalisés</a>
                 <a href="#5-test2">5. Limites et perspectives</a>
@@ -82,12 +82,75 @@
             <li>Un <strong>fichier de lancement</strong> pour exécuter l’ensemble des nodes.</li>
           </ul>
 
-          <h3 id="2-test2">2. Technologies utilisées</h3>
-          <ul>
-            <li><strong>ROS2 Humble</strong>, pour la communication et la gestion des nodes.</li>
-            <li><strong>C++</strong>, avec les bibliothèques <strong>rclcpp</strong> et <strong>std_msgs</strong>.
-            <li>Un <strong>fichier de lancement .xml</strong> pour exécuter tous les nodes simultanément.</li>
-          </ul>
+          <h3 id="2-test2">2. Notion de base sur ROS2</h3>
+            <h4>a. ROS2(Robot Operating System 2)</h4>
+              <p>
+                ROS2 est un framework open source destiné à la robotique.
+                Il permet de développer des systèmes distribués où plusieurs programmes indépendants, appelés <strong>nodes</strong>, peuvent communiquer entre eux. 
+                Grâce à cette modularité, il est possible de concevoir des architectures complexes où chaque partie a un rôle bien défini. 
+                L’organisation du code dans ROS2 repose sur des <strong>packages</strong>, qui regroupent les fichiers sources (C++ ou Python), les définitions de messages, les launch files et les dépendances nécessaires.
+                ROS2 prend principalement en charge <strong>C++</strong>(via la bibliothèque <em><strong>rclcpp</strong></em>) et <strong>Python</strong> (via <em><strong>rclpy</strong></em>), permettant ainsi à la fois des implémentations performantes en C++ et des développements rapides en Python.
+                La version <strong>ROS2 Humble</strong> est l’une des plus utilisées aujourd’hui.                          
+              </p>
+              <p class="txt_center">
+                Veuillez consultez la documentation officielle pour 
+                <a href="https://docs.ros.org/en/kilted/Installation.html" target="_blank">l'installation de ROS2 Humble</a>.
+              </p>
+            
+              <h4>b. Package</h4>
+                <p>
+                  Un package est l'unité de base de l'organisation dans ROS2. 
+                  Il regroupe tout ce qui est nécessaire à une fonctionnalité donnée: les fichiers sources (C++ ou Python), les launch files, les dépendances, la configuration du projet...
+                  Chaque package est autonome et réutilisable, ce qui facilite la modularité et le partage de code dans différents projets. 
+                  Les packages sont généralement gérés via l'outil <strong>colcon build</strong> pour la compilation et l’installation.
+                </p>
+
+              <h4>c. Topic</h4>
+                <p>
+                  Un topic est un canal de communication identifié par un nom (par exemple <em><strong>/camera/image</strong></em> ou <em><strong>/temperature</strong></em>). 
+                  Les nodes publient ou s’abonnent à ces topics pour échanger des données. 
+                  Un <strong>publisher</strong> envoie des messages sur un topic, et <strong>un ou plusieurs subscribers</strong> reçoivent ces messages. 
+                  Les topics constituent donc la base de la communication dans ROS2.
+                </p>
+
+              <h4>d. Nodes(nœuds)</h4>
+                <p>
+                  Un node est une unité de calcul dans ROS2, c’est-à-dire un programme autonome qui exécute une tâche spécifique. 
+                  Certains nodes agissent comme <strong>publishers</strong> en envoyant des informations, d’autres comme <strong>subscribers</strong> en recevant et traitant ces informations, et certains cumulent les deux rôles. 
+                  Cette organisation favorise la réutilisabilité et la modularité du système.
+                </p>
+
+              <h4>e. Messages</h4>
+                <p>
+                  Les données échangées entre nodes passent par des messages. 
+                  Ceux-ci définissent le format de l’information transmise. 
+                  ROS2 fournit de nombreux types standards via la bibliothèque <em><strong>std_msgs</strong></em>, comme <em><strong>String</strong></em>(texte), <em><strong>Int32</strong></em>(entier), ou <em><strong>Bool</strong></em>(valeur logique). 
+                  Il est également possible de définir ses propres types de messages personnalisés selon les besoins du projet.
+                </p>
+
+              <h4>f. Langages et bibliothèques</h4>
+                <p>
+                  ROS2 prend en charge plusieurs langages de programmation, principalement <strong>C++</strong> et <strong>Python</strong>.
+                  <ul>
+                    <li>
+                      En <strong>C++</strong>, on utilise la bibliothèque <em><strong>rclcpp</strong></em> pour créer et gérer les nodes, publishers et subscribers, associée à <em><strong>std_msgs</strong></em> pour manipuler les messages standards.
+                    </li>
+                    <li>
+                      En <strong>Python</strong>, la bibliothèque équivalente est <em><strong>rclpy</strong></em>, qui offre les mêmes fonctionnalités avec une syntaxe plus simple, souvent utilisée pour le prototypage rapide.
+                    </li>
+                  </ul>
+                </p>
+                <p>
+                  <strong>NB:</strong> ROS2 permet aussi de mélanger des nodes en C++ et en Python dans une même architecture
+                </p>
+
+              <h4>g. Fichier de lancement(launcher)</h4>
+              <p>
+                Dans un projet ROS2 composé de plusieurs nodes, lancer chaque node séparément peut vite devenir fastidieux. 
+                Pour résoudre ce problème, ROS2 utilise les <strong>launch files</strong>(fichiers de lancement), généralement écrits en <strong>.xml</strong> ou <strong>.py</strong>. 
+                Ces fichiers décrivent quels nodes doivent être démarrés, avec quels paramètres et dans quel ordre. 
+                Ainsi, une seule commande permet de démarrer l'ensemble du système.
+              </p>
 
           <h3  id="3-test2">3. Structure du package et fonctionnement</h3>
           <p>
