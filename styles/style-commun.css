@@ -331,15 +331,6 @@ video {
   padding: 2rem 1rem;
 }
 
-.header {
-  background-image: url("assets/robot.png");
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-
-
 @media screen and (max-width: 768px) {
   .sidebar {
     position: fixed;
