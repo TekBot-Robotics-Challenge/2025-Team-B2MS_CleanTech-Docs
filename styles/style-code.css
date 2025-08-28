@@ -8,29 +8,22 @@
   padding: 0;
 }
 
-
 code {
-  display: block;
-  padding: 0;
-  white-space: pre;      
+  display: block;    
   word-break: normal;      
 }
-
 
 pre {
   max-height: 400px;
   overflow: auto;
-  margin: 0;
-  padding: 0;
   background: transparent; 
   font-family: 'Courier New', monospace;
   font-size: 0.85em;
-  white-space: pre;
 }
 
 pre, code {
   font-size: 15px;
-  padding: 0px;
+  padding: 0;
   margin: 0;
   white-space: pre;
   font-family: 'Courier New', monospace;
