@@ -13,7 +13,7 @@
   
 .approach_container  { 
   width: 100%;
-  padding: 40px 50px 40px 40px;
+  padding: 20px 40px;
   margin: 0 20px; 
 }
 .approach_container  .topic {
@@ -119,10 +119,52 @@
   display: none;
 }
 
-@media (max-width: 768px) {
-  .approach_container  {
-    padding: 30px 20px;
-    margin: 0 10px;
+.approach_container .approach_content .list label i {
+  color: var(--primary-color-dark);
+  font-size: 22px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+  :root {
+    --max-width: 1000px;
+  }
+    
+}
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  :root {
+    --max-width: 768px;
+  }
+      
+  .approach_container .approach_content .list {
+    width: 50%;
+    margin-right: 60px;
+  }
+  
+  .approach_container .approach_content .text-content {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 576px) {
+  :root {
+    --max-width: 599px;
+  }
+    
+  .approach_container  { 
+    padding: 10px 20px;
+    margin: 0 10px; 
   }
 
   .approach_container .approach_content {
@@ -132,11 +174,12 @@
   .approach_container .approach_content .list {
     flex-direction: row;
     width: 100%;
-    margin: 0 0 20px 0;
+    margin: 0 0 5px 0;
     justify-content: space-between;
     position: relative;
   }
 
+  
   .approach_container .approach_content .list label {
     flex: 1;
     font-size: 16px;
@@ -157,18 +200,14 @@
     top: -6px;
     left: 50%;
     transform: translateX(-50%);
-    border: 6px solid transparent;
+    border: 5px solid transparent;
     border-bottom-color: var(--primary-color);
   }
 
   .approach_container .approach_content .slider {
     height: 50px;
     width: 20%;
-    border-radius: 8px;
-    background: var(--primary-color);
   }
-
-  /* Slider horizontal positions */
   #robot:checked ~ .list .slider {
     top: auto;
     left: 0%;
@@ -189,34 +228,18 @@
     top: auto;
     left: 80%;
   }
-
   .approach_container .approach_content .text-content {
     width: 100%;
+    height: 100%;
   }
 
   .approach_container .approach_content .text .title {
-    font-size: 20px;
+    font-size: 15px;
+    margin-bottom: 5px;
     text-align: center;
   }
 
-  .approach_container .approach_content .text p {
-    font-size: 15px;
-    line-height: 1.6;
+  .approach_container .approach_content .list label i {
+    font-size: 12px;
   }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-.approach_container .approach_content .list label i {
-  color: var(--primary-color-dark);
-  font-size: 22px;
 }
