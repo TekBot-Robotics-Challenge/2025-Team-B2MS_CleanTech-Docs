@@ -5,6 +5,8 @@
   border-radius: 5px;
   position: relative;
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0;
 }
 
@@ -78,7 +80,7 @@ pre::-webkit-scrollbar-thumb {
     font-size: 0.53rem;
   }
   .code-container {
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
   }
 }
 
@@ -87,7 +89,7 @@ pre::-webkit-scrollbar-thumb {
     font-size: 0.8rem;
   }
   .code-container {
-    margin: 0.8rem 0;
+    margin: 0.8rem auto;
   }
 }
 
@@ -96,6 +98,6 @@ pre::-webkit-scrollbar-thumb {
     font-size: 1rem;
   }
   .code-container {
-    margin: 1rem 0;
+    margin: 1rem auto;
   }
 }

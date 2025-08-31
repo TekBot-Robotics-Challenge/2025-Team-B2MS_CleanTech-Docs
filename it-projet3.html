@@ -569,7 +569,7 @@
                 <img src="images/Test3/IT/map.webp" alt="carte" class="image-mean"/>
                 <p>
                   Les différents fichiers générés ont été sauvergadés dans <strong>tekbot_ws</strong> 
-                  puis déplacés dans <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/maps/</strong> 
+                  puis déplacés dans <strong class="file-path">tekbot_ws/src/tekbot_sim/tekbot_navigation/maps/</strong> 
                 </p>
               </div>
 
@@ -706,12 +706,12 @@
                       Il faut ensuite configurer RViz2 pour afficher les éléments suivants:
                       <ul>
                         <li>Carte cartographiée: topic /map et Durability Policy: Transient Local.</li>
-                        <li class="file-path">Carte globale du robot: topic /global_costmap/costmap_updates et Color Schema: costmap.</li>
+                        <li>Carte globale du robot: topic /global_costmap/costmap_updates et Color Schema: costmap.</li>
                         <li>TF: repères map et basic_link.</li>
                         <li>RobotModel: représentation du robot, description Topic: /robot_description.</li>
                         <li>LaserScan: données des capteurs sur le topic /scan.</li> 
                         <li>Path: chemin calculé par l’algorithme, affiché sur le topic /plan.</li>
-                        <li class="file-path">Polygon: espace occupé par le robot, topic /global_costmap/published_footprint.</li>
+                        <li>Polygon: espace occupé par le robot, topic /global_costmap/published_footprint.</li>
                       </ul>
                       Une fois la configuration terminée, nous l’avons enregistrée sous le nom: <strong class="file-path">tekbot_ws/src/tekbot_sim/tekbot_navigation/rviz/tekbot_config_nav_b2ms.rviz</strong>.
                     </p>

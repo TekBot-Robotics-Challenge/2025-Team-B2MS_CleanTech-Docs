@@ -60,7 +60,7 @@ p span {
   color: #007b9f;
 }
 
-.file-path{
+.file-path, ul{
   white-space: normal;
   word-wrap: break-word; 
   overflow-wrap: anywhere;
@@ -267,7 +267,7 @@ img {
 
 .image-container {
   text-align: center;
-  margin: 2rem 0;
+  margin: 2rem auto;
 }
 
 .image-centree {
@@ -512,10 +512,11 @@ table, th, td {
 
   video{
     width: 80% !important;
+    margin: 0.5rem auto;
   }
 
   .image-container {
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
   }
 }
 
@@ -616,10 +617,11 @@ table, th, td {
 
   video{
     width: 60% !important;
+    margin: 0.8rem auto;
   }
 
   .image-container {
-    margin: 0.8rem 0;
+    margin: 0.8rem auto;
   }
 }
 
@@ -714,6 +716,10 @@ table, th, td {
   }
 
   .image-container {
-    margin: 1rem 0;
+    margin: 1rem auto;
+  }
+
+  video{
+    margin: 1rem auto;
   }
 }
