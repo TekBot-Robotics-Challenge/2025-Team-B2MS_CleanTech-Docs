@@ -382,7 +382,7 @@
   user@user:~/tekbot_ws$ rviz2
                       </code></pre>
                     </div>
-                    <p style="margin-top: -1.5rem;">
+                    <p>
                       Il faut ensuite configurer RViz2 pour afficher les éléments suivants:
                       <ul>
                         <li>Map: affichée à partir du topic /map.</li>
@@ -390,7 +390,7 @@
                         <li>RobotModel: représentation du robot.</li>
                         <li>LaserScan: affichage des données des capteurs depuis le topic /scan.</li>
                       </ul>
-                      Une fois la configuration terminée, nous l’avons enregistrée sous le nom: <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/rviz/tekbot_config_b2ms.rviz</strong>.
+                      Une fois la configuration terminée, nous l’avons enregistrée sous le nom: <strong class="file-path">tekbot_ws/src/tekbot_sim/tekbot_navigation/rviz/tekbot_config_b2ms.rviz</strong>.
                     </p>
 
                   <li>
@@ -573,7 +573,7 @@
                 </p>
               </div>
 
-              <p style="margin-bottom: 1.5rem;">
+              <p>
                 <strong>NB:</strong> Il est important de cartographier soigneusement la zone pour qu’elle soit exploitable par la suite.
               </p>
               
@@ -620,8 +620,8 @@
                 </p>
 
                 <p>
-                  Ces paramètres par défaut sont dans le fichier <strong>/opt/ros/humble/share/nav2_bringup/params/nav2_params.yaml</strong>.
-                  Pour l'adapter à nos besoins, nous l'avons copié et modifié dans <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml</strong>.
+                  Ces paramètres par défaut sont dans le fichier <strong class="file-path">/opt/ros/humble/share/nav2_bringup/params/nav2_params.yaml</strong>.
+                  Pour l'adapter à nos besoins, nous l'avons copié et modifié dans <strong class="file-path">tekbot_ws/src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml</strong>.
                 </p>
 
                 <div class="image-container">
@@ -684,9 +684,9 @@
   user@user:~/tekbot_ws$ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true map_subscriber_transient_local:=true params_file:=./src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml
                       </code></pre>
                     </div>
-                    <p style="margin-top: -1.5rem; margin-bottom: 1.5rem">
+                    <p>
                       <em><strong>map_subscriber_transient_local:=true</strong></em> permet aux nodes de recevoir la carte publiée par le map_server.<br>
-                      <em><strong>params_file:=./src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml</strong></em> permet de spécifier des paramètres personnalisés pour la navigation. Si ce paramètre n'est pas défini, les valeurs par défaut seront utilisées.
+                      <em><strong class="file-path">params_file:=./src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml</strong></em> permet de spécifier des paramètres personnalisés pour la navigation. Si ce paramètre n'est pas défini, les valeurs par défaut seront utilisées.
                     </p>
                     <li>
                     <strong>RVIZ2</strong>: 
@@ -702,30 +702,30 @@
   user@user:~/tekbot_ws$ rviz2
                       </code></pre>
                     </div>
-                    <p style="margin-top: -1.5rem;">
+                    <p>
                       Il faut ensuite configurer RViz2 pour afficher les éléments suivants:
                       <ul>
                         <li>Carte cartographiée: topic /map et Durability Policy: Transient Local.</li>
-                        <li>Carte globale du robot: topic /global_costmap/costmap_updates et Color Schema: costmap.</li>
+                        <li class="file-path">Carte globale du robot: topic /global_costmap/costmap_updates et Color Schema: costmap.</li>
                         <li>TF: repères map et basic_link.</li>
                         <li>RobotModel: représentation du robot, description Topic: /robot_description.</li>
                         <li>LaserScan: données des capteurs sur le topic /scan.</li> 
                         <li>Path: chemin calculé par l’algorithme, affiché sur le topic /plan.</li>
-                        <li>Polygon: espace occupé par le robot, topic /global_costmap/published_footprint.</li>
+                        <li class="file-path">Polygon: espace occupé par le robot, topic /global_costmap/published_footprint.</li>
                       </ul>
-                      Une fois la configuration terminée, nous l’avons enregistrée sous le nom: <strong>tekbot_ws/src/tekbot_sim/tekbot_navigation/rviz/tekbot_config_nav_b2ms.rviz</strong>.
+                      Une fois la configuration terminée, nous l’avons enregistrée sous le nom: <strong class="file-path">tekbot_ws/src/tekbot_sim/tekbot_navigation/rviz/tekbot_config_nav_b2ms.rviz</strong>.
                     </p>
-                    <p style="margin-top: 1rem;">
+                    <p>
                       <strong>NB:</strong> Cette configuration de RViz est essentielle au bon fonctionnement de la navigation. Il est important de respecter chaque paramètre indiqué et de laisser les autres réglages par défaut.
                     </p>
                 </ul>
 
-                <p style="margin-top: 1.5rem;">
+                <p>
                   À ce stade, une erreur persiste dans la section <strong>Global Status</strong> de RViz. 
                   Pour la corriger, il suffit de définir la position initiale du robot à l'aide de <strong>2D Pose Estimate</strong>.
                   Une fois cette étape effectuée, tout est prêt : nous pouvons alors indiquer la position finale souhaitée avec <strong>2D Goal Pose</strong>.
                 </p>
-                <p style="margin-top: 1.5rem;">
+                <p>
                   Il est possible d'indiquer ces positions par des lignes de commandes comme suit:
                 </p>
                 <div class="code-container">

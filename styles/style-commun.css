@@ -56,6 +56,11 @@ p span {
   color: #007b9f;
 }
 
+.file-path{
+  white-space: normal;
+  word-wrap: break-word; 
+  overflow-wrap: anywhere;
+}
 
 .txt_center {
   text-align: center;
