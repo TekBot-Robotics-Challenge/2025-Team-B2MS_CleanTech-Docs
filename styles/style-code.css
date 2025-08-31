@@ -77,16 +77,25 @@ pre::-webkit-scrollbar-thumb {
   pre, code, .btn-bar button, .notif {
     font-size: 0.53rem;
   }
+  .code-container {
+    margin: 0.5rem 0;
+  }
 }
 
 @media only screen and (min-width: 567px) and (max-width: 768px) {
   pre, code, .btn-bar button, .notif {
     font-size: 0.8rem;
   }
+  .code-container {
+    margin: 0.8rem 0;
+  }
 }
 
 @media only screen and (min-width: 767px) and (max-width: 1000px) {
   pre, code, .btn-bar button, .notif {
     font-size: 1rem;
+  }
+  .code-container {
+    margin: 1rem 0;
   }
 }

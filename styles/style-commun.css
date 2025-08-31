@@ -97,6 +97,8 @@ p span {
 .main-nav {
   display: flex;
   flex-direction: column;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .nav-link,
@@ -453,6 +455,9 @@ table, th, td {
     font-size: 0.5rem;
   }
 
+  .main-content {
+    padding: 0.5rem;
+  }
 
   .subtab-button {
     font-size: 0.6rem;
@@ -463,6 +468,7 @@ table, th, td {
   }
 
   .subtab-content {
+    margin-top: 0.5rem;
     padding: 0.5rem;
   }
 
@@ -477,7 +483,6 @@ table, th, td {
   .download-link {
     font-size: 0.6rem;
   }
-
 
   .header__container_domaine {
     font-size: 1rem;
@@ -500,6 +505,10 @@ table, th, td {
 
   video{
     width: 80% !important;
+  }
+
+  .image-container {
+    margin: 0.5rem 0;
   }
 }
 
@@ -554,6 +563,9 @@ table, th, td {
     font-size: 0.65rem;
   }
 
+  .main-content {
+    padding: 1rem;
+  }
 
   .subtab-button {
     font-size: 1rem;
@@ -564,6 +576,7 @@ table, th, td {
   }
 
   .subtab-content {
+    margin-top: 0.8rem;
     padding: 0.8rem;
   }
 
@@ -596,6 +609,10 @@ table, th, td {
 
   video{
     width: 60% !important;
+  }
+
+  .image-container {
+    margin: 0.8rem 0;
   }
 }
 
@@ -645,6 +662,9 @@ table, th, td {
     font-size: 1.1rem;
   }
 
+  .main-content {
+    padding: 2rem;
+  }
 
   .subtab-button {
     font-size: 1.2rem;
@@ -655,6 +675,7 @@ table, th, td {
   }
 
   .subtab-content {
+    margin-top: 1rem;
     padding: 1rem;
   }
 
@@ -683,5 +704,9 @@ table, th, td {
   .to-project {
     font-size: 1.3rem;           
     margin-left: 1rem;
+  }
+
+  .image-container {
+    margin: 1rem 0;
   }
 }
