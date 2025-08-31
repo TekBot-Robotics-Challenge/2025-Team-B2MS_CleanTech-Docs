@@ -20,6 +20,10 @@ header {
   background-color: #007b5f;
 }
 
+header h2{
+  line-height: 0.8;
+}
+
 h2 {
   margin-top: 0;
   text-align: center;
