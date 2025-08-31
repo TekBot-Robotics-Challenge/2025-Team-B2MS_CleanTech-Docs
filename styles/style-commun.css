@@ -453,9 +453,6 @@ table, th, td {
     font-size: 0.5rem;
   }
 
-  .main-content {
-    padding: 0.5rem;
-  }
 
   .subtab-button {
     font-size: 0.6rem;
@@ -557,9 +554,6 @@ table, th, td {
     font-size: 0.65rem;
   }
 
-  .main-content {
-    padding: 1rem;
-  }
 
   .subtab-button {
     font-size: 1rem;
@@ -651,9 +645,6 @@ table, th, td {
     font-size: 1.1rem;
   }
 
-  .main-content {
-    padding: 2rem;
-  }
 
   .subtab-button {
     font-size: 1.2rem;
