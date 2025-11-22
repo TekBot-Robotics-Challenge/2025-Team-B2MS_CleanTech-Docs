@@ -345,6 +345,11 @@ video {
   margin-bottom: 2px;
 }
 
+.arbo .img, .arbo .txt{
+  display: inline;  
+  margin-right: 20px;
+}
+
 .arbo .folder > ul,
 .arbo .file > ul {
   padding-left: 15px;
@@ -358,6 +363,15 @@ video {
   content: "📄 ";
 }
 
+.arbo .img::before{
+  content: "🖼️ ";
+}
+
+.arbo .txt::before{
+  content: "📄 ";
+}
+
+
 
 table{
   margin: auto;
@@ -368,6 +382,31 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
   padding: 0.5rem 1rem;
+}
+
+table ul{
+  padding-left: 0.5rem;
+}
+
+table .dash-list {
+  font-size: inherit; 
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.num {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-list {
+  list-style-type: none;
+  padding: 0; 
+}
+
+.dash-list li::before {
+  content: "- "; 
 }
 
 
@@ -723,3 +762,5 @@ table, th, td {
     margin: 1rem auto;
   }
 }
+
+

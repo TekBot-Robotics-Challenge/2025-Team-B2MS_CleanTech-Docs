@@ -667,26 +667,19 @@ nav {
   background-image: url('../assets/mecanique.webp');
 }
 
-.mechatronics {
-  width: calc(2 * 300px + 2 * 2rem); 
-  max-width: 100%;
-  height: 220px;
-  /* background-image: url('https://thumbs.dreamstime.com/z/g%C3%A9nie-m%C3%A9canique-comme-%C3%A9lectronique-et-m%C3%A9lange-sch%C3%A9ma-machatronique-ing%C3%A9nierie-en-informatique-%C3%A9lectrique-combinaison-239676015.webp?ct=jpeg'); */
-  background-image: url('../assets/conveyeur.webp');
-  background-size: cover;
-  background-position: center;
-  border-radius: 16px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-  margin: 0 auto 2rem auto; 
-}
-
 .conveyor {
-  width: calc(2 * 300px + 2 * 2rem); 
+  width: calc(1.2*300px + 2 * 2rem); 
   max-width: 100%;
   height: 220px;
   background-image: url('../assets/conveyeur.webp');
 }
 
+.trc25 {
+  width: calc(1.2*300px + 2 * 2rem); 
+  max-width: 100%;
+  height: 220px;
+  background-image: url('../assets/resilience_urbaine.webp');
+}
 
 
 .header__container_about {

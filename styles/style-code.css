@@ -7,8 +7,18 @@
   margin-bottom: 30px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0;
+  padding: 0rem;
 }
+
+details.code-container summary{
+  padding: 1rem;
+}
+
+details.code-container pre {
+  margin-top: -1rem !important; 
+  padding-top: 0 !important;
+}
+
 
 code {
   display: block;    
