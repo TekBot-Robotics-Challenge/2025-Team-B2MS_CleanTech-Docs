@@ -245,7 +245,8 @@ nav {
 }
 
 .header__container h1 span {
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
+    color: #01ffc4;
 }
 
 .booking__container {
