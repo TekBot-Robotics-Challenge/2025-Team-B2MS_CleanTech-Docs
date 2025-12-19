@@ -246,7 +246,7 @@ nav {
 
 .header__container h1 span {
   /* color: var(--primary-color); */
-    color: #01ffc4;
+    color: #00ae86;
 }
 
 .booking__container {
@@ -1280,7 +1280,7 @@ nav {
 
     .header__container h1 {
     font-size: 1.8rem;
-    font-weight: 100;
+    font-weight: 400;
     line-height: 2rem;
     margin-bottom: 0rem;
     }
