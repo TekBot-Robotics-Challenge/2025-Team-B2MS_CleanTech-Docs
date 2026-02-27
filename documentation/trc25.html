@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Résilience Urbaine - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Résilience Urbaine</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+        <div class="nav-section">
+          <a href="./trc" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-robot"></i> TRC25</button> </a>       
+         
+          <div class="sub-links">
+            <a class="subtab-button" href="./trc25-convoyeur">Convoyeur 2.0</a>
+            <a class="subtab-button" href="./trc25-dofbot">Prise en main du Dofbot</a>
+            <a class="subtab-button" href="./trc25-communication">Communication Dofbot - Convoyeur</a>
+            <a class="subtab-button" href="./trc25-yolo">Modèle de détection YOLO</a>
+            <a class="subtab-button" href="./trc25-dofbot_ia">Détection et tri - Dofbot</a>
+            <a class="subtab-button" href="./trc25-ros">ROS</a>
+            <a class="subtab-button" href="./trc25-meca">Système de ramassage</a>
+          </div>
+        </div>
+
+      </nav>
+    </div>
+
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section class="tab-content active">
+        <div class="subtab-content">
+          <h2 class="projet-titre">Tekbot Robotics Challenge - Résilience Urbaine</h2>
+          <h3>1. Introduction</h3>
+            <p>
+               Dans un contexte mondial marqué par l'urbanisation rapide et les défis environnementaux croissants, 
+               la question de la <strong>gestion durable des déchets</strong> constitue un enjeu majeur pour les villes africaines. 
+               La prolifération des déchets ménagers, commerciaux et industriels impacte non seulement l’environnement, 
+               mais aussi la santé publique et la qualité de vie des citoyens.
+            </p>
+            <p>
+               Face à cette problématique, la <strong>TEKBOT Robotics Challenge 2025</strong> propose le thème <strong>Résilience Urbaine</strong>, 
+               qui vise à mobiliser les étudiants et jeunes ingénieurs africains autour de la <strong>conception de systèmes robotiques</strong> capables 
+               de transformer la gestion des déchets en un système efficace et durable d’assainissement des villes. 
+            </p>
+            <p>
+              Afin de simuler cette problématique, la compétition se déroule dans une ville fictive appelée <strong>EcoCity</strong>, 
+              divisée en 10 quartiers répartis entre :
+              <ul>
+                <li>des zones résidentielles(déchets ménagers),</li>
+                <li>des zones commerciales(déchets recyclables),</li>
+                <li>des zones industrielles(déchets dangereux).</li>
+              </ul>
+            </p>
+
+          <h3>2. Objectifs</h3>
+            <p>
+              L'objectif principal de ce projet est de concevoir et déployer un <strong>robot autonome</strong> 
+              et <strong>une station de tri</strong> capables de 
+              <ul>
+                <li>Collecter un maximum de déchets dans un délai imposé,</li>
+                <li>Trier les déchets de manière fiable et rapide,</li>
+                <li>Redistribuer correctement les déchets triés vers les usines adaptées.</li>
+              </ul>
+            </p>
+        </div>
+
+        <div class="subtab-content">
+          <h2 class="projet-titre">Description et déroulement du jeu</h2>
+          <h3>1. Contraintes</h3>
+            <ul>
+              <li><strong>Temps global</strong>: 5 minutes pour assainir les 10 quartiers.</li>
+              <li><strong>Déplacement</strong>: Le robot effectue plusieurs allers-retours entre les quartiers et la zone de dépôt.</li>
+              <li><strong>Zone d'opération</strong>: Chaque équipe dispose d'une zone de 2,5 m x 5 m sur l’arène. </li>
+              <li><strong>Interactions humaines</strong>: Les membres de l'équipe doivent acheminer les déchets déposés par le robot dans la zone de dépôt sur le convoyeur.</li>
+              <li><strong>Gestion efficace de l'energie</strong> pour éviter toute panne en cours de mission.</li>
+            </ul>
+
+          <h3>2. Structure d'un match</h3>
+            <p>Chaque match est réparti en 3 phases de 5 minutes chacune:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Actions principales</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Installation et validation du robot</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Positionnement du robot sur la ligne de départ (centre de l'arène)</li>
+                      <li>Vérification des dimensions et spécifications techniques par le jury</li>
+                      <li>Inspection et placement de la station de tri dans la zone dédiée</li>
+                      <li>Phase de reconnaissance : le robot téléopéré scanne les QR Codes des quartiers</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Lancement du robot et début des missions</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Collecte: le robot se déplace pour collecter les déchets</li>
+                      <li>Dépôt: Les déchets sont déposés dans la zone de dépôt</li>
+                      <li>Tri par le bras robotique et executions des missions bonus</li>
+                      <li>Redistribution des déchets collectés et triés vers les industries de recyclage </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Fin du match et calcul du score</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Arrêt automatique du robot</li>
+                      <li>Évaluation par les arbitres des déchets collectés, triés et redistribués</li>
+                      <li>Attribution des points et application des éventuelles pénalités</li>
+                    </ul> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>  
+
+        <h3>3. Les différentes étapes</h3>
+          <table>
+              <thead>
+                <tr>
+                  <th>Etape</th>
+                  <th>Actions principales</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Collecte des déchets:<br>
+                    identifier, localiser et ramasser les déchets dispersés sur le terrain
+                  </td>
+                  <td> 
+                    <ul>
+                      <li>
+                        Identification des points de collecte
+                        <ul class="dash-list">
+                          <li>Scan des QR Codes (type du quartier, nom, quantité, types de déchets, nombre de points)</li>
+                          <li>Planification du parcours (distances optimales, zones prioritaires, obstacles)</li>
+                        </ul>
+                      </li>
+                      <li>Navigation autonome</li>
+                        <ul class="dash-list">
+                          <li>se déplacer dans les 10 quartiers, éviter les obstacles, rester dans la zone autorisée</li>
+                          <li>ramasser et stocker les déchets, puis transporter vers la zone de dépôt</li>
+                          <li>Bonus spécial: assurer la collecte complète d'une zone avant de continuer vers une autre</li>
+                        </ul>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Tri et organisation:<br>
+                    tri automatique selon la nature des déchets
+                  </td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Transfert des déchets sur le convoyeur</li>
+                      <li>Identification et tri des déchets par le bras robotique, à l'aide de sa caméra</li>
+                      <li>Dépôt dans les corbeilles</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Distribution ciblée:<br>
+                    Redistribution manuelle des déchets triés vers les centres de recyclage spécialisés
+                  </td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Corbeille bleue → usine de compostage</li>
+                      <li>Corbeille rouge → incinération/régénération</li>
+                      <li>Corbeille verte → usine de recyclage</li>
+                    </ul> 
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+
+        <div class="subtab-content">
+          <h2 class="projet-titre">Terrain et matériels</h2>
+          <h3>1. Terrain de jeu</h3>
+            <h4>a. Arène:</h4>
+              <p>
+                L'arène est disposé comme suit:
+                <ul>
+                  <li>Dimensions: 5mx5m</li>
+                  <li>Subdivision: 10 quartiers(2 zones de 3 quartiers + 1 zone de 4 quartiers)</li>
+                  <li>Un espace de 2,5mx5m par équipe</li>
+                </ul>
+              </p>
+
+          <h4>b. Zones</h4>
+            <p>Les zones sont reparties comme suit:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Zone</th>
+                  <th>Organisation</th>
+                  <th>Déchets dominants</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Résidentielle</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>2 quartiers résidentiels: Haie-Vive, Tampouy</li>
+                      <li>1 quartier commercial: Erevan</li>
+                    </ul> 
+                  </td>
+                  <td>Ménagers</td>
+                </tr>
+                <tr>
+                  <td>Commerciale</td>
+                  <td>
+                    <ul class="dash-list">
+                      <li>2 quartiers résidentiels: Haie-Vive, Tampouy</li>
+                      <li>1 quartier résidentiel: BeauSéjour</li>
+                      <li>1 quartier industriel: GDIZ</li>
+                    </ul> 
+                  </td>
+                  <td>Recyclables</td>
+                </tr>
+                <tr>
+                  <td>Industrielle</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>2 quartiers industriels : Arkadia, Toamasina</li>
+                      <li>1 quartier commercial : Morocco Mall</li>
+                    </ul> 
+                  </td>
+                  <td>Dangereux</td>
+                </tr>
+              </tbody>
+            </table> 
+
+            <p><strong>NB:</strong> La zone de départ est situé au centre de l'arène.</p>
+          
+            <h4>c. Points de redistribution</h4>
+                  <p>
+                    Il s'agit des usines de traitement des déchets:
+                    <ul>
+                      <li>Compostage: déchets ménagers</li>
+                      <li>Recyclage: déchets recyclables</li>
+                      <li>Incinération/régénération: déchets dangereux</li>
+                    </ul>
+                  </p>
+
+        <h3>2. Les matériels</h3>
+          <table>
+              <thead>
+                <tr>
+                  <th>Matériel</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Robot mobile: <a href="https://category.yahboom.net/fr/collections/j-robotic-car/products/rosmaster-x3" target="_blank">Rosmaster X3</a></td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Robot mobile et autonome</li>
+                      <li>Muni de capteurs pour détecter les déchets</li>
+                      <li>Muni d'un mécanisme pour collecter les déchets</li>
+                      <li>Dimensions maximales: 45cmx24,5cmx20cm</li>
+                      <li>Bonne autonomie</li>
+                    </ul>
+                  </td>
+                <tr>
+                  <td>Bras robotique: <a href="https://category.yahboom.net/collections/r-robotics-arm/products/dofbot-jetson_nano" target="_blank">Dofbot Jetson Nano</a></td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Bras articulé équipé d'une caméra</li>
+                      <li>Intégré à la station de tri</li>
+                      <li>Identification et classement des déchets</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Convoyeur</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Système de bande transporteuse conçu et fabriqué par chaque équipe</li>
+                      <li>Acheminement des déchets collectés jusqu'au bras robotique</li>
+                      <li>Communication avec le bras robotique</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Map EcoCity</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>10 quartiers</li>
+                      <li>Zones: de dépot, de départ/arrivée</li>
+                      <li>des QR Codes pour l'identification</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Cubes de déchets</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Ménagers: plastiques, papiers, organiques(5 pts/cube)</li>
+                      <li>Recyclables: cartons, bouteilles, métaux(10 pts/cube)</li>
+                      <li>Dangereux: batteries, produits chimiques(15 pts/cube)</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Corbeille de tri</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Bleue: déchets ménagers</li>
+                      <li>Verte: déchets recyclables</li>
+                      <li>Rouge: déchets dangereux</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Stations de redistribution</td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Usine de compostage(déchets ménagers)</li>
+                      <li>Usine d'incinération/régénération(dangereux)</li>
+                      <li>Usine de recyclage(déchets commerciaux/recyclables)</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+          
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/Manuel%20de%20Jeu%20-%20TRC25%20V3.pdf" target="_blank" class="download-link">Télécharger le manuel de jeu</a>
+            </p>
+          
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

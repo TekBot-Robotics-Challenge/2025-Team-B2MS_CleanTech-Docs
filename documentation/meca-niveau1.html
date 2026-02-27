@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <title>Département Mécanique</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Département Mécanique</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+
+        <div class="nav-section">
+          <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+          <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+          <a href="./mecanique" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-cogs"></i> Mécanique</button> </a>       
+          
+          <div class="sub-links">
+            <a href="./meca-niveau1" class="subtab-button active">Niveau 1</a>
+            <nav class="project-subnav active" id="subnav-test1">
+              <a href="#1-test1">Objectifs</a>
+              <a href="#2-test1">Conception de pièces</a>
+              <a href="#3-test1">Assemblage</a>
+            </nav>
+            <a href="./meca-niveau2" class="subtab-button">Niveau 2</a>
+            <a href="./meca-niveau3" class="subtab-button">Niveau 3</a>
+          </div>
+        </div>
+
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="meca-content" class="tab-content active">
+
+        <div id="test1" class="subtab-content active">
+          <h2 id="projet1" class="projet-titre">Niveau débutant</h2>
+
+          <h3 id="1-test1">Objectifs:</h3>
+            <p>
+              Cette partie vise à évaluer vos compétences de base en conception assistée par ordinateur (CAO) à l’aide de SolidWorks.
+            </p>
+            <p>
+              Il est divisé en deux grandes parties :
+            </p>
+            <ul>
+              <li>
+                Modélisation de pièces simples : Modéliser des pièces simples en respectant 
+                les consignes géométriques, les matériaux et les unités, puis déterminer leur masse.
+              </li>
+              <li>
+                Assemblage d’un mécanisme de pince mécanique : Assembler une pince mécanique à l’aide des fichiers fournis
+                et déterminer les coordonnées du centre de masse dans deux positions.
+              </li>
+            </ul>
+
+          <h3 id="2-test1">Partie 1: Conception de pièces 3D</h3>
+          <h4>1. Pièce I</h4>
+            <div class="image-container">
+              <img src="../images/Test1/Mecanique/Piece1/piece1a.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece1/piece1b.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece1/piece1c.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece1/piece1d.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece1/piece1e.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece1/piece1f.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece1/piece1g.webp" alt="Piece" class="image-small" />
+            </div>
+
+          <video controls width=50%>
+            <source src="../videos/Test1/Mecanique/piece1.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.                   
+          </video>
+          <p class="txt_center">
+            <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test1/Mecanique/Pi%C3%A8ce1.SLDPRT" download class="download-link">télécharger la pièce 1</a>
+          </p> 
+          
+          <p>
+            Ce qui donne :
+          </p>
+          <div class="image-container">
+            <img src="../images/Test1/Mecanique/Piece1/piece1_propriete.webp" alt="Piece" class="image-small" />
+            <p>
+              La masse de la pièce est donc 3201.11 g.
+            </p>
+          </div>
+          
+          
+          <h4>2. Pièce II</h4>
+            <div class="image-container">
+            <!-- <img src="../images/Test1/Mecanique/Piece2/piece2a.webp" alt="Piece" class="image-small" /> -->
+            <img src="../images/Test1/Mecanique/Piece2/piece2b.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece2/piece2c.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece2/piece2d.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece2/piece2e.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece2/piece2f.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece2/piece2g.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece2/piece2h.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece2/piece2i.webp" alt="Piece" class="image-small" />
+          </div>
+
+          <video controls width=50%>
+            <source src="../videos/Test1/Mecanique/piece2.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.                   
+          </video>
+
+          <p class="txt_center">
+            <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test1/Mecanique/Pi%C3%A8ce2.SLDPRT" download class="download-link">télécharger la pièce 2</a>
+          </p>
+          
+         <p>
+            Ce qui donne :
+          </p>
+          <div class="image-container">
+            <img src="../images/Test1/Mecanique/Piece2/piece2_propriete.webp" alt="Piece" class="image-small" />
+            <p>
+              La masse de la pièce est donc 296.30 g.
+            </p>
+          </div>
+
+          <h4>3. Pièce III</h4>
+            <div class="image-container">
+            <img src="../images/Test1/Mecanique/Piece3/piece3a.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece3/piece3b.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece3/piece3c.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece3/piece3d.webp" alt="Piece" class="image-small" />
+            <img src="../images/Test1/Mecanique/Piece3/piece3e.webp" alt="Piece" class="image-small" />
+          </div>
+
+          <video controls width=50%>
+            <source src="../videos/Test1/Mecanique/piece3.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.                   
+          </video>
+
+          <p class="txt_center">
+            <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test1/Mecanique/Pi%C3%A8ce3.SLDPRT" download class="download-link">télécharger la pièce 3</a>
+          </p>
+
+          <p>
+            Ce qui donne :
+          </p>
+
+          <div class="image-container">
+            <img src="../images/Test1/Mecanique/Piece3/piece3_propriete.webp" alt="Piece" class="image-small" />
+            <p>
+              La masse de la pièce est donc 1633.25 g.
+            </p>
+          </div>
+
+          <h4>4. Pièce IV</h4>
+            <div class="image-container">
+              <img src="../images/Test1/Mecanique/Piece4/piece4a.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece4/piece4b.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece4/piece4c.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece4/piece4d.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece4/piece4e.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece4/piece4f.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece4/piece4g.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece4/piece4h.webp" alt="Piece" class="image-small" />
+              <img src="../images/Test1/Mecanique/Piece4/piece4i.webp" alt="Piece" class="image-small" />
+            </div>
+
+            <video controls width=50%>
+            <source src="../videos/Test1/Mecanique/piece4.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.                   
+          </video>
+
+          <p class="txt_center">
+            <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test1/Mecanique/Pi%C3%A8ce4.SLDPRT" download class="download-link">télécharger la pièce 4</a>
+          </p>
+        
+          <p>
+            Ce qui donne :
+          </p>
+
+          <div class="image-container">
+            <img src="../images/Test1/Mecanique/Piece4/piece4_propriete.webp" alt="Piece" class="image-small" />
+            <p>
+              La masse de la pièce est donc 131.77 g.
+            </p>
+          </div>
+
+          <h3 id="3-test1">Partie2 : Assemblage  d’une pince mécanique</h3>
+          <p>
+          Ayant les pièces fournies, nous avons suivi les plans ci-dessous :
+        </p>
+          <div class="image-container">
+            <img src="../images/Test1/Mecanique/Assemblage/pieces_fournies.webp" alt="Piece" class="image-small" />
+          </div>
+
+          <div class="image-container">
+            <img src="../images/Test1/Mecanique/Assemblage/plan1.webp" alt="Piece" class="image-mean" />
+            <img src="../images/Test1/Mecanique/Assemblage/plan2.webp" alt="Piece" class="image-small" />
+          </div>
+
+          <h4>1. Embout de vérin en position minimale</h4>
+          <div class="image-container">
+            <img src="../images/Test1/Mecanique/Assemblage/assemblage1.webp" alt="Piece" class="image-mean"/>
+            <img src="../images/Test1/Mecanique/Assemblage/assemblage1_propriete.webp" alt="Piece" class="image-small" />
+            <p>
+              Le centre de gravité de l'objet : (13.84; 3.78; 19.86).
+            </p>
+          </div>
+
+          <h4>2. Embout de vérin en position maximale</h4>
+          <div class="image-container">
+            <img src="../images/Test1/Mecanique/Assemblage/assemblage2.webp" alt="Piece" class="image-mean" />
+            <img src="../images/Test1/Mecanique/Assemblage/assemblage2_propriete.webp" alt="Piece" class="image-small" />
+            <p>
+              Le centre de gravité de l'objet : (10.47; 3.87; 19.86).
+            </p>
+          </div>
+
+          <p class="txt_center">
+             <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test1/Mecanique/AssemblageTEST1.SLDASM" download class="download-link">télécharger la pince mécanique</a>
+          </p>
+
+    </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

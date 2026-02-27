@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Résilience Urbaine - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Résilience Urbaine</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+
+        <div class="nav-section">
+          <a href="./trc25" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-robot"></i> TRC25</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button" href="./trc25-convoyeur">Convoyeur 2.0</a>
+            <a class="subtab-button" href="./trc25-dofbot">Prise en main du Dofbot</a>
+            <a class="subtab-button" href="./trc25-communication">Communication Dofbot - Convoyeur</a>
+            <a class="subtab-button active" href="./trc25-yolo">Modèle de détection YOLO</a>
+            <nav class="project-subnav active" id="subnav-yolo">
+              <a href="#1-yolo">1. Configuration de l'environnement</a>
+              <a href="#2-yolo">2. Collecte et annotation des images</a>
+              <a href="#3-yolo">3. Structure des dossiers</a>
+              <a href="#4-yolo">4. Codage sur Jupyter</a>
+              <a href="#6-yolo">5. Scripts python</a>
+              <a href="#7-yolo">6. YOLOv5 vs YOLOv8</a>
+            </nav>
+            <a class="subtab-button" href="./trc25-dofbot_ia">Détection et tri - Dofbot</a>
+            <a class="subtab-button" href="./trc25-ros">ROS</a>
+            <a class="subtab-button" href="./trc25-meca">Système de ramassage</a>
+          </div>
+        </div>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section class="tab-content active">
+        <div class="subtab-content active">
+          <h2 id="yolo" class="projet-titre">Détection des déchets</h2>
+            <p>
+              Le modèle de détection, d'indentification et de classement des déchets se fera via YOLO.
+              <br>
+              <a href="https://docs.ultralytics.com/fr/#yolo-a-brief-history" target="_blank">YOLO(You Only Look Once)</a>
+               est un réseau de neurones convolutionnel (CNN) conçu pour la détection d’objets en temps réel.
+              <br>
+              Parmi les différentes versions de YOLO, YOLOv8 a été retenue comme référence dans cette documentation, car elle présente un meilleur compromis entre vitesse d’exécution et exactitude des détections.  
+              Par la suite, une comparaison entre YOLOv5 et YOLOv8 sera faite afin de déterminer la version la plus appropriée pour le <strong>Dofbot Yahboom</strong>.
+            </p>
+          <h3 id="1-yolo">1. Configuration de l'environnement</h3>
+            <p>
+              Les déchets seront détectés et identifiés par un modèle entrainé sur YOLOv8.
+              Pour cela, il faut commencer par configurer l'environnement de travail avec <a href="https://www.anaconda.com/download/success">Anaconda</a>.
+            </p>
+            <h4>a. Installer Anaconda</h4>
+              <p>
+                Anaconda est une distribution logicielle open-source qui facilite l'installation et la gestion d'environnements Python.
+                Il permet d'installer des librairies sans se soucier des conflits avec les librairies déjà existantes.
+                <br>
+                <ul>
+                  <li><a href="https://www.anaconda.com/download/success" target="_blank">Télécharger anaconda</a></li>
+                  <li>Installer et suiver les étapes d'installation</li>
+                  <li>Ouvrir "<strong><em>Anaconda Prompt</em></strong>"</li>
+                </ul>
+              </p>
+            <div class="image-container">
+              <img src="../images/TRC25/YOLO/anaconda_prompt.webp" alt="anaconda prompt" class="image-small"/>
+            </div>
+
+            <h4>b. Environnement et librairies</h4>
+              <p>
+                Ayant réussi à installer anaconda, il est temps de créer l'environnement de travail et d'y installer les librairies nécessaires.
+                <br>
+                <ul>
+                  <li>Création d'un nouvel environnement</li>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('creation_env', this)">📋</button>
+                      </div>
+                      <pre><code class="hljs" id="creation_env">
+conda create --name b2ms-env python=3.12 -y
+                      </code></pre>
+                    </div>
+                    <li>Activation de l'environnement créé</li>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('activation_env', this)">📋</button>
+                      </div>
+                      <pre><code class="hljs" id="activation_env">
+conda activate b2ms-env
+                      </code></pre>
+                    </div>
+                    <li>Installation de <strong>Ultralytics</strong>: package de librairies python pour le modèle YOLO</li>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('ultralytics', this)">📋</button>
+                      </div>
+                      <pre><code class="hljs" id="ultralytics">
+pip install ultralytics
+                      </code></pre>
+                    </div>
+                    <p>
+                      Cette commande va également installer plusieurs librairies: OpenCV, Numpy, Sympy, PyTorch(version sur CPU par défaut), etc.
+                      <br>
+                    </p>
+                  <li>Installation de PyTorch avec CUDA v12.4: pour les ordinateurs ayant un GPU</li>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('pytorch_gpu', this)">📋</button>
+                      </div>
+                      <pre><code class="hljs" id="pytorch_gpu">
+pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+                      </code></pre>
+                    </div>
+                    <p>
+                      Cela permet d'entraîner le modèle sur un ordinateur équipé d'un GPU.
+                      Pour les ordinateurs qui n'en possèdent pas, <a href="https://colab.google/" target="_blank">Google Colab</a> 
+                      offre la possibilité d'effectuer l'entraînement à distance grâce à ses ressources GPU.
+                    </p>
+                    <li>Vérification de PyTorch avec CUDA v12.4: cette commande affichera le GPU du système si CUDA a été installé correctement.</li>
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('pytorch_check', this)">📋</button>
+                      </div>
+                      <pre><code class="hljs" id="pytorch_check">
+python -c "import torch; print(torch.cuda.get_device_name(0))"
+                      </code></pre>
+                    </div>
+                </ul>
+              </p>
+
+          <h4>c. Anaconda Navigator et Jupyter</h4>
+            <p>
+              Pour pouvoir utiliser certains logiciels sur Anaconda Navigator, il faut les ajouter sur l'environnement de travail.
+              Il faut commencer par <strong>activer</strong> l'environnement désiré.         
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('ipykernel', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="ipykernel">
+conda activate b2ms-env
+conda install ipykernel #noyau Python utilisé par Jupyter
+pip install ipykernel
+python -m ipykernel install --user --name=b2ms-env --display-name "B2MS-Env"
+conda install jupyter
+                </code></pre>
+              </div>
+              <p class="txt_center">
+                <strong>Jupyter notebook</strong> sera notamment très utile lors de la phase de codage.
+              </p>
+            </p>
+
+          <h3 id="2-yolo">2. Collecte et annotation des images</h3>
+            <p>
+              Pour pouvoir entrainer le modèle de détection, il faut un dataset: <strong>des images étiquettées</strong>.
+              Un jeu de 100 à 200 images constitue généralement un bon point de départ pour développer un prototype de modèle, mais il faut l'enrichir le plus possible.
+              Les images utilisées pour l'entraînement doivent présenter les objets dans <strong>différents contextes</strong>, avec <strong>des angles de vue</strong> et des <strong>éclairages variés</strong>, similaires à ceux rencontrés dans les conditions réelles d’utilisation.
+              Il est également recommandé d'ajouter des objets non pertinents dans les images afin d'aider le modèle à différencier les éléments à détecter de ceux à ignorer.
+            </p>
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_YOLO/ressources_images.zip" target="_blank" class="download-link">Télécharger les images à annoter</a>
+            </p>
+
+            <p>
+              Une fois les images prises, il faut les étiquetter grâce à des outils comme <a href="https://labelstud.io/">Label Studio</a> ou <a href="https://universe.roboflow.com/">Roboflow</a>.
+            </p>
+
+            <h4>a. Label Studio</h4>
+              <p>
+                Label Studio, open-source et facile à prendre en main, a été choisi pour étiquetter les images.
+              </p>
+              <ul>
+                <li>Installation de Label Studio:</li>
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('label_studio', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="label_studio">
+conda activate b2ms-env
+pip install label-studio
+                    </code></pre>
+                  </div>
+                <li>Lancement de Label Studio:</li>
+                  <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('label_studio_start', this)">📋</button>
+                  </div>
+                  <pre><code class="hljs" id="label_studio_start">
+label-studio start
+                  </code></pre>
+                </div>
+              </ul>
+              <p>
+                Une fois l'interface ouverte, il suffit de saisir une adresse e-mail et un mot de passe (réels ou fictifs) pour y accéder.
+                <ul>
+                  Exemple:
+                  <li>
+                    <strong>Identifiant(mail):</strong> b2ms@gmail.com
+                  </li>
+                  <li>
+                    <strong>Mot de passe:</strong> #TRC2025
+                  </li>
+                </ul>
+              </p>
+              <p>
+                Toutes les données sont stockées localement.
+              </p>
+            <figure>
+              <video controls width=auto>
+                <source src="../videos/TRC25/YOLO/label_studio.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <p class="txt_center">Etiquetage de certaines images avec Label Studio</p>
+            </figure>
+
+            <p>
+              Après avoir étiquetté les images, il faut les exporter. Voici à quoi devrait ressembler le contenu du fichier <strong><em>zip</em></strong> exporté:
+            </p>
+            <div class="arbo">
+              <ul>
+                  <li class="folder">images
+                    <ul>
+                      <li class="img">image1.jpg</li>
+                      <li class="img">image2.jpg</li>
+                      <li class="img">image3.jpg</li>
+                      <li class="img">...</li>
+                    </ul>
+                  <li class="folder">labels
+                    <ul>
+                      <li class="txt">image1.txt</li>
+                      <li class="txt">image2.txt</li>
+                      <li class="txt">image3.txt</li>
+                      <li class="txt">...</li>
+                    </ul>
+                  <li class="txt">classes.txt</li>      
+                </ul>
+              </ul>
+            </div>
+
+          <h4>b. Roboflow</h4>
+              <p>
+                Roboflow Annotate est un outil en ligne pour l'étiquetage d'images pour diverses tâches de vision par ordinateur.
+                Il offre plusieurs fonctionnalités notamment l'auto-étiquetage et l'ajout des différents paramétres de perspctive et de luminosité.
+                <br>
+                Les fichiers étiquetés précédemment sont importés dans Roboflow afin d'utiliser les fonctionnalités suivantes:
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Catégories</th>
+                      <th>Transformations</th>
+                      <th>Descriptions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Géométriques</td>
+                      <td> 
+                        <ul class="dash-list">
+                          <li>Retournement(flip)</li>
+                          <li>Rotation</li>
+                          <li>Recadrage(crop)</li>
+                          <li>Cisaillement(shear)</li>
+                        </ul> 
+                      </td>
+                      <td>Apprendre au modèle à reconnaître les objets sous différentes orientations et cadrages.</td>
+                    </tr>
+                    <tr>
+                      <td>Photométriques</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>Teinte(hue)</li>
+                          <li>Luminosité(brightness)</li>
+                          <li>Exposition(exposure)</li>
+                          <li>Flou(blur)</li>
+                          <li>Bruit(noise)</li>
+                        </ul> 
+                      </td>
+                      <td>Rendre le modèle robuste aux changements de lumière, couleur et qualité d’image.</td>
+                    </tr>
+                  </tbody>
+                </table> 
+              </p>
+
+              <figure>
+              <video controls width=auto>
+                <source src="../videos/TRC25/YOLO/roboflow.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <p class="txt_center">Utilisation de Roboflow</p>
+            </figure>
+          
+            <p>
+              Par la suite, nous avons continué à utiliser Roboflow, car il permet non seulement de collaborer en équipe, 
+              mais aussi d'annoter automatiquement les images importées.
+            </p>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_YOLO/2000_labeled_images_for_YOLO.zip" target="_blank" class="download-link">Télécharger les images annotées pour YOLOv8</a>
+            </p>
+
+          <h3 id="3-yolo">3. Structure des dossiers</h3>
+            <p>
+              Ultralytics exige une structure de dossiers particulière pour les données d'entraînement des modèles. 
+              Le dossier racine est nommé <strong>data</strong>. 
+              À l'intérieur, il y a deux dossiers principaux :
+              <ul>
+                <li>
+                  <strong>train</strong> contient les images et les labels utilisés pour entraîner le modèle. 
+                  L'algorithme d'entraînement ajuste le modèle en fonction des données présentes dans ces images.
+                </li>
+                <li>
+                  <strong>valid</strong> contient les images et les labels qui sont utilisés périodiquement 
+                  pour tester le modèle pendant l'entraînement. 
+                  À la fin de chaque époque d'entraînement, le modèle est évalué sur ces images afin de calculer 
+                  des métriques comme la <strong>précision</strong>, le <strong>rappel</strong> et le <strong>mAP</strong>.
+                </li>
+              </ul>
+              </p>
+              <p>
+                En général, <strong>80%</strong> des images d'un dataset sont placées dans le dossier <strong>train</strong> et <strong>20%</strong> dans <strong>validation</strong>. 
+                Dans chacun de ces dossiers se trouvent un dossier images et un dossier labels, qui contiennent respectivement les fichiers d'images et les fichiers d'annotations.
+                <br>
+                La structure globale des dossiers requise pour entraîner les modèles YOLO d'Ultralytics est illustrée ci-dessous. 
+              </p>
+              <div class="arbo">
+              <ul>
+                  <li class="folder">data
+                    <ul>
+                      <li class="folder">train
+                        <ul>
+                          <li class="folder">images
+                            <ul>
+                              <li class="img">image1.jpg</li>
+                              <li class="img">image2.jpg</li>
+                              <li class="img">image3.jpg</li>
+                              <li class="img">...</li>
+                            </ul>
+                          <li class="folder">labels
+                            <ul>
+                              <li class="txt">image1.txt</li>
+                              <li class="txt">image2.txt</li>
+                              <li class="txt">image3.txt</li>
+                              <li class="txt">...</li>
+                            </ul>
+                            <li class="txt">classes.txt</li>      
+                        </ul>
+                      </li>
+                      <li class="folder">valid
+                        <ul>
+                          <li class="folder">train
+                            <ul>
+                              <li class="img">image101.jpg</li>
+                              <li class="img">image102.jpg</li>
+                              <li class="img">image103.jpg</li>
+                              <li class="img">...</li>
+                            </ul>
+                          <li class="folder">labels
+                            <ul>
+                              <li class="txt">image101.txt</li>
+                              <li class="txt">image102.txt</li>
+                              <li class="txt">image103.txt</li>
+                              <li class="txt">...</li>
+                            </ul>
+                            <li class="txt">classes.txt</li>  
+                          </ul>
+                        </li>   
+                            <li class="txt" style="display: block">data.yaml</li>      
+                        </ul>
+                      </li>                    
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <p>
+                <strong>NB:</strong> Cette structure peut être effectuée manuellement 
+                ou automatiquement grâce à un script Python présenté dans la section suivante.
+              </p>
+
+              <p>
+                Dans le fichier <strong><em>data.yaml</em></strong>:
+              </p>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('yaml', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="yaml">
+path: D:\TRC25\IA\detection\data
+train: train\images
+val: valid\images
+
+nc: 3
+
+names: [“dangereux”, ”menagers”, ”recyclables”]
+                </code></pre>
+              </div>
+              <ul>
+                <li><strong>path</strong> indique le chemin absolu du dossier <strong>data</strong></li>
+                <li><strong>train</strong> dossier d'entrainement</li>
+                <li><strong>val</strong> dossier de validation</li>
+                <li><strong>nc</strong> le nombre de classes d'objets à détecter</li>
+                <li><strong>names</strong> les différentes classes d'objets à détecter</li>
+              </ul>
+            
+          <h3 id="4-yolo">4. Codage sur Jupyter</h3>
+              <p>
+                Une fois dans l'environnement virtuel et dans le dossier souhaité (par exemple <strong>YOLO_detection</strong>), 
+                il suffit de lancer <strong>Jupyter Notebook</strong> avec :
+              </p>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('jupyter_notebook', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="jupyter_notebook">
+jupyter notebook
+                </code></pre>
+              </div>
+              <p>
+                Un onglet s'ouvrira automatiquement dans un navigateur. 
+                Il est alors possible de créer un fichier <strong><em>.ipynb</em></strong> pour commencer à écrire le code.  
+              </p>
+
+            <h4>a. Importation des bibliothèques</h4>
+              <p>
+                La première étape consiste à importer toutes les bibliothèques Python nécessaires :
+              </p>
+              <details class="code-container">
+                <summary>
+                  import
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('import', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="import">
+import torch                       # Gestion des tenseurs et exécution des modèles YOLO
+import cv2                         # Traitement d’images (OpenCV)
+import matplotlib.pyplot as plt    # Affichage d’images, graphiques
+import numpy as np                 # Calculs numériques
+from PIL import Image              # Chargement et manipulation d’images (format PIL)
+import os                          # Gestion des fichiers/dossiers
+from ultralytics import YOLO       # utilisation des modèles YOLO
+import yaml                        # Lecture/écriture des fichiers YAML
+from pathlib import Path           # Gestion pratique et sécurisée des chemins de fichiers
+import random                      # Sélection aléatoire
+import sys                         # Accès au système
+import shutil                      # manipulation des fichiers/dossiers
+from tqdm import tqdm              # Barre de progression
+import glob                        # Recherche de fichiers
+import pandas as pd                # Gestion et manipulation de données tabulaires
+import math                        # fonctions mathématiques
+                </code></pre>
+              </details>
+            
+            <h4>b. Structure des dossiers</h4>
+              <p>
+                Cette étape consiste à organiser les dossiers conformément à la structure décrite précédemment.
+              </p>
+              <details class="code-container">
+                <summary>
+                  organisation des dossiers
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('data_structure', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="data_structure">
+# Paramètres
+data_path = "./dataset"     # Chemin du dataset d'origine
+train_percent = 0.8         # Pourcentage d'images pour l'entraînement (train), le reste sera utilisé pour la validation (val)
+
+
+# Vérification des paramètres
+if not os.path.isdir(data_path):
+    print("Le dossier spécifié par data_path est introuvable. Vérifie le chemin et réessaie.")
+    sys.exit(0)
+
+if train_percent < 0.01 or train_percent > 0.99:
+    print("Valeur invalide pour train_percent. Elle doit être comprise entre 0.01 et 0.99.")
+    sys.exit(0)
+
+val_percent = 1 - train_percent
+
+
+# Définition des chemins
+input_image_path = os.path.join(data_path, "images")  # Dossier contenant les images originales
+input_label_path = os.path.join(data_path, "labels")  # Dossier contenant les labels
+
+cwd = os.getcwd()
+
+# Dossiers de sortie
+train_img_path = os.path.join(cwd, "data/train/images")
+train_label_path = os.path.join(cwd, "data/train/labels")
+val_img_path = os.path.join(cwd, "data/valid/images")
+val_label_path = os.path.join(cwd, "data/valid/labels")
+
+
+# Nettoyage et création des dossiers
+for path in [train_img_path, train_label_path, val_img_path, val_label_path]:
+    if os.path.exists(path):
+        shutil.rmtree(path)  # Supprime les anciens fichiers pour éviter les doublons
+    os.makedirs(path)  # Crée les nouveaux dossiers vides
+    print(f"Dossier prêt : {path}")
+
+
+# Récupération des fichiers
+img_file_list = [path for path in Path(input_image_path).rglob("*") if path.is_file()]
+txt_file_list = [path for path in Path(input_label_path).rglob("*") if path.is_file()]
+
+print(f"\nNombre total d'images : {len(img_file_list)}")
+print(f"Nombre total de fichiers d'annotation : {len(txt_file_list)}")
+
+
+# Détermination du nombre de fichiers à déplacer
+file_num = len(img_file_list)
+train_num = int(file_num * train_percent)
+val_num = file_num - train_num
+
+print(f"\nImages vers train : {train_num}")
+print(f"Images vers valid : {val_num}")
+
+
+# Mélange aléatoire des images
+random.shuffle(img_file_list)
+train_files = img_file_list[:train_num]
+val_files = img_file_list[train_num:]
+
+# Train
+for img_path in tqdm(train_files, desc="Copie des fichiers train"):
+    img_fn = img_path.name
+    base_fn = img_path.stem
+    txt_fn = base_fn + ".txt"
+    txt_path = os.path.join(input_label_path, txt_fn)
+
+    # Copie de l'image
+    shutil.copy(img_path, os.path.join(train_img_path, img_fn))
+
+    # Copie du label si disponible
+    if os.path.exists(txt_path):
+        shutil.copy(txt_path, os.path.join(train_label_path, txt_fn))
+
+# Validation
+for img_path in tqdm(val_files, desc="Copie des fichiers validation"):
+    img_fn = img_path.name
+    base_fn = img_path.stem
+    txt_fn = base_fn + ".txt"
+    txt_path = os.path.join(input_label_path, txt_fn)
+
+    shutil.copy(img_path, os.path.join(val_img_path, img_fn))
+
+    if os.path.exists(txt_path):
+        shutil.copy(txt_path, os.path.join(val_label_path, txt_fn))
+
+
+print("\nDivision du dataset terminée avec succès !")
+print(f"Train : {len(os.listdir(train_img_path))} images")
+print(f"Validation : {len(os.listdir(val_img_path))} images")
+                </code></pre>
+              </details>
+              <div class="image-container">
+                <img src="../images/TRC25/YOLO/data_structure.webp" alt="structure des dossiers" class="image-mean"/>
+              </div>
+
+            <h4>c. Configuration de l'entraînement</h4>
+              <p>
+                Cette étape permet de définir le modèle YOLO pré-entraîné à utiliser ainsi que tous les paramètres 
+                nécessaires pour l'entraînement(nombre d'époques, taille des images, batch, learning rate, etc.).
+              </p>
+              <details class="code-container">
+                <summary>
+                  Configuration d'entrainement
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('config_train', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="config_train">
+# Chargement du modèle YOLOv8 pré-entraîné
+model = YOLO('yolov8n.pt')  # nano version (plus rapide)
+
+# Configuration de l'entraînement
+epochs = 20
+imgsz = 640
+batch = 16
+
+train_config = {
+    'data': 'data.yaml', 
+    'epochs': epochs,            
+    'imgsz': imgsz,          
+    'batch': batch,            
+    'device': 0 if torch.cuda.is_available() else 'cpu',
+    'workers': 4,           
+    'project': 'runs/detect',  # Nom du projet
+    'name': 'train',        # Nom de l'expérience
+    'save_period': 5,       # Sauvegarde tous les 5 epochs
+    'patience': 5,          # Early stopping
+    'lr0': 0.01,           # Learning rate initial
+    'warmup_epochs': 1,     # Epochs de warmup
+    'verbose': True
+}
+
+print("Configuration d'entraînement :")
+for key, value in train_config.items():
+    print(f"  {key}: {value}")
+                </code></pre>
+              </details>
+              <table>
+                  <thead>
+                    <tr>
+                      <th>Paramètre</th>
+                      <th>Description</th>
+                      <th>Impact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>data</td>
+                      <td>Chemin vers le fichier YAML contenant les informations du dataset</td>
+                    </tr>
+                    <tr>
+                      <td>epochs</td>
+                      <td>Nombre total d'époques pour l'entraînement(Nombre de fois que le modèle parcourt l'ensemble du dataset)</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>Trop petit: le modèle peut ne pas apprendre correctement.</li>
+                          <li>Trop grand: risque de sur-apprentissage, et entraînement plus long.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>imgsz</td>
+                      <td>Taille des images utilisées pour l'entraînement</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>Plus petit: rapide mais perte de détails, précision réduite</li>
+                          <li>Plus grand: meilleure précision possible, mais plus de mémoire GPU nécessaire, entraînement plus lent.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>batch</td>
+                      <td>Nombre d'images traitées simultanément</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>Petit batch: moins de mémoire nécessaire, mais entraînement plus bruité et instable.</li>
+                          <li>Grand batch: convergence plus stable, mais plus de mémoire GPU nécessaire.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>device</td>
+                      <td>Appareil utilisé : GPU (0) si disponible, sinon CPU</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>GPU: entraînement beaucoup plus rapide, recommandé si disponible.</li>
+                          <li>CPU:  très lent, déconseillé pour l’entraînement de modèles complexes.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+              </table> 
+
+            <h4>d. Entraînement du modèle</h4>
+              <p>
+                Cette étape lance l'entraînement du modèle YOLOv8 en utilisant la configuration définie précédemment. 
+                Le processus ajuste les poids du modèle pour qu'il apprenne à détecter les objets du dataset.
+              </p>
+              <details class="code-container">
+                <summary>
+                  Entrainement du modèle
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('train_model', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="train_model">
+# Entraînement du modèle
+print("Début de l'entraînement YOLOv8 !")
+print("-" * 50)
+
+# Lancement de l'entraînement
+results = model.train(**train_config)
+
+print("Entraînement terminé !")
+print(f"Modèle sauvegardé dans : {results.save_dir}")
+                </code></pre>
+              </details>
+              <ul>
+                <li><strong>model.train(**train_config)</strong>: exécute l'entraînement avec tous les paramètres définis dans <strong><em>train_config</em></strong>.</li>
+                <li><strong>results.save_dir</strong>: indique le dossier où le modèle entraîné et les résultats sont sauvegardés.</li>
+              </ul>
+              <div class="image-container">
+                <img src="../images/TRC25/YOLO/training_1.webp" alt="entrainement du modele" class="image-mean"/>
+                <img src="../images/TRC25/YOLO/training_2.webp" alt="entrainement du modele" class="image-mean"/>
+              </div>
+
+            <h4>e. Visualisation des métriques</h4>
+              <p>
+                Après l'entraînement, il est important de visualiser les métriques pour évaluer les performances du modèle, comme la précision, le rappel, etc. 
+                Cela permet de vérifier si le modèle apprend correctement et d'identifier d'éventuels problèmes.
+              </p>
+              <details class="code-container">
+                <summary>
+                  Visualisation des métriques
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('metric_visualization', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="metric_visualization">
+results_path = Path(f"{train_config["project"]}/{train_config["name"]}")
+csv_path = results_path / 'results.csv'
+
+if csv_path.exists():
+    # Lecture des métriques
+    df = pd.read_csv(csv_path)
+    df.columns = df.columns.str.strip()
+
+    # Suppression des colonnes inutiles
+    if 'epoch' not in df.columns:
+        print(" Colonne 'epoch' introuvable. Vérifie ton fichier CSV.")
+    else:
+        metrics = [c for c in df.columns if c != 'epoch' and c !=
+                  'time' and c != 'lr/pg0' and c != 'lr/pg1' and c != 'lr/pg2']
+
+        n = len(metrics)
+        cols = 5
+        rows = math.ceil(n / cols)
+
+        #Affichage de l'image sur jupyter notebook
+        %matplotlib inline  
+        fig, axes = plt.subplots(rows, cols, figsize=(5 * cols, 4 * rows))
+        axes = axes.flatten() if n > 1 else [axes]
+
+        # Boucle sur chaque métrique
+        for i, col in enumerate(metrics):
+            axes[i].plot(df['epoch'], df[col], '-o', linewidth=2)
+            axes[i].set_title(col, fontsize=10)
+            axes[i].set_xlabel('epoch')
+            axes[i].grid(True)
+
+        # Si la grille a plus de cases que de métriques, on cache les cases vides
+        for j in range(i + 1, len(axes)):
+            axes[j].axis('off')
+
+        plt.suptitle("Évolution des métriques YOLO", fontsize=14)
+        plt.tight_layout(rect=[0, 0, 1, 0.97])
+        plt.show()
+
+        # MÉTRIQUES FINALES
+        final_metrics = df.iloc[-1]
+        print("\n=== MÉTRIQUES FINALES ===")
+        for col in metrics:
+            val = final_metrics[col]
+            if pd.api.types.is_numeric_dtype(type(val)):
+                print(f"{col:30s} : {val:.4f}")
+            else:
+                print(f"{col:30s} : {val}")
+
+else:
+    print("Fichier de résultats non trouvé :", csv_path)
+                </code></pre>
+              </details>
+              <div class="image-container">
+                <img src="../images/TRC25/YOLO/metric_visualization.webp" alt="visualisation métrique" class="image-mean"/>
+              </div>
+
+              <table>
+                  <thead>
+                    <tr>
+                      <th>Métrique</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>train/box_loss</td>
+                      <td>Erreur sur la localisation des boîtes englobantes pendant l’entraînement</td>
+                    </tr>
+                    <tr>
+                      <td>train/cls_loss</td>
+                      <td>Erreur sur la classification des objets dans les boîtes pendant l’entraînement</td>
+                    </tr>
+                    <tr>
+                      <td>train/dfl_loss</td>
+                      <td>Erreur de distribution des distances pour affiner les boîtes (Distance Focal Loss)</td>
+                    </tr>
+                    <tr>
+                      <td>val/box_loss</td>
+                      <td>Erreur sur la localisation des boîtes sur le dataset de validation</td>
+                    </tr>
+                    <tr>
+                      <td>val/cls_loss</td>
+                      <td>Erreur sur la classification des objets sur le dataset de validation</td>
+                    </tr>
+                    <tr>
+                      <td>val/dfl_loss</td>
+                      <td>Erreur de distribution des distances sur le dataset de validation</td>
+                    </tr>
+                    <tr>
+                      <td>metrics/precision(B)</td>
+                      <td>Précision du modèle: proportion de détections correctes sur toutes les détections(batch)</td>
+                    </tr>
+                    <tr>
+                      <td>metrics/recall(B)</td>
+                      <td>Rappel: proportion d'objets réellement présents correctement détectés(batch)</td>
+                    </tr>
+                    <tr>
+                      <td>metrics/mAP50(B)</td>
+                      <td>Mean Average Precision à IoU 0.5: qualité globale de détection(batch)</td>
+                    </tr>
+                    <tr>
+                      <td>metrics/mAP50-95(B)</td>
+                      <td>Mean Average Precision moyenne sur IoU de 0.5 à 0.95(batch)</td>
+                    </tr>
+                  </tbody>
+              </table> 
+
+            <h4>f. Evaluation sur données de validation</h4>
+              <p>
+                Une fois l'entraînement terminé, il est essentiel d'évaluer le modèle sur le jeu de données de validation. 
+                Cela permet de mesurer ses performances sur des données qu'il n'a jamais vues, et d'obtenir des métriques fiables 
+                afin de vérifier que le modèle généralise correctement.
+              </p>
+              <details class="code-container">
+                <summary>
+                  Evaluation sur validation
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('evaluation_val', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="evaluation_val">
+# Évaluation du modèle entraîné
+print("Évaluation du modèle...")
+
+# Chargement du meilleur modèle
+best_model_path = Path(f"{train_config["project"]}/{train_config["name"]}/weights/best.pt")
+
+if os.path.exists(best_model_path):
+    model = YOLO(best_model_path)
+    print(f"Modèle chargé : {best_model_path}")
+else:
+    print("Meilleur modèle non trouvé, utilisation du modèle pré-entraîné")
+
+# Validation
+val_results = model.val(data='data.yaml', imgsz=imgsz)
+
+
+precision = val_results.box.mp    # mean precision
+recall = val_results.box.mr    # mean recall
+f1_score = val_results.box.f1.mean()  # F1-score moyen sur toutes les classes
+map50 = val_results.box.map50
+map5095 = val_results.box.map
+
+# Latence (préprocess + inference + NMS)
+latency = sum(val_results.speed.values())
+
+# Affichage
+print("\n=== Résultats d'évaluation ===")
+print(f"Precision : {precision:.3f}")
+print(f"Recall    : {recall:.3f}")
+print(f"F1-score  : {f1_score:.3f}")
+print(f"mAP@0.5(Mean Average Precicion 0.5&lt;IOU)   : {map50:.3f}")
+print(f"mAP@0.5:0.95(Mean Average Precicion 0.5&lt;IOU&lt;0.95) : {map5095:.3f}")
+print(f"Latence moyenne : {latency:.3f} ms/image")
+                </code></pre>
+              </details>
+              <div class="image-container">
+                <img src="../images/TRC25/YOLO/evaluation_val.webp" alt="evaluation sur validation" class="image-mean"/>
+              </div>
+
+            <h4>g. Test du modèle</h4>
+              <p>
+                Après l'entraînement et l'évaluation, il est possible de tester le modèle sur une image individuelle pour visualiser 
+                concrètement ses prédictions et vérifier que les objets sont correctement détectés
+              </p>
+              <h5>&#10022; Chargement du modèle et fonction de prédiction</h5>
+              <details class="code-container">
+                <summary>Chargement du modèle et fonction de prédiction</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('predict_visualize', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="predict_visualize">
+# Chargement du meilleur modèle
+best_model_path = Path("runs/detect/train/weights/best.pt")
+
+if os.path.exists(best_model_path):
+    model = YOLO(best_model_path)
+    print(f"Modèle chargé : {best_model_path}")
+else:
+    print("Meilleur modèle non trouvé, utilisation du modèle pré-entraîné")
+
+
+def predict_and_visualize(model, image_path, conf_threshold=0.5):
+    """
+    Faire une prédiction et visualiser les résultats
+    """
+    # Prédiction
+    results = model(image_path, conf=conf_threshold)
+
+    # Visualisation
+    annotated_image = results[0].plot()
+
+    # Conversion BGR -> RGB pour matplotlib
+    annotated_image = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
+
+    # Affichage
+    #Affichage de l'image sur jupyter notebook
+    %matplotlib inline     
+    print("Affichage de l'image")
+    plt.figure(figsize=(12, 8))
+    plt.imshow(annotated_image)
+    plt.axis('off')
+    plt.title(f'Détections (Confiance > {conf_threshold})')
+    plt.show()
+
+    # Informations sur les détections
+    boxes = results[0].boxes
+    if boxes is not None:
+        print(f"{len(boxes)} objets détectés :")
+        for i, box in enumerate(boxes):
+            class_id = int(box.cls[0])
+            confidence = float(box.conf[0])
+            class_name = model.names[class_id]
+            print(f"  {i+1}. {class_name} (confiance: {confidence:.2f})")
+    else:
+        print("Aucun objet détecté")
+                </code></pre>
+              </details>
+
+              <h5>&#10022; Test sur une image</h5>
+              <details class="code-container">
+                <summary>
+                  Test sur une image
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('test1_model', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="test1_model">
+# Test sur une image d'exemple
+print("Test sur image d'exemple...")
+
+# Recherche d'images dans le dataset
+image_files = glob.glob('dataset/images/*.jpg')
+if image_files:
+    test_image = image_files[0]
+    print(f"Image de test : {test_image}")
+    predict_and_visualize(model, test_image, conf_threshold=0.5)
+else:
+    print("Aucune image trouvée dans le dataset")
+                </code></pre>
+              </details>
+              <div class="image-container">
+                <img src="../images/TRC25/YOLO/test1_model.webp" alt="test du modèle sur une image" class="image-mean"/>
+              </div>
+
+              <h5>&#10022; Test sur plusieurs images dans un dossier</h5>
+              <details class="code-container">
+                <summary>
+                  Tests sur un dossier d'images
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('test2_model', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="test2_model">
+import time
+import keyboard 
+# Parcours du dossier de test
+test_root = Path("./test")
+
+if not test_root.exists():
+    print(f"Le dossier de test '{test_root}' n'existe pas.")
+else:
+    print("\n--- Début des prédictions ---")
+    stop_flag = False
+
+    for img_path in test_root.glob("*"):
+        if img_path.suffix.lower() in [".jpg", ".jpeg", ".png"]:
+            # Prédiction + affichage
+            predict_and_visualize(model, img_path, conf_threshold=0.5)
+
+            # Pause interactive ou délai 5s
+            print("Appuyez sur 'Entrée' pour continuer, 'Esc' pour arrêter...")
+            start_time = time.time()
+            while True:
+                if keyboard.is_pressed('esc'):
+                    stop_flag = True
+                    break
+                if keyboard.is_pressed('enter') or (time.time() - start_time) > 1:
+                    break
+            if stop_flag:
+                print("Arrêt des prédictions par l'utilisateur.")
+                break
+    print("\nPrédictions terminées.")
+                </code></pre>
+              </details>
+              <div class="image-container">
+                <img src="../images/TRC25/YOLO/test2_model1.webp" alt="test du modèle sur une image" class="image-small"/>
+                <img src="../images/TRC25/YOLO/test2_model2.webp" alt="test du modèle sur une image" class="image-small"/>
+                <img src="../images/TRC25/YOLO/test2_model3.webp" alt="test du modèle sur une image" class="image-small"/>
+                <img src="../images/TRC25/YOLO/test2_model4.webp" alt="test du modèle sur une image" class="image-small"/>
+                <img src="../images/TRC25/YOLO/test2_model5.webp" alt="test du modèle sur une image" class="image-small"/>
+                <img src="../images/TRC25/YOLO/test2_model6.webp" alt="test du modèle sur une image" class="image-small"/>
+              </div>
+
+            <h4>h. Export du modèle</h4>
+              <p>
+                Une fois l'entraînement terminé et validé, il est important d'exporter le modèle dans différents formats 
+                (par exemple <strong><em>.pt</em></strong>, <strong><em>.onnx</em></strong>, <strong><em>.tflite</em></strong>) afin de pouvoir l'utiliser pour l'inférence dans d'autres environnements ou applications.
+              </p>
+              <details class="code-container">
+                <summary>
+                  Export du modèle
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('export_model', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="export_model">
+# Export du modèle pour déploiement sur Jetson Nano
+print("Export du modèle pour Jetson Nano...")
+
+# 1. Export ONNX (format standard)
+try:
+    onnx_path = model.export(format='onnx', imgsz=640, optimize=True)
+    print(f" Export ONNX réussi : {onnx_path}")
+except Exception as e:
+    print(f" Erreur export ONNX : {e}")
+
+# 2. Export TensorRT (spécifique NVIDIA)
+try:
+    trt_path = model.export(format='engine', imgsz=640, half=True)
+    print(f" Export TensorRT réussi : {trt_path}")
+except Exception as e:
+    print(f" Export TensorRT non disponible (normal sur Colab) : {e}")
+
+# 3. Export TorchScript (PyTorch optimisé)
+try:
+    torchscript_path = model.export(format='torchscript', imgsz=640, optimize=True)
+    print(f" Export TorchScript réussi : {torchscript_path}")
+except Exception as e:
+    print(f" Erreur export TorchScript : {e}")
+
+# 4. Sauvegarde du modèle PyTorch standard
+model.save('b2ms_detector.pt')
+print(" Modèle PyTorch sauvegardé : b2ms_detector.pt")
+
+print(f"\n Formats exportés pour déploiement :")
+print(f"- PyTorch (.pt) : Usage général")
+print(f"- ONNX (.onnx) : Multi-plateforme")
+print(f"- TensorRT (.engine) : Optimisé Jetson Nano")
+print(f"- TorchScript (.torchscript) : PyTorch optimisé")
+                </code></pre>
+              </details>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_YOLO/B2MS_detection.ipynb" target="_blank" class="download-link">
+                Télécharger BMS_detection.ipynb
+              </a>
+            </p>
+
+          <h3 id="5-yolo">5. Scripts python</h3>
+            <p>
+              Les codes sont regroupés sous forme de scripts Python pour simplifier leur utilisation. 
+              Cela permet de configurer facilement les paramètres selon les besoins, sans avoir à modifier 
+              directement les lignes de code, rendant ainsi le système plus flexible et accessible.
+              Cette modularité est possible grâce à <strong><em>argparse</em></strong>, qui permet de passer des options directement 
+              en ligne de commande, avec des valeurs par défaut et une aide automatique pour l’utilisateur.
+            </p>
+
+            <h4>a. Environnement de travail</h4>
+              <p>
+                Il faut toujours commencer par activer/configurer son environnement virtuel et créer un dossier de travail:
+              </p>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('script_env', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="script_env">
+conda activate b2ms-env
+pip install -qU ultralytics opencv-python matplotlib pillow torch
+pip install -qU --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124  #pour pc avec gpu
+mkdir detection
+cd detection
+                </code></pre>
+              </div>
+
+    <p>
+      Il faut ensuite copier le dossier <strong>scripts</strong> dans le repertoire de travail.
+    </p>
+            
+            <h4>b. Préparation du Dataset</h4>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('script_data', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="script_data">
+python scripts/split_dataset.py --dataset_path="dataset" --train_per=0.8
+                </code></pre>
+              </div>
+              
+              <ul>
+                <li>
+                  <strong>--dataset_path</strong> : Chemin du dossier contenant les données (dataset/).
+                </li>
+                <li>
+                  <strong>--train_per</strong> : Pourcentage du dataset utilisé pour l'entraînement (par défaut 0.8: 80%).
+                </li>
+              </ul>
+
+            <h4>c. Entraînement du modèle</h4>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('script_train', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="script_train">
+python scripts/training_model.py --model=yolov8n.pt --epochs=20 --imgsz=640 --batch=16
+                </code></pre>
+              </div>
+              <ul>
+                <li>
+                  <strong>--model</strong> : Modèle YOLO de départ (yolov8n.pt, yolov8s.pt, etc.).
+                </li>
+                <li>
+                  <strong>--epochs</strong> : Nombre d'itérations d'apprentissage (défaut 20).
+                </li>
+                <li>
+                  <strong>--imgsz</strong> : Taille des images d'entrée (défaut 640).
+                </li>
+                <li>
+                  <strong>--batch</strong> : Taille du batch (défaut 16).
+                </li>
+              </ul>
+              <p>
+                Les résultats d'entraînement (modele entrainé, logs, métriques) sont enregistrés dans : <strong><em>runs/detect/train/</em></strong>
+              </p>
+            <h4>d. Visualisation des métriques</h4>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('script_metric', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="script_metric">
+python scripts/metric_visualization.py --result_path=runs/detect/train/results.csv
+                </code></pre>
+              </div>
+              <ul>
+                <li>
+                  <strong>--result_path</strong> : Chemin du fichier results.csv généré par l’entraînement (par défaut runs/detect/train/results.csv).
+                </li>
+              </ul>
+
+            <h4>e. Evaluation sur données de validation</h4>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('script_evaluation_val', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="script_evaluation_val">
+python scripts/evaluate_val.py --model_path=runs/detect/train/weights/best.pt --imgsz=640
+                </code></pre>
+              </div>
+              <ul>
+                <li>
+                  <strong>--model_path</strong> : Chemin du meilleur modèle (par défaut runs/detect/train/weights/best.pt).
+                </li>
+                <li>
+                  <strong>--imgsz</strong> : Taille des images à l’évaluation (défaut 640).
+                </li>
+              </ul>
+
+            <h4>f. Lancement du modèle</h4>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('script_launch', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="script_launch">
+python scripts/detection_launch.py --model=runs/detect/train/weights/best.pt --source=usb0 --confidence=0.6 --resolution=640x640
+                </code></pre>
+              </div>
+              <ul>
+                <li>
+                 <strong>--model</strong> : Chemin vers le modèle entraîné.
+                </li>
+                <li>
+                  <strong>--source</strong> : Source des données :
+                    <ul>
+                      <li>image.jpg: une image unique
+                      <li>data/images/: un dossier</li>
+                      <li>video.mp4: une vidéo</li>
+                      <li>"usb0": caméra USB</li></li>
+                    </ul>
+                  <li>
+                    <strong>--confidence </strong>: Seuil minimal de confiance (défaut 0.5).
+                  </li>
+                  <li>
+                    <strong>--resolution</strong> : Résolution d’affichage (ex. 1280x720).
+                  </li>
+                </li>
+              </ul>
+
+            <h4>g. Export du modèle</h4>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('script_export_model', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="script_export_model">
+python scripts/export_model.py --model_path=runs/detect/train/weights/best.pt --export_to=models --name=b2ms_model --imgsz=640
+                </code></pre>
+              </div>
+              <ul>
+                <li>
+                  <strong>--model_path</strong> : Chemin du modèle à exporter (défaut : runs/detect/train/weights/best.pt).
+                </li>
+                <li>
+                  <strong>--export_to</strong> : Dossier de destination pour les fichiers exportés (défaut : models).
+                </li>
+                <li>
+                  <strong>--name</strong> : Nom du modèle exporté (défaut : my_model).
+                </li>
+                <li>
+                  <strong>--imgsz</strong> : Taille des images à l'export (défaut 640).
+                </li>
+              </ul>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_YOLO/scripts_python.zip" target="_blank" class="download-link">
+                Télécharger scripts_python.zip
+              </a>
+            </p>
+
+          <h3 id="6-yolo">6. YOLOv5 vs YOLOv8</h3>
+            <h4>a. Comparaison numérique</h4>
+              <h5>&#10022; Jeu de données COCO </h5>
+                <p>
+                  Pour commencer, les performances publiées par <a href="https://www.ultralytics.com/" target="_blank">Ultralytics</a> sont examinées. 
+                  Les deux modèles, issus de la même équipe, sont reconnus pour leur excellent compromis entre vitesse et précision. 
+                  Néanmoins, chacun d’eux est optimisé pour répondre à des besoins différents en vision par ordinateur.
+                </p>
+                <div class="image-container">
+                <img src="../images/TRC25/YOLO/comparaison_ultralytics.webp" alt="yolov5 vs yolov8 COCO" class="image-mean"/>
+              </div>
+
+              <p>Pour des tailles d'images de 640px:</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Modèle</th>
+                    <!-- <th>Taille (pixels)</th> -->
+                    <th>mAPval 50-95</th>
+                    <th>Vitesse CPU ONNX (ms)</th>
+                    <th>Vitesse T4 TensorRT10 (ms)</th>
+                    <th>Paramètres (M)</th>
+                    <th>FLOPs (B)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>YOLOv8n</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">37.3</td>
+                    <td class="num">80.4</td>
+                    <td class="num">1.47</td>
+                    <td class="num">3.2</td>
+                    <td class="num">8.7</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv8s</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">44.9</td>
+                    <td class="num">128.4</td>
+                    <td class="num">2.66</td>
+                    <td class="num">11.2</td>
+                    <td class="num">28.6</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv8m</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">50.2</td>
+                    <td class="num">234.7</td>
+                    <td class="num">5.86</td>
+                    <td class="num">25.9</td>
+                    <td class="num">78.9</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv8l</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">52.9</td>
+                    <td class="num">375.2</td>
+                    <td class="num">9.06</td>
+                    <td class="num">43.7</td>
+                    <td class="num">165.2</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv8x</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">53.9</td>
+                    <td class="num">479.1</td>
+                    <td class="num">14.37</td>
+                    <td class="num">68.2</td>
+                    <td class="num">257.8</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv5n</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">28.0</td>
+                    <td class="num">73.6</td>
+                    <td class="num">1.12</td>
+                    <td class="num">2.6</td>
+                    <td class="num">7.7</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv5s</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">37.4</td>
+                    <td class="num">120.7</td>
+                    <td class="num">1.92</td>
+                    <td class="num">9.1</td>
+                    <td class="num">24.0</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv5m</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">45.4</td>
+                    <td class="num">233.9</td>
+                    <td class="num">4.03</td>
+                    <td class="num">25.1</td>
+                    <td class="num">64.2</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv5l</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">49.0</td>
+                    <td class="num">408.4</td>
+                    <td class="num">6.61</td>
+                    <td class="num">53.2</td>
+                    <td class="num">135.0</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv5x</td>
+                    <!-- <td class="num">640</td> -->
+                    <td class="num">50.7</td>
+                    <td class="num">763.2</td>
+                    <td class="num">11.89</td>
+                    <td class="num">97.2</td>
+                    <td class="num">246.4</td>
+                  </tr>
+                </tbody>
+              </table>
+              <ul>
+                <li>
+                  YOLOv5 est idéal si la priorité est la vitesse, la stabilité et un écosystème mature. 
+                  Il reste très efficace pour les appareils à ressources limitées et les projets qui nécessitent une solution éprouvée.
+                </li>
+                <li>
+                  YOLOv8 est plus précis, plus flexible et basé sur une architecture moderne sans ancres. 
+                  C’est le meilleur choix pour les projets cherchant performance et polyvalence en production comme en recherche.
+                </li>
+              </ul>
+              <p class="txt_center">
+                <a href="https://docs.ultralytics.com/fr/compare/yolov8-vs-yolov5/#performance-face-off-yolov8-vs-yolov5" target="_blank">YOLOv5 vs. YOLOv8 : Une Comparaison Détaillée</a>
+              </p>
+
+              <h5>&#10022; Le dataset personnel</h5>
+                <p>
+                  Les performances de YOLOv5nu et YOLOv8n sont ensuite évaluées sur le dataset afin de déterminer lequel s’adapte le mieux aux données spécifiques.
+                </p>
+
+              <p>Pour des tailles d'images de 640px:</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Modèle</th>
+                    <th>mAP@0.5 (%)</th>
+                    <th>mAP@0.5:0.95 (%)</th>
+                    <th>Precision (%)</th>
+                    <th>Recall (%)</th>
+                    <th>F1-score (%)</th>
+                    <th>Latence (ms/image)</th>
+                    <th>Paramètres (M)</th>
+                    <th>FLOPs (GFLOPs)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>YOLOv5nu</td>
+                    <td class="num">94.1</td>
+                    <td class="num">69.0</td>
+                    <td class="num">87.6</td>
+                    <td class="num">87.4</td>
+                    <td class="num">87.4</td>
+                    <td class="num">15.144</td>
+                    <td class="num">2.50</td>
+                    <td class="num">7.1</td>
+                  </tr>
+                  <tr>
+                    <td>YOLOv8n</td>
+                    <td class="num">96.4</td>
+                    <td class="num">71.7</td>
+                    <td class="num">92.0</td>
+                    <td class="num">89.5</td>
+                    <td class="num">90.7</td>
+                    <td class="num">13.632</td>
+                    <td class="num">3.01</td>
+                    <td class="num">8.1</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="image-container">
+                <img src="../images/TRC25/YOLO/comparaison_yolov5nu_yolov8n.webp" alt="yolov5 vs yolov8 COCO" class="image-mean"/>
+              </div>
+              <ul>
+                <li>
+                  YOLOv5nu reste attractif pour sa simplicité et sa légèreté, mais il est légèrement moins performant en détection.
+                </li>
+                <li>
+                  YOLOv8n, en revanche, constitue le meilleur choix pour ce dataset, alliant précision et efficacité.
+                </li>
+              </ul>
+              <p>
+                il est important de noter que la différence entre les deux modèles n’est pas très grande : YOLOv8n apporte des améliorations, 
+                mais YOLOv5nu reste très compétitif et offre des performances proches tout en étant aussi très rapide.
+              </p>
+
+            <h4>b. Comparaison sur un ordinateur</h4>
+              <video controls width=auto>
+                <source src="../videos/TRC25/YOLO/comparaison_yolov5_yolov8_pc1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <video controls width=auto>
+                <source src="../videos/TRC25/YOLO/comparaison_yolov5_yolov8_pc2.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <p>
+                Les tests réalisés sur un ordinateur sous Windows équipé d’un <strong>GPU</strong> montrent que 
+                YOLOv8 et YOLOv5 présentent <strong>des performances globalement proches</strong>, 
+                avec quelques erreurs observées(non-détection ou classification incorrecte).<br>
+                En termes de vitesse, les résultats restent élevés et relativement similaires : YOLOv8 oscille entre <strong>20.74 et 21.58 FPS</strong>, 
+                tandis que YOLOv5 varie entre <strong>18.47 et 20.65 FPS</strong>.<br>
+                Pour la précision, YOLOv8 se montre légèrement meilleur, même si les deux modèles présentent parfois des erreurs similaires.<br>
+                Dans l’ensemble, sur cette machine, les deux modèles offrent des performances comparables, avec un léger avantage pour YOLOv8 en précision et une vitesse globalement équivalente.
+              </p>
+
+
+            <h4>c. Comparaison sur une machine virtuelle similaire au Dofbot</h4>
+              <p>
+                Avant de tester le Dofbot directement, il est préférable de disposer d’un système simulé aux caractéristiques proches.
+                Ce système peut être mis en place en installant Ubuntu sur une machine virtuelle.
+              </p>
+              <h5>&#10022; Création et configuration du système sous Ubuntu 20.01: </h5>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Section</th>
+                      <th>Configuration</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Nouvelle machine virtuelle</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>Nom: Dofbot-Ubuntu</li>
+                          <li>Type: Linux</li>
+                          <li>Version: Ubuntu (64-bit)</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mémoire vive (RAM)</td>
+                      <td>4096MB (4GB)</td>
+                    </tr>
+                    <tr>
+                      <td>Disque dur</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>Type: VDI (VirtualBox Disk Image)</li>
+                          <li>Stockage dynamique: activé</li>
+                          <li>Taille: 30GB</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Processeur</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>4 CPU</li>
+                          <li>Activer PAE/N</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Carte graphique</td>
+                      <td>
+                        <ul class="dash-list">
+                          <li>VRAM: 128MB</li>
+                          <li>Activer l'accélération 3D</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  Une fois le système démarré, il faut installer les outils requis avec les commandes suivantes :
+                </p>
+
+              <details class="code-container">
+                <summary>
+                  Installation des dépendances
+                </summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('dofbot_ubuntu', this)">📋</button>
+                </div>
+                <pre><code class="hljs" id="dofbot_ubuntu">
+sudo apt update
+sudo apt install git -y
+sudo apt install python3-pip -y
+pip3 install ultralytics
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+                </code></pre>
+              </details>
+              
+              <p>
+                <strong>NB:</strong> Pour pouvoir utiliser la camera sur une machine virtuelle: 
+                <strong>Péripheriques>Webcams: activer USB camera</strong>.
+              </p>
+              <video controls width=auto>
+                <source src="../videos/TRC25/YOLO/comparaison_yolov5_yolov8_sim1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <video controls width=auto>
+                <source src="../videos/TRC25/YOLO/comparaison_yolov5_yolov8_sim2.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <p>
+                Sur l’ensemble des tests réalisés, YOLOv8 se démarque par une meilleure qualité de détection, bien que quelques erreurs subsistent. 
+                YOLOv5 présente des performances de détection légèrement inférieures, avec des erreurs similaires à celles observées avec YOLOv8.<br>
+                En termes de vitesse, YOLOv5 atteint en moyenne <strong>3.23 FPS</strong>, tandis que YOLOv8 se situe autour de <strong>2.70–2.74 FPS</strong>, ce qui confirme que YOLOv5 est légèrement plus rapide, mais moins précis que YOLOv8.
+              </p>
+
+              <p class="txt_center">
+                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_YOLO/b2ms_YOLO.zip" target="_blank" class="download-link">
+                  Télécharger b2ms_YOLO.zip
+                </a>
+              </p>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

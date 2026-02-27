@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Résilience Urbaine - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Résilience Urbaine</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./ROS" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+
+        <div class="nav-section">
+          <a href="./trc25" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-robot"></i> TRC25</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button" href="./trc25-convoyeur">Convoyeur 2.0</a>
+            <a class="subtab-button active" href="./trc25-dofbot">Prise en main du Dofbot</a>
+            <nav class="project-subnav active" id="subnav-dofbot">
+              <a href="#1-dofbot">1. Contenu et description du kit</a>
+              <a href="#2-dofbot">2. Mise en place matérielle</a>
+              <a href="#3-dofbot">3. Système et environnement logiciel</a>
+              <a href="#4-dofbot">4. Manipulations basiques</a>
+              <a href="#5-dofbot">5. Problèmes de démarrage et solution</a>
+            </nav>
+            <a class="subtab-button" href="./trc25-communication">Communication Dofbot - Convoyeur</a>
+            <a class="subtab-button" href="./trc25-yolo">Modèle de détection YOLO</a>
+            <a class="subtab-button" href="./trc25-dofbot_ia">Détection et tri - Dofbot</a>
+            <a class="subtab-button" href="./trc25-ros">ROS</a>
+            <a class="subtab-button" href="./trc25-meca">Système de ramassage</a>
+          </div>
+        </div>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section class="tab-content active">
+        <div class="subtab-content active">
+          <h2 id="ros" class="projet-titre">Dofbot - Jetson Nano</h2>
+            <p>
+              Le Dofbot est un bras robotique conçu par <strong>Yahboom</strong>. Il est destiné aux applications pédagogiques, de recherche et de prototypage rapide. 
+              Grâce à sa structure compacte, sa facilité de programmation et sa compatibilité avec des environnements logiciels tels que <strong>Python</strong> et <strong>ROS</strong>, il constitue une plateforme idéale pour l’expérimentation en robotique industrielle, automatisation et systèmes intelligents.
+              <br>
+              Dans le cadre du <strong>TRC25</strong>, le Dofbot est utilisé comme actionneur principal pour le tri des déchets, en interaction avec un convoyeur et un système de vision basé sur <strong>l'intelligence artificielle</strong>.
+            </p>
+
+            <p>
+              Cette section a pour objectif de :
+              <ul>
+                <li>Comprendre l’architecture matérielle du Dofbot</li>
+                <li>Assurer le démarrage correct du système</li>
+                <li>Maîtriser la manipulation de base du bras robotique</li>
+                <li>Manipuler la caméra embarquée</li>
+                <li>Mettre en place les échanges de fichiers entre le Dofbot et un ordinateur hôte</li>
+                <li>Préparer l’intégration du Dofbot avec des systèmes externes</li>
+              </ul>
+            </p>
+
+            <p>
+              Cette phase de prise en main permet de poser <strong>une base technique solide</strong>, 
+              indispensable avant le développement des fonctionnalités avancées de détection, de communication et de tri automatisé.
+            </p>
+
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot/dofbot0.webp" alt="image du dofbot" class="image-small"/>
+            </div>
+
+            <p class="txt_center">
+              <a href="https://www.yahboom.net/study/Dofbot-Jetson_nano" target="_blank">Lien vers la documentation de Yahboom</a>
+            </p>
+            
+          <h3 id="1-dofbot">1. Contenu et description du kit</h3>
+            <p>
+              Le kit utilisé dans ce projet est le <strong>Yahboom Dofbot - Jetson Nano 4GB (B01/SUB)</strong>.
+            </p>
+            <h4>a. Description générale</h4>
+              <p>
+                Le <strong>DOFBOT</strong> est un <strong>bras robotique flexible</strong> à 6 degrés de liberté, équipé d’une <strong>caméra HD</strong>, de <strong>6 servomoteurs HQ</strong>, et d’une <strong>carte d’extension</strong>.
+                Le corps est fabriqué en alliage d’aluminium oxydé vert, offrant à la fois esthétique et durabilité.
+              </p>
+              <p>
+                La caméra et le bras peuvent être exploités avec <strong>OpenCV</strong> pour des applications de vision artificielle, en utilisant <strong>Python</strong>.
+                Le contrôle du robot repose sur ROS, permettant un pilotage simplifié des servomoteurs via le bus série.
+              </p>
+              <ul>
+                Parmi les fonctionnalités disponibles :
+                <li>
+                  Suivi des couleurs et interaction avec celles-ci
+                </li>
+                <li>
+                  Classification et tri des objets ou déchets
+                </li>
+                <li>
+                  Reconnaissance de gestes et suivi du visage
+                </li>
+                <li>
+                  Jeux et expériences pédagogiques en vision IA
+                </li>
+              </ul>
+
+              <p>
+                Le Dofbot peut être contrôlé depuis : <strong>une application mobile Android/iOS</strong>,
+                 <strong>un ordinateur PC</strong> et <strong>une manette de jeu</strong>
+              </p>
+
+            <h4>b. Liste des packages fournis</h4>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Composant</th>
+                    <th>Description / Remarques</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bras robotique DOFBOT</td>
+                    <td>Bras robotique à 6 servomoteurs préassemblés</td>
+                  </tr>
+                  <tr>
+                    <td>Jetson Nano B01 (4GB)</td>
+                    <td>Ordinateur embarqué pour IA et contrôle</td>
+                  </tr>
+                  <tr>
+                    <td>Carte d’extension Dofbot-SE</td>
+                    <td>Carte d’extension multifonction compatible avec plusieurs contrôleurs dont Raspberry Pi, Jetson Nano, STM32, Arduino UNO</td>
+                  </tr>
+                  <tr>
+                    <td>Manette USB</td>
+                    <td>Pour contrôle manuel du bras et des actions de la pince</td>
+                  </tr>
+                  <tr>
+                    <td>Câble V8</td>
+                    <td>Connexion entre périphériques et Jetson Nano</td>
+                  </tr>
+                  <tr>
+                    <td>Adaptateur AC/DC</td>
+                    <td>Fournit l’alimentation principale pour le système</td>
+                  </tr>
+                  <tr>
+                    <td>Connecteur d’alimentation</td>
+                    <td>Permet de relier l’adaptateur AC/DC à la carte d’extension du Dofbot</td>
+                  </tr>
+                  <tr>
+                    <td>Antennes et carte Wi-Fi</td>
+                    <td>Communication sans fil et contrôle à distance</td>
+                  </tr><tr>
+                    <td>Support / châssis</td>
+                    <td>Fixation stable du bras et de la caméra, stabilité avec ventouses</td>
+                  </tr><tr>
+                    <td>Caméra HD</td>
+                    <td>Captation d’images pour vision artificielle et reconnaissance d’objets</td>
+                  </tr>
+                  <tr>
+                    <td>Écran Oled</td>
+                    <td>Affiche des informations système comme l’adresse IP et l’état du système</td>
+                  </tr>
+                  <tr>
+                    <td>Ventilateur</td>
+                    <td>Refroidissement du Jetson Nano</td>
+                  </tr>
+                  <tr>
+                    <td>Connecteur d’extension</td>
+                    <td>Liaison entre Jetson Nano et carte d’extension pour contrôler les servos</td>
+                  </tr>
+                  <tr>
+                    <td>Clé USB 64 Go</td>
+                    <td>Contient le système du Dofbot avec tous les programmes et exemples prêts à l’emploi, facilitant la prise en main immédiate</td>
+                  </tr>
+                  <tr>
+                    <td>4 cubes</td>
+                    <td>Accessoires pour tests, entraînement et expériences IA</td>
+                  </tr>
+                  <tr>
+                    <td>Tapis d’entraînement (Map)</td>
+                    <td>Surface dédiée aux expériences et aux jeux de vision IA</td>
+                  </tr>
+                  <tr>
+                    <td>Tournevis</td>
+                    <td>Outil pour montage, ajustement et maintenance</td>
+                  </tr>
+                  <tr>
+                    <td>Vis, écrous, attaches, engrenages, ventouse</td>
+                    <td>Pièces mécaniques pour fixation, assemblage et manipulation</td>
+                  </tr>
+                </tbody>
+              </table>  
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot/dofbot1.webp" alt="kits du dofbot" class="image-small"/>
+            </div>
+
+            <h5>&#10022; Jetson Nano B01</h5>
+              <p>
+                La Jetson Nano B01 est une carte de développement AI à faible puissance qui exécute Ubuntu avec le SDK NVIDIA JetPack.
+                Elle supporte les bibliothèques de vision par ordinateur (comme OpenCV) et permet de piloter des projets robotiques comme DOFBOT grâce à sa puissance de calcul adaptée à l’apprentissage automatique embarqué.
+              </p>
+
+              <div class="image-container">
+                <img src="../images/TRC25/Dofbot/jetson_nano.webp" alt="jetson nano" class="image-small"/>
+              </div>
+
+              <details>
+                <summary>Interfaces matérielles de la Jetson nano</summary>
+                <ol>
+                  <li>
+                    Emplacement pour carte microSD pour le stockage principal
+                  </li>
+                  <li>
+                    Connecteur d’extension 40 broches
+                  </li>
+                  <li>
+                    Port Micro-USB pour l’alimentation 5 V ou pour le mode périphérique
+                  </li>
+                  <li>
+                    Port Ethernet Gigabit
+                  </li>
+                  <li>
+                    Ports USB 3.0 (x4)
+                  </li>
+                  <li>
+                    Port de sortie HDMI
+                  </li>
+                  <li>
+                    Connecteur DisplayPort
+                  </li>
+                  <li>
+                    Prise DC pour alimentation 5 V
+                  </li>
+                  <li>
+                    Connecteurs caméra MIPI CSI-2
+                  </li>
+                </ol>
+              </details>
+            
+            <h5>&#10022; Carte d’expansion DOFBOT-SE</h5>
+              <p>
+                La carte d’expansion DOFBOT-SE est compatible avec plusieurs cartes maîtres, 
+                mais une seule peut être utilisée à la fois. 
+                Elle supporte notamment : Raspberry Pi, Jetson Nano, STM32, Arduino UNO, ...  
+                Elle possède également un interface I2C externe pour connecter d’autres cartes principales compatibles I2C.
+              </p>
+
+              <div class="image-container">
+                <img src="../images/TRC25/Dofbot/carte_expansion1.webp" alt="carte d'expansion" class="image-50"/>
+              </div>
+
+              <details>
+                <summary>Interfaces et composants</summary>
+                <ol>
+                  <li>
+                    Micro USB : téléchargement de programmes pour Arduino, STM32, STC51 ou mise à jour du firmware du MCU. 
+                    Permet la communication série avec la carte maître.
+                  </li>
+                  <li>
+                    Interface I2C : connecter des périphériques I2C.
+                  </li>
+                  <li>
+                    Connecteur ventilateur : pour brancher un ventilateur de refroidissement (ne fournit pas de courant aux autres périphériques).
+                  </li>
+                  <li>
+                    Boutons :
+                    <ul>
+                      <li>
+                        K1 : reset des servos, apprentissage d’action, ou scan QR code pour WiFi selon le mode.
+                      </li>
+                      <li>
+                        K2 : arrêt d’urgence des servos (court appui) ou activation du BootLoader du MCU (long appui).
+                      </li>
+                      <li>
+                        RESET : réinitialisation du coprocesseur (STM8), STM32 ou Arduino UNO.
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    LED d'indication :
+                    <ul>
+                      <li>
+                        Rouge (MCU) : activité du coprocesseur STM8.  
+                      </li>
+                      <li>
+                        Rouge (5V) : tension 5 V de la carte.  
+                      </li>
+                      <li>
+                        Rouge (Servo) : alimentation des servos.  
+                      </li>
+                      <li>
+                        Bleu (WiFi) : connexion WiFi active.
+                      </li>
+                      <li>
+                        Jaune (RX) : données reçues par le port Micro USB.  
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    LED RGB : contrôlées par le STM8, couleur modifiable via commandes de la carte principale.
+                  </li>
+                  <li>
+                    Interface ultrason : connexion d’un module ultrason.
+                  </li>
+                  <li>
+                    Sélection port série STM8 : jumper pour contrôler les servos ou mettre à jour le firmware via USB.
+                  </li>
+                  <li>
+                    Interface servo PWM : connexion de servos PWM.
+                  </li>
+                  <li>
+                    Buzzer : buzzer actif contrôlé par le STM8.
+                  </li>
+                  <li>
+                    Interface bus servo : connexion des servos en cascade (jusqu’à 6 servos par port).
+                  </li>
+                  <li>
+                    Connecteur récepteur PS2 : brancher le récepteur manette PS2.
+                  </li>
+                  <li>
+                    Interface alimentation T-type : alimentation DC12V.
+                  </li>
+                  <li>
+                    Interrupteur d’alimentation : allumer/éteindre le DOFBOT.
+                  </li>
+                  <li>
+                    Port série : connecter module WiFi ou Bluetooth.
+                  </li>
+                </ol>
+              </details>
+
+              <div class="image-container">
+                <img src="../images/TRC25/Dofbot/carte_expansion2.webp" alt="carte d'expansion" class="image-small"/>
+              </div>
+
+              <details>
+                <summary>Emplacements d’installation des cartes maîtres</summary>
+                <ol>
+                  <li>
+                    Raspberry Pi et Jetson Nano
+                  </li>
+                  <li>
+                    microbit
+                  </li>
+                  <li>
+                    Arduino UNO
+                  </li>
+                  <li>
+                    STM32  
+                  </li>
+                  <li>
+                    STC51  
+                  </li>
+                </ol>
+              </details>
+                
+          <h3 id="2-dofbot">2. Mise en place matérielle</h3>
+            <p>
+              Cette partie explique comment <strong>assembler, connecter et préparer</strong> le Dofbot 
+              pour son premier démarrage et sa prise en main, en insistant sur les aspects mécaniques, électriques et de sécurité.
+            </p>
+
+            <h4>a. Assemblage du Dofbot</h4>
+              <p>
+                Le Dofbot a été assemblé correctement en se basant sur le tutoriels officiels de <strong>Yahboom</strong>
+              </p>
+              <p class="txt_center">
+                <a href="youtube.com/watch?time_continue=1&v=_2R6of3xC8Q&embeds_referring_euri=https%3A%2F%2Fwww.yahboom.net%2F&source_ve_path=Mjg2NjY" target="_blank">Lien vers le tutoriel video</a>
+              </p>
+
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot/assemblage1.webp" alt="assemblage du dofbot" class="image-small"/>
+              <img src="../images/TRC25/Dofbot/assemblage2.webp" alt="assemblage du dofbot" class="image-small"/>
+              <img src="../images/TRC25/Dofbot/assemblage3.webp" alt="assemblage du dofbot" class="image-small"/>
+              <img src="../images/TRC25/Dofbot/assemblage5.webp" alt="assemblage du dofbot" class="image-small"/>
+            </div>
+
+            <video controls width=25%>
+              <source src="../videos/TRC25/Dofbot/assemblage.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+            <h4>b. Préparation et mise sous tension</h4>
+              <p>
+                Cette étape décrit la mise en place des connexions électriques, la préparation du système et la mise sous tension du Dofbot.
+              </p>
+              <p>
+                L'adaptateur AC/DC est connecté à lla carte d'expansion à l'aide du connecteur d'alimentation.
+                La clé contenant le système ainsi que les péripheriques externes(souris et clavier) et le cable HDMI sont branchés sur les ports du robot.
+              </p>
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot/preparation1.webp" alt="préparation du dofbot pour le démarrage" class="image-small"/>
+              <img src="../images/TRC25/Dofbot/preparation2.webp" alt="préparation du dofbot pour le démarrage" class="image-small"/>
+            </div>
+
+            <p>
+              Lors de l’alimentation du système à l’aide de l’interrupteur (switch), une LED rouge s’allume, indiquant que la carte est correctement alimentée.
+              <br>
+              Après quelques instants, le système démarre.
+            </p>
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot/mise_sous_tension.webp" alt="mise sous tension du dofbot" class="image-small"/>
+            </div>
+
+          <h3 id="3-dofbot">3. Système et environnement logiciel</h3>
+            <p>
+              Cette partie consiste à manipuler le Dofbot pour les premières utilisations, en présentant le système d’exploitation installé 
+              sur le Jetson Nano, les outils logiciels, et les manipulations pour contrôler le bras et la caméra.
+            </p>
+
+            <p>
+              Lors de la mise sous tension du Dofbot, le logo NVIDIA apparaît à l’écran.
+              Ce logo reste affiché tant qu’aucun système d’exploitation n’est détecté ou en cours de démarrage.
+            </p>
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot/nvidia.webp" alt="logo nvidia au démarrage" class="image-small"/>
+            </div>
+
+            <p>
+              Il est possible que, lors du démarrage, l’interface s’ouvre directement sur un terminal. 
+              Dans ce cas, il suffit de patienter quelques instants.
+            </p>
+
+            <p>
+              Lorsque le système est allumé, l’écran OLED affiche des informations essentielles telles que 
+              l’état du système, l’adresse IP, le pourcentage d’utilisation du CPU et d’autres données utiles.
+            </p>
+
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot/oled.webp" alt="oled lorsque le système est allumé" class="image-small"/>
+            </div>
+
+            <p>
+              Une fois le système complètement démarré, un mot de passe peut être demandé.
+              Le mot de passe par défaut est : <strong>yahboom</strong>.
+            </p>
+
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot/jetson.webp" alt="premier demarrage du dofbot" class="image-small"/>
+            </div>
+
+            <p>
+              Le Dofbot est livré avec une distribution <strong>Ubuntu 18.04</strong> installée sur le Jetson Nano.
+    
+              <div class="image-container">
+                <img src="../images/TRC25/Dofbot/ubuntu.webp" alt="système d'exploitation du dofbot" class="image-small"/>
+              </div>
+            </p>
+
+            <p>
+              La carte est préconfigurée avec :
+                <ul>
+                  <li>
+                    Python 3.6.9 pour le contrôle du robot et les scripts d’IA
+                  </li>
+                  <li>
+                    Bibliothèques OpenCV pour le traitement d’images
+                  </li>
+                  <li>
+                    Environnement ROS (Robot Operating System) pour différentes applications
+                  </li>
+                </ul>
+                <div class="image-container">
+                  <img src="../images/TRC25/Dofbot/python.webp" alt="version de python installée sur le dofbot" class="image-small"/>
+                  <img src="../images/TRC25/Dofbot/jtop-info.webp" alt="information jtop" class="image-small"/>
+                </div>
+            </p>
+
+            <p>
+              D'autres outils utiles sont également installés : terminal, gestionnaire de fichiers, navigateur(chromium).
+            </p>
+
+            <p>
+              <strong>Remarque:</strong> 
+              <ul>
+                <li>
+                  La clé USB fournie contient tous les programmes prêts à l’emploi pour expérimenter avec le Dofbot.
+                </li>
+                <li>
+                  Ubuntu 18.04 est stable et compatible avec ROS et OpenCV, ce qui permet de manipuler le Dofbot immédiatement après le démarrage.
+                </li>
+              </ul>
+            </p>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/jetson_dofbot.zip" 
+              target="_blank" class="download-link">Télécharger jetson_dofbot.zip(fichiers et dossiers dans le Dofbot)</a>
+            </p>
+
+          <h3 id="4-dofbot">4. Manipulations basiques</h3>
+            <p>
+              Cette partie présente les principales manipulations permettant de prendre le contrôle du DOFBOT, 
+              d’interagir avec le système embarqué et d’exploiter les périphériques intégrés.
+            </p>
+
+            <h4>a. Manipulation et test de la caméra</h4>
+              <p>
+                La caméra intégrée au DOFBOT est utilisée pour la vision artificielle et les applications d’intelligence artificielle. 
+                <br>
+                Avant toute exploitation, il est nécessaire de vérifier son bon fonctionnement et de s’assurer qu’elle n’est pas déjà utilisée par un autre processus.
+              </p>
+
+              <h5>&#10022; Vérification de l’utilisation de la caméra</h5>
+                <p>
+                  Sous Linux, un seul programme peut accéder à la caméra à la fois. Il arrive donc que la caméra soit bloquée par un processus actif. 
+                  La commande suivante permet d’identifier le processus utilisant la caméra :                
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('fuser', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="fuser">
+fuser /dev/video0
+                    </code></pre>
+                  </div>   
+                </p>
+
+                <ul>
+                  <li>
+                    <strong>/dev/video0</strong> correspond généralement à la caméra principale.
+                  </li>
+                  <li>
+                    La commande retourne l’identifiant du processus (<strong>PID</strong>) utilisant la caméra.
+                  </li>
+                </ul>
+
+              <h5>&#10022; Libération de la caméra</h5>
+                <p>
+                  Si un processus empêche l’accès à la caméra, 
+                  il peut être arrêté manuellement à l’aide de la commande <strong><em>kill</em></strong> :
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('kill', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="kill">
+kill &lt;PID&gt;
+                    </code></pre>
+                  </div>   
+                </p>
+
+                <p>
+                  En cas de processus bloqué ou récalcitrant, la commande suivante peut être utilisée :
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('kill -9', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="kill -9">
+kill -9 &lt;PID&gt;
+                    </code></pre>
+                  </div>   
+                </p>
+                <p>
+                  Cette action force l’arrêt du processus et libère immédiatement la caméra.
+                </p>
+                
+              <h5>&#10022; Test du fonctionnement de la caméra</h5>
+                <p>
+                  Une fois la caméra libérée, il est possible de lancer la commande suivante afin de vérifier que la caméra est bien fonctionnelle :
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('cheese', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="cheese">
+cheese
+                    </code></pre>
+                  </div>   
+                </p>
+
+                <p>
+                  Cette commande ouvre une interface graphique permettant d’afficher en temps réel le flux vidéo capturé par la caméra.
+                  <br>
+                  Il est également possible d’accéder à cette interface en lançant directement le logiciel <strong>Cheese</strong>, ou tout autre logiciel de caméra installé sur le système.
+                <br><br>
+                  Cette étape est indispensable avant l’utilisation de la caméra dans des applications plus avancées, telles que la détection d’objets ou les systèmes de tri intelligent.
+                </p>
+
+            <h4>b. Premières manipulations logicielles</h4>
+              <p>
+                Après le démarrage du DOFBOT, les premières manipulations logicielles consistent à se familiariser avec l’environnement de travail installé sur le Jetson Nano.
+                <br>
+                Dans cette étape, <strong>Jupyter Lab</strong> est principalement utilisé afin de parcourir, comprendre et exécuter les fichiers et programmes fournis.
+                <br>
+                Cet environnement interactif permet d’explorer les exemples existants, de tester rapidement des scripts en Python et de faciliter la prise en main du bras robotique avant le développement d’applications plus avancées.
+              </p>
+
+              <h5>&#10022; Lancement de jupyter lab</h5>
+                <p>
+                  Jupyter lab est préinstallé sur le système du Dofbot.
+                  Il suffit alors d’ouvrir un terminal et d’exécuter la commande suivante :              
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('jupyter_lab', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="jupyter_lab">
+jupyter lab
+                    </code></pre>
+                  </div>   
+                </p>
+
+                <p>
+                  Après quelques instants, le serveur Jupyter démarre et une interface web est automatiquement ouverte dans le navigateur.
+                </p>
+
+                <p>
+                  Le mot de passe est: <strong>yahboom</strong>.
+                </p>
+
+                <div class="image-container">
+                  <img src="../images/TRC25/Dofbot/jupyter_lab.webp" alt="jupyter lab sur le Dofbot" class="image-small"/>
+                </div>
+                
+                <p>
+                  Cette interface permet d’accéder aux fichiers du système, d’exécuter des notebooks Python et de visualiser les résultats en temps réel.
+                </p>
+
+              <h5>&#10022; Structure des dossiers du DOFBOT</h5>
+                <p>
+                  Le système fourni par Yahboom contient plusieurs dossiers organisés par fonctionnalité.
+                  <ul>
+                    On y retrouve notamment :
+                    <li>
+                      des scripts de test pour les servomoteurs et le bras robotique,
+                    </li>
+                    <li>
+                      des exemples liés à la vision artificielle et à l’intelligence artificielle,
+                    </li>
+                    <li>
+                      des fichiers de configuration et des bibliothèques nécessaires au fonctionnement du DOFBOT.
+                    </li>
+                  </ul>
+                </p>
+
+                <p>
+                  Cette organisation permet une prise en main progressive, en commençant par des tests simples avant de passer à des applications plus complexes.
+                </p>
+
+                <div class="arbo">
+                  <ul>
+                      <li class="folder">Arm</li>
+                      <li class="folder">...</li>
+                      <li class="folder">Dofbot
+                        <ul>
+                          <li class="folder">0.py_install</li>
+                          <li class="folder">1.telecontrol</li>
+                          <li class="folder">2.sys_settings</li>
+                          <li class="folder">3.ctrl_Arm</li>
+                          <li class="folder">4.opencv_CN</li>
+                          <li class="folder">4.opencv_EN</li>
+                          <li class="folder">5.AI_Visual</li>
+                          <li class="folder">...</li>
+
+                        </ul>
+                      </li>
+                      <li class="folder">dofbot_ws</li>
+                      <li class="folder">...</li>
+                    </ul>
+                </div>
+
+              <h5>&#10022; Enregistrement video</h5>
+                <p>
+                  Il est souvent utile d’enregistrer les sessions de travail sur le Jetson Nano, 
+                  que ce soit pour documenter les tests, analyser les mouvements du bras robotique 
+                  ou sauvegarder les résultats de la caméra. 
+                  La commande <strong><em>ffmpeg</em></strong> permet de capturer l’écran et d’enregistrer une vidéo.
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('enregistrement', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="enregistrement">
+ffmpeg -f x11grab -video_size 1280x720 -framerate 30 -i :0.0 -pix_fmt yuv420p output.mp4
+                    </code></pre>
+                  </div> 
+                </p>
+
+                <ul>
+                  <strong>Explication des paramètres</strong>
+                  <li>
+                    -f x11grab : 
+                    indique que la capture se fait depuis le serveur X11 (l’affichage graphique d’Ubuntu).
+                  </li>
+                  <li>
+                    -video_size 1280x720 : 
+                    définit la résolution de la vidéo enregistrée (ici 1280x720 pixels).
+                  </li>
+                  <li>
+                    -framerate 30 : 
+                    fixe la fréquence d’images à 30 images par seconde.
+                  </li>
+                  <li>
+                    -i :0.0 : 
+                    sélectionne l’écran principal comme source d’entrée.
+                  </li>
+                  <li>
+                    -pix_fmt yuv420p : 
+                    définit le format de pixel pour garantir la compatibilité avec la plupart des lecteurs vidéo.
+                  </li>
+                  <li>
+                    output.mp4 : nom du fichier vidéo qui sera généré.
+                  </li>
+                </ul>
+                <br>
+
+                <ul>
+                  <strong>Modification des paramètres</strong>
+                  <br>
+                  Il est possible de modifier certains paramètres de la commande ffmpeg pour adapter l’enregistrement aux besoins :
+                  <li>
+                    <strong>Résolution</strong> (-video_size) : 
+                    par exemple 1920x1080 pour du Full HD ou 640x480 pour un fichier plus léger.
+                  </li>
+                  <li>
+                    <strong>Framerate</strong> (-framerate) : 
+                    augmenter pour un mouvement plus fluide ou réduire pour un fichier plus léger.
+                  </li>
+                  <li>
+                    <strong>Nom de fichier de sortie</strong> (output.mp4) : 
+                    changer le nom ou le format (.avi, .mkv) selon vos préférences.
+                  </li>
+                </ul>
+
+                <p>
+                  Cependant, il est important de noter que des <strong>valeurs trop élevées</strong> de résolution ou de framerate 
+                  peuvent entraîner <strong>une charge CPU importante</strong>, 
+                  pouvant <strong>ralentir</strong> le Jetson Nano ou <strong>affecter</strong> le fonctionnement du Dofbot pendant la capture.
+                </p>
+                <br>
+
+                <ul>
+                  <strong>NB:</strong>
+                  <li>
+                    Ctrl+C permet d'arrêter l’enregistrement.
+                  </li>
+                  <li>
+                    Le fichier video sera créé dans le répertoire courant.
+                    </li>
+                </ul>
+                
+            <h4>c. Prise de contrôle à distance via SSH</h4>
+              <p>
+                La prise en main à distance permet de contrôler le Jetson Nano du DOFBOT depuis un ordinateur externe via le réseau.
+                grâce au <strong>protocole SSH (Secure Shell)</strong>.
+              </p>
+
+              <h5>&#10022; Procédure de connexion avec PuTTY</h5>
+                <p>
+                  Pour contrôler le DOFBOT à distance, l’ordinateur et le Jetson Nano doivent être connectés au même réseau.
+                  <ul>
+                    <li>
+                      Ouvrir PuTTY sur l’ordinateur.
+                    </li>
+                    <li>
+                      Dans le champ Host Name (or IP address), saisir l’adresse IP du DOFBOT.
+                    </li>
+                    <li>
+                      Vérifier que :
+                        <ul>
+                          <li>le port est défini sur 22,</li>
+                          <li>le type de connexion est SSH.</li>
+                        </ul>
+                    </li>
+                    <li>
+                      Cliquer sur Open
+                    </li>
+                  </ul>
+                </p>
+
+                <p>
+                  Lors de la première connexion, une fenêtre de sécurité apparaît pour demander l’acceptation de la clé du serveur: 
+                  Cliquer sur <strong>Yes</strong> pour continuer et enregistrer la clé.
+                  <br>
+                  Il faut ensuite s’authentifier en saisissant le nom d’utilisateur et le mot de passe correspondant au DOFBOT.
+                </p>
+
+                <h5>&#10022; Procédure de connexion avec terminal(altérnatif à PuTTY)</h5>
+                  <p>
+                    Il est également possible de se connecter au DOFBOT directement depuis un terminal sans utiliser PuTTY avec la commande:
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('ssh', this)">📋</button>
+                      </div>
+                      <pre><code class="hljs" id="ssh">
+ssh jetson@adresse_ip_dofbot
+                      </code></pre>
+                  </div>
+                  </p>
+
+                  <p>
+                    Ensuite, il suffit de suivre le processus d’authentification ci-dessous.
+                  </p>
+              
+              <h5>&#10022; Authentification</h5>
+                <ul>
+                  Une fois la connexion établie :
+                  <li>
+                    <strong>Login :</strong> jetson
+                  </li>
+                  <li>
+                    <strong>Password :</strong> yahboom
+                  </li>
+                  <li>
+                    Surveillance des processus en cours
+                  </li>
+                </ul>
+                <p>
+                  Après authentification, l’utilisateur accède directement au terminal du Jetson Nano 
+                  et peut exécuter des commandes à distance.
+                </p>
+
+                <h5>&#10022; Arrêt de la session SSH</h5>
+                  <p>
+                    Pour terminer une connexion SSH avec le DOFBOT et fermer la session, il suffit de taper la commande: 
+                    <div class="code-container">
+                      <div class="btn-bar">
+                        <button onclick="copierCode('exit', this)">📋</button>
+                      </div>
+                      <pre><code class="hljs" id="exit">
+exit
+                      </code></pre>
+                  </div>
+                  </p>
+
+                  <ul>
+                    Après Entrée:
+                    <li>
+                      La session se termine immédiatement.
+                    </li>
+                    <li>
+                      Le terminal ou PuTTY revient à l’invite de commande locale de l'ordinateur.
+                    </li>
+                  </ul>
+
+                  <p class="txt_center">
+                    <strong>NB:</strong>
+                    Il est important de toujours fermer proprement la session SSH 
+                    avant de débrancher le Jetson Nano ou de couper l’alimentation, 
+                    afin d’éviter tout risque de corruption de fichiers.
+                  </p>
+
+              <h5>&#10022; Avantages de la connexion SSH</h5>
+                <ul>
+                  <li>
+                    Accès complet au système sans écran ni clavier
+                  </li>
+                  <li>
+                    Lancement et arrêt de programmes à distance
+                  </li>
+                  <li>
+                    Surveillance des processus en cours
+                  </li>
+                </ul>
+
+              <video controls width=50%>
+                <source src="../videos/TRC25/Dofbot/ssh.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+            <h4>d. Transfert de fichiers avec WinSCP</h4>
+              <p>
+                Pour travailler efficacement avec le DOFBOT, il est souvent nécessaire de transférer des scripts, des modèles ou des résultats 
+                entre l’ordinateur hôte et le Jetson Nano.
+                <br>
+                Le logiciel <strong>WinSCP</strong> est utilisé pour gérer ces transferts de manière sécurisée et simple.
+              </p>
+
+              <h5>&#10022; Connexion à WinSCP</h5>
+                <p>
+                  L'ordinateur et le Dofbot doivent être sur le même réseau.
+                </p>
+
+                <ul>
+                  <li>
+                    Ouvrir WinSCP sur l’ordinateur.
+                  </li>
+                  <li>
+                    Dans la fenêtre de connexion, renseigner :
+                    <ul>
+                      <li>Protocole de fichier : SFTP</li>
+                      <li>Nom d’hôte : adresse IP du DOFBOT</li>
+                      <li>Port : 22</li>
+                      <li>Nom d’utilisateur : jetson</li>
+                      <li>Mot de passe : yahboom</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Cliquer sur Login(ou Connexion) pour établir la connexion.
+                  </li>
+                </ul>
+
+              <h5>&#10022; Transfert de fichiers</h5>
+                <ul>
+                  <li>
+                    La fenêtre de WinSCP est divisée en deux parties :
+                    <ul>
+                      <li>
+                        Côté gauche : fichiers de l’ordinateur local
+                      </li>
+                      <li>
+                        Côté droit : fichiers sur le Jetson Nano du DOFBOT
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Pour copier un fichier de l'un vers l'autre :
+                    <ul>
+                      <li>
+                        Sélectionner le fichier ou dossier à copier dans le volet correspondant.
+                      </li>
+                      <li>
+                        Glisser-déposer dans le dossier souhaité de l'autre volet.
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+
+              <h5>&#10022; Bonnes pratiques</h5>
+                <ul>
+                  <li>
+                    Toujours vérifier que le fichier n’est pas ouvert ou utilisé sur le DOFBOT avant le transfert.
+                  </li>
+                  <li>
+                    Organiser les fichiers dans des dossiers clairement nommés pour éviter toute confusion.
+                  </li>
+                  <li>
+                    Fermer WinSCP après le transfert pour libérer les ressources réseau.
+                  </li>
+                </ul>
+
+              <video controls width=auto>
+                <source src="../videos/TRC25/Dofbot/WinSCP.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+          <h3 id="5-dofbot">5. Problèmes de démarrage et solution</h3>
+            <p>
+              Si le DOFBOT ne démarre pas correctement sur le système, il est possible que celui-ci soit corrompu.
+              Ces problèmes peuvent se manifester de différentes manières, notamment comme illustré ci-dessous, par un blocage lors du démarrage ou un échec de l’installation.
+              
+              <div class="image-container">
+                <img src="../images/TRC25/Dofbot/erreur_demarrage.webp" alt="erreur au demarrage" class="image-50"/>
+                <img src="../images/TRC25/Dofbot/installation_failed.webp" alt="installation échouée" class="image-50"/>
+              </div>
+            </p>
+
+            <p>
+              Cette section explique comment restaurer ou réinstaller le système du Jetson Nano 
+              en cas de problème de démarrage ou de corruption, en deux étapes essentielles :  
+              <ul>
+                <li>
+                  <strong>Flashage de l’eMMC: </strong>
+                  Installation du système de base directement sur la mémoire embarquée de la carte Jetson Nano
+                </li>
+                <li>
+                  <strong>Formatage et écriture de la clé USB: </strong>
+                  Configuration d'une clé USB bootable contenant le système du Dofbot développé par Yahboom
+                </li>
+              </ul>
+            </p>
+
+            <h4>a. Flashage de l’eMMC</h4>
+              <p>
+              Le flashage de l'eMMC(Embedded MultiMediaCard) permet de réinstaller complètement le système sur la mémoire interne du Jetson Nano 
+              lorsque celui-ci est corrompu ou ne démarre plus correctement.
+              </p>
+
+              <h5>&#10022; Matériels requis</h5>
+                <ul>
+                  <li>
+                    Carte Jetson Nano à reflasher
+                  </li>
+                  <li>
+                    Alimentation 5V / 2A
+                  </li>
+                  <li>
+                    Câble de données USB Type B
+                  </li>
+                  <li>
+                    Jumper
+                  </li>
+                  <li>
+                    Ordinateur avec un système Linux (Ubuntu 22.04 recommandé)
+                  </li>
+                </ul>
+
+              <div class="image-container">
+                <img src="../images/TRC25/Dofbot/flashage_materiels.webp" alt="matériels pour le flashage eMMC" class="image-small"/>
+              </div>
+
+              <h5>&#10022; Fichiers nécessaires</h5>
+                <p class="txt_center">
+                  eMMC Boot File : 
+                  <a href="https://drive.google.com/file/d/160lqKO80yyqXbsEXEYPxDx6b7Ubt7uCh/view?usp=drive_link" target="_blank" class="download-link">Télécharger</a>
+                </p>
+
+              <h5>&#10022; Procédure de flashage</h5>
+                <h5>Etape 1: Mise en place du jumper</h5>
+                  <p>
+                    Connecter le jumper entre les broches FC REC et GND(deuxième et troisième broches situées sous la carte principale).
+                    <div class="image-container">
+                      <img src="../images/TRC25/Dofbot/flashage_jumper.webp" alt="mise en place du jumper" class="image-mean"/>
+                    </div>
+                  </p>
+
+                  <p>
+                    Après mise sous tension, la carte entre automatiquement en mode flash (REC).  
+                  </p>
+                
+                <h5>Etape 2: Branchements et alimentation</h5>
+                  <p>
+                    Brancher les péripheriques à la carte: HDMI, souris, clavier
+                    <br>
+                    Connecter la carte à un ordincateur via le cable type B
+                    <br>
+                    Alimenter la carte
+                    <div class="image-container">
+                      <img src="../images/TRC25/Dofbot/flashage_cablage.webp" alt="cablage pour le flashage eMMC" class="image-mean"/>
+                    </div>
+                  </p>
+
+                  <p>
+                    Cette opération permet de mettre la carte <strong>en mode de récupération</strong> (REC), indispensable pour le flashage du système.
+                  </p>
+
+                <h5>Etape 3: Vérification du mode boot</h5>
+                  <p>
+                    Ouvrir un terminal sur l’ordinateur Linux et taper :
+                  </p>
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('cmd_eMMC1', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="cmd_eMMC1">
+lsusb
+                    </code></pre>
+                  </div> 
+
+                  <p>
+                    Vérifiez que parmi les devices se trouve "<strong>NVIDIA Corp APX</strong>". 
+                    Cela confirme que la carte est en boot mode.
+                    Sinon, revérifiez la connexion avec le jumper caps.</p>
+
+                <h5>Etape 4: Extraction du fichier boot</h5>
+                  <p>
+                    En étant dans le dossier contenant le fichier <strong>Jetson_Boot_USB.tar.gz</strong>, décompresser avec la commande:
+                  </p>
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('cmd_eMMC2', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="cmd_eMMC2">
+tar xzvf Jetson_Boot_USB.tar.gz
+                    </code></pre>
+                  </div> 
+
+                <h5>Etape 5: Exécution du flashage</h5>
+                  <p>
+                    Lancer la commande suivante: 
+                  </p>
+
+                  <div class="code-container">
+                    <div class="btn-bar">
+                      <button onclick="copierCode('cmd_eMMC3', this)">📋</button>
+                    </div>
+                    <pre><code class="hljs" id="cmd_eMMC3">
+sudo jetson_nano_boot_usb/Linux_for_Tegra/flash.sh -r jetson-nano-devkit-emmc mmcblk0p1
+                    </code></pre>
+                  </div> 
+
+                  <p>
+                    Le système commence alors l'écriture sur la mémoire eMMC.
+                    <br>
+                    Cette peut prendre plusieurs minutes, il ne faut surtour pas interrompre le processus.
+                  </p>
+
+                <h5>Etape 6: Vérification</h5>
+                  <p>
+                    Si le flashage est réussi, le message suivant apparaît :
+                    <div class="image-container">
+                      <img src="../images/TRC25/Dofbot/flashage_message.webp" alt="message en cas de flashage réussi" class="image-mean"/>
+                    </div>
+                  </p>
+
+                  <p>
+                    En cas d’erreur :
+                    <ul>
+                      <li>
+                        vérifier la connexion USB,
+                      </li>
+                      <li>
+                        vérifier le jumper,
+                      </li>
+                      <li>
+                        s’assurer que la carte est bien en mode REC,
+                      </li>
+                      <li>
+                        recommencer la procédure.
+                      </li>
+                    </ul>
+                  </p>
+                 
+
+                <h5>Etape 7:</h5>
+                  <p>
+                    Après la fin de l’écriture, débrancher les cables et retirer le jumper de la Jetson Nano, 
+                  </p>
+
+
+            <h4>b. Formatage et écriture de la clé USB</h4>
+              <p>
+              Le flashage de l'eMMC(Embedded MultiMediaCard) permet de réinstaller complètement le système sur la mémoire interne du Jetson Nano 
+              lorsque celui-ci est corrompu ou ne démarre plus correctement.
+              </p>
+
+              <h5>&#10022; Matériels requis</h5>
+                <ul>
+                  <li>
+                    Clé USB d'au moins 64Gb
+                  </li>
+                  <li>
+                    Un ordinateur équipé de Windows 10 ou 11
+                  </li>
+                </ul>
+
+              <h5>&#10022; Fichiers et logiciels nécessaires</h5>
+                <ul>
+                  <li>
+                    <a href="https://dw.uptodown.net/dwn/sUZn1m-1i5isgiA5fs_n0XkOOFIILfYxcARottvAHjKalf4_50katFQzmzOCg7FYbkvQgxgbpEmukLB7GGWK6n0at4f3CRm8prs7tfRIZ-W5oKAZXQr0mFFWyjDJ1QJt/hbWoDimNhtEXCJuFml_-VXJYwnPKEs0k-8RldZEu_DnLHDKiq9QicZbXoCQL2ru2Xy1AnJsp0i9Qu_xo00Ja3ogsyUyBaRtHeExexk_8iOFX9PwrYWa_vQVTMin65Zcz/Gq2E6KKth0zVDuj6lmyZsr7ZaN5D8JsjazYDZhw6hyKZ-NZP-eAG2vcO8KOwq7eRI3OH8qcAu-dLODWh7IottcEtC-y0VFo6euxqJ_cpGC0=/sd-memory-card-formatter-5-0-3.exe" 
+                      target="_blank" class="download-link">SD Card Formatter</a>: 
+                      logiciel permettant de formater la clé USB (ou carte SD) afin de la préparer à recevoir une nouvelle image système.
+                  </li>
+                  <li>
+                    <a href="https://sourceforge.net/projects/win32diskimager/files/latest/download"
+                      target="_blank" class="download-link">Win32 Disk Imager</a>:
+                      logiciel permettant d’écrire (graver) l’image disque d’un système d’exploitation sur une clé USB ou une carte mémoire SD.
+                  </li>
+                  <li>
+                    <a href="https://drive.google.com/file/d/16utHnCDTNQThNQ1if7jeLOUgK80IyORa/view?usp=drive_link"
+                      target="_blank" class="download-link">Dofbot Nano</a>:
+                      fichier image contenant le système d’exploitation optimisé pour le DOFBOT, à écrire sur la clé USB.
+                  </li>
+                </ul>
+
+              <h5>&#10022; Procédure</h5>
+                <h5>Etape 1: Formatage</h5>
+                  <ul>
+                    <li>
+                      Insérer la clé USB dans l’ordinateur (Windows 10/11)
+                    </li>
+                    <li>
+                      Ouvrir <strong>SD Card Formatter.exe</strong> et sélectionner la clé USB
+                    </li>
+                    <li>
+                      Cliquer sur "Format" pour préparer la clé à recevoir l’image système
+                    </li>
+                  </ul>
+                  <div class="image-container">
+                    <img src="../images/TRC25/Dofbot/flashage_usb1.webp" alt="formatage avec SD Card Formatter" class="image-mean"/>
+                  </div>
+
+                  <p>
+                    Si la clé USB ou la carte SD n’apparaît pas dans SD Card Formatter, il faut :
+                    <ol>
+                      <li>
+                        Vérifier qu’elle est correctement insérée: Tester un autre port USB
+                      </li>
+                      <li>
+                        Ouvrir la Gestion des disques sous Windows: <strong><em>Win + R</em></strong> 
+                        puis taper <strong><em>diskmgmt.msc</em></strong>
+                      </li>
+                      <li>
+                        Vérifier si la clé apparaît dans la liste des disques: Si elle apparaît sans lettre ou comme "Non alloué"
+                      </li>
+                      <li>
+                        Supprimer le volume existant: Clic droit sur la partition puis sur "Supprimer le volume"
+                      </li>
+                      <li>
+                        Créer un nouveau volume: Clic droit sur l’espace non alloué puis sur "Nouveau volume simple" et suivre l'assistant
+                      </li>
+                      <li>
+                        Vérifier qu’elle apparaît ensuite dans SD Card Formatter
+                      </li>
+                    </ol>
+                  </p>
+
+                  <p>
+                    Si elle n’apparaît même pas dans la gestion des disques, 
+                    cela peut indiquer un problème matériel, une clé défectueuse ou un problème de pilote USB.
+                  </p>
+                
+                <h5>Etape 2: Écriture de l'image</h5>
+                  <ul>
+                    <li>
+                      Décompresser le fichier <strong>Dofbot_nano.zip</strong>
+                    </li>
+                    <li>
+                      Ouvrir <strong>Win32 Disk Imager</strong>
+                    </li>
+                    <li>
+                      Sélectionner le fichier image décompressé <strong>(.img)</strong>
+                    </li>
+                    <li>
+                      Choisir la lettre correspondant à la clé USB formatée.
+                    </li>
+                    <li>
+                      Cliquer sur "Écrire" pour lancer l’écriture de l’image.
+                    </li>
+                  </ul>
+                  <div class="image-container">
+                    <img src="../images/TRC25/Dofbot/flashage_usb2.webp" alt="écriture de l'image avec Win32 Disk Imager" class="image-mean"/>
+                  </div>
+
+                  <p class="txt_center">
+                    <strong>NB:</strong> 
+                    Pendant l’écriture de l’image, il ne faut surtout pas retirer la clé USB ni interrompre le processus,
+                    au risque de corrompre les données et de rendre la clé inutilisable.  
+                  </p>
+                
+                  <p>
+                    Si la procédure a réussi, 
+                    il suffit d'insérer la clé USB dans la Jetson Nano et de suivre les étapes de démarrage.
+                  </p>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

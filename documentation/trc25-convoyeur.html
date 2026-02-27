@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Résilience Urbaine - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Résilience Urbaine</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+
+        <div class="nav-section">
+          <a href="./trc25" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-robot"></i> TRC25</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button active" href="./trc25-convoyeur">Convoyeur 2.0</a>
+            <nav class="project-subnav active" id="subnav-convoyeur">
+              <a href="#1-conv">1. Vers convoyeur 2.0</a>
+              <a href="#2-conv">2. Améliorations mécaniques</a>
+              <a href="#3-conv">3. Améliorations électroniques</a>
+              <a href="#4-conv">4. Programmation</a>
+              <a href="#5-conv">5. Tests fonctionnels</a>
+            </nav>
+            <a class="subtab-button" href="./trc25-dofbot">Prise en main du Dofbot</a>
+            <a class="subtab-button" href="./trc25-communication">Communication Dofbot - Convoyeur</a>
+            <a class="subtab-button" href="./trc25-yolo">Modèle de détection YOLO</a>
+            <a class="subtab-button" href="./trc25-dofbot_ia">Détection et tri - Dofbot</a>
+            <a class="subtab-button" href="./trc25-ros">ROS</a>
+            <a class="subtab-button" href="./trc25-meca">Système de ramassage</a>
+          </div>
+        </div>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section class="tab-content active">
+        <div class="subtab-content active">
+          <h2 id="convoyeur" class="projet-titre">Convoyeur 2.0</h2>
+            
+          <h3 id="1-vers_conv2">1. Vers convoyeur 2.0</h3>
+            <p>
+              Lors de la phase de présélection de la TRC 2025, une première version du convoyeur destiné au tri et au transport des déchets a été conçue et testée. 
+              Bien que fonctionnelle, cette version initiale présentait plusieurs limites, tant sur le plan mécanique qu’électronique.
+              <br>
+              La conception du Convoyeur 2.0 vise à corriger ces limites en se concentrant sur deux axes principaux :
+                <ul>
+                  <li><strong>Améliorations mécaniques:</strong> remplacement du bois par des pièces imprimées en 3D, structure démontable en quatre parties, système d'ajustement de tension du tapis optimisé et supports de capteurs repensés.</li>
+                  <li><strong>Améliorations électroniques:</strong> meilleure intégration des capteurs, câblage optimisé, support moteur stabilisé et fiabilisation générale du fonctionnement.</li>
+                </ul>
+            </p>
+            <p>
+              L’objectif du Convoyeur 2.0 est d’offrir une structure plus solide, modulable, 
+              facilement réparable et mieux adaptée à l’intégration dans le système de tri intelligent pour la TRC 2025.
+            </p>
+
+          <h3 id="2-conv">2. Améliorations mécaniques</h3>
+            <p>
+              Le Convoyeur 2.0 intègre plusieurs améliorations mécaniques visant à rendre le système <strong>plus robuste</strong>, 
+              <strong>modulable</strong> et <strong>facile à entretenir</strong>, tout <strong>en conservant les éléments fonctionnels essentiels</strong> de la version précédente (roulements, tambours, moteur, ...).
+            </p>
+
+            <h4>a. Structure démontable</h4>
+              <p>
+                La structure initiale en bois a été remplacée par des pièces imprimées en 3D. 
+                Le convoyeur est désormais entièrement démontable, découpé en quatre parties principales, ce qui facilite le transport, l’assemblage et la maintenance.
+              </p>
+              <div class="image-container">
+                <img src="../images/TRC25/Convoyeur/conv1.webp" alt="bord" class="image-small"/>
+                <img src="../images/TRC25/Convoyeur/conv2.webp" alt="bord" class="image-small"/>
+                <img src="../images/TRC25/Convoyeur/conv3.webp" alt="bord" class="image-small"/>
+                <img src="../images/TRC25/Convoyeur/conv4.webp" alt="bord" class="image-small"/>
+                <img src="../images/TRC25/Convoyeur/conv5.webp" alt="bord" class="image-small"/>
+                <img src="../images/TRC25/Convoyeur/conv6.webp" alt="bord" class="image-small"/>
+              </div>
+
+              <h4>b. Système d’ajustement de la tension du tapis</h4>
+                <p>
+                  Un nouveau mécanisme permet de régler précisément la tension du tapis. 
+                  Ce système est composé de deux <strong>vis filetées</strong> et de <strong>trois écrous</strong> montés autour d’un support central accueillant le tambour arrière. 
+                  En vissant ou dévissant, les écrous se déplacent axialement, entraînant le support et ajustant la tension du tapis pour éviter tout glissement.
+                </p>
+                <div class="image-container">
+                  <img src="../images/TRC25/Convoyeur/conv9.webp" alt="vis" class="image-small"/>
+                  <img src="../images/TRC25/Convoyeur/conv10.webp" alt="ecrou" class="image-small"/>
+                  <br>
+                  <img src="../images/TRC25/Convoyeur/conv11.webp" alt="support du tambour" class="image-small"/>
+                  <img src="../images/TRC25/Convoyeur/conv12.webp" alt="système d’ajustement de la tension" class="image-small"/>
+                </div>
+
+              <h4>c. Supports</h4>
+                <ul>
+                  <li>
+                    <strong>Support du capteur de fin de convoyage:</strong> 
+                    intégré et conçu pour maintenir le capteur en position stable et fiable à la sortie du convoyeur.
+                    <div class="image-container">
+                      <img src="../images/TRC25/Convoyeur/conv13.webp" alt="support du capteur infrarouge" class="image-small"/>
+                    </div>
+                  </li>
+                  <li>
+                    <strong>Support du capteur ultrason:</strong> 
+                    conçu pour maintenir le capteur en position stable et précise afin de détecter la présence des déchets sur le convoyeur.
+                    <div class="image-container">
+                      <img src="../images/TRC25/Convoyeur/conv14.webp" alt="support du capteur ultrason" class="image-small"/>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <strong>Supports de l'alimentation:</strong> 
+                    pour fixer et sécuriser le système d’alimentation.
+                    <div class="image-container">
+                      <img src="../images/TRC25/Convoyeur/conv16.webp" alt="support de l'alimentation" class="image-small"/>
+                    </div>
+                  </li>
+                  <li>
+                    <strong>Supports du pupitre et des circuits:</strong> 
+                    pour les boutons de contrôle et la LED de signalisation, ainsi que les circuits.
+                    <div class="image-container">
+                      <img src="../images/TRC25/Convoyeur/conv17.webp" alt="support du pupitre de commande" class="image-small"/>
+                    </div>
+                  </li>
+                  <li>
+                    <strong>Supports du tapis:</strong> 
+                    pour soutenir et maintenir le tapis en place.
+                    <div class="image-container">
+                      <img src="../images/TRC25/Convoyeur/conv15.webp" alt="support du tapis" class="image-small"/>
+                    </div>
+                  </li>
+                </ul>
+
+              <h4>d. Autres pièces supplementaires</h4>
+                <ul>
+                  <li>
+                    <strong>Pièce de fixation du moteur:</strong> 
+                    conçue pour assurer le maintien, l’alignement correct et la stabilité du moteur.
+                    <div class="image-container">
+                      <img src="../images/TRC25/Convoyeur/conv27.webp" alt="support du capteur infrarouge" class="image-small"/>
+                    </div>
+                  </li>
+                  <li>
+                    <strong>Pièce de fin de convoyage:</strong> 
+                    placée à l’extrémité du convoyeur afin de guider et recentrer les déchets vers le milieu du tapis avant la phase de détection et de tri.
+                    <div class="image-container">
+                      <img src="../images/TRC25/Convoyeur/conv28.webp" alt="support du capteur ultrason" class="image-small"/>
+                    </div>
+                  </li>
+                </ul>
+                
+              <h4>e. Assemblage sous SolidWorks</h4>
+                <p>
+                  Toutes les pièces ont été modélisées sur SolidWorks, puis assemblées sous SolidWorks.
+                </p>
+                <div class="image-container">
+                  <img src="../images/TRC25/Convoyeur/conv18.webp" alt="convoyeur sous solidworks" class="image-small"/>
+                  <img src="../images/TRC25/Convoyeur/conv19.webp" alt="convoyeur sous solidworks" class="image-small"/>
+                </div>
+
+                <p class="txt_center">
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_Convoyeur/b2ms_Conv_Meca.zip" target="_blank" class="download-link">
+                    Télécharger b2ms_Conv_Meca.zip
+                  </a>
+                </p>
+
+              <h4>f. Impression et assemblage</h4>
+                <p>
+                  Après modélisation sur SolidWorks et validation des pièces par l’équipe mécanique, 
+                  toutes les pièces ont été imprimées en 3D puis assemblées pour constituer le convoyeur.
+                </p>
+                <div class="image-container">
+                  <img src="../images/TRC25/Convoyeur/conv20.webp" alt="pièces imprimées" class="image-small"/>
+                  <br>
+                  <img src="../images/TRC25/Convoyeur/conv21.webp" alt="assemblage" class="image-small"/>
+                  <img src="../images/TRC25/Convoyeur/conv22.webp" alt="assemblage" class="image-small"/>
+                </div>
+
+          <h3 id="3-conv">3. Améliorations électroniques</h3>
+            <p>
+              Le Convoyeur 2.0 intègre plusieurs améliorations électroniques pour renforcer la fiabilité, la flexibilité et la connectivité du système.
+            </p>
+
+            <h4>a. Alimentation</h4>
+              <p>
+                Le Convoyeur 2.0 conserve l’alimentation par batterie de la version précédente, garantissant ainsi la portabilité du système 
+                et son fonctionnement même en l’absence d’une source secteur. 
+                Cette configuration permet de déplacer facilement le convoyeur et de l’utiliser dans différents environnements sans dépendre d’une prise électrique.
+                <br>
+                Pour accroître la flexibilité et permettre un fonctionnement prolongé, un système d’alimentation par prise secteur a été ajouté. 
+                Cette option fournit une source d’énergie alternative et continue, réduisant la dépendance aux batteries 
+                et assurant une disponibilité permanente lors de tests prolongés ou d’une utilisation intensive.
+              </p>
+              <div class="image-container">
+                <img src="../images/TRC25/Convoyeur/conv23.webp" alt="alimentation" class="image-small"/>
+              </div>
+
+              <h4>b. Communication et connectivité</h4>
+                <ul>
+                  <li>
+                    <strong>Communication I2C:</strong>
+                     une interface I2C a été ajoutée pour permettre une liaison rapide et fiable entre le <strong>convoyeur</strong> et le <strong>DOFBOT</strong>. 
+                     Cette communication facilite l’échange de données et le contrôle des différents modules du système, tout en simplifiant le câblage et l’intégration.
+                  </li>
+                  <li>
+                    <strong>Module Wi-Fi ESP01:</strong>
+                    le module Wi-Fi ESP01 a été intégré afin de transmettre les données du convoyeur en temps réel. 
+                    Il permet la supervision à distance du fonctionnement, le suivi des capteurs et le contrôle du convoyeur. 
+                    Cette connectivité améliore la flexibilité du système et facilite le diagnostic et la maintenance.
+                  </li>
+                </ul>
+                <p>
+                  Pour assurer la compatibilité des deux communications, un <strong>régulateur de tension 5V à 3,3V</strong> a été utilisé afin d'alimenter correctement les modules nécessitant une tension plus faible.
+                  Un <strong>convertisseur de niveau logique</strong> a également été intégré pour adapter les signaux entre le microcontrôleur et les périphériques, garantissant ainsi une communication fiable et sécurisée pour l'I²C et le module Wi-Fi ESP01.
+                </p>
+
+                <div class="image-container">
+                  <img src="../images/TRC25/Convoyeur/convertisseur_niveaux_logiques.webp" alt="Convertisseur de niveau logique bidirectionnel 3.3V-5V" class="image-small"/>
+                  <p class="txt_center">
+                    <a href="https://www.tme.eu/Document/3d637fa1410688f9bd1aa00171908361/POLOLU-2595.pdf" target="_blank">Convertisseur de niveau logique bidirectionnel 3.3V-5V</a>
+                  </p>
+                </div>
+
+                <div class="image-container">
+                  <img src="../images/TRC25/Convoyeur/circuit2.webp" alt="circuit de communication" class="image-mean"/>
+                  <img src="../images/TRC25/Convoyeur/conv24.webp" alt="circuit communication" class="image-small"/>
+                </div>
+
+              <h4>c. Commandes</h4>
+                <ul>
+                  <li>
+                    <strong>Marche/Arrêt:</strong>
+                    Les deux boutons poussoirs ont été remplacés par un interrupteur à bascule, offrant un contrôle plus pratique et moins encombrant.
+                  </li>
+                  <li>
+                    <strong>Reset du convoyeur</strong>
+                    un bouton de réinitialisation a été ajouté pour permettre de redémarrer rapidement le microcontrôleur en cas de besoin, facilitant la maintenance et le débogage.
+                  </li>
+                </ul>
+                <div class="image-container">
+                  <img src="../images/TRC25/Convoyeur/conv25.webp" alt="commandes et interfaces" class="image-small"/>
+                </div>
+
+              <h4>d. Câblage</h4>
+                <p>
+                  Le câblage a été réorganisé afin de faciliter la maintenance et de réduire les risques de court-circuit.
+                  Toutes les connexions sont sécurisées et facilement accessibles, garantissant ainsi un fonctionnement stable et fiable du convoyeur.
+                </p>
+                <div class="image-container">
+                  <img src="../images/TRC25/Convoyeur/conv26.webp" alt="cablage du convoyeur" class="image-small"/>
+                </div>
+
+          <h3 id="4-conv">4. Programmation</h3>
+            <ul>Le microcontrôleur du convoyeur a été programmé pour :
+              <li>
+                Lire en temps réel les capteurs(ultrason et infrarouge).
+              </li>
+              <li>
+                Contrôler le moteur.
+              </li>
+              <li>
+                Assurer la communication avec le DOFBOT.
+              </li>
+              <li>
+                Réagir aux commandes utilisateur(interrupteur à bascule, bouton reset) et sécuriser le fonctionnement du système.
+              </li>
+            </ul>
+            <p>
+              Le code est structuré de manière modulaire, facilitant la maintenance et les futures améliorations.
+            </p>
+
+            <details class="code-container">
+              <summary>code_convoyeur.ino</summary>
+              <div class="btn-bar">
+                <button onclick="copierCode('code_convoyeur-ino', this)">📋</button>
+                <button onclick="telechargerCode('code_convoyeur-ino', 'code_convoyeur.ino', 'text/ino', this)">🡇</button>
+              </div>
+              <pre><code class="hljs" id="code_convoyeur-ino">
+#include &lt;SoftwareSerial.h&gt;
+
+#define pinStart 2
+
+// Contrôle moteur
+#define pinMotor 3
+
+// Définir les broches du capteur de couleur
+#define LED_R 9
+#define LED_G 10
+#define LED_B 11
+
+// capteur infrarouge
+#define infraredSensor 8
+
+// capteur Ultrason
+#define trigPin 6
+#define echoPin 5
+
+// RX, TX
+SoftwareSerial espSerial(4, 7);
+
+unsigned long distance = 0, lastInterrupt = 0, lastSend = 0;
+bool finTapis = true;
+volatile bool is_on = false;
+
+const int vitesse = 250;
+
+
+
+void setup()
+{
+    // Moteur
+    pinMode(pinMotor, OUTPUT);
+    analogWrite(pinMotor, 0); // arrêt initial
+
+    // LED
+    pinMode(LED_R, OUTPUT);
+    pinMode(LED_G, OUTPUT);
+    pinMode(LED_B, OUTPUT);
+    setColor(0, 0, 0); // blanc
+
+    // Ultrason
+    pinMode(trigPin, OUTPUT);
+    pinMode(echoPin, INPUT);
+
+    // Infrarouge
+    pinMode(infraredSensor, INPUT);
+
+    // interrupteur à bascule
+    pinMode(pinStart, INPUT);
+    attachInterrupt(digitalPinToInterrupt(pinStart), interrupt_routine, CHANGE);
+
+    Serial.begin(9600);
+    espSerial.begin(9600); 
+    delay(1000);
+    is_on = digitalRead(pinStart);
+}
+
+
+void loop()
+{
+  if (!is_on)
+  {
+    // led en rouge pour indiquer que le système est en stop
+    setColor(255, 0, 0);
+    analogWrite(pinMotor, 0);
+    while (!is_on)
+    {      
+      delay(100);
+    }
+  }
+  else
+  {
+    distance = getDistance();
+    int infraredValue = digitalRead(infraredSensor);
+
+    if (infraredValue)
+    {
+      analogWrite(pinMotor, 0);
+      finTapis = true;
+      setColor(255, 165, 0);
+      send_info();
+    }
+
+    else if (distance < 50 || !finTapis)
+    {
+      setColor(0, 255, 0);
+      if(distance < 15){
+        delay(500);
+        finTapis = false;
+        lastSend = 0;
+        analogWrite(pinMotor, vitesse);
+      }
+    else if (distance > 45)
+    {
+      analogWrite(pinMotor, vitesse-50);
+      }
+    }
+    else
+    {
+      setColor(0, 0, 255);
+      analogWrite(pinMotor, 0);
+    }
+  }
+}
+
+// Fonction pour lire la distance avec le capteur ultrason
+long getDistance()
+{
+    digitalWrite(trigPin, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
+
+    long duration = pulseIn(echoPin, HIGH);
+    long distance = (duration / 2.0) * 0.0344;
+    return distance;
+}
+
+void setColor(unsigned int red, unsigned int green, unsigned int blue)
+{
+    red = map(red, 0, 255, 255, 0);
+    green = map(green, 0, 255, 255, 0);
+    blue = map(blue, 0, 255, 255, 0);
+    analogWrite(LED_R, red);
+    analogWrite(LED_G, green);
+    analogWrite(LED_B, blue);
+}
+
+void send_info(){
+  unsigned long currentMillisInfo = millis();
+  if (currentMillisInfo - lastSend > 2000) {
+    espSerial.write("piece");
+    Serial.println("piece");
+    lastSend = currentMillisInfo;
+  }
+}
+
+   
+void interrupt_routine() {
+    unsigned long currentMillis = millis();
+    detachInterrupt(digitalPinToInterrupt(pinStart)); 
+    if (currentMillis - lastInterrupt > 200) { // anti-rebond 100ms
+      is_on = digitalRead(pinStart);
+      lastInterrupt = currentMillis;
+    }
+   attachInterrupt(digitalPinToInterrupt(pinStart), interrupt_routine, CHANGE);
+}
+              </code></pre>
+            </details>
+
+
+          <h3 id="5-conv">5. Tests fonctionnels</h3>
+            <p>
+              Le Convoyeur 2.0 a été soumis à une série de tests pour vérifier le bon fonctionnement de l’ensemble du système.
+              <br>
+              Ci-dessous quelques tests éffectués:
+            </p>
+            <h4>Test de la pupitre de commande</h4>
+              <details class="code-container">
+                <summary>test_pupitre.ino</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('test_pupitre-ino', this)">📋</button>
+                  <button onclick="telechargerCode('test_pupitre-ino', 'test_pupitre.ino', 'text/ino', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="test_pupitre-ino">
+#define pinStart 2
+#define LED_R 9
+#define LED_G 10
+#define LED_B 11
+
+unsigned long lastInterrupt = 0;
+volatile bool is_on = false;
+
+// variables pour gestion du timing
+unsigned long previousMillis = 0;
+int colorState = 0;
+const unsigned long interval = 2000; // intervalle de 2 secondes
+
+void setup()
+{
+  Serial.begin(9600);
+    pinMode(LED_R, OUTPUT);
+    pinMode(LED_G, OUTPUT);
+    pinMode(LED_B, OUTPUT);
+    setColor(0, 0, 0); // éteint la LED
+
+    pinMode(pinStart, INPUT);
+    attachInterrupt(digitalPinToInterrupt(pinStart), interrupt_routine, CHANGE);
+    delay(500);
+    is_on = digitalRead(pinStart);
+    Serial.println(is_on);
+}
+
+void loop() {
+    unsigned long currentMillis = millis();
+
+    if (is_on) {
+        if (currentMillis - previousMillis >= interval) {
+            previousMillis = currentMillis;
+
+            // changer la couleur en fonction de colorState
+            switch(colorState) {
+                case 0:
+                    setColor(250, 0, 0); // rouge
+                    break;
+                case 1:
+                    setColor(0, 250, 0); // vert
+                    break;
+                case 2:
+                    setColor(0, 0, 250); // bleu
+                    break;
+            }
+
+            colorState++;
+            if (colorState > 2) colorState = 0;
+        }
+    } else {
+        setColor(0, 0, 0); // LED éteinte
+        previousMillis = currentMillis; // réinitialiser le timing
+        colorState = 0;
+    }
+}
+
+void setColor(unsigned int red, unsigned int green, unsigned int blue)
+{
+    red = map(red, 0, 255, 255, 0);
+    green = map(green, 0, 255, 255, 0);
+    blue = map(blue, 0, 255, 255, 0);
+    analogWrite(LED_R, red);
+    analogWrite(LED_G, green);
+    analogWrite(LED_B, blue);
+}
+
+void interrupt_routine() {
+    unsigned long currentMillis = millis();
+    detachInterrupt(digitalPinToInterrupt(pinStart)); 
+    if (currentMillis - lastInterrupt > 200) { // anti-rebond 100ms
+      is_on = digitalRead(pinStart);
+      Serial.println(is_on);
+      lastInterrupt = currentMillis;
+    }
+  attachInterrupt(digitalPinToInterrupt(pinStart), interrupt_routine, CHANGE);
+}
+                </code></pre>
+              </details>
+            <video controls width=25%>
+              <source src="../videos/TRC25/Convoyeur/test_pupitre.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+            <h4>Test du moteur et des capteurs</h4>
+              <details class="code-container">
+                <summary>test_moteur_capteurs.ino</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('test_moteur_capteurs-ino', this)">📋</button>
+                  <button onclick="telechargerCode('test_moteur_capteurs-ino', 'test_moteur_capteurs.ino', 'text/ino', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="test_moteur_capteurs-ino">
+#define pinStart 2
+
+// Contrôle moteur
+#define pinMotor 3
+
+// Définir les broches du capteur de couleur
+#define LED_R 9
+#define LED_G 10
+#define LED_B 11
+
+// capteur infrarouge
+#define infraredSensor 8
+
+// capteur Ultrason
+#define trigPin 6
+#define echoPin 5
+
+
+unsigned long distance = 0, lastInterrupt = 0;
+bool finTapis = true;
+volatile bool is_on = false;
+const int vitesse = 100;
+
+void setup()
+{
+    // Moteur
+    pinMode(pinMotor, OUTPUT);
+    analogWrite(pinMotor, 0); // arrêt initial
+
+    // LED
+    pinMode(LED_R, OUTPUT);
+    pinMode(LED_G, OUTPUT);
+    pinMode(LED_B, OUTPUT);
+    setColor(0, 0, 0); // blanc
+
+    // Ultrason
+    pinMode(trigPin, OUTPUT);
+    pinMode(echoPin, INPUT);
+
+    // Infrarouge
+    pinMode(infraredSensor, INPUT);
+
+    // interrupteur à bascule
+    pinMode(pinStart, INPUT);
+    attachInterrupt(digitalPinToInterrupt(pinStart), interrupt_routine, CHANGE);
+
+    Serial.begin(9600);
+    delay(1000);
+    is_on = digitalRead(pinStart);
+}
+
+
+void loop()
+{
+  if (!is_on)
+  {
+    // led en rouge pour indiquer que le système est en stop
+    setColor(255, 0, 0);
+    analogWrite(pinMotor, 0);
+    while (!is_on)
+    {      
+      delay(100);
+    }
+  }
+  else
+  {
+    //setColor(0, 0, 255); 
+    //delay(200);
+    // distance de l'objet par rapport au capteur
+    distance = getDistance();
+    int infraredValue = digitalRead(infraredSensor);
+
+    if (infraredValue)
+    {
+        finTapis = true;
+        analogWrite(pinMotor, 0);
+        setColor(255, 255, 0);
+    }
+
+    else if (distance < 50 || !finTapis)
+    {
+      if(distance < 15){
+        delay(500);
+      }
+      else if(15 < distance && distance < 20){
+          finTapis = false;
+        }
+        setColor(0, 255, 0);
+        analogWrite(pinMotor, vitesse);
+        delay(100);
+    }
+    else
+    {
+        setColor(0, 0, 255);
+        // arrêt du moteur
+        analogWrite(pinMotor, 0);
+    }
+  }
+}
+
+// Fonction pour lire la distance avec le capteur ultrason
+long getDistance()
+{
+    digitalWrite(trigPin, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
+
+    long duration = pulseIn(echoPin, HIGH);
+    long distance = (duration / 2.0) * 0.0344;
+    return distance;
+}
+
+void setColor(unsigned int red, unsigned int green, unsigned int blue)
+{
+    red = map(red, 0, 255, 255, 0);
+    green = map(green, 0, 255, 255, 0);
+    blue = map(blue, 0, 255, 255, 0);
+    analogWrite(LED_R, red);
+    analogWrite(LED_G, green);
+    analogWrite(LED_B, blue);
+}
+
+  
+void interrupt_routine() {
+    unsigned long currentMillis = millis();
+    detachInterrupt(digitalPinToInterrupt(pinStart)); 
+    if (currentMillis - lastInterrupt > 200) { // anti-rebond 100ms
+      is_on = digitalRead(pinStart);
+      lastInterrupt = currentMillis;
+    }
+  attachInterrupt(digitalPinToInterrupt(pinStart), interrupt_routine, CHANGE);
+}
+                </code></pre>
+              </details>
+            <video controls width=auto>
+              <source src="../videos/TRC25/Convoyeur/test_moteur_capteurs.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_Convoyeur/b2ms_Conv_Code.zip" target="_blank" class="download-link">
+                Télécharger b2ms_Conv_Code.zip
+              </a>
+            </p>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

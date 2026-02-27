@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Système de convoyeur - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Système de convoyeur</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+
+        <div class="nav-section">
+          <a href="./convoyeur" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-forward"></i> Convoyeur</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button" href="./convoyeur-meca">Partie mécanique</a>
+            <a class="subtab-button active" href="./convoyeur-electro">Partie électronique</a>
+            <nav class="project-subnav active" id="subnav-electro">
+              <a href="#1-electro">1. Cahier de charge électronique</a>
+              <a href="#2-electro">2. Schéma synoptique</a>
+              <a href="#3-electro">3. Description fonctionnelle </a>
+              <a href="#4-electro">4. Tests et validation</a>
+              <a href="#5-electro">5. Réalisation du PCB</a>
+              <a href="#6-electro">6. Prototype final</a>
+            </nav>
+            <a class="subtab-button" href="./convoyeur-it">Partie informatique</a>
+            <a class="subtab-button" href="./convoyeur-validation">Tests et validation</a>
+          </div>
+        </div>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="convoyeur-content" class="tab-content active">
+        <div id="electronique" class="subtab-content active">
+          <h2 id="electro" class="projet-titre">Partie électronique - Système de convoyeur</h2>
+          <h3 id="1-electro">1. Cahier de charge électronique</h3>
+            <p>
+            Dans le cadre d’un projet final en systèmes embarqués, le but est de concevoir un <strong>système automatisé de tri de déchets</strong> 
+            inspiré des procédés industriels de recyclage.
+            </p> 
+            
+            <h4>a. Objectifs fonctionnels</h4>
+              <ul>
+                <li>Détecter la présence d’un objet/déchet sur la bande.</li>
+                <li>Mettre en mouvement la bande uniquement si un déchet est détecté.</li>
+                <li>Détecter la couleur de l’objet (cube) en mouvement.</li>
+                <li>Afficher la couleur via une LED RGB.</li>
+                <li>Transmettre la couleur détectée à une interface web via Wi-Fi.</li>
+              </ul>
+
+            <h4>b. Contraintes techniques</h4>
+              <ul>
+                <li>Alimentation sur 3 piles Li-ion 3,7V (≈11,1V).</li>
+                <li>Conversion de tension via module buck MP2307 vers 5V.</li>
+                <li>Circuit centré sur une Arduino Nano.</li>
+                <li>Capteurs alimentés en 5V.</li>
+                <li>Utilisation minimale de composants externes (driver moteur simple par MOSFET). </li>
+              </ul>
+
+            <h4>c. Composants utilisés</h4>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><strong>Arduino Nano</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Capteur à ultrasons HC-SR04</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Capteur de couleur TCS230</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Capteur infrarouge</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>LED RGB</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Moteur DC 6-12V</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Module WiFi (ESP-01)</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>MOSFET canal N (IRFZ44N)</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Régulateur buck MP2307</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Boutons poussoirs</strong></td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Interrupteur</strong></td>
+                    <td>1</td>
+                  </tr>                 
+                  <tr>
+                    <td><strong>Diode de roue libre (1N4007)</strong></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Résistances, câblage</strong></td>
+                    <td>-</td>
+                  </tr>
+                </tbody>
+            </table>
+
+          <h3 id="2-electro">2. Schéma synoptique</h3>
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/schema_synoptique.webp" alt="schema_synoptique" class="image-mean"/>
+            </div>
+    
+          <h3 id="3-electro">3. Description fonctionnelle des blocs</h3>
+             <h4>a. Le microcontrôleur(Arduino Nano)</h4>
+              <p>
+                L'<a href="https://docs.arduino.cc/resources/datasheets/A000005-datasheet.pdf" target="_blank">Arduino nano</a> 
+                est une carte microcontrôleur compacte et polyvalente basée sur l'ATmega328P. 
+                Ses broches et ses caractéristiques techniques lui confèrent de nombreuses fonctionnalités.
+              </p>
+
+              <p>
+                Il constitue le cœur de notre système. 
+                C’est lui qui reçoit l’ensemble des données issues des capteurs et qui pilote les différents actionneurs : 
+                l’éclairage <strong>RGB</strong>, le <strong>moteur</strong> (pour le démarrage et l’arrêt du tapis), ainsi que les <strong>boutons</strong> de mise en marche et d’arrêt du système.
+                Sans ce composant central, aucun fonctionnement n’est possible.
+              </p>
+              <p>
+                Son fonctionnement repose sur un programme écrit en langage C, spécifiquement conçu pour coordonner tous les éléments du système.
+              </p>
+              <p>
+                Dans la suite du document, nous détaillerons le code ainsi que le schéma de câblage, en précisant à quelles broches de l’Arduino Nano chaque capteur ou composant est connecté.
+              </p>
+              <div class="image-container">
+                <img src="../images/Test4/Electronique/arduino_nano.webp" alt="nano" class="image-mean"/>
+              </div>
+
+              <ul>
+                <strong>Quelques caractéristiques:</strong>
+              </ul>
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Rôles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Vin, 5V, 3.3V</strong></td>
+                    <td>Alimentation</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Reset</strong></td>
+                    <td>Réinitialisation du microcontrôleur.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Broches analogiques(A0 – A7)</strong></td>
+                    <td>Entrée analogique</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Broches numériques (D0 – D13)</strong></td>
+                    <td>Entrée/Sortie numérique uniquement</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Série (Rx, Tx)</strong></td>
+                    <td>Transmission et la réception de données série TTL</td>
+                  </tr>
+                  <tr>
+                    <td><strong>PWM (3, 5, 6, 9, 11)</strong></td>
+                    <td>Sortie PWM 8 bits</td>
+                  </tr>
+                  <tr>
+                    <td><strong>SPI (10, 11, 12, 13)</strong></td>
+                    <td>Communication SPI</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            <h4>b. Bloc d'alimentation</h4>
+              <p>
+                Le système est alimenté par <strong>trois batteries Li-Ion 3.7V</strong> montées en série (tension totale ≈11.1V). 
+                Cette tension alimente directement le moteur via le circuit MOSFET. 
+                Pour alimenter les composants électroniques en 5V, un <a href="https://cdn-shop.adafruit.com/datasheets/MP2307_r1.9.pdf" download target="_blank">module buck MP2307</a> est utilisé. 
+                Ce module convertit efficacement la tension 11.1V vers 5V avec un bon rendement.
+              </p>
+              <div class="image-container">
+                <img src="../images/Test4/Electronique/alimentation.webp" alt="bloc_alimentation" class="image-mean"/>
+                <img src="../images/Test4/Electronique/buck.webp" alt="bloc_alimentation" class="image-small"/>
+              </div>
+              <p>
+                <ul>
+                  <li><strong>Avantages du MP2307</strong>: faible échauffement, grande stabilité, courant jusqu’à 2A. </li>
+                </ul>
+              </p>
+
+              <h4>c. Les capteurs</h4>
+              <h5>&#10022; Capteur à ultrasons (HC-SR04)</h5>
+                <p>
+                  Le <a href="https://www.robot-maker.com/shop/img/cms/datasheet-capteur-ultrasons-hc-sr04.pdf" download target="_blank">capteur à ultrasons HC-SR04</a> 
+                  détermine la distance d’un objet par rapport à sa position.
+                  Il génère un signal à bande étroite à une fréquence de 40 kHz et capte le signal réfléchi(écho). 
+                  Sur la base du temps de propagation du son vers et depuis l’objet, la distance (en centimètres) peut être déterminée assez précisément.
+                  Ce capteur permet donc de détecter la présence d'une pièce tout le long du convoyeur.                 
+                </p>
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/ultrasonic.webp" alt="Ultrason" class="image-mean"/>
+                </div>
+
+                <p>
+                  <ul>
+                    <li>
+                      <strong>TRIG</strong>(OUTPUT) envoie une impulsion électrique de 10 microsecondes pour déclencher la mesure. 
+                      Cette impulsion commande au capteur d’émettre une onde ultrasonore.
+                    </li>
+                    <li>
+                      <strong>Echo</strong>(INPUT) reçoit l’onde ultrasonore réfléchie par un objet et passe à l’état HAUT pendant une durée proportionnelle à la distance mesurée. 
+                      Cette durée est utilisée pour calculer la distance entre le capteur et l’objet.
+                    </li>
+                  </ul>
+                </p>
+
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/circuit_ultrason.webp" alt="Ultrason" class="image-mean"/>
+                </div>
+                
+                <div class="code-container">
+                  <p>code_ultrasonic.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_ultrasonic-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_ultrasonic-ino', 'code_ultrasonic.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code class="hljs" id="code_ultrasonic-ino">
+#define trigPin 5
+#define echoPin 6
+
+long distance = 0;  //stocke la distance calculée
+
+void setup() {
+  pinMode(trigPin, OUTPUT); // Configurer trigPin en sortie
+  pinMode(echoPin, INPUT); // Configurer echoPin en entrée
+  Serial.begin(9600); // Initialiser la communication série à 9600 bauds
+}
+
+void loop() {
+  distance = getDistance(); 
+
+  // Afficher la distance sur le moniteur série
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  delay(1000); // Attendre 1 seconde avant de refaire une lecture
+}
+
+long getDistance() {
+  // Envoyer une impulsion de 10 µs pour déclencher le capteur
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Mesurer la durée de l'écho
+  long duration = pulseIn(echoPin, HIGH);
+  
+  // Calculer la distance en cm
+  long distance = (duration / 2) * 0.0344;  // Vitesse du son = 0.0344 cm/µs
+  
+  return distance;
+}
+                </code></pre>
+              </div>
+
+              <h5>&#10022; Capteur infrarouge</h5>
+                <p>
+                  Placé en bout de convoyeur, à une distance adéquate, le <a href="https://www.vishay.com/docs/83760/tcrt5000.pdf" download target="_blank">capteur infrarouge TRCT5000</a> <strong>émet un faisceau infrarouge</strong> à courte portée à l’aide d’une LED de 940 nm. 
+                  Lorsqu’un objet s’approche, la lumière infrarouge est partiellement <strong>réfléchie vers un récepteur photoélectrique intégré</strong>. 
+                  Cette variation de lumière permet au module de générer un signal numérique indiquant la présence ou l'absence d’un obstacle.
+                </p>
+                <p>
+                  Compatible avec une alimentation de 3,3 V à 5 V et consommant jusqu’à 100 mA, le capteur s’adapte à la plupart des microcontrôleurs. 
+                  Il fonctionne à une fréquence de 38 kHz, limitant les interférences dues à la lumière ambiante, et peut opérer dans des températures allant de -25 °C à +55 °C.
+                  Sa robustesse et sa précision en font un composant essentiel pour assurer un arrêt précis du convoyeur en fin de cycle.
+                </p>
+                
+                <p>
+                  <strong>NB:</strong> le potentiomètre intégré permet d'ajuster la plage de détection du module.
+                </p>
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/infrared.webp" alt="infrared" class="image-mean"/>
+                </div>
+
+                <ul>
+                  <strong>Sortie logique: </strong>
+                  <li><strong>HIGH</strong> = objet détecté</li>
+                  <li><strong>LOW</strong> = pas d’objet</li>
+                </ul>
+
+                <p>
+                  Ce capteur infrarouge est utilisé pour détecter l’arrivée d’une pièce en fin de convoyage et d'arrêter le moteur. 
+                </p>
+
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/circuit_infrared.webp" alt="infrared" class="image-mean"/>
+                </div>
+
+                <div class="code-container">
+                  <p>code_infrarouge.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_infrarouge-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_infrarouge-ino', 'code_infrarouge.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code class="hljs" id="code_infrarouge-ino">
+#define infraredSensor 19
+
+int infraredValue = 0; //stocke la valeur du capteur infrarouge
+
+void setup(){
+    pinMode(infraredSensor, INPUT);
+    Serial.begin(9600);
+}
+
+void loop(){
+    infraredValue = digitalRead(infraredSensor);
+    // affichage sur le moniteur
+    Serial.print(" Valeur du capteur: ");
+    Serial.println(infraredValue);
+    delay(500);
+}
+                </code></pre>
+              </div>
+
+              <h5>&#10022; Le capteur de couleur TCS230/TCS3200</h5>
+                <p>
+                  Le <a href="https://www.mouser.com/catalog/specsheets/tcs3200-e11.pdf?srsltid=AfmBOoryK8wKLsTUaZK-DPXlDA7PPmU7zvHeu1G3dqKgPZAXs0rpiqxm" target="_blank">capteur de couleur TCS230/TCS3200</a> 
+                  est un dispositif optique capable de détecter la couleur dominante d’un objet. 
+                  Il fonctionne en convertissant l’intensité lumineuse de la couleur perçue en un signal carré dont <strong>la fréquence varie selon la couleur détectée</strong>.
+                  Ce capteur est plus fiable et performant que le capteur de couleur 
+                  <a href="https://www.mouser.com/datasheet/2/321/28380-ColorPAL-Documentation-370265.pdf?srsltid=AfmBOoqGq8vwQaI62oqMLZm4TdE2iRID73yldqJOA6wBk9wV9HYMWR5j" target="_blank"><strong>ColorPal</strong></a> utilisé initialement.
+                </p>
+                <ul>
+                  &#9673; <strong>Fonctionnement:</strong>
+                  <li>
+                    Le capteur est composé d'une matrice de 8×8 photodiodes, soit 64 au total: 3x16 photodiodes sensibles au rouge, vert, bleu, et 16 photodiodes sans filtre(blanc). 
+                  </li>
+                  <li>
+                    Les photodiodes sont sélectionnées via les broches <strong>S2</strong> et <strong>S3</strong>, permettant de choisir la composante de couleur à mesurer (R, G ou B).
+                  </li>
+                  <li>La sortie du capteur est fournie sur la broche <strong>OUT</strong>, sous forme d’un signal carré dont <strong>la fréquence est proportionnelle à l’intensité de la couleur mesurée</strong>.</li>
+                </ul>
+
+                <ul>
+                  &#9673; <strong>Brochage:</strong>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Pin</th>
+                        <th>Rôle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>VCC</strong></td>
+                        <td>Alimentation(2.7-5.5V)</td>
+                      </tr>
+                      <tr>
+                        <td><strong>GND</strong></td>
+                        <td>Masse</td>
+                      </tr>
+                      <tr>
+                        <td><strong>S0, S1</strong></td>
+                        <td>Selection de l'échelle de fréquence de sortie</td>
+                      </tr>
+                      <tr>
+                        <td><strong>S2, S3</strong></td>
+                        <td>Selection du type de photodiode</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Out</strong></td>
+                        <td>Sortie de fréquence</td>
+                      </tr>
+                      <tr>
+                        <td><strong>OE</strong></td>
+                        <td>Activer la sortie(actif bas)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ul>
+
+                <ul>
+                  &#9673; <strong>Utilisation avec un Arduino:</strong>
+                  <li>
+                    Lorsqu’un objet est placé devant le capteur, celui-ci mesure la lumière réfléchie par l’objet pour chaque composante de couleur (rouge, vert, bleu).
+                  </li>
+                  <li>
+                    Le capteur envoie ensuite les fréquences mesurées à l’Arduino, qui les analyse pour déterminer la couleur dominante.
+                  </li>
+                </ul>
+
+                <table>
+                    <thead>
+                      <tr>
+                        <th>S0</th>
+                        <th>S1</th>
+                        <th>Fréquence</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>LOW</td>
+                        <td>LOW</td>
+                        <td>0%</td>
+                      </tr>
+                      <tr>
+                        <td>LOW</td>
+                        <td>HIGH</td>
+                        <td>2%</td>
+                      </tr>
+                      <tr>
+                        <td>HIGH</td>
+                        <td>LOW</td>
+                        <td>20%</td>
+                      </tr>
+                      <tr>
+                        <td>HIGH</td>
+                        <td>HIGH</td>
+                        <td>100%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>S2</th>
+                        <th>S3</th>
+                        <th>Filtre séléctionné</th>
+                        <th>Sensibilité</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>LOW</th>
+                        <th>LOW</th>
+                        <th>Rouge</th>
+                        <th>Haute</th>
+                      </tr>
+                      <tr>
+                        <th>LOW</th>
+                        <th>HIGH</th>
+                        <th>Bleu</th>
+                        <th>Haute</th>
+                      </tr>
+                      <tr>
+                        <th>HIGH</th>
+                        <th>LOW</th>
+                        <th>Sans filtre(clair)</th>
+                        <th>Très haute</th>
+                      </tr>
+                      <tr>
+                        <th>HIGH</th>
+                        <th>HIGH</th>
+                        <th>Vert</th>
+                        <th>Haute</th>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/capteur_couleur.webp" alt="capteur_couleur" class="image-mean"/>
+                </div>
+                
+                <!-- <div class="image-container">
+                  <img src="../images/Test4/Electronique/circuit_sensorColor.webp" alt="capteur_couleur" class="image-mean"/>
+                </div> -->
+                
+                <div class="code-container">
+                  <p>code_tcs230.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_tcs230-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_tcs230-ino', 'code_tcs230.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code class="hljs" id="code_tcs230-ino">
+// Définir les broches du capteur
+#define S0 14
+#define S1 15
+#define S2 16
+#define S3 17
+#define sensorOut 18
+
+
+void setup() {
+  Serial.begin(9600); // Initialiser la communication série à 9600 bauds
+  pinMode(S0, OUTPUT); // Définir S0 comme sortie
+  pinMode(S1, OUTPUT); // Définir S1 comme sortie
+  pinMode(S2, OUTPUT); // Définir S2 comme sortie
+  pinMode(S3, OUTPUT); // Définir S3 comme sortie
+  pinMode(sensorOut, INPUT); // Définir sensorOut comme entrée
+
+
+  // Configurer l'échelle de fréquence à 20%
+  digitalWrite(S0, HIGH);
+  digitalWrite(S1, LOW);
+}
+
+void loop() {
+  printColorFrequency();
+  delay(500); // Attendre 500 ms avant la prochaine lecture
+}
+
+void printColorFrequency() {
+  // Lire la valeur de la couleur rouge
+  digitalWrite(S2, LOW); // Activer les photodiodes rouges
+  digitalWrite(S3, LOW);
+  int redFrequency = pulseIn(sensorOut, LOW); // Lire la fréquence de sortie pour le rouge
+  Serial.print("Red: ");
+  Serial.print(redFrequency);
+  Serial.print("  ");
+
+
+  // Lire la valeur de la couleur verte
+  digitalWrite(S2, HIGH); // Activer les photodiodes vertes
+  digitalWrite(S3, HIGH);
+  int greenFrequency = pulseIn(sensorOut, LOW); // Lire la fréquence de sortie pour le vert
+  Serial.print("Green: ");
+  Serial.print(greenFrequency);
+  Serial.print("  ");
+
+
+  // Lire la valeur de la couleur bleue
+  digitalWrite(S2, LOW); // Activer les photodiodes bleues
+  digitalWrite(S3, HIGH);
+  int blueFrequency = pulseIn(sensorOut, LOW); // Lire la fréquence de sortie pour le bleu
+  Serial.print("Blue: ");
+  Serial.println(blueFrequency);
+}   
+                </code></pre>
+              </div>             
+
+              <h4>d. Module Wi-Fi ESP01</h4>
+                <p>
+                  Le module Wi-Fi <a href="https://academy.cba.mit.edu/classes/networking_communications/ESP8266/esp01.pdf" download target="_blank">ESP-01</a>, 
+                  permet aux microcontrôleurs de se connecter à un réseau Wi-Fi. 
+                  Dans notre projet, il est principalement utilisé pour communiquer avec une <strong>interface web</strong> et transmettre des informations(la couleur detectée et l'état du système).
+                </p>
+                <p>
+                  <h5>&#10022; Configuration de l’IDE Arduino pour l’ESP8266</h5>
+                  Pour utiliser l’ESP8266 avec l’IDE Arduino, il faut suivre les étapes suivantes :
+                  <ul>
+                    <li>Ajouter le support de la carte ESP8266: ajouter l’URL(http://arduino.esp8266.com/stable/package_esp8266com_index.json) de la source ESP8266 dans les préférences de l’IDE</li>
+                    <li>Installer le package logiciel: rechercher et installer la bibliothèque <strong>ESP8266</strong></li>
+                    <li>Sélectionner la carte: choisir "Generic ESP8266 Module"</li>
+                  </ul>
+                </p>
+
+                  <h5>&#10022; Brochage de l’ESP-01 (ESP8266-01)</h5>
+                  <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Rôles</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>VCC</strong></td>
+                      <td>Alimentation(<strong>3.3V</strong>)</td>
+                    </tr>
+                    <tr>
+                      <td><strong>GND</strong></td>
+                      <td>Masse</td>
+                    </tr>
+                    <tr>
+                      <td><strong>TX</strong></td>
+                      <td>Transmission de données</td>
+                    </tr>
+                    <tr>
+                      <td><strong>RX</strong></td>
+                      <td>Réception de données</td>
+                    </tr>
+                    <tr>
+                      <td><strong>CH_PD / EN</strong></td>
+                      <td>Activation du module</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Reset</strong></td>
+                      <td>Réinitialisation du module</td>
+                    </tr>
+                    <tr>
+                      <td><strong>GPIO0 et GPIO2</strong></td>
+                      <td>Broches d’entrée/sortie numériques</td>
+                    </tr>
+                  </tbody>
+                </table>
+              <div class="image-container">
+                <img src="../images/Test4/Electronique/module_wifi.webp" alt="module_wifi" class="image-small"/>
+              </div>
+
+              <p class="txt_center">
+                <strong>NB:</strong> ce module n'est pas encore intégré dans cette documentation à cause de problèmes de communication avec l'interface.
+                La communication se fera alors par cable USB pour le moment.
+              </p>
+
+              <h4>e. Bloc de sortie</h4>
+              <h5>&#10022; Moteur</h5>
+                <p>
+                  Le <strong>moteur à courant continu</strong> (DC) 6–12 V est utilisé pour entraîner le tapis du convoyeur. 
+                  Il assure le déplacement des objets détectés grâce à son couple adapté aux applications de petite puissance. 
+                  Son alimentation est assurée par une source externe(12 V), 
+                  tandis que sa mise en marche est commandée électroniquement.
+                </p>
+                <p>
+                  Pour contrôler le moteur, un transistor <strong>MOSFET canal N</strong> est utilisé comme interrupteur électronique. 
+                  Ce composant permet de gérer l’alimentation du moteur en fonction du signal envoyé par la carte Arduino. 
+                  Une diode de roue libre est placée en parallèle du moteur afin de protéger le circuit contre les surtensions transitoires générées lors de l’arrêt du moteur, dues à l’induction.
+                </p>
+                <p>
+                  La commande du moteur se fait via une broche <strong>PWM</strong> de l’Arduino connectée à la grille du MOSFET. 
+                  En faisant varier le rapport cyclique du signal PWM, il est possible d'<strong>ajuster la vitesse de rotation</strong> du moteur, et donc la vitesse du convoyeur. 
+                  Un signal à rapport cyclique élevé entraîne une rotation rapide, tandis qu’un rapport plus faible réduit la vitesse du moteur.
+                </p>
+                <p>
+                  Ainsi, le système est plus optimisé et ne dépend plus d'un 
+                  <a href="https://www.handsontec.com/dataspecs/L298N%20Motor%20Driver.pdf" download target="_blank">moteur driver</a>.
+                </p>
+
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/mosfet.webp" alt="Moteur" class="image-small"/>
+                  <img src="../images/Test4/Electronique/moteur_dc.webp" alt="Moteur" class="image-small"/>
+                  <img src="../images/Test4/Electronique/commande_moteur1.webp" alt="Moteur" class="image-mean"/>
+                </div>
+
+                <div class="code-container">
+                  <p>code_moteur.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_moteur-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_moteur-ino', 'code_moteur.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code class="hljs" id="code_moteur-ino">
+#define pinMotor 3
+
+void setup () {
+    pinMode(pinMotor, OUTPUT);
+}
+
+void loop() {
+    analogWrite(pinMotor, 100);
+    delay(2000);
+    analogWrite(pinMotor, 0);
+    delay(5000);
+}
+                </code></pre>
+              </div>
+
+              <video controls width=50%>
+                <source src="../videos/Test4/Electronique/moteur1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+              <h4>&#10022; Led RGB</h4>
+                <p>
+                  La <a href="https://www.electronicoscaldas.com/datasheet/LED5D-RGB-CA.pdf?srsltid=AfmBOoqs7qaS3Igqh4KOchV5kW2dMOhyP29FHSZP3KxMu2uM1ZmHUj3s" download target="_blank">LED RGB</a> 
+                  affiche la couleur détectée(rouge, bleu, vert, jaune).
+                </p>
+                <p>
+                  Le signal PWM est utilisé pour moduler l’intensité de chaque couleur et ainsi permettre le mélange des couleurs. 
+                  Les broches de la LED doivent donc être connectées à des pins compatibles PWM.
+                </p>
+
+                <p>
+                  Elle peut aussi indiquer l'état du convoyeur(en marche ou à l'arrêt).
+                </p>
+
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/led.webp" alt="LED" class="image-mean"/>
+                  <p>Led RGB à anode commun</p>
+                </div>
+
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/circuit_led.webp" alt="LED" class="image-mean"/>
+                </div>
+
+                <div class="code-container">
+                  <p>code_led.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_led-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_led-ino', 'code_led.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code class="hljs" id="code_led-ino">
+#define LED_R 9
+#define LED_G 10
+#define LED_B 11
+
+void setup() {
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+}
+
+void loop() {
+  setColor(100, 0, 0); //rouge
+  delay(2000);
+  setColor(0, 100, 0); //vert
+  delay(2000);
+  setColor(0, 0, 100); //bleu
+  delay(2000);
+  setColor(100, 100, 0); //jaune
+  delay(2000);
+}
+
+void setColor(unsigned int red, unsigned int green, unsigned int blue) {
+  // 0 correspond à 255 et 255 à 0 pour LED à anode commun
+  red = map(red, 0, 255, 255, 0);
+  green = map(green, 0, 255, 255, 0);
+  blue = map(blue, 0, 255, 255, 0);
+  analogWrite(LED_R, red);
+  analogWrite(LED_G, green);
+  analogWrite(LED_B, blue);
+}
+                </code></pre>
+              </div>
+
+              <video controls width=50%>
+                <source src="../videos/Test4/Electronique/led_rgb.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+              <p class="txt_center">
+                <strong>NB:</strong> Utiliser des résistances pour protéger la led. 
+                Ici, nous avons utilisé des résistances de <strong>270 &ohm;</strong> pour chaque pin RGB.
+              </p>
+
+              <h4>f. Bloc de commande</h4>
+                <p>
+                  Un <strong>interrupteur</strong> a été installé pour permettre à l'utilisateur de mettre sous tension ou de couper le courant.
+                </p>
+                <p>
+                  Par ailleurs, deux <strong>boutons-poussoirs</strong> sont prévus pour commander la mise en marche et l'arrêt du convoyeur.
+                  <ul>
+                    <li>
+                      <strong>Bouton Start</strong>(connecté au pin 7 de l'Arduino): permet d'activer le système.
+                    </li>
+                    <li>
+                      <strong>Bouton Stop</strong>(connecté au pin 2 de l'Arduino): permet de désactiver le système à l'aide 
+                      d'<a href="https://docs.arduino.cc/language-reference/en/functions/external-interrupts/attachInterrupt/" download target="_blank">interruption</a>
+                      , assurant ainsi un arrêt rapide et réactif.
+                    </li>
+                  </ul>
+                </p>
+
+
+                <div class="image-container">
+                  <img src="../images/Test4/Electronique/boutons_poussoirs.webp" alt="boutons_poussoirs" class="image-mean"/>
+                  <p>
+                    <strong>NB:</strong> Nous utilisons les résistances 
+                    <a href="https://docs.arduino.cc/tutorials/generic/digital-input-pullup/" download target="_blank">pull-up internes</a> 
+                    afin d’optimiser l’utilisation du matériel.</p>
+                </div>
+
+                <div class="code-container">
+                  <p>code_bp.ino </p>
+                  <div class="btn-bar">
+                    <button onclick="copierCode('code_bp-ino', this)">📋</button>
+                    <button onclick="telechargerCode('code_bp-ino', 'code_bp.ino', 'text/ino', this)">🡇</button>
+                  </div>
+                  <pre><code class="hljs" id="code_bp-ino">
+const byte pinStart = 7;
+const byte pinStop = 2; 
+const byte ledPin = 12;
+volatile bool blinking = false;
+unsigned long lastInterrupt = 0;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  // boutons poussoirs
+  pinMode(pinStart, INPUT_PULLUP);
+  pinMode(pinStop, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(pinStop), interrupt_routine, FALLING);
+
+  digitalWrite(ledPin, LOW); // éteint la led initialement
+}
+
+void loop() {
+  if(!blinking){
+    while(digitalRead(pinStart)){ //tant qu'on n'appuie pas sur btnStart, la boucle continue
+      delay(10);
+    }
+    blinking = true;
+  }
+
+  else{
+    digitalWrite(ledPin, HIGH);
+    delay(300);
+    digitalWrite(ledPin, LOW);
+    delay(300);
+  }
+}
+
+void interrupt_routine() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - lastInterrupt > 100) { // anti-rebond de 100 ms
+    digitalWrite(ledPin, LOW);
+    blinking = false;
+    lastInterrupt = currentMillis;
+  }
+}
+                </code></pre>
+              </div>
+
+              <!-- <video controls width=50%>
+                <source src="../videos/Test4/Electronique/boutons_poussoirs.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video> -->
+              
+          <h3 id="4-electro">4. Tests et validation</h3>
+            <p>
+              Après avoir pris en main chaque composant, il est temps de réaliser un test global du système électrique.
+            </p>
+            <p>
+              Nous avons réalisé les branchements sur un breadboard puis le circuit sur veroboard pour les tests afin de s'assurer que chaque composant s'integre au système electronique.
+            </p>
+            <p>Voici quelques uns de ces test:</p>
+            <ul>
+              <li>Test du capteur de couleur avec la led RGB:</li>
+                <video controls width=50%>
+                  <source src="videos\Test4\Electronique\sensorColor_rgb.mp4" type="video/mp4">
+                  Votre navigateur ne supporte pas la vidéo HTML5.
+                </video>
+
+              <li>Vérification de l’alimentation et du pilotage du moteur avec le circuit câblé sur veroboard.</li>
+                <video controls width=50%>
+                  <source src="../videos/Test4/Electronique/moteur2.mp4" type="video/mp4">
+                  Votre navigateur ne supporte pas la vidéo HTML5.
+                </video>
+            </ul>
+
+            
+          <h3 id="5-electro">5. Réalisation du PCB</h3>
+            <p>
+              Après avoir effectué tous les tests, nous avons réalisé un PCB sur Kicad comme suit:
+            </p>
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/pcb1.webp" alt="pcb" class="image-mean" />
+              <p>
+                Conception du schéma électronique.
+              </p>
+            </div>
+
+            <p>
+              Nous avons décidé par la suite de rassembler les <strong>Vcc</strong> et <strong>GND</strong> pour les capteurs, la led et les boutons poussoirs afin de faciliter les branchements.
+            </p>
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/pcb2.webp" alt="pcb" class="image-mean" />
+              <p>
+                Conception du schéma pour le pcb.
+              </p>
+            </div>
+            
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/pcb3.webp" alt="pcb" class="image-mean" />
+              <p>
+                Attribution des empreintes.
+              </p>
+            </div>
+        
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/pcb4.webp" alt="pcb" class="image-mean" />
+              <p>
+                Verificaton des erreurs (DRC)
+              </p>
+            </div>
+            
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/pcb5.webp" alt="pcb" class="image-small" />
+              <p>
+                Ajustement de la disposition et routage des pistes.
+              </p>
+            </div>
+
+
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/pcb6.webp" alt="pcb" class="image-small" />
+              <p>
+                Plan de masse GND et ajout des textes pour les différents composants et pins.
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/pcb7.webp" alt="pcb" class="image-small" />
+              <img src="../images/Test4/Electronique/pcb8.webp" alt="pcb" class="image-small" />
+              <p>
+                Ajout des models 3D(arduino nano et serre-fils).
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="../images/Test4/Electronique/pcb9.webp" alt="pcb" class="image-mean" />
+              <p>
+                Visualisation 3D
+              </p>
+            </div>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Electronique/convoyeur_pcb.rar" target="_blank" class="download-link">télécharger les fichiers du PCB</a>
+            </p>
+
+          <h3 id="6-electro">6. Prototype final</h3>
+            <p>
+              Après les tests sur le breadboard et la conception du PCB, il est temps de réaliser le circuit final.
+              Nous utilisons ici un veroboard, tout en respectant les pins utilisées dans la conception du PCB.
+            </p>
+            <p>
+              <strong>NB:</strong> Nous avons retravaillé notre circuit pour répondre aux exigences techniques et esthétiques.
+            </p>
+            <div class="image-container">
+              <img src="../images/Test4\Electronique\circuit0.webp" alt="circuit" class="image-mean"/>
+              <p>
+                Comparatif des deux prototypes
+              </p>
+            </div>
+
+            <div class="image-container">
+              <p>
+                Prototype final adopté:
+              </p>
+              <img src="../images/Test4\Electronique\circuit1.webp" alt="circuit" class="image-small"/>
+              <img src="../images/Test4\Electronique\circuit5.webp" alt="circuit" class="image-small"/>
+              <img src="../images/Test4\Electronique\circuit6.webp" alt="circuit" class="image-small"/>
+              <img src="../images/Test4\Electronique\circuit7.webp" alt="circuit" class="image-small"/>
+
+              <img src="../images/Test4\Electronique\circuit2.webp" alt="circuit" class="image-small"/>
+              <img src="../images/Test4\Electronique\circuit3.webp" alt="circuit" class="image-small"/>
+              <img src="../images/Test4\Electronique\circuit4.webp" alt="circuit" class="image-small"/>
+              <img src="../images/Test4\Electronique\circuit9.webp" alt="circuit" class="image-small"/>
+            </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

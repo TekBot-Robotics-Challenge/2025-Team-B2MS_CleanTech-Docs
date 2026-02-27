@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Département IT – B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Département IT</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+
+        <div class="nav-section">
+          <a href="./it" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-desktop"></i> IT</button> </a>       
+          
+          <div class="sub-links">
+            <a href="./it-projet1" class="subtab-button">Projet 1</a>
+
+            <a href="./it-projet2" class="subtab-button active">Projet 2</a>
+              <nav class="project-subnav active" id="subnav-test2">
+                <a href="#1-test2">1. Contexte et objectifs</a>
+                <a href="#2-test2">2. Notion de base sur ROS2</a>
+                <a href="#3-test2">3. Structure du package et fonctionnement</a>
+                <a href="#4-test2">4. Tests réalisés</a>
+                <a href="#5-test2">5. Limites et perspectives</a>
+                <a href="#6-test2">6. Conclusion</a>
+                <a href="#7-test2">7. Bonus</a>
+                <a href="#8-test2">8. Ressources utiles</a>
+              </nav>
+
+            <a href="./it-projet3" class="subtab-button">Projet 3</a>
+          </div>
+        </div>
+
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="it-content" class="tab-content active">
+
+        <div id="test2" class="subtab-content active">
+          <h2 id="projet2" class="projet-titre">Projet 2 – Introduction à ROS2</h2>
+
+          <h3 id="1-test2">1. Contexte et objectifs:</h3>
+
+          <p>
+            Ce projet introduit les mécanismes fondamentaux de publication
+            et de souscription dans le framework <strong>ROS2</strong> à travers un exemple
+            pratique de génération et d’évaluation de données de capteurs.
+          </p>
+          <p>   
+            L'objectif est de créer un package ROS2 nommé <strong>sensor_data_evaluation</strong> contenant :
+          </p>
+          <ul>
+            <li>Un <strong>node publisher</strong> qui publie toutes les 0,5 secondes des données simulées (température, humidité, pression).</li>
+            <li>Un <strong>node subscriber</strong> qui reçoit ces données et vérifie qu'elles sont dans les plages prédéfinies, en affichant les résultats dans le log.</li>
+            <li>Un <strong>fichier de lancement</strong> pour exécuter l’ensemble des nodes.</li>
+          </ul>
+
+          <h3 id="2-test2">2. Notion de base sur ROS2</h3>
+            <h4>a. ROS2(Robot Operating System 2)</h4>
+              <p>
+                ROS2 est un framework open source destiné à la robotique.
+                Il permet de développer des systèmes distribués où plusieurs programmes indépendants, appelés <strong>nodes</strong>, peuvent communiquer entre eux. 
+                Grâce à cette modularité, il est possible de concevoir des architectures complexes où chaque partie a un rôle bien défini. 
+                L’organisation du code dans ROS2 repose sur des <strong>packages</strong>, qui regroupent les fichiers sources (C++ ou Python), les définitions de messages, les launch files et les dépendances nécessaires.
+                ROS2 prend principalement en charge <strong>C++</strong>(via la bibliothèque <em><strong>rclcpp</strong></em>) et <strong>Python</strong> (via <em><strong>rclpy</strong></em>), permettant ainsi à la fois des implémentations performantes en C++ et des développements rapides en Python.
+                La version <strong>ROS2 Humble</strong> est l’une des plus utilisées aujourd’hui.                          
+              </p>
+              <div class="image-container">
+                <img src="../images/Test2/IT/ros2_humble.webp" alt="web" class="image-mean"/>       
+                <p class="txt_center">
+                  Veuillez consultez la documentation officielle pour 
+                  <a href="https://docs.ros.org/en/kilted/Installation.html" target="_blank">l'installation de ROS2 Humble</a>.
+                </p>
+              </div>
+            
+              <h4>b. Package</h4>
+                <p>
+                  Un package est l'unité de base de l'organisation dans ROS2. 
+                  Il regroupe tout ce qui est nécessaire à une fonctionnalité donnée: les fichiers sources (C++ ou Python), les launch files, les dépendances, la configuration du projet...
+                  Chaque package est autonome et réutilisable, ce qui facilite la modularité et le partage de code dans différents projets. 
+                  Les packages sont généralement gérés via l'outil <strong>colcon build</strong> pour la compilation et l’installation.
+                </p>
+
+              <h4>c. Topic</h4>
+                <p>
+                  Un topic est un canal de communication identifié par un nom (par exemple <em><strong>/camera/image</strong></em> ou <em><strong>/temperature</strong></em>). 
+                  Les nodes publient ou s’abonnent à ces topics pour échanger des données. 
+                  Un <strong>publisher</strong> envoie des messages sur un topic, et <strong>un ou plusieurs subscribers</strong> reçoivent ces messages. 
+                  Les topics constituent donc la base de la communication dans ROS2.
+                </p>
+
+              <h4>d. Nodes(nœuds)</h4>
+                <p>
+                  Un node est une unité de calcul dans ROS2, c’est-à-dire un programme autonome qui exécute une tâche spécifique. 
+                  Certains nodes agissent comme <strong>publishers</strong> en envoyant des informations, d’autres comme <strong>subscribers</strong> en recevant et traitant ces informations, et certains cumulent les deux rôles. 
+                  Cette organisation favorise la réutilisabilité et la modularité du système.
+                </p>
+             
+              <h4>e. Messages</h4>
+                <p>
+                  Les données échangées entre nodes passent par des messages. 
+                  Ceux-ci définissent le format de l’information transmise. 
+                  ROS2 fournit de nombreux types standards via la bibliothèque <em><strong>std_msgs</strong></em>, comme <em><strong>String</strong></em>(texte), <em><strong>Int32</strong></em>(entier), ou <em><strong>Bool</strong></em>(valeur logique). 
+                  Il est également possible de définir ses propres types de messages personnalisés selon les besoins du projet.
+                </p>
+
+                <div class="image-container">
+                  <img src="../images/Test2/IT/topic_node.webp" alt="web" class="image-mean"/>       
+                  <p class="txt_center">
+                    Illustration d'un topic et des nodes avec un message. 
+                  </p>
+                </div>
+
+              <h4>f. Langages et bibliothèques</h4>
+                <p>
+                  ROS2 prend en charge plusieurs langages de programmation, principalement <strong>C++</strong> et <strong>Python</strong>.
+                  <ul>
+                    <li>
+                      En <strong>C++</strong>, on utilise la bibliothèque <em><strong>rclcpp</strong></em> pour créer et gérer les nodes, publishers et subscribers, associée à <em><strong>std_msgs</strong></em> pour manipuler les messages standards.
+                    </li>
+                    <li>
+                      En <strong>Python</strong>, la bibliothèque équivalente est <em><strong>rclpy</strong></em>, qui offre les mêmes fonctionnalités avec une syntaxe plus simple, souvent utilisée pour le prototypage rapide.
+                    </li>
+                  </ul>
+                </p>
+                <p>
+                  <strong>NB:</strong> ROS2 permet aussi de mélanger des nodes en C++ et en Python dans une même architecture
+                </p>
+
+              <h4>g. Fichier de lancement(launcher)</h4>
+              <p>
+                Dans un projet ROS2 composé de plusieurs nodes, lancer chaque node séparément peut vite devenir fastidieux. 
+                Pour résoudre ce problème, ROS2 utilise les <strong>launch files</strong>(fichiers de lancement), généralement écrits en <strong>.xml</strong> ou <strong>.py</strong>. 
+                Ces fichiers décrivent quels nodes doivent être démarrés, avec quels paramètres et dans quel ordre. 
+                Ainsi, une seule commande permet de démarrer l'ensemble du système.
+              </p>
+
+              <h4>h. rqt</h4>
+                <p>
+                  rqt est un framework graphique modulaire intégré à ROS2. Il propose une suite de plugins permettant la visualisation, l’analyse et le débogage des systèmes distribués. 
+                  Parmi ses fonctionnalités, on retrouve :
+                  <ul>
+                    <li>l'inspection en temps réel des topics, des publishers et des subscribers,</li>
+                    <li>l'affichage et la visualisation des messages échangés,</li>
+                    <li>le suivi de l’évolution de données sous forme de graphiques.</li>
+                  </ul>
+                </p>
+
+                <div class="image-container">
+                  <img src="../images/Test2/IT/rqt_graph.webp" alt="web" class="image-mean"/>       
+                  <p class="txt_center">
+                    Exemple d'informations affichées dans l'interface rqt.
+                  </p>
+                </div>
+
+          <h3  id="3-test2">3. Structure du package et fonctionnement</h3>
+          <p>
+            Le package <strong>sensor_data_evaluation</strong> est composé de deux nodes:
+          </p>
+          <ul>
+            <li><strong>sensor_node_publisher</strong></li>
+            <li><strong>sensor_node_subscriber</strong></li>
+          </ul>
+
+          <h4><strong>a. Création du workspace</strong></h4>
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('test2_T1', this)">📋</button>
+            </div>
+            <pre><code class="hljs" id="test2_T1">
+user@user-VirtualBox:~$ cd Desktop
+user@user-VirtualBox:~/Desktop$ mkdir -p workspace/src
+            </code></pre>
+          </div>
+
+          <h4><strong>b. Création du package</strong></h4>
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('test2_T2a', this)">📋</button>
+            </div>
+            <pre><code class="hljs" id="test2_T2a">
+user@user-VirtualBox:~/Desktop$ cd workspace/src
+user@user-VirtualBox:~/Desktop/workspace/src$ ros2 pkg create sensor_data_evaluation --build-type ament_cmake
+            </code></pre>
+          </div>
+
+          <h4><strong>c. Création des nodes cpp</strong></h4>
+          <p>
+            Les nodes se trouvent dans le dossier <strong>workspace/src/sensor_data_evaluation/src</strong>.
+            Ils ont été créés à l'aide de la commande <em><strong>touch</strong></em> et rendus exécutables avec <em><strong>chmod +x</strong></em>.
+          </p>
+          <div class="code-container">
+            <div class="btn-bar">
+              <button onclick="copierCode('test2_T2b', this)">📋</button>
+            </div>
+            <pre><code class="hljs" id="test2_T2b">
+user@user-VirtualBox:~/Desktop/workspace/src$ cd sensor_data_evaluation/src
+user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ touch sensor_node_publisher.cpp
+user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ touch sensor_node_subscriber.cpp
+user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x sensor_node_publisher.cpp
+user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +x sensor_node_subscriber.cpp
+            </code></pre>
+          </div>
+          
+          <h4><strong>d. sensor_node_publisher</strong></h4>
+          <p>
+            Ce node publie des données aléatoires toutes les 0.5 secondes sur le topic <strong>/sensor_data</strong>:
+          </p>
+          <ul>
+            <li>Température : 15°C à 35°C</li>
+            <li>Humidité : 30% à 70%</li>
+            <li>Pression : 950 hPa à 1050 hPa</li>
+          </ul>
+
+          <ul> 
+            <strong>Fonctionnement:</strong>
+            <li><em><strong>nbr_generator()</strong></em> génère un nombre entier aléatoire dans la plage donnée.</li>
+            <li>Un <strong>timer</strong> appelle <em><strong>timer_callback()</strong></em> toutes les 0,5s.</li>
+            <li><em><strong>timer_callback()</strong></em> appelle <em><strong>nbr_generator()</strong></em> pour générer les trois valeurs, crée un message <strong>std_msgs::msg::String</strong>, l'affiche dans le log et le publie.</li>
+          </ul>
+
+          <p>
+            <strong>NB:</strong> Le node est lancé via <em><strong>rclcpp::spin()</strong></em>, ce qui permet d’exécuter le callback en continu.
+          </p>
+
+          <div class="code-container">
+            <p>
+              <strong>sensor_node_publisher.cpp</strong>
+            </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('sensor_node_publisher-cpp', this)">📋</button>
+              <button onclick="telechargerCode('sensor_node_publisher-cpp', 'sensor_node_publisher.cpp', 'text/x-c++src', this)">🡇</button>
+               </div>
+            <pre><code class="hljs" id="sensor_node_publisher-cpp">
+#include &lt;chrono&gt;
+#include &lt;functional&gt;
+#include &lt;memory&gt;
+#include &lt;string&gt;
+#include &lt;random&gt;
+
+#include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+
+using namespace std::chrono_literals;
+
+
+class SensorPublisher : public rclcpp::Node
+{
+private:
+  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::Publisher&lt;std_msgs::msg::String&gt;::SharedPtr publisher_;
+  int temp, pression, hum;
+  // float temp, pression, hum;
+  void timer_callback()
+  {
+    temp = nbr_generator(15, 35);
+    hum = nbr_generator(30, 70);
+    pression = nbr_generator(950, 1050);
+    auto message = std_msgs::msg::String();
+    message.data = "T = " + std::to_string(temp) + "°C, H = " + std::to_string(hum) + "%, P = " + std::to_string(pression) + "hPa";
+    RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+    publisher_->publish(message);
+  }
+
+  int nbr_generator(int min_value, int max_value){
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution&lt;int&gt; distrib(min_value, max_value);
+
+    return distrib(gen);
+}
+
+
+public:
+  SensorPublisher()
+  : Node("sensor_node_publisher")
+  {
+    publisher_ = this->create_publisher&lt;std_msgs::msg::String&gt;("sensor_data", 10);
+    timer_ = this->create_wall_timer(
+      500ms, std::bind(&SensorPublisher::timer_callback, this));
+  }
+};
+
+int main(int argc, char * argv[])
+{
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared&lt;SensorPublisher&gt;());
+  rclcpp::shutdown();
+  return 0;
+}
+            </code></pre>
+          </div>
+
+          <h4><strong>e. sensor_node_subscriber</strong></h4>
+          <p>
+            Ce node écoute le topic <strong>/sensor_data</strong> et vérifie que les données sont dans la bonne plage.
+          </p>
+          <ul>
+            <li>Température : 15°C à 35°C</li>
+            <li>Humidité : 30% à 70%</li>
+            <li>Pression : 950 hPa à 1050 hPa</li>
+          </ul>
+          
+          <ul> 
+            <strong>Fonctionnement:</strong>
+            <li>La <strong>subscription</strong> appelle <em><strong>sensor_callback()</strong></em> à chaque message reçu.</li>
+            <li>La fonction <em><strong>is_correct_value()</strong></em> analyse les données et retourne <strong>"correct values"</strong> ou <strong>"incorrect values"</strong> selon les plages.</li>
+            <li><em><strong>sensor_callback()</strong></em> affiche dans le log les données reçues et indique si elles sont correctes ou non, grâce à <em><strong>is_correct_value()</strong></em></li>
+          </ul>
+
+          <p>
+            <strong>NB:</strong> Le node est lancé via <em><strong>rclcpp::spin()</strong></em>, ce qui permet de recevoir et traiter les messages en continu.
+          </p>
+        
+          <div class="code-container">
+            <p>
+              <strong>sensor_node_subscriber.cpp</strong>
+            </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('sensor_node_subscriber-cpp', this)">📋</button>
+              <button onclick="telechargerCode('sensor_node_subscriber-cpp', 'sensor_node_subscriber.cpp', 'text/x-c++src', this)">🡇</button>
+               </div>
+            <pre><code class="hljs" id="sensor_node_subscriber-cpp">
+#include &lt;functional&gt;
+#include &lt;memory&gt;
+#include &lt;sstream&gt;
+
+#include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+
+using std::placeholders::_1;
+
+class SensorSubscriber : public rclcpp::Node
+{
+public:
+  SensorSubscriber()
+  : Node("sensor_node_subscriber")
+  {
+    subscription_ = this->create_subscription&lt;std_msgs::msg::String&gt;(
+      "sensor_data", 10, std::bind(&SensorSubscriber::sensor_callback, this, _1));
+  }
+
+private:
+  void sensor_callback(const std_msgs::msg::String & msg) const
+  {
+    // std::string message = "Data received: " + msg.data + ": " + is_correct_value(msg.data);
+    // RCLCPP_INFO(this->get_logger(), "%s", message.c_str());
+    RCLCPP_INFO(this->get_logger(), "Data received: %s : %s", msg.data.c_str(), (is_correct_value(msg.data)).c_str());
+  }
+  rclcpp::Subscription&lt;std_msgs::msg::String&gt;::SharedPtr subscription_;
+
+  std::string is_correct_value(const std::string &txt) const{
+    std::stringstream ss(txt);
+    std::string buffer;
+    int T, H, P;
+
+    ss >> buffer >> buffer >> T >> buffer  
+      >> buffer >> buffer >> H >> buffer 
+      >> buffer >> buffer >> P >> buffer;
+    
+    return (15 <= T && T <= 35 && 30 <= H && H <= 70 && 950 <= P && P <= 1050)? "correct values":"incorrect values";
+}
+};
+
+
+int main(int argc, char * argv[])
+{
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared&lt;SensorSubscriber&gt;());
+  rclcpp::shutdown();
+  return 0;
+}
+            </code></pre>
+          </div>
+
+
+          <h4><strong>f. CMakeLists.txt </strong></h4>
+          <p>
+            Ce fichier permet de créer les <strong>exécutables</strong> pour les nodes et de configurer les <strong>dépendances</strong> du package ROS2.
+            Il est généré automatiquement lors de la création du package avec des valeurs par défaut.
+          </p>
+          <ul>
+            <strong>Points clés:</strong>
+            <li>Recherche des dépendances nécessaires: <em><strong>ament_cmake</strong></em>, <em><strong>rclcpp</strong></em> et <em><strong>std_msgs</strong></em>.</li>
+            <li>Création des exécutables <strong>sensor_node_publisher</strong> et <strong>sensor_node_subscriber</strong> et liaison aux bibliothèques ROS2.</li>
+            <li>Installation les exécutables dans le dossier <strong>lib/${PROJECT_NAME}</strong>.</li>
+            <li>Configuration des tests et linters si <strong>BUILD_TESTING</strong> est activé.</li>
+            <li>Termine par <em><strong>ament_package()</strong></em> pour indiquer que c'est un package ROS2 valide.</li>
+          </ul>
+          
+          <div class="code-container">
+            <p>
+              <strong>CMakeLists.txt</strong>
+            </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('CMakeLists-txt', this)">📋</button>
+              <button onclick="telechargerCode('CMakeLists-txt', 'CMakeLists.txt', 'text/txt', this)">🡇</button>
+               </div>
+            <pre><code class="hljs" id="CMakeLists-txt">
+cmake_minimum_required(VERSION 3.8)
+project(sensor_data_evaluation)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+
+# add the executable
+add_executable(sensor_node_publisher src/sensor_node_publisher.cpp)
+target_link_libraries(sensor_node_publisher PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
+
+add_executable(sensor_node_subscriber src/sensor_node_subscriber.cpp)
+target_link_libraries(sensor_node_subscriber PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
+
+install(TARGETS
+  sensor_node_publisher
+  sensor_node_subscriber
+  DESTINATION lib/${PROJECT_NAME})
+
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  # the following line skips the linter which checks for copyrights
+  # comment the line when a copyright and license is added to all source files
+  set(ament_cmake_copyright_FOUND TRUE)
+  # the following line skips cpplint (only works in a git repo)
+  # comment the line when this package is in a git repo and when
+  # a copyright and license is added to all source files
+  set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
+            </code></pre>
+          </div>
+
+          <h4><strong>g. package.xml </strong></h4>
+          <p>
+            Ce fichier permet d'inclure et déclarer toutes les ressources nécessaires pour le package ROS2. 
+            Il contient les informations essentielles sur le package, ses dépendances et ses outils de build.
+            Il est aussi généré automatiquement à la création du package avec des valeurs par défaut.
+          </p>
+
+          <ul>
+            <strong>Points clés:</strong>
+            <li>Déclaration du nom, de la version, de la description, du mainteneur et de la licence du package.</li>
+            <li>Indique les dépendances de build et d’exécutionber: <em><strong>ament_cmake</strong></em>, <em><strong>rclcpp</strong></em>, <em><strong>std_msgs</strong></em> <em><strong>ros2launch</strong></em>.</li>
+            <li>Spécification des dépendances pour les tests: <em><strong>ament_lint_auto</strong></em> et <em><strong>ament_lint_common</strong></em>.</li>
+            <li>Contient la section &lt;export&gt; pour préciser le type de build (<em><strong>ament_cmake</strong></em> pour les packages C++) utilisé par ROS2.</li>
+          </ul>
+
+          <div class="code-container">
+            <p>
+              <strong>package.xml</strong>
+            </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('package-xml', this)">📋</button>
+              <button onclick="telechargerCode('package-xml', 'package.xml', 'text/xml', this)">🡇</button>
+               </div>
+            <pre><code class="hljs" id="package-xml">
+&lt;?xml version="1.0"?&gt;
+&lt;?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?&gt;
+
+&lt;package format="3"&gt;
+  &lt;name&gt;sensor_data_evaluation&lt;/name&gt;
+  &lt;version&gt;0.0.0&lt;/version&gt;
+  &lt;description&gt;Sending and receiving data&lt;/description&gt;
+  &lt;maintainer email="user@todo.todo"&gt;user&lt;/maintainer&gt;
+  &lt;license&gt;TODO: License declaration&lt;/license&gt;
+
+  &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+  &lt;depend&gt;rclcpp&lt;/depend&gt;
+  &lt;depend&gt;std_msgs&lt;/depend&gt;
+  
+  &lt;exec_depend&gt;ros2launch&lt;/exec_depend&gt;
+
+  &lt;test_depend&gt;ament_lint_auto&lt;/test_depend&gt;
+  &lt;test_depend&gt;ament_lint_common&lt;/test_depend&gt;
+
+  &lt;export&gt;
+    &lt;build_type&gt;ament_cmake&lt;/build_type&gt;
+  &lt;/export&gt;
+&lt;/package&gt;
+            </code></pre>
+          </div>
+
+        <h4><strong>h. Le fichier de lancement</strong></h4>
+          <p>
+            Ce fichier <strong>lance simultanément les nodes</strong> du package ROS2.
+            Nous avons choisi le format <strong>XML</strong> pour sa simplicité et sa facilité de prise en main.
+          </p>
+          <p>
+            Il se trouve dans: <strong class="file-path">workspace/install/sensor_data_evaluation/share/sensor_data_evaluation</strong>
+          </p>
+
+          <div class="code-container">
+            <p>
+              <strong>sensor_data_eval_launch.xml</strong>
+            </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('sensor_data_eval_launch-xml', this)">📋</button>
+              <button onclick="telechargerCode('sensor_data_eval_launch-xml', 'sensor_data_eval_launch.xml', 'text/xml', this)">🡇</button>
+               </div>
+            <pre><code class="hljs" id="sensor_data_eval_launch-xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;launch&gt;
+  &lt;node pkg="sensor_data_evaluation" exec="sensor_node_publisher"/&gt;
+  &lt;node pkg="sensor_data_evaluation" exec="sensor_node_subscriber"/&gt;
+&lt;/launch&gt;
+            </code></pre>
+          </div>
+
+        <h3  id="4-test2">4. Tests réalisés </h3>
+            <p>
+              <strong>Compilation du package</strong> par <strong>colcon</strong>
+              et <strong>lancement des nodes</strong> via le launcher:
+            </p>
+              <div class="code-container">
+                <div class="btn-bar">
+                  <button onclick="copierCode('test2_T3', this)">📋</button>
+            </div>
+            <pre><code class="hljs" id="test2_T3">
+user@user-VirtualBox:~$ cd Desktop/workspace
+user@user-VirtualBox:~/Desktop/workspace$ colcon build --symlink-install
+user@user-VirtualBox:~/Desktop/workspace$ source install/setup.bash
+user@user-VirtualBox:~/Desktop/workspace$ ros2 launch sensor_data_evaluation sensor_data_eval_launch.xml
+                </code></pre>
+              </div>
+              
+          <video controls width=auto>
+            <source src="../videos/Test2/IT/demo.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+       
+          
+          <h3 id="5-test2">5. Limites et perspectives</h3>
+            <p>
+              En utilisant un launcher.xml, les deux nodes s'exécutent sur le même terminal
+              ce qui rend difficile la lecture.
+            </p>
+            <p>
+              Pour ne pas encombrer davantage l'affichage, nous avons opté pour des données entières
+              et une notification simple pour la vérification des plages des données.
+            </p>
+          
+            <p>
+              Pour résoudre ce problème, d'autres formats alternatifs existent pour le fichier
+              de lancement tel que le format <strong>.py</strong>. 
+            </p>
+
+        <h3 id="6-test2">6. Conclusion</h3>    
+          <p>
+            Ce projet a permis de mettre en œuvre de manière concrète les mécanismes de publication
+            et de souscription dans ROS2 à travers un exemple simple mais représentatif d’un système de capteurs.
+            En simulant des données environnementales (température, humidité et pression) et en les évaluant en temps réel,
+            nous avons pu répondre au cahier de charge.
+          </p>
+        
+          <p>
+            Ce projet représente une étape clé dans l’apprentissage du framework ROS2
+            et de son écosystème autour de la robotique distribuée.
+          </p>
+
+          <h3  id="7-test2">7. Bonus</h3>
+            <p>
+              La vidéo ci-dessous illustre <strong>la connexion</strong> entre un <strong>node publisher exécuté</strong> sur une <strong>machine A</strong>
+              et un <strong>node subscriber exécuté</strong> sur une <strong>machine B</strong>, montrant ainsi la communication inter-machines via ROS2.
+            </p>
+            <video controls width=auto>
+              <source src="../videos/Test2/IT/bonus.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+            <ul>
+              <strong>NB:</strong> 
+              <li>
+                Il est recommandé d'installer la même distribution de ROS2 sur chaque machine.
+
+              </li>
+              <li>
+                Il faut aussi vérifier qu’aucun pare-feu ne bloque la communication 
+                et que toutes les machines soient connectées au même réseau, avec tous les packages nécessaires installés.
+              </li>
+            </ul>
+
+          <h3  id="8-test2">8. Ressources utiles</h3>
+            <p>
+              <a href="https://docs.ros.org/en/kilted/index.html" target="_blank">ROS2 Documentation</a>
+            </p>
+            <p>
+              <a href="https://roboticsbackend.com/ros2-multiple-machines-including-raspberry-pi/" target="_blank">ROS2 Multiple Machines Tutorial</a>
+            </p>
+          
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

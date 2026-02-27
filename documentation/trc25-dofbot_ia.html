@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Résilience Urbaine - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Résilience Urbaine</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./ROS" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+
+        <div class="nav-section">
+          <a href="./trc25" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-robot"></i> TRC25</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button" href="./trc25-convoyeur">Convoyeur 2.0</a>
+            <a class="subtab-button" href="./trc25-dofbot">Prise en main du Dofbot</a>
+            <a class="subtab-button" href="./trc25-communication">Communication Dofbot - Convoyeur</a>
+            <a class="subtab-button" href="./trc25-yolo">Modèle de détection YOLO</a>
+            <a class="subtab-button active" href="./trc25-dofbot_ia">Détection et tri - Dofbot</a>
+            <nav class="project-subnav active" id="subnav-dofbot_ia">
+              <a href="#1-dofbot_ia">1. Détection des dechets</a>
+              <a href="#2-dofbot_ia">2. Contrôle et validation des mouvements</a>
+              <a href="#3-dofbot_ia">3. Algorithme de tri des déchets</a>
+              <a href="#4-dofbot_ia">4. Tests et Demonstration</a>
+              <a href="#5-dofbot_ia">5. Suivi et gestion de l’historique</a>
+            </nav>
+            <a class="subtab-button" href="./trc25-ros">ROS</a>
+            <a class="subtab-button" href="./trc25-meca">Système de ramassage</a>
+          </div>
+        </div>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section class="tab-content active">
+        <div class="subtab-content active">
+          <h2 id="dofbot_ia" class="projet-titre">Détection et tri - Dofbot</h2>
+            <p>
+              Cette section est consacrée à la détection et au tri automatique des déchets à l’aide du bras robotisé Dofbot, 
+              élément central du système intelligent de tri développé dans le cadre du projet TRC25.
+              Après l’étude du modèle de détection basé sur YOLO, l’objectif est désormais d'implementer le modèle et d’assurer une prise de décision autonome.
+            </p>
+            <ul>
+              Cette section détaille :
+              <li>l’intégration du modèle YOLO dans le Dofbot,</li>
+              <li>le processus de détection et de validation des déchets,</li>
+              <li>la logique de tri adoptée,</li>
+              <li>ainsi que la commande et la synchronisation des mouvements du bras robotisé.</li>
+            </ul>
+
+          <h3 id="1-dofbot_ia">1. Détection des dechets</h3>
+            <h4>a. Choix du modèle et contraintes d’intégration</h4>
+            <p>
+              Lors de la section <a href="./trc25-yolo.html"><strong>Modèle de détection YOLO</strong></a>, une étude comparative a été menée entre <strong>YOLOv5</strong> et <strong>YOLOv8</strong>. 
+              Les résultats obtenus ont montré des performances similaires.
+            </p>
+            <p>
+              Cependant, ces deux modèles, entraînés avec la bibliothèque <strong>Ultralytics</strong>, ont posé des problèmes de compatibilité lors de leur intégration dans le Dofbot. 
+              En effet, le Dofbot utilise <strong>Python 3.6.9</strong> et dispose de <strong>versions antérieures de plusieurs bibliothèques</strong> telles que numpy, matplotlib ou torch, 
+              ce qui rend la mise à jour complexe et susceptible d’introduire d’autres incompatibilités.
+            </p>
+            <p>
+              Afin de garantir une <strong>intégration stable, maîtrisée et exploitable</strong>, il a été nécessaire de réentraîner le modèle de détection en utilisant <strong>YOLOv5 basé sur PyTorch</strong>.
+            </p>
+
+            <h4>b. Entrainement du modèle YOLOv5 Pytorch</h4>
+              <p>
+                L’entraînement du modèle YOLOv5-PyTorch pour le Dofbot suit globalement la même démarche que celle utilisée avec Ultralytics, avec quelques points spécifiques à prendre en compte pour garantir la compatibilité.
+              </p>
+              <ul>
+                <li>
+                  <strong>Téléchargement des images labellisées :</strong>
+                  Il est essentiel de s’assurer que les annotations et les images sont compatibles avec YOLOv5-PyTorch et non avec la version Ultralytics utilisée précédemment. 
+                  Il faut alors utiliser la version <strong>YOLOv5-Pytorch</strong>.
+                <li>
+                  <strong>La version utilisée</strong>:
+                  Les modèles de detection YOLO ne cesse d'être mise à jour, il faut donc faire attention à la version utilisée.
+                </li>
+                <li>
+                  <strong>les fichiers yolov5.yaml</strong>: nc : 3 #nombre de classes
+                  <br>
+                  Ces fichiers décrivent la structure du réseau de neurones YOLOv5, c’est-à-dire :
+                  <ul>
+                    <li>le type de backbone (extraction des features)</li>
+                    <li>le neck (FPN / PANet pour la fusion multi-échelle)</li>
+                    <li>le head (détection : bounding boxes, classes, scores)</li>
+                    <li>les paramètres de profondeur et de largeur du réseau</li>
+                  </ul>
+                </li>
+              </ul>
+
+            <p>
+              L'architecture du dossier est comme suit:
+            </p>
+            <div class="arbo">
+              <ul>
+                  <li class="folder">garbage
+                    <ul>
+                      <li class="folder">train
+                        <ul>
+                          <li class="folder">images
+                            <ul>
+                              <li class="img">image1.jpg</li>
+                              <li class="img">image2.jpg</li>
+                              <li class="img">image3.jpg</li>
+                              <li class="img">...</li>
+                            </ul>
+                          <li class="folder">labels
+                            <ul>
+                              <li class="txt">image1.txt</li>
+                              <li class="txt">image2.txt</li>
+                              <li class="txt">image3.txt</li>
+                              <li class="txt">...</li>
+                            </ul>
+                        <li class="txt" style="display: block">garbage.yaml</li>      
+                        </ul>
+                      </li>   
+                    </ul>
+                  </li>  
+                  <li class="folder">models
+                    <ul>
+                      <li class="txt">__init__.py</li>
+                      <li class="txt">common.py</li>                    
+                      <li class="txt">experimental.py</li>                    
+                      <li class="txt">export.py</li>                    
+                      <li class="txt">yolo.py</li>     
+                      <li class="txt">yolov5s.yaml</li>                    
+                      <li class="txt">...</li>                  
+                    </ul>
+                  </li>
+                  <li class="folder">utils
+                    <ul>
+                      <li class="folder">google_app_engine</li>                  
+                      <li class="txt">__init__.py</li>
+                      <li class="txt">activations.py</li>                    
+                      <li class="txt">datasets.py</li>
+                      <li class="txt">evolve.sh</li>                    
+                      <li class="txt">general.py</li>                    
+                      <li class="txt">google_utils.py</li>     
+                      <li class="txt">torch_utils.py</li>                    
+                    </ul>
+                  </li>
+                  <li class="folder">weights
+                    <ul>
+                      <li class="txt">download_weights.sh</li>
+                      <li class="txt">yolov5.pt</li>                    
+                    </ul>
+                  </li>
+                  <li class="txt">detect.py</li>
+                  <li class="txt">requirements.txt</li> 
+                  <li class="txt">test_dataset.py</li>                    
+                  <li class="txt">test.py</li>                    
+                  <li class="txt">train.py</li>
+                </ul>
+            </div>
+
+            <p>
+              <strong>NB:</strong>
+              Il est primodial de vérifier les annotations (format YOLOv5-PyTorch : classe x_center y_center width height).
+            </p>
+            <details class="code-container">
+                <summary>test_dataset.py</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('test_dataset-py', this)">📋</button>
+                  <button onclick="telechargerCode('test_dataset-py', 'test_dataset.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="test_dataset-py">
+import os
+import glob
+import numpy as np
+
+img_dir = "./garbage/train/labels/"
+txt_files = glob.glob(os.path.join(img_dir, "*.txt"))
+
+for f in txt_files:
+    with open(f, "r") as file:
+        for line in file.readlines():
+            parts = line.strip().split()
+            if len(parts) != 5:
+                print(f"Erreur dans {f}: {line.strip()}")
+            try:
+                np.array([float(x) for x in parts])
+            except:
+                print(f"Valeur invalide dans {f}: {line.strip()}")
+                </code></pre>
+            </details>
+
+            <p>
+              Pour entraîner le modèle YOLOv5-PyTorch compatible avec le Dofbot, 
+              il est nécessaire de préparer un environnement Python spécifique et de lancer le script d’entraînement. 
+              Les commandes suivantes permettent de reproduire l’environnement sur un ordinateur et d'entrainer le modèle:
+            </p>
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('training_yolov5', this)">📋</button>
+                  </div>
+                  <pre><code class="hljs" id="training_yolov5">
+# 1. Création de l'environnement conda avec Python 3.6.9
+conda create --name b2ms-env python=3.6.9 -y
+
+# 2. Activation de l'environnement
+conda activate b2ms-env
+
+# 3. Installation des dépendances nécessaires
+pip install -r requirements.txt
+
+# 4. Lancement de l'entraînement du modèle
+python train.py --device 0 --workers 0 --epochs 300
+                  </code></pre>
+                </div>   
+
+                <p>
+                  Cette séquence garantit que le modèle est entraîné dans un environnement compatible avec le Dofbot, 
+                  tout en respectant les versions de Python et des bibliothèques existantes.
+                </p>
+
+                <p class="txt_center">
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_YOLO/yolov5_pytorch_training.zip" 
+                  target="_blank" class="download-link">Télécharger yolov5_pytorch_training.zip</a>
+                </p>
+
+          <h4>c. Déploiement du modèle</h4>
+              <p>
+                Une fois l’entraînement du modèle YOLOv5-PyTorch terminé, le modèle obtenu doit être chargé dans Dofbot afin de permettre la détection des déchets:
+                <strong><em>b2ms/yolov5-pytorch/model4.pt</em></strong>
+              </p>
+
+              <p>
+                Il est alors possible de lancer la détection à l’aide de <strong>detect.py</strong> 
+                en spécifiant différents paramètres, notamment : <em>--source</em>, <em>--weights</em>, <em>--output</em>, etc.
+              </p>
+
+              <p>
+                Afin de tester et valider le modèle sur le Dofbot, deux approches complémentaires ont été adoptées.
+              </p>
+
+              <h5>&#10022; Détection sur images statiques</h5>
+                <p>
+                  Dans un premier temps, le modèle a été testé sur un ensemble d’images statiques.
+                  Cette étape permet de :
+                  <ul>
+                    <li>
+                      vérifier le bon chargement du modèle,
+                    </li>
+                    <li>
+                      valider la compatibilité entre le modèle et le Dofbot,
+                    </li>
+                    <li>
+                      analyser visuellement la précision des détections (classes, bounding boxes, probabilités),
+                    </li>
+                    <li>
+                      corriger d’éventuelles erreurs avant le passage au temps réel.
+                    </li>
+                  </ul>
+                </p>
+
+                <p>
+                  Les images sont traitées une par une, 
+                  et les résultats de détection sont affichés directement sur les images, facilitant ainsi l’évaluation qualitative du modèle.
+                </p>
+
+            <figure>
+              <video controls width=auto>
+                <source src="../videos/TRC25/Dofbot_IA/yolov5_statique.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+            </figure>
+
+            <h5>&#10022; Détection en temps réel avec la caméra</h5>
+                <p>
+                  Une fois les tests sur images validés, le modèle est intégré à un flux vidéo issu de la caméra du Dofbot.
+                  Cette seconde approche permet de :
+                  <ul>
+                    <li>
+                      évaluer les performances du modèle en conditions réelles,
+                    </li>
+                    <li>
+                      mesurer le temps de traitement par image,
+                    </li>
+                    <li>
+                      tester la stabilité de la détection sur plusieurs frames consécutives,
+                    </li>
+                  </ul>
+                </p>
+
+                <p>
+                  Cette étape constitue une transition essentielle entre la validation du modèle et son exploitation opérationnelle dans le système de tri automatique.
+                </p>
+
+                <p>
+                  Lors du lancement de la détection, il est possible qu’une erreur apparaisse. 
+                  Celle-ci est généralement due au fait que la caméra est déjà utilisée par un autre processus, empêchant ainsi son accès par le script de détection du Dofbot.
+                  <br>
+                  Dans ce cas, il suffit d’arrêter le processus en cours qui utilise la caméra afin de libérer la ressource.
+                  La procédure à suivre est illustrée dans la vidéo suivante, qui montre comment identifier et interrompre le processus concerné.
+                </p>
+              <video controls width=auto>
+                <source src="../videos/TRC25/Dofbot_IA/yolov5_camera_erreur.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+              <p>
+                Ces commandes ont été intégrées dans un <strong>script de lancement .sh</strong>, permettant d’automatiser l’initialisation de l’environnement et le démarrage de la détection.
+                Cette approche facilite l’utilisation du système, limite les erreurs de manipulation et garantit une exécution cohérente à chaque lancement du Dofbot. 
+              </p>
+
+              <details class="code-container">
+                <summary>launch_detection.sh</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('launch_detection-sh', this)">📋</button>
+                  <button onclick="telechargerCode('launch_detection-sh', 'launch_detection.sh', 'text/sh', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="launch_detection-sh">
+#!/bin/bash
+
+DEVICE="/dev/video0"
+
+SCRIPT="/home/jetson/b2ms/yolov5-pytorch/detect.py"
+WEIGHTS="/home/jetson/b2ms/yolov5-pytorch/model4.pt"
+
+echo "Vérification de l'utilisation de $DEVICE..."
+
+# Récupérer les PID qui utilisent /dev/video0 (la camera)
+PIDS=$(fuser $DEVICE 2>/dev/null)
+
+if [ -n "$PIDS" ]; then
+    echo "Processus utilisant $DEVICE : $PIDS"
+    for PID in $PIDS; do
+        echo "Killing PID $PID"
+        sudo kill -9 "$PID"
+    done
+    sleep 1
+else
+    echo "Aucun processus n'utilise $DEVICE"
+fi
+
+echo "Lancement de la détection..."
+python "$SCRIPT" --source 0 --weights "$WEIGHTS"
+                </code></pre>
+              </details>
+
+              <video controls width=60%>
+                <source src="../videos/TRC25/Dofbot_IA/yolov5_camera.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+            <p class="txt_center">
+              <strong>NB:</strong>
+              Le dossier <strong><em>yolov5-pytorch</em></strong> est fourni dans l’archive <strong><em>b2ms_Dofbot_IA.zip</em></strong>, disponible à la fin de cette section.
+            </p>
+
+            <h5>&#10022; Script d’identification des déchets</h5>
+              <p>
+                Pour permettre au Dofbot d’identifier les déchets détectés par le modèle pré-entrainé, un script Python dédié a été créé : <strong><em>garbage_identify.py</em></strong>.
+              </p>
+              <ul>
+                Ce script a pour rôle principal de :
+                <li>détecter les types de déchets dans l’image,</li>
+                <li>renvoyer les coordonnées de l’objet dans le repère de l’image.</li>
+              </ul>
+
+              <details class="code-container">
+                <summary>garbage_identify.py</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('garbage_identify-py', this)">📋</button>
+                  <button onclick="telechargerCode('garbage_identify-py', 'garbage_identify.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="garbage_identify-py">
+#!/usr/bin/env python3
+# coding: utf-8
+
+import time
+import torch
+import cv2 as cv
+import numpy as np
+from numpy import random
+
+from utils.torch_utils import select_device
+from models.experimental import attempt_load
+from utils.general import (
+    non_max_suppression,
+    scale_coords,
+    xyxy2xywh,
+    plot_one_box
+)
+
+model_path = '/home/jetson/b2ms/yolov5-pytorch/model4.pt'
+
+# Initialize device
+device = select_device()
+
+# Load YOLO model
+model = attempt_load(model_path, map_location=device)
+
+# Get names and colors
+names = model.module.names if hasattr(model, 'module') else model.names
+# Get the color value randomly
+colors = [[random.randint(0, 255) for _ in range(3)] for _ in range(len(names))]
+
+
+class garbage_identify:
+    """
+    YOLO-based garbage identification class
+    ROLE:
+    - Detect garbage type
+    - Return {class_name: (x, y)} in image coordinates
+    - DOES NOT control the robot arm
+    """
+
+    def __init__(self):
+        self.frame = None
+        self.garbage_index = 0  # used to delay detection at startup
+        self.model_ready = False
+        
+    def warmup(self):
+        """
+        Warmup YOLO model at startup
+        """
+        dummy = np.zeros((480, 640, 3), dtype=np.uint8)
+        for _ in range(5):
+            self.garbage_run(dummy)
+
+        self.model_ready = True
+
+    def garbage_run(self, image):
+        """
+        Run garbage detection
+        :param image: Original camera frame
+        :return: frame (with drawings), msg {name: (x, y)}
+        """
+        self.frame = cv.resize(image, (640, 480))
+        msg = {}
+
+        if not self.model_ready:
+            cv.putText(
+                self.frame,
+                "MODEL LOADING...",
+                (150, 50),
+                cv.FONT_HERSHEY_SIMPLEX,
+                1,
+                (0, 0, 255),
+                2
+            )
+            return self.frame, msg
+
+        try:
+            msg = self.get_pos()
+        except Exception as e:
+            print("YOLO detection error:", e)
+
+        return self.frame, msg
+
+    def get_pos(self):
+        """
+        Perform YOLO inference and extract object position
+        :return: dict {class_name: (x, y)}
+        """
+        msg = {}
+
+        # Copy frame to avoid modifying original
+        img = self.frame.copy()
+
+        # Preprocess
+        img = np.transpose(img, (2, 0, 1))  # HWC → CHW
+        img = torch.from_numpy(img).to(device)
+        img = img.float() / 255.0
+
+        if img.ndimension() == 3:
+            img = img.unsqueeze(0)
+
+        # Inference
+        pred = model(img)[0]
+
+        # Apply Non-Max Suppression
+        pred = non_max_suppression(pred, 0.4, 0.5)
+
+        gn = torch.tensor(self.frame.shape)[[1, 0, 1, 0]]
+
+        if pred != [None]:
+            for det in pred:
+                if det is None:
+                    continue
+
+                # Rescale boxes
+                det[:, :4] = scale_coords(
+                    img.shape[2:], det[:, :4], self.frame.shape
+                ).round()
+
+                for *xyxy, conf, cls in reversed(det):
+                    class_id = int(cls)
+                    name = names[class_id]
+
+                    # Bounding box center
+                    xywh = (
+                        xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn
+                    ).view(-1).tolist()
+
+                    cx = int(xywh[0] * 640)
+                    cy = int(xywh[1] * 480)
+
+                    # Draw center point
+                    cv.circle(self.frame, (cx, cy), 5, (0, 0, 255), -1)
+
+                    # Draw bounding box
+                    label = f"{name} {conf:.2f}"
+                    plot_one_box(
+                        xyxy,
+                        self.frame,
+                        label=label,
+                        color=colors[class_id],
+                        line_thickness=2
+                    )
+
+                    # Convert pixel coordinates to normalized robot coordinates
+                    x = round((cx - 320) / 4000, 5)
+                    y = round(((480 - cy) / 3000) * 0.8 + 0.19, 5)
+
+                    msg[name] = (x, y)
+
+        return msg
+                </code></pre>
+              </details>
+          
+          <h3 id="2-dofbot_ia">2. Contrôle et validation des mouvements</h3>
+            <p>
+              Avant de contrôler le bras robotisé, il est indispensable de positionner correctement le Dofbot dans son environnement de travail. 
+              Ceci permet d’anticiper les contraintes mécaniques, d’éviter les collisions potentielles et de s’assurer que les mouvements du bras seront effectifs et reproductibles dans les conditions réelles d’utilisation.
+            </p>
+            <div class="image-container">
+              <img src="../images/TRC25/Dofbot_IA/environnement.webp" alt="environnement" class="image-mean"/>
+            </div>
+            <p>
+              Une fois l’environnement défini, les mouvements du bras Dofbot sont contrôlés et testés indépendamment de la détection. 
+              Chaque mouvement souhaité est programmé puis validé, notamment :
+              <ul>
+                <li>
+                  La position initiale : permet au bras de se placer correctement pour détecter les objets sur le convoyeur.
+                </li>
+                <li>
+                  La prise des objets : inclut le déplacement vers l’objet, l’ouverture/fermeture de la pince et la sécurisation de la préhension.
+                </li>
+                <li>
+                  Le dépôt selon sa catégorie : transport de l’objet vers la zone de tri correspondante et retour à la position initiale.
+                </li>
+              </ul>
+            </p>
+            <p>
+              Cette séquence permet de tester et vérifier la précision, la stabilité et la fiabilité de chaque mouvement avant leur intégration dans l’algorithme de tri automatique, garantissant ainsi un fonctionnement sûr et efficace du Dofbot.
+            </p>
+
+            <p>
+              <strong>Remarque:</strong><br>
+              Les servomoteurs du bras Dofbot peuvent être contrôlés individuellement ou simultanément. 
+              Cependant, étant donné que les servomoteurs 3 et 6 sont interdépendants (le servomoteur 6 influence directement le mouvement du 3), 
+              il est préférable de séparer les commandes autant que possible. D'ailleurs, la commande sur le 3 seul ne fonctionne pas.
+              <br>
+              Le contrôle individuel est effectué par la commande: <strong>Arm.Arm_serial_servo_write(id, angle, mvt_time)</strong>
+              <ul>
+                Cette approche permet de :
+                <li>
+                  limiter les conflits entre mouvements,
+                </li>
+                <li>
+                  garantir une précision accrue lors de la préhension et du dépôt,
+                </li>
+                <li>
+                  faciliter la programmation et le débogage des séquences de mouvement.
+                </li>
+              </ul>
+            </p>
+
+            <p>
+              En pratique, la séquence de tri est donc conçue pour commander chaque servomoteur individuellement, 
+              tout en synchronisant les mouvements essentiels pour assurer un fonctionnement fluide et sûr.
+            </p>
+
+            <video controls width=80%>
+              <source src="../videos/TRC25/Dofbot_IA/ctrl_servo.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+            <p>
+              Après validation des mouvements à l’aide de Jupyter Notebook, 
+              <strong>un script Python</strong> dédié est créé afin d’être utilisé directement dans le processus de tri automatique.
+              Ce script regroupe l’ensemble des séquences de mouvement validées 
+              et permet une intégration simple et efficace avec l’algorithme de détection et de décision du système de tri.
+            </p>
+              <details class="code-container">
+                <summary>garbage_grab.py</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('garbage_grab-py', this)">📋</button>
+                  <button onclick="telechargerCode('garbage_grab-py', 'garbage_grab.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="garbage_grab-py">
+#!/usr/bin/env python
+# coding: utf-8
+import Arm_Lib
+from time import sleep
+
+class garbage_grap_move:
+    def __init__(self):
+        # set move status
+        self.move_status = True
+        self.arm = Arm_Lib.Arm_Device()
+        # Clamping jaw tightening angle
+        self.grap_joint = 134
+        self.mvt_time = 550
+        self.turn_dangereux = 140
+        self.turn_menagers = 20
+        self.arm.Arm_RGB_set(0, 0, 0) #RGB off
+        sleep(.5)
+
+
+    def mvt_pos_initial(self):
+        '''
+        initial position to detect object
+        '''
+        self.arm.Arm_RGB_set(0, 0, 0) #RGB off
+        sleep(.1)
+        
+        self.arm.Arm_serial_servo_write(6, 120, self.mvt_time + 400)  # servo 3, 6
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(1, 90, self.mvt_time + 400)   # servo 1
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(2, 90, self.mvt_time + 400)   # servo 2
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(4, 50, self.mvt_time + 400)   # servo 4
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(5, 90, self.mvt_time + 400)   # servo 5
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(6, 175, self.mvt_time + 400)  # servo 3, 6
+        sleep(1)
+        
+    def mvt_pos_object(self):
+        '''
+        position on object
+        '''
+        self.arm.Arm_serial_servo_write(5, 270, self.mvt_time)   # servo 5
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(4, 70, self.mvt_time)   # servo 4
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(6, 100, self.mvt_time)   # servo 6
+        sleep(0.5)
+        self.arm.Arm_serial_servo_write(2, 16, 3*self.mvt_time)   # servo 2
+        sleep(2)
+    
+    def mvt_take_object(self):
+        '''
+        position on object
+        '''
+        self.arm.Arm_serial_servo_write(2, 22, 200)   # servo 2
+        sleep(0.2)
+
+        self.arm.Arm_serial_servo_write(6, 110, self.mvt_time + 200)   # servo 6
+        sleep(0.4)
+
+        self.arm.Arm_serial_servo_write(2, 28, self.mvt_time + 200)   # servo 2
+        sleep(0.2)
+
+        self.arm.Arm_serial_servo_write(6, 125, self.mvt_time + 200)   # servo 6
+        sleep(0.4)
+
+        self.arm.Arm_serial_servo_write(2, 35, self.mvt_time + 200)   # servo 2
+        sleep(0.8)
+
+        self.arm.Arm_serial_servo_write(6, 134, self.mvt_time + 200)   # servo 6
+        sleep(0.3)
+
+        self.arm.Arm_serial_servo_write(2, 44, self.mvt_time + 200)   # servo 2
+        sleep(1)
+        
+    def mvt_up(self):
+        '''
+        move up object
+        '''
+        self.arm.Arm_serial_servo_write(2, 70, self.mvt_time)   # servo 2
+        sleep(0.5)
+    
+    def grab_object(self):
+        self.mvt_pos_object()
+        self.mvt_take_object()
+        self.mvt_up()
+
+        
+    def mvt_dangereux(self):
+        '''
+        recycle hazardous waste
+        '''
+        self.arm.Arm_RGB_set(50, 0, 0) #RGB red
+        sleep(.5)
+        
+        self.grab_object()
+        
+        self.arm.Arm_serial_servo_write(1, self.turn_dangereux, self.mvt_time)  # servo 4
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(4, 30, self.mvt_time)   # servo 4
+        sleep(0.4)
+        self.arm.Arm_serial_servo_write(6, 120, self.mvt_time)   # servo 6
+        sleep(0.8)
+        
+        
+    def mvt_menagers(self):
+        '''
+        recycle kitchen waste
+        '''
+        self.arm.Arm_RGB_set(0, 0, 50) #RGB blue
+        sleep(.5)
+        
+        self.grab_object()
+        
+        self.arm.Arm_serial_servo_write(1, self.turn_menagers, self.mvt_time)  # servo 4
+        sleep(0.2)
+        self.arm.Arm_serial_servo_write(4, 30, self.mvt_time)   # servo 4
+        sleep(0.4)
+        self.arm.Arm_serial_servo_write(6, 120, self.mvt_time)   # servo 6
+        sleep(0.8)
+        
+    def mvt_recyclables(self):
+        '''
+        recycle recyclable waste
+        '''
+        self.arm.Arm_RGB_set(0, 50, 0) #RGB green
+        sleep(.5)
+        
+        self.grab_object()
+        
+        self.arm.Arm_serial_servo_write(2, 175, self.mvt_time*2)    # servo 2
+        sleep(0.8)
+        self.arm.Arm_serial_servo_write(4, 120, self.mvt_time)  # servo 4
+        sleep(0.6)
+        self.arm.Arm_serial_servo_write(6, 120, self.mvt_time)   # servo 6
+        sleep(0.8)
+
+    def mvt_others(self):
+        '''
+        recycle others waste: not identified
+        '''
+        self.arm.Arm_RGB_set(255, 165, 0) #RGB orange
+        sleep(.5)
+        
+        self.grab_object()
+        
+        self.arm.Arm_serial_servo_write(2, 175, self.mvt_time)    # servo 2
+        sleep(1)
+        self.arm.Arm_serial_servo_write(4, 120, self.mvt_time)  # servo 4
+        sleep(2)
+        self.arm.Arm_serial_servo_write(6, 120, self.mvt_time)   # servo 6
+        sleep(2)
+        
+    def arm_run(self, name):
+        '''
+        Manipulator movement function
+        :param name: Identified spam names
+        '''
+        # Hazardous waste - red
+        if name == "dangereux" and self.move_status == True:
+            # It is set here. You can only run down after this operation
+            self.move_status = False
+            # print("Hazardous waste")
+            self.mvt_dangereux()
+            self.move_status = True
+            
+        # Kitchen waste - blue
+        if name == "menagers" and self.move_status == True:
+            self.move_status = False
+            # print("Kitchen waste")
+            self.mvt_menagers()
+            self.move_status = True
+            
+        # Recyclable waste - green
+        if name == "recyclables" and self.move_status == True:
+            self.move_status = False
+            # print("Recyclable waste")
+            self.mvt_recyclables()
+            self.move_status = True
+        
+        self.mvt_pos_initial()
+                </code></pre>
+              </details>
+
+          <h3 id="3-dofbot_ia">3. Algorithme de tri</h3>
+            <p>
+              Le script <strong><em>garbage_sorting.py</em></strong> centralise l’ensemble des opérations nécessaires au tri automatique des déchets par le Dofbot.
+              Il combine la détection via YOLOv5 et les mouvements du bras robotisé, tout en gérant la stabilité et la répétabilité des opérations.
+            </p>
+
+            <details class="code-container">
+              <summary>garbage_sorting.py</summary>
+              <div class="btn-bar">
+                <button onclick="copierCode('garbage_sorting-py', this)">📋</button>
+                <button onclick="telechargerCode('garbage_sorting-py', 'garbage_sorting.py', 'text/py', this)">🡇</button>
+              </div>
+              <pre><code class="hljs" id="garbage_sorting-py">
+#!/usr/bin/env python
+# coding: utf-8
+
+import threading
+import cv2 as cv
+from time import sleep
+from garbage_identify import garbage_identify
+from garbage_grap import garbage_grap_move
+
+
+class garbage_sorting:
+    def __init__(self):
+        self.name_tmp = None
+        self.num = 0
+        self.status = 'waiting'
+        self.nbr_detection = 2
+
+        self.garbage_identify = garbage_identify()
+        self.garbage_identify.warmup()
+
+        self.arm = garbage_grap_move()
+        self.arm.mvt_pos_initial()
+
+    def single_garbage_run(self, image, piece_present=False):
+        self.frame = cv.resize(image, (640, 480))
+
+        if not self.garbage_identify.model_ready:
+            cv.putText(
+                self.frame,
+                "MODEL LOADING...",
+                (150, 50),
+                cv.FONT_HERSHEY_SIMPLEX,
+                1,
+                (0, 0, 255),
+                2
+            )
+            return self.frame
+
+        if not piece_present:
+            self.arm.arm.Arm_RGB_set(0, 0, 0) #RGB off
+            cv.putText(
+                self.frame,
+                "WAITING FOR PIECE",
+                (150, 50),
+                cv.FONT_HERSHEY_SIMPLEX,
+                1,
+                (0, 0, 255),
+                2
+            )
+            return self.frame
+
+        if self.status == 'waiting':
+            self.garbage_getName()
+
+        return self.frame
+
+
+    def garbage_getName(self):
+        if self.status != "waiting":
+            return
+
+        self.frame, msg = self.garbage_identify.garbage_run(self.frame)
+        self.arm.arm.Arm_RGB_set(255, 165, 0) #RGB orange
+
+        name = "None"
+        for key in msg.keys():
+            name = key
+
+        if name == self.name_tmp and name != "None":
+            self.num += 1
+            if self.num >= self.nbr_detection:
+                self.status = 'running'
+                threading.Thread(
+                    target=self.sorting_garbage,
+                    args=(name,),
+                    daemon=True
+                ).start()
+                self.num = 0
+        else:
+            self.name_tmp = name
+            self.num = 0
+
+    def sorting_garbage(self, name):
+        self.arm.arm.Arm_Buzzer_On(1)
+        sleep(0.5)
+
+        if name == "dangereux":
+            self.arm.mvt_dangereux()
+        elif name == "menagers":
+            self.arm.mvt_menagers()
+        elif name == "recyclables":
+            self.arm.mvt_recyclables()
+        else:
+            self.arm.mvt_others()
+
+        self.arm.mvt_pos_initial()
+        self.status = 'waiting'
+              </code></pre>
+            </details>
+
+            <h4>a. Detection d'objets</h4>
+              <ul>
+                <li>
+                  Après l’initialisation du système, le flux vidéo est analysé image par image.
+                </li>
+                <li>
+                  Le modèle YOLO retourne un dictionnaire msg contenant les objets détectés et leurs coordonnées dans l’image.
+                </li>
+                <li>
+                  La méthode garbage_getName vérifie la détection sur plusieurs frames consécutives afin d’éviter les faux positifs.
+                </li>
+              </ul>
+
+            <h4>b. Validation de la détection</h4>
+              <ul>
+                <li>
+                  <strong>name_tmp</strong> : mémorise la dernière classe détectée.
+                </li>
+                <li>
+                  <strong>num</strong> : compteur d’apparitions consécutives.
+                </li>
+                <li>
+                  <strong>nbr_detection</strong> : nombre minimal de détections consécutives pour valider l’objet.
+                </li>
+              </ul>
+              <p>
+                Si le même objet est détecté sur au moins nbr_detection frames, la détection est considérée valide et le tri peut commencer.
+                <br>
+                Sinon, le système continue de scanner le flux vidéo.
+              </p>
+
+              <h4>c. Tri et mouvement</h4>
+              <ul>
+                <li>
+                  Une fois la détection validée, le tri est déclenché dans un thread séparé, pour ne pas bloquer la détection en continu.
+                </li>
+                <li>
+                  L’objet est trié selon sa catégorie (dangereux, menagers, recyclables, autres).
+                </li>
+                <li>
+                  Le bras retourne ensuite automatiquement à la position initiale.
+                </li>
+              </ul>
+
+            <h4>d. Logique de fonctionnement</h4>
+              <ul>
+                L’algorithme suit une boucle continue permettant au Dofbot de détecter et trier les déchets automatiquement :
+                <li>
+                  Capture d’image : le convoyeur est scanné en temps réel pour détecter la présence d’objets.
+                </li>
+                <li>
+                  Détection des objets : le script identifie les objets présents et enregistre leur classe.
+                </li>
+                <li>
+                  Validation de la détection : un objet doit être détecté sur plusieurs frames consécutives pour être considéré comme valide.
+                </li>
+                <li>
+                  Tri via le bras robotisé: l'objet est trié à la suite d'une sequence de mouvement du bras.
+                </li>
+                <li>
+                  Signal et Visualisation : le buzzer du bras indique le début de l’opération, et la led RGB indique le type de déchet en cours de traitement.
+                </li>
+                <li>
+                  Répétition : le système revient à l’état “attente” pour continuer la surveillance du convoyeur.
+                </li>
+              </ul>
+
+              <p>
+                Cette logique garantit un tri fiable, précis et visuellement identifiable, tout en maintenant la détection active en continu.
+              </p>
+
+            <h4>e. Test sur Jupyter</h4>
+              <p>
+                Les séquences de détection et de mouvements ont été testées et validées via Jupyter Notebook.
+              </p>
+
+              <details class="code-container">
+                <summary>Garbage_sorting.ipynb</summary> 
+                <div class="btn-bar">
+                  <button onclick="copierCode('Garbage_sorting-ipynb', this)">📋</button> 
+                  <button onclick="telechargerCode('Garbage_sorting-ipynb', 'Garbage_sorting.ipynb', 'application/json', this)">🡇</button> 
+                </div>
+                <pre><code class="hljs" id="Garbage_sorting-ipynb">
+# ### Import head file
+
+#!/usr/bin/env python
+# coding: utf-8
+import Arm_Lib
+import cv2 as cv
+import threading
+from time import sleep
+import ipywidgets as widgets
+from IPython.display import display
+from garbage_sorting import garbage_sorting
+
+# ### Create the instance and initialize the parameters
+sorting_garbage = garbage_sorting()
+
+model = "General"
+
+# ### Initialize DOFBOT position
+sorting_garbage.arm.mvt_pos_initial()
+
+# ### Create controls
+button_layout      = widgets.Layout(width='320px', height='60px', align_self='center')
+output = widgets.Output()
+# exit
+exit_button = widgets.Button(description='Exit', button_style='danger', layout=button_layout)
+imgbox = widgets.Image(format='jpg', height=480, width=640, layout=widgets.Layout(align_self='center'))
+controls_box = widgets.VBox([imgbox, exit_button], layout=widgets.Layout(align_self='center'))
+
+def exit_button_Callback(value):
+    global model
+    model = 'Exit'
+    with output: print(model)
+exit_button.on_click(exit_button_Callback)
+
+# ### Main process
+
+def camera():
+    # Open camera
+    capture = cv.VideoCapture(0)
+    # The loop is executed when the camera is opened normally 
+    while capture.isOpened():
+        try:
+
+            _, img = capture.read()
+
+            img = cv.resize(img, (640, 480))
+            img = sorting_garbage.single_garbage_run(img)
+            if model == 'Exit':
+                cv.destroyAllWindows()
+                capture.release()
+                break
+            imgbox.value = cv.imencode('.jpg', img)[1].tobytes()
+        except KeyboardInterrupt:capture.release()
+
+# ### Start
+
+# Place the block in the center of the cross on map.
+display(controls_box,output)
+threading.Thread(target=camera, ).start()
+                </code></pre>
+              </details>
+
+              <video controls width=80%>
+                <source src="../videos/TRC25/Dofbot_IA/garbage_sorting.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+          <h3 id="4-dofbot_ia">4. Tests et Demonstration</h3>
+            <p>
+              Cette phase vise à évaluer le fonctionnement global du système de tri intelligent en conditions réelles, en comparant deux modes de communication entre le convoyeur et le Dofbot : 
+              communication sans fil et communication filaire via UART. 
+              Les tests portent principalement sur <strong>la réactivité du système</strong>, 
+              <strong>la précision de la prise des déchets</strong> et <strong>la stabilité des mouvements du bras robotisé</strong>.
+            </p>
+            
+            <h4>a. Tests avec communication sans fil</h4>  
+              <p>
+                Dans cette configuration, la synchronisation entre le convoyeur et le Dofbot repose sur <strong>une communication sans fil via TCP</strong>. 
+                Le convoyeur agit comme émetteur d’état (présence ou absence d’un déchet), 
+                tandis que le Dofbot reçoit cette information et déclenche la détection puis le tri.
+                <br>
+                Le script ci-dessous permet de tester le système complet (détection et tri) avec <strong>une communication TCP</strong> entre le convoyeur et le Dofbot.
+              </p>            
+
+              <details class="code-container">
+                <summary>main_ssh_tcp.py</summary> 
+                <div class="btn-bar">
+                  <button onclick="copierCode('main_ssh_tcp-py', this)">📋</button> 
+                  <button onclick="telechargerCode('main_ssh_tcp-py', 'main_ssh_tcp.py', 'text/py', this)">🡇</button> 
+                </div>
+                <pre><code class="hljs" id="main_ssh_tcp-py">
+#!/usr/bin/env python
+# coding: utf-8
+
+import cv2 as cv
+import threading
+from time import sleep
+from garbage_sorting import garbage_sorting
+from tcp_server import tcp_Server
+
+sorting_garbage = garbage_sorting()
+
+# ----- TCP -----
+tcp = tcp_Server()
+tcp.start_server()
+
+
+def tcp_loop():
+    while True:
+        tcp.listen()
+        sleep(0.01)
+
+
+threading.Thread(target=tcp_loop, daemon=True).start()
+
+# ----- CAMERA -----
+
+
+def camera():
+    capture = cv.VideoCapture(0)
+
+    if not capture.isOpened():
+        print("Erreur caméra")
+        return
+
+    while True:
+        ret, img = capture.read()
+        if not ret:
+            break
+
+        img = cv.resize(img, (640, 480))
+
+        img = sorting_garbage.single_garbage_run(
+            img,
+            piece_present=tcp.presence
+        )
+
+        # cv.imshow("Garbage Sorting", img)
+
+        if cv.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    capture.release()
+    cv.destroyAllWindows()
+
+
+camera()
+                </code></pre>
+              </details>
+
+              <p>
+                Afin de simplifier le démarrage du système de tri avec communication sans fil (TCP) et d’éviter la répétition des mêmes commandes, un <strong>script Bash de lancement</strong> a été mis en place.
+              </p>
+
+              <details class="code-container">
+                <summary>launch_sorting_tcp.sh</summary> 
+                <div class="btn-bar">
+                  <button onclick="copierCode('launch_sorting_tcp-sh', this)">📋</button> 
+                  <button onclick="telechargerCode('launch_sorting_tcp-sh', 'launch_sorting_tcp-sh', 'text/sh', this)">🡇</button> 
+                </div>
+                <pre><code class="hljs" id="launch_sorting_tcp-sh">
+#!/bin/bash
+
+DEVICE="/dev/video0"
+
+SCRIPT="/home/jetson/b2ms/garbage_sorting_conv/main_ssh_tcp.py"
+
+echo "Vérification de l'utilisation de $DEVICE..."
+
+# Récupérer les PID qui utilisent /dev/video0 (la camera)
+PIDS=$(fuser $DEVICE 2>/dev/null)
+
+if [ -n "$PIDS" ]; then
+    echo "Processus utilisant $DEVICE : $PIDS"
+    for PID in $PIDS; do
+        echo "Killing PID $PID"
+        sudo kill -9 "$PID"
+    done
+    sleep 1
+else
+    echo "Aucun processus n'utilise $DEVICE"
+fi
+
+echo "Execution de garbage_sorting_comm_v3/main_ssh.py ..."
+python "$SCRIPT"
+                </code></pre>
+              </details>
+
+              <video controls width=80%>
+                <source src="../videos/TRC25/Dofbot_IA/garbage_sorting_with_conv1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+              <p>
+                Lors des premiers essais basés sur une communication sans fil entre le convoyeur et le Dofbot, plusieurs limites ont été observées :
+                <ul>
+                  <li>
+                    <strong>Une latence notable</strong> entre l’envoi du signal par le convoyeur et la réaction du Dofbot, impactant la synchronisation entre détection et action.
+                  </li>
+                  <li>
+                    Les déchets ont tendance à <strong>ne pas être correctement centrés</strong> sur la zone de préhension, ce qui entraîne des échecs de saisie par la pince.
+                  </li>
+                  <li>
+                    Le temps global du cycle de tri est relativement élevé, dû à  
+                    la durée du convoyage et la lenteur volontaire des mouvements du bras afin de préserver la stabilité.
+                  </li>
+                </ul>
+              </p>
+
+              <p>
+                Ces contraintes montrent que, bien que fonctionnelle, la communication sans fil n’est pas optimale pour un tri précis et répétable dans cette configuration.
+                <br>
+                Ce mode reste néanmoins intéressant pour une architecture distribuée ou lorsque le câblage n’est pas possible.
+              </p>
+
+            <h4>b. Tests avec communication UART</h4>
+              <p>
+                Dans cette configuration, la communication entre le convoyeur et le Dofbot est assurée par <strong>une liaison filaire UART</strong>. 
+                Le convoyeur (Arduino) envoie directement l’état de présence d’un déchet au Dofbot, permettant une synchronisation plus rapide et plus fiable du processus de tri.
+                <br>
+                Le script suivant permet de tester le tri automatique en utilisant <strong>une communication filaire UART</strong> entre le convoyeur et le Dofbot.
+              </p>
+
+              <details class="code-container">
+                <summary>main_ssh_uart.py</summary> 
+                <div class="btn-bar">
+                  <button onclick="copierCode('main_ssh_uart-py', this)">📋</button> 
+                  <button onclick="telechargerCode('main_ssh_uart-py', 'main_ssh_uart.py', 'text/py', this)">🡇</button> 
+                </div>
+                <pre><code class="hljs" id="main_ssh_uart-py">
+#!/usr/bin/env python
+# coding: utf-8
+
+import cv2 as cv
+import threading
+from time import sleep
+from garbage_sorting import garbage_sorting
+from uart_Arduino import uart_Arduino
+
+sorting_garbage = garbage_sorting()
+
+# ----- Communication -----
+communication = uart_Arduino()
+communication.start()
+
+
+def communication_loop():
+    while True:
+        communication.listen()
+        sleep(0.01)
+
+
+threading.Thread(target=communication_loop, daemon=True).start()
+
+# ----- CAMERA -----
+
+
+def camera():
+    capture = cv.VideoCapture(0)
+
+    if not capture.isOpened():
+        print("Erreur caméra")
+        return
+
+    while True:
+        ret, img = capture.read()
+        if not ret:
+            break
+
+        img = cv.resize(img, (640, 480))
+
+        img = sorting_garbage.single_garbage_run(
+            img,
+            piece_present=communication.presence
+        )
+
+        # cv.imshow("Garbage Sorting", img)
+
+        if cv.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    capture.release()
+    cv.destroyAllWindows()
+
+
+camera()
+                </code></pre>
+              </details>
+
+              <p>
+                Un script de lancement équivalent est utilisé pour la version UART, en adaptant simplement le chemin vers le fichier Python principal correspondant.  
+              </p>
+
+              <details class="code-container">
+                <summary>launch_sorting_uart.sh</summary> 
+                <div class="btn-bar">
+                  <button onclick="copierCode('launch_sorting_uart-sh', this)">📋</button> 
+                  <button onclick="telechargerCode('launch_sorting_uart-sh', 'launch_sorting_uart-sh', 'text/sh', this)">🡇</button> 
+                </div>
+                <pre><code class="hljs" id="launch_sorting_uart-sh">
+#!/bin/bash
+
+DEVICE="/dev/video0"
+
+SCRIPT="/home/jetson/b2ms/garbage_sorting_conv/main_ssh_uart.py"
+
+echo "Vérification de l'utilisation de $DEVICE..."
+
+# Récupérer les PID qui utilisent /dev/video0 (la camera)
+PIDS=$(fuser $DEVICE 2>/dev/null)
+
+if [ -n "$PIDS" ]; then
+    echo "Processus utilisant $DEVICE : $PIDS"
+    for PID in $PIDS; do
+        echo "Killing PID $PID"
+        sudo kill -9 "$PID"
+    done
+    sleep 1
+else
+    echo "Aucun processus n'utilise $DEVICE"
+fi
+
+echo "Execution de garbage_sorting_comm_v3/main_ssh.py ..."
+python "$SCRIPT"
+                </code></pre>
+              </details>
+
+              <video controls width=80%>
+                <source src="../videos/TRC25/Dofbot_IA/garbage_sorting_with_conv2.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+
+              <p>
+                Les essais réalisés avec une communication filaire via UART ont permis d’améliorer les performances globales du système :
+                <ul>
+                  <li>
+                    La communication est <strong>plus réactive</strong>, avec une réduction perceptible du temps de réponse entre le convoyeur et le Dofbot.
+                  </li>
+                  <li>
+                    Il a été possible de réduire <strong>le nombre de détections consécutives</strong> nécessaires à la validation d’un objet, ainsi que <strong>le temps des mouvements du bras</strong>, sans compromettre la stabilité.
+                  </li>
+                  <li>
+                    Une pièce mécanique ajoutée en fin de convoyeur permet désormais <strong>de centrer correctement les déchets</strong> avant la phase de prise.
+                  </li>
+                  <li>
+                    Grâce à ce centrage, le bras robotisé parvient <strong>à saisir les déchets de manière fiable et répétable</strong>.
+                  </li>
+                </ul>
+              </p>
+
+              <p>
+                Ces améliorations rendent le système <strong>plus robuste et mieux adapté</strong> à une utilisation continue.
+                <br>
+                <strong>Néanmoins</strong>, d'autres optimisations restent à envisager afin d’accélérer davantage le cycle de tri.
+              </p>
+
+            <h3 id="5-dofbot_ia">5. Suivi et gestion des historiques</h3>
+              <p>
+                À la suite des différentes phases de tests et de démonstration, il est apparu nécessaire d’ajouter des fonctionnalités permettant de suivre et enregistrer l’historique des déchets triés.
+                Ces ajouts visent à améliorer la traçabilité, la visualisation des performances du système, ainsi que l’exploitation des données sur une période donnée.
+              </p>
+
+              <p>
+                L’intégration de l’historique permet de :
+                <ul>
+                  <li>
+                    Conserver une trace des déchets détectés et triés.
+                  </li>
+                  <li>
+                    Analyser la répartition des catégories de déchets.
+                  </li>
+                  <li>
+                    Faciliter le débogage et l’amélioration continue du tri.
+                  </li>
+                  <li>
+                    Disposer de données exploitables pour des statistiques ou une interface future.
+                  </li>
+                </ul>
+              </p>
+
+              <h4>a. Principe de fonctionnement</h4>
+                <p>
+                  À chaque opération de tri validée :
+                  <ul>
+                    <li>
+                      Le type de déchet identifié est enregistré.
+                    </li>
+                    <li>
+                      La date et l’heure de la détection sont associées à l’événement.
+                    </li>
+                    <li>
+                      L’information est stockée localement dans une structure dédiée.
+                    </li>
+                    <li>
+                      Les données peuvent être consultées, analysées et utilisées ultérieurement.
+                    </li>
+                  </ul>
+                </p>
+
+                <p>
+                  Ce mécanisme est indépendant du mode de communication utilisé entre le Dofbot et le convoyeur.
+                </p>
+
+              <h4>b. Structure</h4>
+                <p>
+                  Un module dédié à la gestion de l’historique est intégré au système.
+                  <br>
+                  Il assure:
+                  <ul>
+                    <li>
+                      l’enregistrement des événements de tri,
+                    </li>
+                    <li>
+                      la mise à jour des compteurs par catégorie,
+                    </li>
+                    <li>
+                      la persistance des données (fichier local).
+                    </li>
+                  </ul>
+                </p>
+
+                <details class="code-container">
+                  <summary>garbage_history.py</summary> 
+                  <div class="btn-bar">
+                    <button onclick="copierCode('garbage_history-py', this)">📋</button> 
+                    <button onclick="telechargerCode('garbage_history-py', 'garbage_history-py', 'text/py', this)">🡇</button> 
+                  </div>
+                  <pre><code class="hljs" id="garbage_history-py">
+import json
+import os
+from datetime import datetime
+
+
+class GarbageHistory:
+    GARBAGE_TYPES = ["dangereux", "menagers", "recyclables"]
+
+    def __init__(self, file_path="garbage_history.json"):
+        self.file_path = file_path
+        self.data = {
+            "total": 0,
+            "by_type": {g: 0 for g in self.GARBAGE_TYPES},
+            "history": []
+        }
+        self.load()
+
+    def load(self):
+        if os.path.exists(self.file_path):
+            with open(self.file_path, "r") as f:
+                self.data = json.load(f)
+
+            for g in self.GARBAGE_TYPES:
+                if g not in self.data["by_type"]:
+                    self.data["by_type"][g] = 0
+        else:
+            self.save()
+
+    def save(self):
+        with open(self.file_path, "w") as f:
+            json.dump(self.data, f, indent=4)
+
+    def add(self, garbage_type):
+        self.data["total"] += 1
+        self.data["by_type"][garbage_type] += 1
+
+        self.data["history"].append({
+            "type": garbage_type,
+            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        })
+
+        self.save()
+        self.display_last(garbage_type)
+
+    def display_last(self, garbage_type):
+        print(f"\nNouveau déchet trié : {garbage_type}")
+        print("Répartition :")
+        for g in self.GARBAGE_TYPES:
+            print(f"   - {g} : {self.data['by_type'][g]} ({(self.data['by_type'][g]/self.data['total'])*100.0})%")
+        print(f"Total déchets : {self.data['total']}")
+        print("-" * 40)
+
+    def display_all(self):
+        print("\nHISTORIQUE COMPLET")
+        for i, item in enumerate(self.data["history"], 1):
+            print(f"{i}. {item['time']}: {item['type']}")
+
+    def reset(self):
+        confirm = input("Confirmer le reset ? (oui/non) : ")
+        if confirm.lower() == "oui":
+            self.data = {
+                "total": 0,
+                "by_type": {g: 0 for g in self.GARBAGE_TYPES},
+                "history": []
+            }
+            self.save()
+            print("Historique réinitialisé")
+        else:
+            print("Reset annulé")
+                  </code></pre>
+                </details>
+
+                <h4>c. Intégration dans l'algorithme de tri</h4>
+                  <p>
+                    Le module <strong><em>garbage_history</em></strong> est appelé après une opération de tri réussie, afin d’enregistrer uniquement les déchets effectivement manipulés par le bras.
+                  </p>
+
+                  <div class="code-container">
+                    <p>Extrait d'intégration dans <strong><em>garbage_sorting.py</em></strong></p> 
+                    <div class="btn-bar">
+                      <button onclick="copierCode('extrait_garbage_sorting-py', this)">📋</button> 
+                    </div>
+                    <pre><code class="hljs" id="extrait_garbage_sorting-py">
+from garbage_history import GarbageHistory
+
+class garbage_sorting:
+    def __init__(self):
+        ...
+        self.history = GarbageHistory()
+
+    ...
+
+    def sorting_garbage(self, name):
+    self.arm.arm.Arm_Buzzer_On(1)
+    sleep(0.5)
+
+    if name == "dangereux":
+        self.arm.mvt_dangereux()
+    elif name == "menagers":
+        self.arm.mvt_menagers()
+    elif name == "recyclables":
+        self.arm.mvt_recyclables()
+    else:
+        self.arm.mvt_others()
+
+    # Enregistrement dans l’historique
+    self.history.add(name)
+
+    self.arm.mvt_pos_initial()
+    self.status = 'waiting'
+                    </code></pre>
+                  </div>
+
+                  <div class="image-container">
+                    <img src="../images/TRC25/Dofbot_IA/terminal.webp" alt="terminal" class="image-small"/>
+                  </div>
+
+                <h4>d. Interaction utilisateur</h4>
+                  <p>
+                    En complément de l’enregistrement automatique des déchets triés, une interface en ligne de commande a été intégrée dans le script <strong><em>garbage_sorting.py</em></strong>.
+                    <br>
+                    Elle permet à l’utilisateur d’interagir directement avec l’historique pendant l’exécution du programme.
+                  </p>
+
+                  <p>
+                    Une boucle dédiée attend l’initialisation du système de vision, puis permet à l’utilisateur d’interagir en temps réel via la console afin de consulter, 
+                    réinitialiser ou afficher l’historique des déchets triés, sans interrompre le processus de détection et de tri automatique.
+                  </p>
+
+                  <div class="code-container">
+                    <p>user_commands dans <strong><em>garbage_sorting.py</em></strong></p> 
+                    <div class="btn-bar">
+                      <button onclick="copierCode('user_commands-py', this)">📋</button> 
+                    </div>
+                    <pre><code class="hljs" id="user_commands-py">
+    ...
+    def user_commands(self):
+        while not self.opencv_ready:
+            sleep(0.2)
+            
+        while True:
+            cmd = input("\nCommande (r=reset, s=stats, h=historique) : ")
+            if cmd == "r":
+                self.history.reset()
+            elif cmd == "s":
+                print(self.history.data)
+            elif cmd == "h":
+                self.history.display_all()
+                    </code></pre>
+                  </div>
+
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Commande</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>r</strong></td>
+                        <td>Réinitialise l’historique des déchets</td>
+                      </tr>
+                      <tr>
+                        <td><strong>s</strong></td>
+                        <td>Affiche les statistiques (compteurs par catégorie)</td>
+                      </tr>
+                      <tr>
+                        <td><strong>h</strong></td>
+                        <td>Affiche l’historique complet des déchets triés</td>
+                      </tr>
+                    </tbody>
+                  </table> 
+
+                  <div class="image-container">
+                    <img src="../images/TRC25/Dofbot_IA/terminal_commande.webp" alt="terminal" class="image-mean"/>
+                  </div>
+
+              <p class="txt_center">
+                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_Dofbot_IA.zip" target="_blank" class="download-link">
+                  Télécharger b2ms_Dofbot_IA.zip
+                </a>
+              </p>
+              
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

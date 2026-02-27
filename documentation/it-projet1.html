@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Département IT – B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Département IT</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+
+        <div class="nav-section">
+          <a href="./it" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-desktop"></i> IT</button> </a>       
+          
+          <div class="sub-links">
+            <a href="./it-projet1" class="subtab-button active">Projet 1</a>
+
+            <nav class="project-subnav active" id="subnav-test1">
+              <a href="#1-test1">1. Contexte et objectifs</a>
+              <a href="#2-test1">2. Architecture générale</a>
+              <a href="#3-test1">3. Concept de POO utilisés</a>
+              <a href="#4-test1">4. Diagramme UML</a>
+              <a href="#5-test1">5. Tests réalisés</a>
+              <a href="#6-test1">6. Résultats obtenus</a>
+              <a href="#7-test1">7. Limites et perspectives</a>
+              <a href="#8-test1">8. Conclusion</a>
+            </nav>
+
+            <a href="./it-projet2" class="subtab-button">Projet 2</a>
+            <a href="./it-projet3" class="subtab-button">Projet 3</a>
+          </div>
+        </div>
+
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="it-content" class="tab-content active">
+
+        <div id="test1" class="subtab-content active">
+          <h2 id="projet1" class="projet-titre">Projet 1 – Gestion de Robots</h2>
+
+          <h3 id="1-test1">1. Contexte et objectifs</h3>
+            <p>
+              L’objectif de ce projet est de mettre en pratique les principes de la programmation orientée objet (POO) en C++ à travers la conception d’un système de gestion de différents types de robots.
+            </p>
+            <p>
+              Le système permet notamment de :
+            </p>
+            <ul>
+              <li>Créer plusieurs types de robots avec des comportements spécifiques.</li>
+              <li>Simuler leurs mouvements.</li>
+              <li>Implémenter des fonctionnalités génériques : héritage, polymorphisme, surcharge, encapsulation, etc.</li>
+              <li>Appliquer les bonnes pratiques de conception logicielle (structure modulaire, classes bien définies, etc.).</li>
+            </ul>
+
+          <h3 id="2-test1">2. Architecture générale</h3>
+            <p>
+              Le système est composé de trois classes principales, dont une classe mère : <strong>robot</strong>.
+            </p>
+
+            <h4><strong>a. robot</strong>(Classe mère)</h4>
+            <p>
+              Il s'agit d'une classe générique représentant un robot. Elle regroupe les attributs et comportements communs à tous les types de robots.
+            </p>
+
+            <p>
+              - Attributs principaux : ID du robot, Position 2D : coordonnées (x, y), État : ON ou OFF
+            </p>
+            <p>
+              - Fonctionnalités : constructeurs / destructeurs, méthodes de déplacement (virtuelles), calcul de la distance à l’origine, méthodes d’affichage
+            </p>
+
+            <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('robot-cpp', this)">📋</button>
+                <button onclick="telechargerCode('robot-cpp', 'robot.cpp', 'text/x-c++src', this)">🡇</button>
+              </div>
+              <pre><code class="hljs" id="robot-cpp">
+#include "robot.hpp"
+
+robot::robot() : ID(0), position(0, 0), status(OFF) {}
+
+robot::robot(unsigned int Id, float x, float y) : ID(Id), position(x, y), status(ON) {}
+
+robot::robot(const robot &rhs)
+    : ID(rhs.ID), position(rhs.position), status(rhs.status) {}
+
+robot &robot::operator=(const robot &rhs)
+{
+    if (this != &rhs)
+    {
+        ID = rhs.ID;
+        position = rhs.position;
+        status = rhs.status;
+    }
+    return *this;
+}
+
+robot::~robot() {}
+
+float robot::distanceFromOrigin()
+{
+    return std::sqrt(position.x * position.x + position.y * position.y);
+}
+
+vect2D robot::getPosition() const
+{
+    return position;
+}
+
+void robot::setPosition(const vect2D &currentPosition)
+{
+    position = currentPosition;
+}
+
+unsigned int robot::getID() const
+{
+    return ID;
+}
+
+void robot::setID(int Id)
+{
+    ID = Id;
+}
+
+state robot::getStatus() const
+{
+    return status;
+}
+
+void robot::setStatus(const state &OnOrOff)
+{
+    status = OnOrOff;
+}
+
+void printNameOfRobot(robot *p)
+{
+    std::cout << p->getNameOfRobot() << std::endl;
+}
+
+void moveRobot(robot *p)
+{
+    p->move();
+}
+              </code></pre>
+            </div>
+
+            <h4><strong>b. deliveryRobot </strong>(Classe fille)</h4>
+            <p>
+              Il s'agit d'un robot de livraison, dérivé de <strong>robot</strong>.
+            </p>
+
+            <p>
+              - Fonctionnalités spécifiques  : livrer des entités vers des zones prédéfinies (zone1, zone2), gèrer le nombre d'entités à livrer, implémenter un déplacement basé sur la zone          
+            </p>
+
+            <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('deliveryRobot-cpp', this)">📋</button>
+                <button onclick="telechargerCode('deliveryRobot-cpp', 'deliveryRobot.cpp', 'text/x-c++src', this)">🡇</button>
+              </div>
+              <pre><code class="hljs" id="deliveryRobot-cpp">
+#include "deliveryRobot.hpp"
+
+deliveryRobot::deliveryRobot(zone ZONE, unsigned short nbrOfEntities, unsigned int Id, float x, float y)
+    : robot(Id, x, y), entities(nbrOfEntities), Zone(ZONE) {}
+
+deliveryRobot::deliveryRobot() : robot(), entities(0), Zone(keepYourPlace) {}
+
+deliveryRobot::deliveryRobot(const deliveryRobot &rhs) : robot(rhs)
+{
+    if (this != &rhs)
+    {
+        entities = rhs.entities;
+        Zone = rhs.Zone;
+    }
+}
+
+deliveryRobot &deliveryRobot::operator=(const deliveryRobot &rhs)
+{
+    if (this != &rhs)
+    {
+        robot::operator=(rhs);
+        entities = rhs.entities;
+        Zone = rhs.Zone;
+    }
+    return *this;
+}
+
+deliveryRobot::~deliveryRobot() {}
+
+void deliveryRobot::move()
+{
+    switch (Zone)
+    {
+    case keepYourPlace:
+        break;
+    case zone1:
+        position.x = 10;
+        position.y = 20;
+        if (entities > 0)
+            entities--;
+        break;
+    case zone2:
+        position.x = 0;
+        position.y = 30;
+        if (entities > 0)
+            entities--;
+        break;
+    default:
+        Zone = keepYourPlace;
+        break;
+    }
+}
+
+std::string deliveryRobot::getNameOfRobot()
+{
+    return "Delivery Robot";
+}
+
+unsigned short deliveryRobot::getNbrOfEntities()
+{
+    return entities;
+}
+
+void deliveryRobot::setNbrOfEntities(unsigned short nbrOfEntities)
+{
+    entities = nbrOfEntities;
+}
+
+zone deliveryRobot::getZone()
+{
+    return Zone;
+}
+
+void deliveryRobot::setZone(zone ZONE)
+{
+    Zone = ZONE;
+}
+              </code></pre>
+            </div>
+
+            <h4><strong>c. travellingRobot </strong>(Classe fille)</h4>
+            <p>
+              Il s'agit d'un robot qui se déplace librement, dérivé de <strong>robot</strong>.
+            </p>
+
+            <p>
+              - Fonctionnalité spécifique  : se déplacer dans une direction donnée(avant, arrière, gauche, droite)       
+            </p>
+
+            <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('travellingRobot-cpp', this)">📋</button>
+                <button onclick="telechargerCode('travellingRobot-cpp', 'travellingRobot.cpp', 'text/x-c++src', this)">🡇</button>
+              </div>
+              <pre><code class="hljs" id="travellingRobot-cpp">
+#include "travellingRobot.hpp"
+
+travellingRobot::travellingRobot(direction DIRECTION, unsigned int Id, float x, float y)
+    : robot(Id, x, y), Direction(DIRECTION) {}
+
+travellingRobot::travellingRobot() : robot(), Direction(Stop) {}
+
+travellingRobot::travellingRobot(const travellingRobot &rhs) : robot(rhs)
+{
+    if (this != &rhs)
+    {
+        Direction = rhs.Direction;
+    }
+}
+
+travellingRobot &travellingRobot::operator=(const travellingRobot &rhs)
+{
+    if (this != &rhs)
+    {
+        robot::operator=(rhs);
+        Direction = rhs.Direction;
+    }
+    return *this;
+}
+
+travellingRobot::~travellingRobot() {}
+
+void travellingRobot::move()
+{
+    switch (Direction)
+    {
+    case Stop:
+        break;
+    case Forward:
+        position.y += 1;
+        break;
+    case Backward:
+        position.y -= 1;
+        break;
+    case Right:
+        position.x += 1;
+        break;
+    case Left:
+        position.x -= 1;
+        break;
+    default:
+        Direction = Stop;
+        break;
+    }
+}
+
+std::string travellingRobot::getNameOfRobot()
+{
+    return "Travelling Robot";
+}
+
+direction travellingRobot::getDirection()
+{
+    return Direction;
+}
+
+void travellingRobot::setDirection(direction DIRECTION)
+{
+    Direction = DIRECTION;
+}
+              </code></pre>
+            </div>
+
+            <h4><strong>d. armRobot </strong>(Classe fille)</h4>
+            <p>
+              Il s'agit d'un bras robotique, dérivé de <strong>robot</strong>.
+            </p>
+
+            <p>
+              - Fonctionnalité spécifique  : effectuer une rotation dans une direction     
+            </p>
+
+            <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('armRobot-cpp', this)">📋</button>
+                <button onclick="telechargerCode('armRobot-cpp', 'armRobot.cpp', 'text/x-c++src', this)">🡇</button>
+              </div>
+              <pre><code class="hljs" id="armRobot-cpp">
+#include "armRobot.hpp"
+
+armRobot::armRobot()
+  : robot(), angle(0), rotationalDirection(Clockwise) {}
+
+armRobot::armRobot(rotate rotationalDirection, unsigned short initAngle, unsigned int id, float x, float y)
+  : robot(id, x, y), angle(initAngle), rotationalDirection(rotationalDirection) {}
+
+armRobot::armRobot(const armRobot &rhs)
+  : robot(rhs), angle(rhs.angle), rotationalDirection(rhs.rotationalDirection) {}
+
+armRobot &armRobot::operator=(const armRobot &rhs)
+{
+  if (this != &rhs)
+  {
+    robot::operator=(rhs);
+    angle = rhs.angle;
+    rotationalDirection = rhs.rotationalDirection;
+  }
+  return *this;
+}
+
+armRobot::~armRobot() {}
+
+void armRobot::move()
+{
+  // Simuler un mouvement de rotation de 10 degrés
+  if (rotationalDirection == Clockwise)
+    angle = (angle + 10) % 360;
+  else
+    angle = (angle + 350) % 360; // recule de 10 degrés
+}
+
+std::string armRobot::getNameOfRobot()
+{
+  return "Arm Robot";
+}
+
+unsigned short armRobot::getAngle() const
+{
+  return angle;
+}
+
+void armRobot::setAngle(unsigned short angle_)
+{
+  angle = angle_;
+}
+
+rotate armRobot::getRotationalDirection() const
+{
+  return rotationalDirection;
+}
+
+void armRobot::setRotationalDirection(rotate rotationalDirection_)
+{
+  rotationalDirection = rotationalDirection_;
+}
+              </code></pre>
+            </div>
+            
+          <h3 id="3-test1">3. Concept de POO utilisés</h3>
+          <ul>
+            <li><strong>Encapsulation</strong> : Attributs privés, accès par getters/setters</li>
+            <li><strong>Héritage </strong> : Les classes deliveryRobot et travellingRobot héritent de robot</li>
+            <li><strong>Polymorphisme </strong> : Méthodes virtuelles (move, getNameOfRobot)</li>
+            <li><strong>Surcharge </strong> : Constructeurs et opérateurs d’affectation</li>
+          </ul>
+
+          <h3 id="4-test1">4. Diagramme UML</h3>
+          <div class="image-container">
+            <img src="../images/Test1/IT/UML digramme.webp" alt="Diagramme UML simplifié" class="image-centree" />
+          </div>
+
+          <h3 id="5-test1">5. Tests réalisés</h3>
+            <ul>
+              <li>Création d’objets de chaque classe</li>
+              <li>Simulation des déplacements (changement de zone / direction)</li>
+              <li>Vérification des distances depuis l’origine</li>
+              <li>Test du polymorphisme avec des pointeurs de type robot*</li>
+            </ul>  
+            <div class="code-container">
+              <div class="btn-bar">
+                <button onclick="copierCode('main-cpp', this)">📋</button>
+                <button onclick="telechargerCode('main-cpp', 'main.cpp', 'text/x-c++src', this)">🡇</button>
+              </div>
+              <pre><code class="hljs" id="main-cpp">
+#include "travellingRobot.hpp"
+#include "deliveryRobot.hpp"
+#include "armRobot.hpp"
+#include &lt;iostream&gt;
+
+std::string rotateToString(rotate r)
+{
+    switch (r)
+    {
+    case anticlockwise:
+        return "Anticlockwise";
+    case Clockwise:
+        return "Clockwise";
+    default:
+        return "Unknown";
+    }
+}
+
+int main()
+{
+    // ------------------Travelling Robot----------------------
+    travellingRobot a(Forward, 111, 0, 0);
+    printNameOfRobot(&a);
+    moveRobot(&a);
+    vect2D v = a.getPosition();
+    std::cout << "\n"
+              << v.x << " " << v.y << std::endl;
+    std::cout << a.getID() << std::endl;
+    std::cout << a.getDirection() << std::endl;
+
+    // ------------------Delivery Robot-----------------------
+    deliveryRobot b(zone1, 10, 222, 0, 0);
+    printNameOfRobot(&b);
+    moveRobot(&b);
+    v = b.getPosition();
+    std::cout << "\n"
+              << v.x << " " << v.y << std::endl;
+    std::cout << b.getID() << std::endl;
+    std::cout << b.getNbrOfEntities() << std::endl;
+    std::cout << b.getZone() << std::endl;
+
+    // ------------------ARM Robot---------------------------
+    armRobot c(anticlockwise, 0, 333, 0, 0);
+    printNameOfRobot(&c);
+    moveRobot(&c);
+    v = c.getPosition();
+    std::cout << "\n"
+              << v.x << " " << v.y << std::endl;
+    std::cout << c.getID() << std::endl;
+    std::cout << c.getAngle() << std::endl;
+    std::cout << rotateToString(c.getRotationalDirection()) << std::endl;
+
+    return 0;
+}
+              </code></pre>
+            </div>
+
+          <h3 id="6-test1">6. Résultats obtenus</h3>
+          <ul>
+            <li>Chaque type de robot fonctionne indépendamment</li>
+            <li>Les mouvements sont simulés correctement selon la logique métier</li>
+            <li>Le code est bien structuré, modulaire, réutilisable et extensible</li>
+            <li>Les bonnes pratiques C++ sont respectées (gestion mémoire, encapsulation, etc.)</li>
+          </ul> 
+
+          <h3 id="7-test1">7. Limites et perspectives</h3>
+          <h4>Limitations :</h4>
+          <ul>
+            <li>Les déplacements sont simulés mais pas visualisés graphiquement.</li>
+            <li>Le système ne gère pas d’environnement réel ou physique</li>
+          </ul> 
+          <h4>Améliorations possibles :</h4>
+          <ul>
+            <li>Ajout d’une interface graphique (SFML, Qt)</li>
+            <li>Implémentation de logs ou de fichiers de tracking</li>
+            <li>Extension à d’autres types de robots (volants, marins, etc.)</li>
+            <li>Gestion d’obstacles, de cartes ou de missions</li>
+          </ul> 
+
+          <h3 id="8-test1">8. Conclusion</h3>
+          <p>
+            Ce projet nous a permis de :
+          </p>
+          <ul>
+            <li>Appliquer les concepts fondamentaux de la programmation orientée objet</li>
+            <li>Comprendre l’importance de la conception logicielle modulaire</li>
+            <li>Développer un système cohérent, évolutif et structuré en C++</li>
+          </ul>  
+          <p>
+            Il constitue une base solide pour des projets plus complexes, comme des systèmes embarqués dans des robots réels ou des simulations d’intelligence artificielle mobile.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

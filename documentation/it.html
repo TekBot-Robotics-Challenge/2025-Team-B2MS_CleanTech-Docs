@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <title>Département IT – B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Département IT</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+
+        <div class="nav-section">
+          <button class="tab-button active" href="./it"><i class="fas fa-desktop"></i> IT</button>
+          <div class="sub-links">
+            <a class="subtab-button" href="./it-projet1">Projet 1</a>
+            <a class="subtab-button" href="./it-projet2">Projet 2</a>
+            <a class="subtab-button" href="./it-projet3">Projet 3</a>
+          </div>
+        </div>
+
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="it-content" class="tab-content active">
+        <div class="subtab-content">
+          <h2 class="projet-titre">Tekbot Robotics Challenge – Parcours IT</h2>
+          <p>
+            Dans le cadre du <strong>Tekbot Robotics Challenges 2025</strong>, notre équipe a relevé trois défis techniques intensifs, 
+            réalisés à raison d’un projet par semaine. Ces travaux ont permis de mettre en pratique nos compétences en développement logiciel, en robotique et en simulation, 
+            à travers des outils professionnels comme <strong>ROS2</strong>, <strong>Gazebo</strong> et des langages comme <strong>Python</strong> et <strong>C++</strong>.
+          </p>
+
+          <h3>
+            <a href="./it-projet1" class="to-project">Projet 1 - Programmation Orientée Objet: Conception d’une classe Robot</a>
+          </h3>
+          <p>
+            Ce premier projet consistait à développer une classe <strong>Robot</strong> en Python et C++, en appliquant les principes de la programmation orientée objet : 
+            <strong>encapsulation</strong>, <strong>héritage</strong> et <strong>polymorphisme</strong>. 
+            Nous avons conçu une architecture modulaire avec une méthode move() redéfinie dans plusieurs sous-classes, accompagnée de diagrammes UML détaillant la structure du code.
+          </p>
+
+          <h3>
+            <a href="./it-projet2" class="to-project">Projet 2 - ROS2: Évaluation de données capteurs</a>
+          </h3>
+          <p>
+            Cette partie est basée sur la création de <strong>package ROS2</strong> nommé <strong>sensor_data_evaluation</strong> avec deux nodes:
+            <ul>
+              <li>Un <strong>publisher</strong> qui génère aléatoirement des données de capteurs (température, humidité, pression) toutes les 0,5 secondes.</li>
+              <li>Un <strong>subscriber</strong> qui vérifie si ces données respectent les plages autorisées et envoie des messages dans les logs.</li>
+            </ul>
+          </p>
+          <p>
+            Le tout est orchestré via un fichier de lancement, garantissant une exécution fluide et sans erreurs.
+          </p>
+
+          <h3>
+            <a href="./it-projet3" class="to-project">Projet 3 - Navigation autonome avec Pathfinding</a>
+          </h3>
+          <p>
+            À l’aide de <strong>ROS2</strong>, <strong>Gazebo</strong> et <strong>RViz2</strong>, nous avons développé un système de navigation autonome pour le robot TekBot. 
+            L’objectif était d'implémenter un <strong>algorithme de pathfinding</strong> (A*, Dijkstra, ou RRT) permettant au robot de se déplacer efficacement dans un environnement simulé en évitant les obstacles. 
+            La simulation visuelle valide la robustesse de l’algorithme et l’intégration avec ROS2.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

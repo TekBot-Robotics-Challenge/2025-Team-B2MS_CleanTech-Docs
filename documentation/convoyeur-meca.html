@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Système de convoyeur - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Système de convoyeur</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+
+        <div class="nav-section">
+
+          <a href="./convoyeur" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-forward"></i> Convoyeur</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button active" href="./convoyeur-meca">Partie mécanique</a>
+            <nav class="project-subnav active" id="subnav-meca">
+              <a href="#1-meca">1. Étude de conception mécanique</a>
+              <a href="#2-meca">2. Choix des composants mécaniques</a>
+              <a href="#3-meca">3. Modélisation CAO (SolidWorks)</a>
+              <a href="#4-meca">4. Réalisation</a>
+            </nav>
+            <a class="subtab-button" href="./convoyeur-electro">Partie électronique</a>
+            <a class="subtab-button" href="./convoyeur-it">Partie informatique</a>
+            <a class="subtab-button" href="./convoyeur-validation">Tests et validation</a>
+          </div>
+        </div>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="convoyeur-content" class="tab-content active">
+        <div id="mecanique" class="subtab-content active">
+          <h2 id="meca" class="projet-titre">Partie mécanique - Système de convoyeur</h2>
+          <h3 id="1-meca">1. Étude de conception mécanique(Analyse fonctionnelle)</h3>
+              <p>
+                L’analyse fonctionnelle est une démarche essentielle dans la conception d’un système technique. 
+                Elle vise à identifier, comprendre et formaliser les besoins réels des utilisateurs ainsi que les fonctions que le système doit remplir pour y répondre. 
+                Dans le cadre de ce projet, qui consiste à développer un système de convoyeur intelligent pour le tri de déchets(considérés ici comme des objets colorés), l’analyse fonctionnelle permettra de structurer la réflexion en distinguant les fonctions principales, les contraintes techniques, et les interactions entre les différents composants. 
+              </p>
+            
+            <h4>a. Analyse de besoin:</h4>
+              <p>
+                La bête à cornes est un diagramme représenté sous forme de graphique. 
+                Il permet de savoir si un produit ou un service répond aux besoins des utilisateurs. 
+                Elle est appelée bête à corne, car elle ressemble à une tête de taureau avec la ligne reliant les deux boules en haut du diagramme.
+                Pour débuter, nous allons commencer par faire une analyse de besoin en utilisant ce diagramme de bête à corne qui va nous permettre de répondre aux trois questions suivantes:
+                <ul>
+                  <li>Qui utilise le système ?</li>
+                  <li>Sur quoi agit-il ?</li>
+                  <li>Dans quel but ?</li>
+                </ul>
+              </p>
+              <div class="image-container">
+                <img src="../images/Test4/Mecanique/analyse1.webp" alt="analyse" class="image-mean"/>
+              </div>
+
+              <h4>b. Énoncé du besoin</h4>
+                <p>
+                  Notre système de convoyeur rend service à une entreprise de recyclage dans la zone industrielle de TECHBOT CITY 
+                  en permettant de trier automatiquement des déchets en fonction de leurs couleurs afin de faciliter la collecte.  
+                </p>
+
+              <h4>c. Analyse fonctionnelle du besoin (AFB)</h4>
+                <p>
+                  Une analyse fonctionnelle de besoin se concentre sur l'identification de deux types principaux de fonctions: les fonctions principales et les fonctions contraintes.
+                  Les fonctions principales décrivent ce que le produit ou système doit faire pour satisfaire le besoin de l'utilisateur, tandis que les fonctions contraintes 
+                  définissent les limites ou les conditions dans lesquelles ces fonctions principales doivent être réalisées.
+                </p>
+                <p>
+                  <strong>Fonctions principales:</strong>
+                  <ul>
+                    <li>Elles sont la raison d'être du produit ou du système.</li>
+                    <li>Elles répondent directement au besoin de l'utilisateur. </li>
+                    <li>Elles peuvent être décomposées en fonctions élémentaires pour une analyse plus détaillée.</li>
+                  </ul>
+                </p>
+
+                <p>
+                  <strong>Fonctions contraintes</strong>
+                  <ul>
+                    <li>Elles limitent les choix du concepteur et du produit.</li>
+                    <li>Elles peuvent être liées à la sécurité, l'environnement, l'ergonomie, etc.</li>
+                    <li>Exemple: "Être compatible avec les normes de sécurité" pour une voiture. </li>
+                  </ul>
+                </p>
+
+                <p>
+                  En plus de ces fonctions principales et les fonctions de contraintes, 
+                  nous allons ajouter et détailler des fonctions de services pour mieux satisfaire les besoins de l’entreprise de faire le système de tri avec le convoyeur.
+                </p>
+                <p>
+                  En résumé, l'analyse fonctionnelle de besoin vise à identifier 
+                  et à caractériser ces deux types de fonctions afin de bien comprendre les exigences du produit et de garantir sa pertinence par rapport au besoin initial. 
+                </p>
+                
+                <p>
+                  Pour bien étudier notre système et pour définir les fonctions principales et les fonctions de contraintes, nous allons utiliser le diagramme de pieuvre.
+                </p>
+                <div class="image-container">
+                  <p>Diagramme de pieuvre:</p>
+                  <img src="../images/Test4/Mecanique/analyse2.webp" alt="analyse" class="image-mean"/>
+                </div>
+
+                <table>
+                  <tbody>
+                  <tr>
+                    <td>FP1</td>
+                    <td>transférer les déchets</td>
+                  </tr>
+                  <tr>
+                    <td>FP2</td>
+                    <td>trier les déchets</td>
+                  </tr>
+                  <tr>
+                    <td>FP3</td>
+                    <td>interface web pour affichage</td>
+                  </tr>
+                  <tr>
+                    <td>FC1</td>
+                    <td>utiliser l'arduino nano</td>
+                  </tr>
+                  <tr>
+                    <td>FC2</td>
+                    <td>alimentation batterie lithium</td>
+                  </tr>
+                  <tr>
+                    <td>FC3</td>
+                    <td>le convoyeur ne doit fonctionner que si un déchet est présent</td>
+                  </tr>
+                  <tr>
+                    <td>FC4</td>
+                    <td>le capteur de présence(Ultrason)</td>
+                  </tr>
+                  <tr>
+                    <td>FC5</td>
+                    <td>
+                      dimension:
+                      <ul>
+                        <li style="font-size: 1rem;">longueur du convoyeur: 650 mm</li>
+                        <li style="font-size: 1rem;">hauteur du tapis: 100 mm</li>
+                        <li style="font-size: 1rem;">largeur du tapis: 50 mm</li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>FC6</td>
+                    <td>les déchets sous formes de cubes de 30 mm</td>
+                  </tr>
+                  <tr>
+                    <td>FS1</td>
+                    <td>détecter la présence d'un déchet</td>
+                  </tr>
+                  <tr>
+                    <td>FS2</td>
+                    <td>identifier la couleur du déchet</td>
+                  </tr>
+                  <tr>
+                    <td>FS3</td>
+                    <td>déplacer le tapis du convoyeur</td>
+                  </tr>
+                  <tr>
+                    <td>FS4</td>
+                    <td>afficher les statistiques de tri en temps réel sur une interface web</td>
+                  </tr>
+                  <tr>
+                    <td>FS5</td>
+                    <td>indiquer à l'utilisateur dans quelle benne placer le déchet</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            <h4>d. Diagramme FAST</h4>
+              <p>
+                Le diagramme FAST (Function Analysis System Technique) est la représentation visuelle d'un produit ou d’un système et de toutes ses fonctions.
+                Ce diagramme est un outil utilisé par les entreprises pour obtenir une vision globale d'un produit existant ou en cours de création. Il représente schématiquement toutes les fonctions de l'article et la manière dont il les met en œuvre.
+              </p>
+              <p><strong>À quoi sert le diagramme FAST ?</strong></p>
+              <p>
+                Il répond à trois grandes questions pour chaque fonction :
+                <ul>
+                  <li>Pourquoi ?</li>
+                  <li>Comment ?</li>
+                  <li>Quand ?</li>
+                </ul>
+              </p>
+              <p>
+                Il représente <strong>graphiquement</strong> les relations entre les fonctions principales (FP) et les fonctions de service (FS)
+              </p>
+              <div class="image-container">
+                <img src="../images/Test4/Mecanique/analyse3.webp" alt="analyse" class="image-mean"/>
+              </div>
+            <h4>e. Conclusion générale de l’analyse fonctionnelle</h4>
+              <p>
+                L’analyse fonctionnelle a permis d’identifier clairement les fonctions principales du système de convoyeur : trier automatiquement les déchets selon leur couleur.
+                Pour répondre efficacement à ce besoin, plusieurs fonctions de service ont été définies, telles que la détection de présence, l’identification de couleur, le déplacement du tapis et l’affichage des statistiques en temps réel.
+              </p>
+              <p>
+                Les fonctions contraintes imposées par le cahier des charges (composants à utiliser, dimensions, alimentation etc.) ont été intégrées dans la conception dès les premières étapes
+              </p>
+              <p>
+                Cette analyse permet ainsi de poser une base solide pour la phase de conception et garantit que le système répondra aux attentes techniques, fonctionnelles et ergonomiques de l’entreprise utilisatrice.
+              </p>
+            
+            
+
+          <h3 id="2-meca">2. Choix des composants mécaniques</h3>
+            <p>
+              Ayant déjà du bois comme matière première, nous avons décidé de l’utiliser, 
+              ainsi que d’autres composants déjà en notre possession tels que le tapis et les roulements.
+            </p>
+            <p>
+              Voici donc le tableau récapitulatif des composants utilisés et de leur rôle :
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Composants</th>
+                  <th>Matériaux</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Parois latérales</strong></td>
+                  <td>Bois</td>
+                </tr>
+                <tr>
+                  <td><strong>Tapis</strong></td>
+                  <td>Textile</td>
+                </tr>
+                <tr>
+                  <td><strong>Roulements</strong></td>
+                  <td>Acier</td>
+                </tr>
+                <tr>
+                  <td><strong>Tambours</strong></td>
+                  <td>Plastique</td>
+                </tr>
+                <tr>
+                  <td><strong>Supports des tambours</strong></td>
+                  <td>Plastique</td>
+                </tr>
+                <tr>
+                  <td><strong>Supports des composants électroniques</strong></td>
+                  <td>Plastique</td>
+                </tr>
+              </tbody>
+            </table>
+          <h3 id="3-meca">3. Modélisation CAO (SolidWorks)</h3>
+            <p>
+              Nous avons conçu les différentes pièces puis avons assemblé sur <strong>SolidWorks</strong> 
+              en respectant les dimensions du cahier de charge.
+            </p>
+            <h4>a. Parois latérales</h4>
+              <p>
+                Il s'agit de la structure principale du convoyeur.
+              </p>
+              <div class="image-container">
+                <img src="../images/Test4/Mecanique/parois1.webp" alt="parois" class="image-mean"/>
+                <img src="../images/Test4/Mecanique/parois2.webp" alt="parois" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Bords.rar" download class="download-link">télécharger les parois latérales</a>
+                </p> 
+              </div>
+
+            <h4>b. Tapis</h4>
+              <p>
+                Il s'agit de la structure principale du convoyeur.
+              </p>
+              <div class="image-container">
+                <img src="../images/Test4/Mecanique/tapis1.webp" alt="tapis" class="image-mean"/>
+                <img src="../images/Test4/Mecanique/tapis2.webp" alt="tapis" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Tapis.SLDPRT" download class="download-link">télécharger le tapis</a>
+                </p> 
+              </div>
+
+            <h4>c. Roulements</h4>
+              <p>
+                Il s'agit de la structure principale du convoyeur.
+              </p>
+
+              <div class="image-container">
+                <p>Interieur du roulement:</p>
+                <img src="../images/Test4/Mecanique/roulements1.webp" alt="roulements" class="image-small"/>
+                <img src="../images/Test4/Mecanique/roulements2.webp" alt="roulements" class="image-small"/>
+              </div>
+
+              <div class="image-container">
+                <p>Exterieur du roulement:</p>
+                <img src="../images/Test4/Mecanique/roulements3.webp" alt="roulements" class="image-small"/>
+                <img src="../images/Test4/Mecanique/roulements4.webp" alt="roulements" class="image-small"/>
+                <img src="../images/Test4/Mecanique/roulements5.webp" alt="roulements" class="image-small"/> 
+              </div>
+
+              <div class="image-container">
+                <p>Le roulement assemblé:</p>
+                <img src="../images/Test4/Mecanique/roulements6.webp" alt="roulements" class="image-mean"/> 
+              </div>
+
+              <p class="txt_center">
+                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Roulement.rar" download class="download-link">télécharger les fichiers du roulement</a>
+              </p>
+
+            <h4>d. Tambours</h4>
+              <p>
+                Les deux tambours entrainent le tapis en rotation.
+                L'un des tambours est connecté au moteur.
+              </p>
+              
+              <div class="image-container">
+                <p>Tambour connecté au moteur</p>
+                <img src="../images/Test4/Mecanique/tambours_motor1.webp" alt="tambours_motor" class="image-small"/>
+                <img src="../images/Test4/Mecanique/tambours_motor2.webp" alt="tambours_motor" class="image-small"/>
+                <img src="../images/Test4/Mecanique/tambours_motor3.webp" alt="tambours_motor" class="image-small"/>
+                <img src="../images/Test4/Mecanique/tambours_motor4.webp" alt="tambours_motor" class="image-small"/>             
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Cylindre%20convoyeur%20moteur.SLDPRT" download class="download-link">télécharger le tambour connecté au moteur</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Tambour libre</p>
+                <img src="../images/Test4/Mecanique/tambours_libre1.webp" alt="tambours_libre" class="image-small"/>
+                <img src="../images/Test4/Mecanique/tambours_libre2.webp" alt="tambours_libre" class="image-small"/>
+                <img src="../images/Test4/Mecanique/tambours_libre3.webp" alt="tambours_libre" class="image-small"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Cylindre%20conv.SLDPRT" download class="download-link">télécharger le tambour libre</a>
+                </p> 
+              </div>
+              
+            <h4>e. Supports des tambours</h4>
+              <p>
+                Ils permettent de relier les parois, les roulement et les tambours.
+              </p>
+              <div class="image-container">
+                <p>Support du tambour côté moteur</p>
+                <img src="../images/Test4/Mecanique/support_tambours_motor1.webp" alt="support_tambours_motor" class="image-small"/>
+                <img src="../images/Test4/Mecanique/support_tambours_motor2.webp" alt="support_tambours_motor" class="image-small"/>
+                <img src="../images/Test4/Mecanique/support_tambours_motor3.webp" alt="support_tambours_motor" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Roller__Holder_inside.SLDPRT" download class="download-link">télécharger le support du tambour côté moteur</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Support des tambours libres</p>
+                <img src="../images/Test4/Mecanique/support_tambours_libre1.webp" alt="support_tambours_libre" class="image-small"/>
+                <img src="../images/Test4/Mecanique/support_tambours_libre2.webp" alt="support_tambours_libre" class="image-small"/>
+                <img src="../images/Test4/Mecanique/support_tambours_libre3.webp" alt="support_tambours_libre" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Roller__Holder.SLDPRT" download class="download-link">télécharger le support du tambour libre</a>
+                </p> 
+              </div>
+            
+
+            <h4>f. Supports des composants électroniques et autres</h4>
+              <p>
+                Ils permettent de supporter et de fixer les composants électroniques.
+              </p>
+              <div class="image-container">
+                <p>Support Ultrason et moteur</p>
+                <img src="../images/Test4/Mecanique/support_composant1.webp" alt="support_composant" class="image-small"/>
+                <img src="../images/Test4/Mecanique/support_composant2.webp" alt="support_composant" class="image-small"/>
+                <img src="../images/Test4/Mecanique/support_composant3.webp" alt="support_composant" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Support_Ultrason.SLDPRT" download class="download-link">télécharger le support Ultrason et moteur</a>
+                </p> 
+              </div>
+              
+              <div class="image-container">
+                <p>Support du capteur de couleur, de la led RGB et des boutons poussoirs</p>
+                 <img src="../images/Test4/Mecanique/support_composant4.webp" alt="support_composant" class="image-small"/>
+                 <img src="../images/Test4/Mecanique/support_composant5.webp" alt="support_composant" class="image-small"/>
+                 <img src="../images/Test4/Mecanique/support_composant6.webp" alt="support_composant" class="image-small"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Support_ColorSencor.SLDPRT" download class="download-link">télécharger le support du capteur de couleur et des boutons poussoirs</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Support du capteur infrarouge</p>
+                 <img src="../images/Test4/Mecanique/support_infrarouge.webp" alt="support_infrarouge" class="image-small"/>
+                 <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/support_infrarouge.SLDPRT" download class="download-link">télécharger le support du capteur infrarouge</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Un support au milieu du convoyeur pour le circuit</p>
+                 <img src="../images/Test4/Mecanique/support_pcb.webp" alt="support_pcb" class="image-small"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/supportConvoyeur_milieu.SLDPRT" download class="download-link">télécharger le support du convoyeur et du circuit</a>
+                </p> 
+              </div>
+
+              <div class="image-container">
+                <p>Deux supports aux extrémités pour fixer le convoyeur au sol</p>
+                <img src="../images/Test4/Mecanique/support_extremite.webp" alt="support_extremite" class="image-small"/>
+                <p>
+                  <a href="https://githhttpsub.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/supportConvoyeur.SLDPRT" download class="download-link">télécharger le support du convoyeur</a>
+                </p> 
+              </div>
+
+            <h4>g. Moteur DC</h4>
+              <p>
+                Il s'agit de la structure principale du convoyeur.
+              </p>
+              <div class="image-container">
+                <img src="../images/Test4/Mecanique/moteur1.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur2.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur3.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur4.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur5.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur6.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur7.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur8.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur9.webp" alt="moteur" class="image-small"/>
+                <img src="../images/Test4/Mecanique/moteur10.webp" alt="moteur" class="image-small"/>
+              </div>
+
+              <div class="image-container">
+                <img src="../images/Test4/Mecanique/moteur11.webp" alt="moteur" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Motor%20DC.rar" download class="download-link">télécharger le moteur DC</a>
+                </p> 
+              </div>
+
+            <h4>h. Le convoyeur assemblé</h4>
+              <p>
+                A partir de ces pièces, nous avons assemblé le convoyeur.
+              </p>
+              <div class="image-container">
+                <img src="../images/Test4/Mecanique/assemblage1.webp" alt="assemblage" class="image-small"/>
+                <img src="../images/Test4/Mecanique/assemblage2.webp" alt="assemblage" class="image-small"/>
+                <img src="../images/Test4/Mecanique/assemblage3.webp" alt="assemblage" class="image-small"/>
+                <img src="../images/Test4/Mecanique/assemblage5.webp" alt="assemblage" class="image-small"/>
+                <img src="../images/Test4/Mecanique/assemblage4.webp" alt="assemblage" class="image-small"/>
+                <img src="../images/Test4/Mecanique/assemblage6.webp" alt="assemblage" class="image-mean"/>
+                <p>
+                  <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/Assemblage.SLDASM" download class="download-link">télécharger le convoyeur assemblé</a>
+                </p> 
+              </div>
+
+            <p class="txt_center">
+              Télécharger l'ensemble(pièces et assemblages) <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test4/Mecanique/B2MS_convoyeur_CAO.rar" download class="download-link">ici</a>
+            </p> 
+
+          <h4 id="4-meca">4. Réalisation</h4>
+           <p>
+            Les pièces en plastique nécessaires au montage ont été modélisées puis imprimées à l’aide d’une imprimante 3D.
+           </p>
+           <div class="image-container">
+              <img src="../images/Test4/Mecanique/impression3d1.webp" alt="impression" class="image-small"/>
+              <img src="../images/Test4/Mecanique/impression3d2.webp" alt="impression" class="image-small"/>
+            </div>
+
+            <video controls width=30%>
+              <source src="../videos/Test4/Mecanique/impression3d1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+            <video controls width=30%>
+              <source src="../videos/Test4/Mecanique/impression3d2.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+           <p>
+            Le bois a été découpé en respectant les dimensions définies sur SolidWorks, garantissant une structure précise.
+            Pour la fabrication du tapis roulant, un textile utilisé habituellement pour les sacs a été choisi, assurant une bonne résistance.
+           </p>
+           <div class="image-container">
+              <img src="../images/Test4/Mecanique/realisation_piece1.webp" alt="realisation_piece" class="image-small"/>
+              <img src="../images/Test4/Mecanique/realisation_piece2.webp" alt="realisation_piece" class="image-small"/>
+              <img src="../images/Test4/Mecanique/montage1.webp" alt="realisation_conv" class="image-mean"/>
+              <img src="../images/Test4/Mecanique/montage2.webp" alt="realisation_conv" class="image-mean"/>
+              <img src="../images/Test4/Mecanique/realisation_conv2.webp" alt="realisation_conv" class="image-small"/>
+            </div>
+   
+            <p>
+              Cette méthode a permis d’obtenir des composants parfaitement adaptés au système.
+            L'ensemble a été assemblé avec soin pour assurer la stabilité et la fonctionnalité du convoyeur.
+            </p>
+
+            <div class="image-container">
+              <img src="../images/Test4/Mecanique/conv1.webp" alt="realisation_conv" class="image-mean"/>
+              <img src="../images/Test4/Mecanique/conv2.webp" alt="realisation_conv" class="image-mean"/>
+            </div>
+
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

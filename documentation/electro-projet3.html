@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Département Électronique</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Département Électronique</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+
+        <div class="nav-section">
+          <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+          <a href="./electronique" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-microchip"></i> Électronique</button> </a>       
+          
+          <div class="sub-links">
+            <a href="./electro-projet1" class="subtab-button">Projet 1</a>
+            <a class="subtab-button" href="./electro-projet2">Projet 2</a>
+            <a class="subtab-button active" href="./electro-projet3">Projet 3</a>
+            <nav class="project-subnav active" id="subnav-test3">
+              <a href="#1-test3">1. Objectifs</a>
+              <a href="#2-test3">2. Cahier des charges</a>
+              <a href="#3-test3">3. Architecture Générale</a>
+              <a href="#4-test3">4. Fonctionnement global</a>
+              <a href="#5-test3">5. Fonctionnement du Servomoteur</a>
+              <a href="#6-test3">6. Utilisation de Servomoteurs</a>
+              <a href="#7-test3">7. Bibliothèque nécessaire</a>
+              <a href="#8-test3">8. Code</a>
+              <a href="#9-test3">9. Test et Démonstration</a>
+              <a href="#10-test3">10. Realisation du PCB</a>
+            </nav>
+          </div>
+        </div>
+
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="electro-content" class="tab-content active">
+        <div id="test3" class="subtab-content active">
+          <h2 id="projet3" class="projet-titre">Projet 3 - Afficheur 7 Segments à Servomoteurs</h2>
+            <h3 id="1-test3">1. Objectifs:</h3>
+          <p>
+            Créer un afficheur 7 segments mécanique utilisant <strong>servomoteurs</strong>, pilotés par un ATmega328P nu (sans carte Arduino), pour afficher les chiffres de 0 à 9, puis de 9 à 0. Le tout doit être alimenté par une batterie Li-ion, et le code doit être non bloquant (sans delay()), avec un affichage toutes les secondes.
+          </p>
+          <p>
+            Ce projet a pour objectif de :
+          </p>
+          <ul>
+            <li>Comprendre le fonctionnement d’un capteur inertiel (IMU).</li>
+            <li>afficher en temps réel les directions (haut, bas, gauche, droite) ainsi que les données d’accélération sur un écran LCD.</li>
+            <li>Utiliser le protocole de communication I2C.</li>
+            <li>Appliquer les bonnes pratiques de conception logicielle (structure modulaire, classes bien définies, etc.).</li>
+          </ul>
+
+          <h3 id="2-test3">2. Cahier des charges</h3>
+            <h4>Objectifs fonctionnels :</h4>
+              <ul>
+              <li>Créer un afficheur 7 segments mécanique utilisant <strong>des servomoteurs</strong>></li>
+              <li>Contrôler les servomoteurs avec un <strong>ATmega328P</strong></li>
+              <li>Générer un affichage fluide des chiffres de 0 à 9 puis 9 à 0, sans blocage</li>
+              <li>Utiliser un signal PWM avec la bibliothèque <strong>Servo.h</strong></li>
+              <li>Concevoir un circuit imprimé (PCB) optimisé et compact</li>
+              <li>Alimenter le système avec une batterie Li-ion via un <strong>régulateur AMS1117</strong></li>
+              </ul>
+        
+            <h4>Contraintes techniques :</h4>
+              <ul>
+              <li>Le système doit être autonome (sans PC ni carte Arduino)</li>
+              <li>Les segments doivent être entièrement visibles mécaniquement</li>
+              <li>Aucun delay() ne doit être utilisé dans le code (gestion avec <strong>millis()</strong>)</li>
+              <li>Le PCB doit intégrer le régulateur, le quartz, les résistances et les condensateurs</li>
+              <li>L’ensemble doit être testé en simulation et en maquette avant production</li>
+              </ul>
+
+        <h3 id="3-test3">3. Architecture Générale</h3>
+          <h4>Matériel Utilisé:</h4>
+              <ul>
+              <li>Microcontrôleur: <strong>ATmega328P</strong></li>
+              <li>Servomoteurs: <strong>SG90/Parallax</strong>(7)</li>
+              <li>Régulateur: <strong>LM7805 5V</strong></li>
+              <li>Quartz: <strong>16 MHz</strong></li>
+              <li>Condensateurs: <strong>22pF</strong>(2)</li>
+              <li>Résistance Pull-up: <strong>10kΩ (reset)</strong></li>
+              <li>Batterie Li-ion: <strong>3.7V</strong></li>
+              <li>Veroboard</li>
+              <li>Fils & connecteurs</li>
+              </ul>
+
+        <h3 id="4-test3">4. Fonctionnement global</h3>
+          <p>
+            Le principe de fonctionnement repose sur l’utilisation de 7 servomoteurs, chacun étant affecté à un segment de l’afficheur (de a à g). Ces segments ne sont pas lumineux, mais déplacés mécaniquement à l’aide des bras des servomoteurs, ce qui crée une représentation physique du chiffre souhaité. Pour chaque chiffre (de 0 à 9), une configuration particulière des segments doit être activée ou désactivée. Cela signifie que certains servomoteurs se positionnent dans une position visible (par exemple 90° pour un segment « allumé ») tandis que d’autres se rétractent (0° pour un segment « éteint »). L’ensemble est piloté par un microcontrôleur ATmega328P, qui génère un signal PWM adapté à chaque servo pour lui indiquer sa position. 
+            Le code est conçu pour éviter toute fonction bloquante comme delay() ; les changements de chiffres sont gérés toutes les secondes à l’aide de la fonction millis(), garantissant un comportement fluide et réactif du système. 
+          </p>
+
+        <h3 id="5-test3">5. Fonctionnement détaillé du Servomoteur SG90</h3>
+          <p>
+            Un servomoteur est un moteur équipé d’un réducteur et d’un potentiomètre qui permet un contrôle précis de l’angle de rotation, généralement entre 0° et 180°.
+          </p>
+          <div class="image-container">
+            <img src="../images/Test3/Electronique/image1.webp" alt="image" class="image-centree" />
+          </div>
+
+          <h4>Caractéristiques techniques du SG90</h4>
+            <ul>
+              <li>Dimensions: 22 x 11.5 x 27 mm</li>
+              <li>Poids: 	9 g</li>
+              <li>Tension d’alimentation: 4.8 V à 6 V</li>
+              <li>Vitesse: 0.12 s / 60°</li>
+              <li>Couple: 1.2 kg/cm</li>
+              <li>Angle de rotation: 	0° à 180°</li>
+            </ul>
+
+            <h4>Signal PWM</h4>
+            <p>
+              Le servomoteur SG90 est commandé par un signal PWM (Pulse Width Modulation), qui est une suite d'impulsions répétées périodiquement. La largeur de l'impulsion (temps pendant lequel le signal est à l'état haut) détermine l'angle de positionnement du servomoteur.
+            </p>
+            <p>En général :</p>
+            <ul>
+              <li>Une impulsion de 1 ms positionne l'axe à 0° (gauche)</li>
+              <li>Une impulsion de 1.5 ms positionne l'axe à 90° (milieu)</li>
+              <li>Une impulsion de 2 ms positionne l'axe à 180° (droite)</li>
+            </ul>
+            <p>
+              Ce signal est répété <strong>toutes les 20 ms</strong>, soit une fréquence de 50 Hz. Le microcontrôleur doit maintenir cette fréquence et adapter la durée de l'impulsion pour indiquer la position voulue. Si la fréquence est trop basse ou si le signal n’est pas stable, le servomoteur risque de vibrer ou de perdre sa position.
+            </p>
+
+            <div class="code-container">
+            <p>Code_servo_basique.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_servo_basique-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_servo_basique-ino', 'Code_servo_basique.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code class="hljs" id="Code_servo_basique-ino">
+// Test utilisation servomoteur SG90
+#include &lt;Servo.h&gt;
+Servo monservo; // Crée l’objet pour contrôler le servomoteur
+
+void setup() {
+  monservo.attach(9);     // Utilise la broche 9 pour le contrôle
+  monservo.write(0);      // Positionne le servomoteur à 0° (repos)
+}
+
+void loop() {
+  // Boucle vide pour ce test
+}
+            </code></pre>
+            </div>
+
+            <p>
+            Ce code représente la toute première étape de l’utilisation d’un servomoteur. Il permet de l’attacher à une broche numérique (ici D9) et de le positionner à un angle précis (ici 0°).
+            Ce code utilise millis() pour gérer la temporisation, ce qui permet d'éviter toute fonction bloquante comme delay().
+            </p>
+                
+          <h3 id="6-test3">6. Utilisation de Deux Types de Servomoteurs (SG90 & Parallax)</h3>
+            <p>
+              Pendant le développement, nous n’avons pas pu trouver 7 servomoteurs SG90 identiques. Pour contourner ce problème, nous avons utilisé une combinaison de servomoteurs SG90 et Parallax Continuous Rotation.
+            </p>
+
+            <h4>Adaptation du fonctionnement :</h4>
+            <p>
+              Les SG90 ont été utilisés normalement pour représenter les segments ON/OFF via des angles précis.
+              Les Parallax Continuous Rotation (rotation continue) ont été calibrés pour tourner brièvement dans un sens ou l’autre (ON ou OFF), puis s’arrêter.
+            </p>
+
+            <h4>Fonctionnement détaillé du Servomoteur Parallax Continuous Rotation :</h4>
+            <p>
+              Ce type de servo ne peut pas se positionner à un angle fixe. Il tourne dans un sens ou l’autre à une certaine vitesse selon le signal PWM reçu.
+            </p>
+
+            <ul>
+              <li>Caractéristiques techniques:</li>
+              <ul>
+                  <li>Type: Rotation continue</li>
+                  <li>Tension: 4.8 – 6 V</li>
+                  <li>Signal neutre: 1500 µs (arrêt)</li>
+                  <li>Vitesse max: ~60 tr/min</li>
+                  <li>Contrôle: Par largeur d’impulsion</li>
+                  <li>Angle de positionnement: Non applicable</li>     
+              </ul>
+              <li>Signal de contrôle:</li>
+              <ul>
+                  <li>< 1500 µs: Rotation sens horaire</li>
+                  <li>> 1500 µs: Rotation sens antihoraire</li>
+                  <li>= 1500 µs: Arrêt (neutre)</li>    
+              </ul>
+              <li>Utilisation dans notre projet</li>
+              <ul>
+                  <li>ON: 1300 µs pendant 200 m</li>
+                  <li>OFF: 1700 µs pendant 200 ms</li>
+                  <li>Arrêt: 1500 µs</li>    
+              </ul>
+            </ul>
+            <p>
+              <strong>NB:</strong> Comme ces moteurs ne retournent pas à une position fixe, chaque moteur a été calibré manuellement pour assurer l’alignement visuel des segments.
+            </p>
+      
+          <h3 id="7-test3">7. Bibliothèque nécessaire: <strong>Servo.h</strong></h3>  
+            <p>
+              La bibliothèque <strong>Servo.h</strong> est une bibliothèque native d'Arduino qui permet de contrôler facilement les servomoteurs à l’aide d’un signal PWM.
+            </p>
+            <p>Elle prend en charge :</p>
+            <ul>
+              <li>L’attachement d’un servomoteur à une broche numérique via <strong>servo.attach(pin)</strong>;</li>
+              <li>L’envoi d’un angle de rotation avec <strong>servo.write(angle)</strong>;</li>
+              <li>La gestion du signal PWM en arrière-plan sans que l’utilisateur ait à le générer manuellement.</li>
+            </ul>
+            
+            <p>
+              Cette bibliothèque est <strong>incluse par défaut</strong> avec l’IDE Arduino. Aucun téléchargement supplémentaire n’est nécessaire.
+            </p>
+
+
+          <h3 id="8-test3">8. Code Arduino (version multi-servos)</h3> 
+            <p>
+              Dans ce projet, le code Arduino est structuré pour contrôler 7 servomoteurs, chacun correspondant à un segment (de a à g) de l’afficheur 7 segments mécanique.
+            </p>
+            <p>
+              Voici les points clés du code :
+            </p>
+            <ul>
+              <li><strong>Utilisation de la bibliothèque Servo.h</strong>:</li>
+              <p>
+                Cette bibliothèque facilite le contrôle des servomoteurs en générant automatiquement le signal PWM nécessaire sur les broches numériques du microcontrôleur.
+              </p>
+              <li><strong>Création de 7 objets Servo distincts</strong>: </li>
+              <p>
+                Chaque segment (a, b, c, d, e, f, g) est associé à un objet Servo différent.
+                Cela permet de commander individuellement chaque servomoteur en lui envoyant un angle spécifique.
+              </p>
+              <li><strong>Définition d’un tableau chiffres[10][7]</strong>:</li>
+              <p>
+                Ce tableau contient la configuration des segments pour chaque chiffre de 0 à 9.
+              </p>
+              <ul>
+                <li>Chaque ligne du tableau correspond à un chiffre.</li>
+                <li>Chaque colonne correspond à un segment (a à g).</li>
+                <li>La valeur 1 signifie que le segment doit être activé (servo en position « ON », par exemple 90°).</li>
+                <li>La valeur 0 signifie que le segment doit être désactivé (servo en position « OFF », par exemple 0°).</li>
+              </ul>
+              <p>
+                Cela permet d’activer ou désactiver facilement les segments nécessaires pour afficher un chiffre donné en parcourant simplement ce tableau.
+              </p>
+              <li><strong>Gestion de la temporisation avec millis()</strong></li>
+              <p>
+                Pour que le programme reste réactif et évite les blocages, la fonction millis() est utilisée pour déclencher le changement de chiffre toutes les secondes.
+              </p>
+              <p>
+                <strong>millis()</strong> retourne le nombre de millisecondes écoulées depuis le démarrage du programme.
+              </p>
+              <p>
+                En stockant la dernière valeur de millis() lors d’un changement, on peut comparer à la valeur actuelle pour savoir quand une seconde s’est écoulée sans utiliser delay().
+              </p>
+              <p>
+                Cela permet au microcontrôleur de continuer à gérer les servomoteurs et autres tâches sans interruption ni blocage.
+              </p>
+            </ul>
+
+            <div class="image-container">
+              <img src="../images/Test3/Electronique/tableau.webp" alt="image" class="image-centree" />
+              <p>
+                Tableau logique des chiffres (Segments activés)
+              </p>
+            </div>
+            <p>
+              Chaque ligne correspond à un chiffre et chaque colonne (a–g) représente un segment :
+            </p>
+
+
+            <div class="code-container">
+            <p>Code_servo_7seg.ino </p>
+            <div class="btn-bar">
+              <button onclick="copierCode('Code_servo_7seg-ino', this)">📋</button>
+              <button onclick="telechargerCode('Code_servo_7seg-ino', 'Code_servo_7seg.ino', 'text/ino', this)">🡇</button>
+            </div>
+            <pre><code class="hljs" id="Code_servo_7seg-ino">
+#include &lt;Servo.h&gt;  // Inclusion de la bibliothèque standard Servo
+
+// Définition des angles pour contrôler les segments
+#define ANGLE_ON  0     // Angle correspondant à un segment "allumé"
+#define ANGLE_OFF 90    // Angle correspondant à un segment "éteint"
+
+// Déclaration du nombre total de segments (7 segments A à G)
+const int NUM_SEGMENTS = 7;
+
+// Tableau des broches reliées aux servomoteurs pour les segments A à G
+const int servoPins[NUM_SEGMENTS] = {2, 3, 4, 5, 6, 7, 8};
+
+// Tableau d’objets Servo, un pour chaque segment
+Servo servos[NUM_SEGMENTS];
+
+// Définition de l’état ON (0°) ou OFF (90°) pour chaque chiffre de 0 à 9
+// Chaque ligne correspond à un chiffre, chaque colonne à un segment : A B C D E F G
+const bool digits[10][7] = {
+  {0, 0, 0, 1, 1, 1, 1}, // 0
+  {1, 0, 0, 0, 0, 0, 1}, // 1
+  {0, 0, 1, 1, 1, 0, 0}, // 2
+  {0, 0, 0, 1, 0, 0, 0}, // 3
+  {1, 0, 0, 0, 0, 1, 0}, // 4
+  {0, 1, 0, 1, 0, 1, 0}, // 5
+  {0, 1, 0, 1, 1, 1, 0}, // 6
+  {0, 0, 0, 0, 0, 0, 1}, // 7
+  {0, 0, 0, 1, 1, 1, 0}, // 8
+  {0, 0, 0, 1, 0, 1, 0}  // 9
+};
+
+// Variables pour gérer la temporisation sans bloquer le code
+unsigned long previousMillis = 0;         // Mémorise le temps du dernier changement
+const unsigned long interval = 1000;      // Intervalle entre les changements (1 seconde)
+
+// Variables pour suivre le chiffre actuel et la direction du comptage
+int digit = 0;        // Chiffre actuellement affiché
+int direction = 1;    // 1 = incrémenter, -1 = décrémenter
+
+// Fonction d'initialisation : attache chaque servo à sa broche
+void setup() {
+  for (int i = 0; i < NUM_SEGMENTS; i++) {
+    servos[i].attach(servoPins[i]);  // Initialise chaque servo
+  }
+
+  displayDigit(digit);  // Affiche le premier chiffre (0)
+}
+
+// Boucle principale qui s’exécute en continu
+void loop() {
+  unsigned long currentMillis = millis();  // Temps écoulé depuis le démarrage
+
+  // Si une seconde s'est écoulée, on change de chiffre
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;  // Met à jour le temps du dernier changement
+
+    digit += direction;  // Incrémente ou décrémente le chiffre
+
+    // Si on dépasse 9, on repart dans l'autre sens (compte à rebours)
+    if (digit > 9) {
+      digit = 9;
+      direction = -1;
+    }
+
+    // Si on descend en dessous de 0, on repart vers le haut
+    else if (digit < 0) {
+      digit = 0;
+      direction = 1;
+    }
+
+    // Affiche le chiffre actuel sur les servos
+    displayDigit(digit);
+  }
+}
+
+// Fonction qui positionne les servos en fonction du chiffre à afficher
+void displayDigit(int d) {
+  for (int i = 0; i < NUM_SEGMENTS; i++) {
+    // Si la valeur est 0 → servo à ANGLE_ON (segment allumé)
+    // Si la valeur est 1 → servo à ANGLE_OFF (segment éteint)
+    servos[i].write(digits[d][i] ? ANGLE_ON : ANGLE_OFF);
+  }
+}
+              </code></pre>
+            </div>
+
+
+          <h3 id="9-test3">9. Test et Démonstration</h3>
+          <video controls width=60%>
+            <source src="../videos/Test3/Electronique/video1.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+
+          <h3 id="10-test3">10. Realisation du PCB</h3>
+            <div class="image-container">
+              <img src="../images/Test3/Electronique/image2.webp" alt="image"/>
+              <p>
+                Création du schéma électronique
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="../images/Test3/Electronique/image3.webp" alt="image"/>
+              <p>
+                Footprints
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="../images/Test3/Electronique/image4.webp" alt="image"/>
+              <p>
+                Organisation du PCB
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="../images/Test3/Electronique/image5.webp" alt="image"/>
+              <p>
+                Définition des contours du PCB (Edge Cuts)
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="../images/Test3/Electronique/image6.webp" alt="image"/>
+              <p>
+                Routage
+              </p>
+            </div>
+
+            <div class="image-container">
+              <img src="../images/Test3/Electronique/image7.webp" alt="image"/>
+              <p>
+                Visualisation 3D du PCB
+              </p>
+            </div>
+
+            <video controls width=60%>
+              <source src="../videos/Test3/Electronique/video2.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+          <p class="txt_center">
+            <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test3/Electronique/afficheur7segment.zip" target="_blank" class="download-link">télécharger les fichiers PCB</a>
+          </p>
+          
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

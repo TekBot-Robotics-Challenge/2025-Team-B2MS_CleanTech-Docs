@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Département Mécanique</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Département Mécanique</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+
+        <div class="nav-section">
+          <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+          <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+          <a href="./mecanique" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-cogs"></i> Mécanique</button> </a>       
+          
+          <div class="sub-links">
+            <a href="./meca-niveau1" class="subtab-button">Niveau 1</a>
+            <a href="./meca-niveau2" class="subtab-button">Niveau 2</a>
+            <a href="./meca-niveau3" class="subtab-button active">Niveau 3</a>
+            <nav class="project-subnav active" id="subnav-test3">
+              <a href="#1-test3">Objectifs</a>
+              <a href="#2-test3">Contraintes</a>
+              <a href="#3-test3">Conception de pièces</a>
+            </nav>
+          </div>
+        </div>
+
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="meca-content" class="tab-content active">
+
+        <div id="test3" class="subtab-content active">
+          <h2 id="projet3" class="projet-titre">Niveau avancé</h2>
+
+          <h3 id="1-test3">Objectifs</h3>
+            <p>Le test de niveau avancé aura pour objectif l’évaluation des participants à la conception d’une pièce complexe et d’une solution mécanique complète afin de résoudre un problème concret. Il met en avant l’utilisation des compétences acquises lors des tests précédents dans le design d’une solution mécanique à assembler. L’objectif de ce test est d’évaluer le rapport des participants à la complexité et leur créativité mais aussi leurs capacités à concevoir une solution fonctionnele en gérant correctement les erreurs.</p>
+            <p>Nous devons, dans ce 3ème test, modéliser des pièces complexes en respectant les consignes géométriques, les matériaux et les unités, puis déterminer leurs masses.</p>
+        
+          <h3 id="2-test3">Contraintes</h3>
+            <p>
+                <ul>
+                <li><strong>Système d’unités: </strong> MMGS (millimètre, gramme, seconde)</li>
+                <li><strong>Précision: </strong> 2 décimales</li>
+                <li><strong>Croquis 2D: </strong> à base de cercles, rectangles, polygones...</li>
+                <li><strong>Opérations: </strong> extrusion, révolution, enlèvement de matière, etc.</li>
+                <li><strong>Tous les trous sont débouchants</strong> sauf indication contraire</li>
+                <li><strong>Rayon des 12 filets</strong>10 mm sauf indication contraire</li>
+                </ul>
+
+             <h3 id="3-test3">2. Conception des pièces</h3>
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/piece.webp" alt="Piece" class="image-mean"/>
+                    <p class="text-center">
+                        Pièce à concevoir
+                    </p>
+                </div>
+
+                <h4>a. Pièce A:</h4>
+                <li><strong> A = 193 mm ; B = 88 mm ; W = B/2 mm ; X = A/4 mm ; Y = B+5.5 mm ; Z = B+15 mm ;</strong></li>
+                <p>
+                <strong>Étape 1</strong> Définition des équations globales<br>
+                    On commence par définir des équations en tant que variables globales nommées A, B, w, x, y, et z, afin de paramétrer la conception de la pièce.
+                    <div class="image-container">
+                    <img src="../images/Test3/Mecanique/1.webp" alt="Piece" class="image-mean"/>
+                    </div>
+                </p>
+
+                <p>
+                <strong>Étape 2</strong>: Création de l'esquisse principale<br>
+                Ensuite, on dessine l’esquisse de base en se référant aux dimensions définies par les variables globales précédemment créées.
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/2.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+                
+                <p>
+                <strong>Étape 3</strong>: Création de la pièce en commançant par le blog gauche<br>
+                Nous complètons l'esquisse gauche en respectant toutes les contraintes pour gérer le compartiement gauche
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/3.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Étape 4</strong>: Création du compartiment gauche<br>
+                On fait appelle à la fonction Bossage/base extrudé pour dimensionner la profondeur et on abtient notre 'Parallélépipède
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/4.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Étape 5</strong>: Nouvelle esquisse<br>
+                On réalise une nouvelle esquisse comme montrée dans l’image suivante.
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/5.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Étape 6</strong>: Création des petits rayons<br>
+                On fait appelle à la fonction Congé dans solidwork ensuite pour les rayons de 10mm comme le montre l'image suivante
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/6.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Étape 7</strong>: Création du compartiment droite<br>
+                on dessine l’esquisse de base pour le bloc gauche en se référant aux dimensions définies par les variables globales précédemments créées A et Y. Ensuite grace à la fonction enlèv. de matière extrudé on obtient le compatiment droit comme le montre les deux images suivantes.
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/7a.webp" alt="Piece" class="image-mean"/>
+                    <img src="../images/Test3/Mecanique/7b.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Étape 8</strong>: Support de liaison<br>
+                Nous allons faire une nouvelle esquisse entre les deux compartiments pour créer le support de liaison entre les deux bolcs en respectant toutes les mesures et en applicants aussi des congés d'esquisses pour bien gérer les rayons de liaisons.
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/8.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Étape 9</strong>: Création du Support de liaison<br>
+                En applicant ensuite la fonction Bossage/base extrudé on a notre support de liaison
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/9.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Étape 10</strong>: Création de la partie en haut du Support de liaison<br>
+                Nous allons faire une nouvelle esquisse en haut du support de liaison en respectant toutes les mesures et en applicants aussi la fonction Bossage/base extrudé.
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/10.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Étape 11</strong>: complément de la création de la partie en haut du Support de liaison<br>
+                On crée une nouvelle esquisse et en application les fonction enlèv. de matière extrudé, Congé et des congés d'esquisses on obtient notre pièces complète
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/11.webp" alt="Piece" class="image-mean"/>
+                </div>
+                </p>
+
+                <p>
+                <strong>Pièce complète:</strong><br>
+                On obtient ainsi notre pièce complète qu'on peut modifier la couleur et évaluer la masse bien sûr en applicant le matériau en lui donnant le 1060 Aloy Aluminium
+                </p>
+
+                <video controls width=50%>
+                <source src="../videos/Test3/Mecanique/Vidéo_1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.                   
+                </video>
+
+                <p>
+                Evaluation de la masse de notre pièce <br>
+                On peut évaluer maintenant la masse de notre pièce
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/11masse1.webp" alt="Piece" class="image-mean"/>
+                </div>
+                On trouve ainsi une masse de <strong>1373,85 grammes</strong>.
+                </p>
+                
+                <p class="txt_center">
+                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test3/Mecanique/Pi%C3%A8ce1.SLDPRT" download class="download-link">télécharger la pièce A</a>
+                </p>
+
+
+                <h4>b. Pièce B et C:</h4>
+                <strong> Modification des variables et évaluation de la masse</strong>
+                <p>
+                Dans cette étape, on modifie les valeurs des variables globales A, B et w ,x, y et z pour obtenir des pièces avec les paramètres de b°) et c°) 
+                <br>Après avoir mis à jour la géométrie, on effectue une nouvelle évaluation de la masse de la pièce.<br>
+                Après avoir fait les mêmes choses on évalue les masses.
+                </p>
+
+                <ul>
+                <li>
+                    <strong>
+                    A = 205 mm ; B = 100mm ; W = B/2 mm ; X = A/4 mm ; Y = B+5.5 mm ; Z = B+15 mm:
+                    </strong>
+                </li>
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/12masse2.webp" alt="Piece" class="image-mean"/>
+                </div>
+
+                <video controls width=50%>
+                    <source src="../videos/Test3/Mecanique/Vidéo_2.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la vidéo HTML5.                   
+                </video>
+
+                <p>On trouve une masse de <strong>1634.80 grammes</strong></p>
+
+                <p class="txt_center">
+                <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test3/Mecanique/Pi%C3%A8ce2.SLDPRT" download class="download-link">télécharger la piège B</a>
+                </p>
+
+                <li>
+                    <strong>
+                    A = 210 mm ; B = 105 mm ; W = B/2 mm ; X = A/4 mm ; Y = B+5.5 mm ; Z = B+15 mm:
+                    </strong>
+                </li>
+                <div class="image-container">
+                    <img src="../images/Test3/Mecanique/13masse3.webp" alt="Piece" class="image-mean"/>
+                </div>
+
+                <video controls width=50%>
+                    <source src="../videos/Test3/Mecanique/Vidéo_3.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la vidéo HTML5.                   
+                    </video>
+                <p>On trouve une masse de <strong>1807.29 grammes</strong></p>
+
+                <p class="txt_center">
+                    <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/Test3/Mecanique/Pi%C3%A8ce3.SLDPRT" download class="download-link">télécharger la pièce C</a>
+                </p>
+                </ul>
+          
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

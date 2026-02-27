@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Système de convoyeur - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Système de convoyeur</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+
+        <div class="nav-section">
+          <a href="./convoyeur" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-forward"></i> Convoyeur</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button" href="./convoyeur-meca">Partie mécanique</a>
+            <a class="subtab-button" href="./convoyeur-electro">Partie électronique</a> 
+            <a class="subtab-button" href="./convoyeur-it">Partie informatique</a>
+            <a class="subtab-button active" href="./convoyeur-validation">Tests et validation</a>
+            <nav class="project-subnav active" id="subnav-test2">
+              <a href="#1-test">1. Assemblage du convoyeur</a>
+              <a href="#2-test">2. Protocole de test</a>
+              <a href="#3-test">3. Résultats et démonstration</a>
+            </nav> 
+          </div>
+        </div>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="convoyeur-content" class="tab-content active">
+        <div id="electronique" class="subtab-content active">
+          <h2 id="test" class="projet-titre">Tests et validation - Système de convoyeur</h2>
+          <h3 id="1-test">1. Assemblage du convoyeur</h3>
+            <p>
+              Nous avons ici l'assemblage de la partie mécanique et de la partie électronqiue.
+              Nous avons profité du temps supplémentaire pour améliorer notre convoyeur déjà fonctionnel et répondant au cahier de charge.
+            </p>
+            <div class="image-container">
+              <p>
+                <strong>Premier prototype(minimal):</strong>
+              </p>
+              <img src="../images/Test4/Convoyeur/realisation1_1.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation1_2.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation1_3.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation1_4.webp" alt="realisation" class="image-small"/>
+            </div>
+
+             <video controls width=30%>
+              <source src="../videos/Test4/Convoyeur/convoyeur1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+
+            <div class="image-container">
+              <p>
+                <strong>Deuxième prototype:</strong>
+              </p>
+              <img src="../images/Test4/Convoyeur/realisation2_1.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation2_2.webp" alt="realisation" class="image-small"/>  
+              <img src="../images/Test4/Convoyeur/realisation2_3.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation2_4.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation2_5.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation2_6.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation2_8.webp" alt="realisation" class="image-mean"/>
+            </div>
+
+           
+
+          <h3 id="2-test">2. Protocole de test</h3>
+            <p>
+              Les tests individuels de chaque domaine ayant déjà été effectués, cette section est consacrée à l’évaluation du système global. 
+              L’objectif est de vérifier l’intégration de tous les modules pour garantir le bon fonctionnement de l’ensemble. 
+              Il s’agit donc de s’assurer que chaque domaine interagit correctement avec les autres dans un environnement complet et cohérent. 
+            
+              <ul>
+                <p class="txt_center"><strong>Fonctionnement minimal avec le premier prototype:</strong></p>
+                <li>
+                  Nous avons commencé par tester l'intégration de l'électronique et de la détection intelligente avec la structure du convoyeur à l'aide d'un petit code.
+                </li>
+                <video controls width=auto>
+                  <source src="../videos/Test4/Convoyeur/test2.mp4" type="video/mp4">
+                  Votre navigateur ne supporte pas la vidéo HTML5.
+                </video>
+
+                <li>
+                  Puis, nous avons testé le système avec l'interface web.
+                </li>
+                <video controls width=auto>
+                  <source src="../videos/Test4/Convoyeur/test3.mp4" type="video/mp4">
+                  Votre navigateur ne supporte pas la vidéo HTML5.
+                </video>
+              </ul>
+            </p>
+
+            <p>
+              Ce premier prototype a permis de tester l’ensemble du système avant l’assemblage du deuxième prototype.
+              En effet, il nous a permis de le mettre à l’épreuve et d’y apporter les ajustements nécessaires pour sa finalisation.
+              Cette étape s’est révélée essentielle pour identifier les éventuelles failles techniques et optimiser les performances du système.
+            </p>
+
+            <p>
+              Avec les améliorations apportées et après l'assemblage, nous avons testé différents modules pour les dernières modifications.
+              En voici quelques vidéos:
+            <ul>
+              <li>Test du moteur, de la zone de détection, et de la détection de couleu: </li>
+              <video controls width=auto>
+                <source src="../videos/Test4/Convoyeur/test4.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <ul>Résultats:
+                <li>Zone de détection: [8; 11] cm</li>
+                <li>Capteur Ultrason: précis</li>
+                <li>Capteur de couleur: opérationnel</li>
+                <li>Algorithme: satisfaisant</li>
+              </ul>
+
+              <li>Test des boutons marche et arrêt</li>
+              <video controls width=auto>
+                <source src="../videos/Test4/Convoyeur/test5.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <ul>Résultats:
+                <li>Bouton Marche: satisfaisant</li>
+                <li>Bouton Stop: réactif</li>
+                <li>Algorithme: fonctionnel</li>
+              </ul>
+            </ul>
+            </p>
+
+          <h3 id="3-test">3. Résultats et démonstration</h3>
+            <p>
+              Après plusieurs tests et modifications, nous sommes parvenus à réaliser le système de convoyeur répondant au cahier de charge.
+              En effet, le convoyeur respecte les <strong>contraintes de dimension</strong>(longueur et hauteur).
+              Le tapis du convoyeur reste <strong>immobile</strong> et <strong>ne se meut que</strong> le système détecte des déchets.
+              Ensuite, les déchets sont <strong>identifiés</strong> lorsqu'ils passent dans la zone du capteur de couleur. 
+              Ils  seront <strong>collectés manuellement</strong> à la fin du convoyeur et <strong>mis dans la berne</strong> indiquée par le système.
+              Nous avons aussi mis en place une <strong>interface web</strong> pour permettre un suivi en temps réel du tri des déchets.
+            </p>
+            <p>
+              Voici des images et videos montrant notre travail:
+            </p>
+
+            <div class="image-container">
+              <img src="../images/Test4/Convoyeur/realisation2_9.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation2_10.webp" alt="realisation" class="image-small"/>
+              <img src="../images/Test4/Convoyeur/realisation2_11.webp" alt="realisation" class="image-small"/>  
+            </div>
+
+            <video controls width=auto>
+              <source src="../videos/Test4/Convoyeur/demo.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+            <!-- <video controls width=auto>
+              <source src="../videos/Test4/Convoyeur/demo1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video> -->
+            <!-- <video controls width=auto>
+              <source src="../videos/Test4/Convoyeur/demo2.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo HTML5.
+            </video> -->
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

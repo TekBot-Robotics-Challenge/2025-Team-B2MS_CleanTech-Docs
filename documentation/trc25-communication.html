@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Résilience Urbaine - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Résilience Urbaine</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./ROS" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+
+        <div class="nav-section">
+          <a href="./trc25" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-robot"></i> TRC25</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button" href="./trc25-convoyeur">Convoyeur 2.0</a>
+            <a class="subtab-button" href="./trc25-dofbot">Prise en main du Dofbot</a>
+            <a class="subtab-button active" href="./trc25-communication">Communication Dofbot - Convoyeur</a>
+            <nav class="project-subnav active" id="subnav-communication">
+              <a href="#1-communication">1. Communication I2C</a>
+              <a href="#2-communication">2. Communication sans fil</a>
+              <a href="#3-communication">3. Communication UART</a>
+              <a href="#3-communication">4. Conclusion générale</a>
+            </nav>
+            <a class="subtab-button" href="./trc25-yolo">Modèle de détection YOLO</a>
+            <a class="subtab-button" href="./trc25-dofbot_ia">Détection et tri - Dofbot</a>
+            <a class="subtab-button" href="./trc25-ros">ROS</a>
+            <a class="subtab-button" href="./trc25-meca">Système de ramassage</a>
+          </div>
+        </div>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section class="tab-content active">
+        <div class="subtab-content active">
+          <h2 id="communication" class="projet-titre">Communication Dofbot - Convoyeur</h2>
+            <p>
+              Le Dofbot est positionné en fin de convoyage afin d’assurer le tri des déchets transportés sur le convoyeur. 
+              Lorsqu’un déchet atteint la zone finale du convoyeur, le système de convoyage doit notifier le Dofbot de sa présence 
+              afin de permettre une prise en charge rapide et précise de l’objet.
+              <br>
+              La performance globale du système repose en grande partie sur la qualité, la fiabilité et la rapidité de la communication entre ces deux sous-systèmes, 
+              qui doivent fonctionner de manière synchronisée pour garantir un tri efficace.
+            </p>
+            <p>
+              Afin de garantir une interaction efficace et adaptée aux différents scénarios de fonctionnement, 
+              trois types de communication ont été étudiés et testés :
+              <ul>
+                <li>communication I2C</li>
+                <li>communication sans fil</li>
+                <li>communication via une broche</li>
+              </ul>
+            </p>
+
+          <h3 id="1-communication">1. Communication I2C</h3>
+            <p>
+              La communication I²C (Inter-Integrated Circuit) est un protocole de communication série synchrone à courte distance, 
+              reposant sur une architecture <strong>maître–esclave</strong>. 
+              Dans ce système, le Dofbot joue le rôle de maître, tandis que le convoyeur agit comme esclave.
+            </p>
+            <ul>
+              Le bus I²C repose sur deux lignes principales: 
+              <li><strong>SDA</strong>(Serial Data) : ligne de données</li>
+              <li><strong>SCL</strong>(Serial Clock) : ligne d’horloge</li>
+            </ul>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Avantages</th>
+                  <th>Inconvenients</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Câblage réduit(trois fils dont deux de communication)</li>
+                      <li>Bonne fiabilité pour des distances courtes</li>
+                      <li>Communication bidirectionnelle</li>
+                    </ul>
+                  </td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Distance de communication limitée</li>
+                      <li>Sensibilité au bruit électrique</li>
+                      <li>Dépendance au maître</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <p>
+              Les connexions entre le Dofbot et le convoyeur sont réalisées comme suit :
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Dofbot(Maître)</th>
+                  <th>Convoyeur(esclave)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SDA</td>
+                  <td>SDA</td>
+                </tr>
+                <tr>
+                  <td>SCL</td>
+                  <td>SCL</td>
+                </tr>
+                <tr>
+                  <td>GND</td>
+                  <td>GND</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              <strong>NB:</strong>Il est indispensable d’avoir une <strong>masse commune (GND)</strong> entre les deux systèmes afin d’assurer une référence électrique identique et garantir le bon fonctionnement de la communication.
+            </p>
+
+            <h4>a. Adaptation de niveau logique</h4>
+              <p>
+                Le Dofbot fonctionne avec un niveau logique de 3,3V, tandis que le microcontrôleur du convoyeur (Arduino) utilise des niveaux logiques de 5V. 
+                Cette différence de tension peut entraîner des erreurs de communication, voire endommager les composants.
+                <br>
+                Pour assurer une communication fiable et sécurisée, un <strong>convertisseur de niveau logique bidirectionnel</strong> est utilisé entre les lignes SDA et SCL(Voir section <strong>Convoyeur 2.0</strong>). 
+                Ce dispositif permet :
+                <ul>
+                  <li>d’adapter les niveaux de tension entre 3,3 V et 5 V,</li>
+                  <li>de protéger les entrées/sorties des deux systèmes,</li>
+                  <li>de garantir l’intégrité des signaux I²C.</li>
+                </ul>
+              </p>
+
+          <h4>b. Programmation</h4>
+              <p>
+                Afin d’établir la communication I²C, il est nécessaire de connaître l’adresse I²C de l’esclave. 
+                Cette adresse permet au maître, en l’occurrence le Dofbot, d’identifier correctement le microcontrôleur du convoyeur (Arduino) sur le bus I²C.
+                <br>
+                La détection de cette adresse peut être effectuée côté Dofbot à l’aide d’un scan du bus I²C, en exécutant la commande suivante :
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('scan_i2c', this)">📋</button>
+                  </div>
+                  <pre><code class="hljs" id="scan_i2c">
+i2cdetect -y -r -a 1
+                  </code></pre>
+                </div>      
+              </p>
+
+              <p>
+                Ayant identifié l’adresse I²C de l’esclave, le Dofbot peut alors établir la communication et envoyer des commandes ou recevoir des informations en utilisant le protocole I²C. 
+                Le code suivant illustre l’initialisation de la communication I²C, l’envoi d’une commande simple depuis le Dofbot vers le microcontrôleur du convoyeur, 
+                ainsi que la réception de la réponse envoyée par l’esclave.
+              </p>
+
+              <details class="code-container">
+                <summary>i2c_dofbot.py</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('i2c_dofbot-py', this)">📋</button>
+                  <button onclick="telechargerCode('i2c_dofbot-py', 'i2c_dofbot.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="i2c_dofbot-py">
+import smbus   #bibliotheque i2c
+import time
+
+# Bus I2C du Jetson
+bus = smbus.SMBus(1)
+ARDUINO_ADDR = 0x15
+
+
+def send_command_and_read():
+    try:
+        #Envoyer une commande
+        bus.write_byte(ARDUINO_ADDR, 5)
+        print("Commande envoyée: 5")
+
+        #Lire la réponse de l'esclave (1 octet)
+        time.sleep(1)  # petit délai pour que l'Arduino prépare la réponse
+        resp = bus.read_byte(ARDUINO_ADDR)
+        print("Réponse reçue de l'Arduino:", resp)
+    except Exception as e:
+        print("Erreur I2C:", e)
+
+
+while True:
+    send_command_and_read()
+    time.sleep(1)  #boucle toutes les secondes
+                </code></pre>
+              </details>
+
+              <details class="code-container">
+                <summary>i2c_convoyeur.ino</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('i2c_convoyeur-ino', this)">📋</button>
+                  <button onclick="telechargerCode('i2c_convoyeur-ino', 'i2c_convoyeur.ino', 'text/ino', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="i2c_convoyeur-ino">
+#include &lt;Wire.h&gt;   //bibliothèque i2c
+
+volatile byte lastCmd = 0;
+volatile int reqCount = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin(0x15); // adresse esclave
+  Wire.onReceive(receiveEvent);
+  Wire.onRequest(requestEvent);
+}
+
+void loop() {
+
+}
+
+void receiveEvent(int howMany) {
+  while (Wire.available()) {
+    lastCmd = Wire.read();
+  }
+  Serial.print("Donnée recue : ");
+  Serial.println(lastCmd);
+}
+
+void requestEvent() {
+  int data = 2;          // donnée envoyée
+
+  Wire.write(data);         // envoi I2C
+  reqCount++;
+
+  Serial.print("Requete n° : ");
+  Serial.println(reqCount);
+  Serial.print("Envoyé au maître : ");
+  Serial.println(data);
+  Serial.println("------------------------------------");
+}    
+                </code></pre>
+              </details>
+              
+          <!-- Video avec label -->
+            <figure>
+              <video controls width=auto>
+                <source src="../videos/TRC25/Convoyeur/communication_i2c.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+              <!-- <p class="txt_center">label</p> -->
+            </figure>
+            <p>
+              Les résultats expérimentaux montrent que la transmission des données du Dofbot vers le convoyeur est fonctionnelle. 
+              Toutefois, la réception des données émises par l’esclave vers le maître n’aboutit pas, 
+              la valeur retournée étant systématiquement nulle.  
+            </p>
+            <p>
+              Plusieurs tests ont été réalisés dans le but de déterminer la cause du dysfonctionnement observé. 
+              La communication entre le convoyeur et un autre microcontrôleur Arduino a notamment été validée, 
+              confirmant le <strong>bon fonctionnement de l’esclave I²C</strong>.
+              Les connexions matérielles ont été revérifiées, 
+              un délai de réponse a été introduit dans le code, et les broches de communication ont été modifiées 
+              afin d’écarter toute erreur liée au câblage ou à la configuration matérielle.
+              <br>
+              Malgré ces ajustements, le problème persiste. 
+              Il apparaît donc que <strong>le dysfonctionnement soit lié à la réception des données au niveau du Dofbot</strong>.
+            </p>
+
+          <h3 id="2-communication">2. Communication sans fil</h3>
+            <p>
+              Afin de contourner les limitations rencontrées avec la communication I²C, une communication sans fil a été mise en place en parallèle, 
+              entre le Dofbot et le convoyeur, à l’aide du <strong>module ESP-01 (ESP8266)</strong>.
+              Cette approche permet d’assurer <strong>un échange de données bidirectionnel</strong>, <strong>sans liaison filaire</strong>, 
+              tout en offrant une plus grande flexibilité d’intégration .
+            </p>
+            <p>
+              Le module ESP-01 est basé sur le microcontrôleur <strong>ESP8266</strong>, intégrant <strong>une interface Wi-Fi</strong> et supportant <strong>les protocoles TCP/IP</strong>. 
+              Il permet ainsi l’envoi et la réception de données via un réseau local sans fil.
+            </p>
+
+            <ul>
+              L’architecture retenue repose sur une communication client–serveur :
+              <li>Dofbot : serveur Wi-Fi</li>
+              <li>Convoyeur : client Wi-Fi</li>
+            </ul>
+            <p>
+              Le convoyeur notifie le Dofbot lorsqu’un déchet est détecté en fin de convoyage. 
+              Le Dofbot analyse cette information et déclenche l’action de tri appropriée.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Avantages</th>
+                  <th>Inconvenients</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Suppression des contraintes de câblage</li>
+                      <li>Communication bidirectionnelle fiable</li>
+                      <li>Plus grande portée</li>
+                    </ul>
+                  </td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Communication bidirectionnelle fiable</li>
+                      <li>Dépendance à la qualité du réseau Wi-Fi</li>
+                      <li>Complexité logicielle plus élevée</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>
+              <strong>NB:</strong> Le convoyeur(ESP-01 relié en UART avec l'arduino) et le dofbot doivent être connectés au même réseau Wi-Fi afin de permettre l’échange de données.
+            </p>
+
+            <h4>a. Adaptation de niveau logique</h4>
+              <p>
+                Tout comme le dofbot, l'ESP-01 fonctionne avec un niveau logique de 3,3V. 
+                Un convertisseur de niveau logique est donc nécessaire.(Voir section <strong>Convoyeur 2.0</strong>). 
+              </p>
+
+          <h4>b. Programmation</h4>
+            <p>
+              La programmation du système sans fil se divise en trois parties distinctes, correspondant aux différents composants impliqués :
+                <ul>
+                  <li>
+                    ESP-01: relié à l’Arduino via UART, il gère la communication avec le Dofbot en tant que client Wi-Fi.
+                  </li>
+                  <li>
+                    Arduino: interface avec les capteurs et actionneurs, envoi des données du convoyeur via l’ESP-01.
+                  </li>
+                  <li>
+                    Dofbot: agit comme point d’accès Wi-Fi (AP) et reçoit les notifications du convoyeur pour le tri des déchets.
+                  </li>
+                </ul>
+              </p>
+
+              <details class="code-container">
+                <summary>esp_01.ino</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('esp_01-ino', this)">📋</button>
+                  <button onclick="telechargerCode('esp_01-ino', 'esp_01.ino', 'text/ino', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="esp_01-ino">
+#include &lt;ESP8266WiFi.h&gt;
+#include &lt;ESP8266HTTPClient.h&gt;
+
+const char* ssid = "Dofbot";
+const char* password = "TRC25_b2ms";
+
+const char* dofbotIP = "192.168.1.11";
+int dofbotPort = 5001;                
+
+WiFiClient client;
+
+void setup() {
+  Serial.begin(9600);
+
+  WiFi.begin(ssid, password);
+  // Serial.println("Connexion to Dofbot...");
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    // Serial.print(".");
+  }
+
+  // Serial.println("\nConnected to Wi-Fi !");
+  // Serial.print("IP ESP : ");
+  // Serial.println(WiFi.localIP());
+
+  connectToDofbot();   // Connexion TCP
+}
+
+void loop() {
+  if (!client.connected()) {
+    // Serial.println("Reconnexion...");
+    connectToDofbot();
+  }
+
+  if (Serial.available()) {
+    String data = Serial.readStringUntil('\n'); // Reçoit la donnée depuis Arduino
+    data.trim();
+
+    if (data.length() > 0) {
+      sendToDofbot(data);
+    }
+  }
+
+  while (client.available()) {
+    String response = client.readStringUntil('\n');
+    response.trim();
+
+    if (response.length() > 0) {
+      Serial.println(response);   // Envoi vers Arduino
+    }
+  }
+}
+
+void connectToDofbot() {
+  if (client.connect(dofbotIP, dofbotPort)) {
+    // Serial.println("TCP connected to Dofbot!");
+  } else {
+    // Serial.println("TCP connection failed!");
+  }
+}
+
+void sendToDofbot(String cmd) {
+  if (client.connected()) {
+    client.print(cmd);
+    // Serial.println("Sent to Dofbot: " + cmd);
+  } 
+}
+                </code></pre>
+              </details>
+
+              <details class="code-container">
+                <summary>tcp_arduino.ino</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('tcp_arduino-ino', this)">📋</button>
+                  <button onclick="telechargerCode('tcp_arduino-ino', 'tcp_arduino.ino', 'text/ino', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="tcp_arduino-ino">
+#include &lt;SoftwareSerial.h&gt;
+
+// RX, TX
+SoftwareSerial espSerial(4, 7);
+
+#define pinStart 2
+
+#define LED_R 9
+#define LED_G 10
+#define LED_B 11
+
+unsigned long lastInterrupt = 0;
+volatile bool is_on = false;
+
+// variables pour gestion du timing
+unsigned long previousMillis = 0;
+int colorState = 0;
+const unsigned long interval = 2000; // intervalle de 2 secondes
+
+void setup()
+{
+    Serial.begin(9600);        // PC
+    espSerial.begin(9600);     // ESP
+
+    pinMode(LED_R, OUTPUT);
+    pinMode(LED_G, OUTPUT);
+    pinMode(LED_B, OUTPUT);
+    setColor(0, 0, 0); // éteint la LED
+
+    pinMode(pinStart, INPUT);
+    attachInterrupt(digitalPinToInterrupt(pinStart), interrupt_routine, CHANGE);
+
+    delay(500);
+    is_on = digitalRead(pinStart);
+}
+
+void loop() {
+    unsigned long currentMillis = millis();
+
+    if (is_on) {
+        if (currentMillis - previousMillis >= interval) {
+            previousMillis = currentMillis;
+
+            // changer la couleur en fonction de colorState
+            switch(colorState) {
+                case 0:
+                    setColor(250, 0, 0); // rouge
+		            espSerial.write("rouge");
+                    Serial.println("Sent: rouge");
+                    break;
+                case 1:
+                    setColor(0, 250, 0); // vert
+		            espSerial.write("vert");
+                    Serial.println("Sent: vert");
+                    break;
+                case 2:
+                    setColor(0, 0, 250); // bleu
+		                espSerial.write("bleu");
+                    Serial.println("Sent: bleu");
+                    break;
+            }
+
+            colorState++;
+            if (colorState > 2) colorState = 0;
+        }
+    } else {
+        setColor(0, 0, 0); // LED éteinte
+        previousMillis = currentMillis; // réinitialiser le timing
+        colorState = 0;
+    }
+}
+
+void setColor(unsigned int red, unsigned int green, unsigned int blue)
+{
+    red = map(red, 0, 255, 255, 0);
+    green = map(green, 0, 255, 255, 0);
+    blue = map(blue, 0, 255, 255, 0);
+    analogWrite(LED_R, red);
+    analogWrite(LED_G, green);
+    analogWrite(LED_B, blue);
+}
+
+void interrupt_routine() {
+    unsigned long currentMillis = millis();
+    detachInterrupt(digitalPinToInterrupt(pinStart)); 
+    if (currentMillis - lastInterrupt > 200) { // anti-rebond 100ms
+      is_on = digitalRead(pinStart);
+      lastInterrupt = currentMillis;
+    }
+   attachInterrupt(digitalPinToInterrupt(pinStart), interrupt_routine, CHANGE);
+}
+                </code></pre>
+              </details>
+
+              <details class="code-container">
+                <summary>tcp_dofbot.py</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('tcp_dofbot-py', this)">📋</button>
+                  <button onclick="telechargerCode('tcp_dofbot-py', 'tcp_dofbot.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="tcp_dofbot-py">
+import socket
+
+HOST = '0.0.0.0'
+PORT = 5001
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind((HOST, PORT))
+server.listen(1)
+
+print("Serveur TCP prêt sur port", PORT)
+
+while True:
+    conn, addr = server.accept()
+    print("Connexion :", addr)
+    
+    while True:
+        data = conn.recv(1024)
+        if not data:
+            break
+        cmd = data.decode().strip()
+        print("Commande reçue :", cmd)
+
+        # >>> ICI tu mets la fonction de mouvement du Dofbot <<<
+        # move_robot(cmd)
+
+    conn.close()
+    print("Client déconnecté")
+                </code></pre>
+              </details>
+              
+          <!-- Video avec label -->
+            <figure>
+              <video controls width=auto>
+                <source src="../videos/TRC25/Convoyeur/communication_tcp.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+            </figure>
+
+            <p>
+              La communication sans fil entre le Dofbot et le convoyeur est fonctionnelle. 
+              Les échanges de données via les modules ESP-01 se déroulent correctement, permettant au Dofbot de recevoir les notifications du convoyeur.
+            </p>
+
+          <h3 id="3-communication">3. Communication UART</h3>
+            <p>
+              La communication UART (Universal Asynchronous Receiver Transmitter) repose sur une liaison série asynchrone point à point entre deux systèmes. 
+              Elle permet l’échange de données sans horloge partagée, 
+              la synchronisation étant assurée par des paramètres de communication communs.
+              <br>
+              Dans ce projet, la communication UART est établie directement entre le convoyeur et le Jetson Nano, 
+              assurant une transmission simple, rapide et fiable des informations nécessaires au fonctionnement du système de tri.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Avantages</th>
+                  <th>Inconvenients</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Mise en œuvre simple</li>
+                      <li>Communication stable et fiable</li>
+                      <li>Faible latence</li>
+                    </ul>
+                  </td>
+                  <td> 
+                    <ul class="dash-list">
+                      <li>Portée limitée par la longueur du câble</li>
+                      <li>Communication point à point uniquement</li>
+                      <li>Dépendance à la connexion physique</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>a. Connexion matérielle</h4>
+              <p>
+                La liaison UART est réalisée à l’aide d’un câble <strong>USB–série</strong>, reliant le microcontrôleur du convoyeur au Jetson. 
+                Une fois connecté, le périphérique série est reconnu sous Linux sous la forme :
+                <div class="code-container">
+                  <div class="btn-bar">
+                    <button onclick="copierCode('uart_connexion', this)">📋</button>
+                  </div>
+                  <pre><code class="hljs" id="uart_connexion">
+/dev/ttyUSB0
+                  </code></pre>
+                </div>
+              </p>
+              <p>
+                Cette interface est utilisée par le programme exécuté sur le Jetson pour recevoir les données émises par le convoyeur.
+              </p>
+
+              <p>
+                <strong>NB:</strong> 
+                L’utilisation d’un câble USB–série garantit une <strong>adaptation automatique des niveaux logiques</strong> et <strong>simplifie l’intégration matérielle</strong>.
+              </p>
+
+            <h4>b. Programmation</h4>
+              <ul>
+                Deux programmes ont été développés afin de tester la communication UART filaire entre le convoyeur et le Jetson Nano (Dofbot) :
+                <li>
+                  <strong><em>uart_arduino.ino</em></strong> : 
+                  exécuté sur l’Arduino du convoyeur, il permet l’envoi périodique d’un message via l’interface UART.
+                </li> 
+                <li>
+                  <strong><em>uart_dofbot.py</em></strong> : 
+                  exécuté sur le Jetson Nano, il assure la réception des données transmises par le convoyeur via le port série (/dev/ttyUSB0).
+                </li> 
+              </ul>
+
+              <details class="code-container">
+                <summary>uart_arduino.ino</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('tcp_arduino-ino', this)">📋</button>
+                  <button onclick="telechargerCode('tcp_arduino-ino', 'tcp_arduino.ino', 'text/ino', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="tcp_arduino-ino">
+void setup()
+{
+    Serial.begin(9600);
+    delay(1000);
+}
+
+
+void loop()
+{
+  Serial.println("hello");
+delay(5000);
+}
+                </code></pre>
+              </details>
+
+              <details class="code-container">
+                <summary>uart_dofbot.py</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('tcp_dofbot-py', this)">📋</button>
+                  <button onclick="telechargerCode('tcp_dofbot-py', 'tcp_dofbot.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="tcp_dofbot-py">
+import serial
+import time
+
+serial_port = "/dev/ttyUSB0"
+baurate = 9600
+
+try:
+    arduino_data = serial.Serial(serial_port, baurate, timeout=1)
+    time.sleep(2)
+    print("Connexion établie")
+    while True:
+        while(arduino_data.inWaiting()==0):
+            pass
+        data_packet = arduino_data.readline()
+        data_packet = str(data_packet, "utf-8")
+        data_packet = data_packet.strip('\r\n')
+        print(data_packet)
+
+except KeyboardInterrupt:
+    print('Exiting Program')
+
+except:
+    print('Error Occurs, Exiting Program')
+                </code></pre>
+              </details>
+              
+              <p>
+                Ces deux programmes permettent de tester la communication en envoyant le message "hello" depuis le convoyeur vers le Dofbot, validant ainsi le bon fonctionnement de la liaison UART.
+              </p>
+
+          <h3 id="4-communication">4. Conclusion générale</h3>
+            <p>
+              Dans le cadre de ce projet, trois types de communication entre le convoyeur et le Dofbot ont été étudiés, implémentés et testés : 
+              la communication I²C, la communication sans fil via l’ESP-01 (Wi-Fi) et la communication UART filaire.  
+            </p>
+
+            <h4>a. Communication I2C</h4>
+              <p>
+                La communication I²C, bien que théoriquement adaptée pour des échanges rapides à courte distance, n’a pas permis d’assurer une communication bidirectionnelle fonctionnelle dans le contexte de ce projet. 
+                Malgré plusieurs tests et vérifications (câblage, délais, configuration logicielle), la réception des données au niveau du Dofbot est restée non fonctionnelle.
+                Cette communication n'est donc pas retenue.
+              </p>
+
+            <h4>b. Communication sans fil</h4>
+              <p>
+                La communication sans fil via l’ESP-01 s’est révélée fonctionnelle et a permis un échange bidirectionnel de données entre le convoyeur et le Dofbot. 
+                Toutefois, cette solution introduit une latence liée au réseau Wi-Fi ainsi qu’une complexité logicielle plus élevée, ce qui peut constituer un inconvénient pour des actions nécessitant une réponse immédiate.
+                <br>
+                Malgré ces contraintes, un code de communication TCP a été développé et testé côté Dofbot afin de valider le fonctionnement global de cette approche. 
+                Ce programme met en œuvre un serveur TCP, capable de recevoir les notifications envoyées par le convoyeur (via l’ESP-01), de détecter la présence d’un objet et de gérer un timeout en cas d’absence de nouvelles données.
+              </p>
+              <p>
+                Le code suivant illustre l’implémentation du serveur TCP exécuté sur le Dofbot :
+              </p>
+              <details class="code-container">
+                <summary>tcp_server.py</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('tcp_server-py', this)">📋</button>
+                  <button onclick="telechargerCode('tcp_server-py', 'tcp_server.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="tcp_server-py">
+#!/usr/bin/env python
+# coding: utf-8
+
+import socket
+import time
+
+
+class tcp_Server:
+    def __init__(self, host='0.0.0.0', port=5001, timeout=2.5):
+        self.host = host
+        self.port = port
+        self.timeout = timeout
+
+        self.server = None
+        self.conn = None
+        self.addr = None
+
+        self.presence = False
+        self.last_msg_time = 0
+
+    def start_server(self):
+        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server.bind((self.host, self.port))
+        self.server.listen(1)
+
+        print(f"Serveur TCP prêt sur {self.host}:{self.port}")
+        self.conn, self.addr = self.server.accept()
+        print("Connexion Arduino :", self.addr)
+
+        self.conn.setblocking(False)
+
+    def listen(self):
+        try:
+            data = self.conn.recv(1024)
+            if data:
+                cmd = data.decode().strip()
+                if cmd == "piece":
+                    self.presence = True
+                    self.last_msg_time = time.time()
+        except BlockingIOError:
+            pass
+
+        if self.presence:
+            if time.time() - self.last_msg_time > self.timeout:
+                self.presence = False
+
+    def close(self):
+        if self.conn:
+            self.conn.close()
+        if self.server:
+            self.server.close()
+                </code></pre>
+              </details>
+
+            <h4>c. Communication UART</h4>
+              <p>
+                La communication UART filaire entre le convoyeur et le Jetson Nano s’est révélée simple, fiable et rapide, répondant efficacement aux besoins de transmission des informations critiques du système. 
+                Contrairement à la communication sans fil, cette solution ne dépend pas d’un réseau et ne présente qu’une latence négligeable, ce qui la rend particulièrement adaptée aux actions nécessitant une réponse immédiate.
+                <br>
+                Dans ce cadre, un code de communication UART a été développé côté Jetson Nano afin de valider le bon fonctionnement de cette liaison.
+              </p>
+                
+              <details class="code-container">
+                <summary>uart_Arduino.py</summary>
+                <div class="btn-bar">
+                  <button onclick="copierCode('uart_Arduino-py', this)">📋</button>
+                  <button onclick="telechargerCode('uart_Arduino-py', 'uart_Arduino.py', 'text/py', this)">🡇</button>
+                </div>
+                <pre><code class="hljs" id="uart_Arduino-py">
+#!/usr/bin/env python
+# coding: utf-8
+
+import serial
+import time
+
+class uart_Arduino:
+    def __init__(self, serial_port="/dev/ttyUSB0", baudrate=9600, timeout=2.5):
+        self.serial_port = serial_port
+        self.baudrate = baudrate
+        self.timeout = timeout
+
+        self.arduino = None
+        self.presence = False
+        self.last_msg_time = 0
+
+    def start(self):
+        try:
+            self.arduino = serial.Serial(self.serial_port, self.baudrate, timeout=1)
+            time.sleep(2)  # temps pour l'initialisation de l'Arduino
+            print(f"Connexion UART établie sur {self.serial_port} à {self.baudrate} bauds")
+        except Exception as e:
+            print(f"Erreur de connexion UART : {e}")
+
+    def listen(self):
+        if self.arduino and self.arduino.in_waiting > 0:
+            try:
+                data = self.arduino.readline().decode().strip()
+                if data == "piece":
+                    self.presence = True
+                    self.last_msg_time = time.time()
+            except Exception as e:
+                print(f"Erreur lecture UART : {e}")
+
+        # Timeout pour remettre presence à False
+        if self.presence and (time.time() - self.last_msg_time > self.timeout):
+            self.presence = False
+
+    def close(self):
+        if self.arduino:
+            self.arduino.close()
+            print("UART fermée")
+                </code></pre>
+              </details>
+            
+            <h4>d. Conclusion</h4>
+              <p>
+                En conclusion, la communication UART filaire a été retenue comme solution principale pour ce projet, 
+                tandis que la communication sans fil constitue une alternative flexible et évolutive. 
+                La communication I²C, quant à elle, n’a pas été retenue en raison de son manque de fiabilité dans cette configuration.
+              </p>
+
+              
+
+        </div>
+      </section>
+    </main>
+  </div> 
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

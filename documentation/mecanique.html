@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Département Mécanique – B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Département Mécanique</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+
+        <div class="nav-section">
+          <button class="tab-button active" href="./mecanique"><i class="fas fa-cogs"></i> Mecanique</button>
+          <div class="sub-links">
+            <a class="subtab-button" href="./meca-niveau1">Niveau 1</a>
+            <a class="subtab-button" href="./meca-niveau2">Niveau 2</a>
+            <a class="subtab-button" href="./meca-niveau3">Niveau 3</a>
+          </div>
+        </div>
+
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="meca-content" class="tab-content active">
+        <div class="subtab-content">
+          <h2 class="projet-titre">Tekbot Robotics Challenge – Parcours Mécanique</h2>
+          <p>
+            Durant trois semaines, notre équipe a mis à l’épreuve ses compétences en <strong>conception mécanique assistée par ordinateur</strong> (CAO) avec <strong>SolidWorks</strong>. 
+            Chaque niveau de difficulté a introduit des challenges de modélisation, d’assemblage et de calcul de masse, testant rigueur, précision et capacité à résoudre des problèmes concrets.  
+          </p>
+
+          <h3>
+            <a href="./meca-niveau1" class="to-project">Niveau Débutant: Modélisation de base et assemblage simple</a>
+          </h3>
+          <p>
+            Ce premier niveau introduisait les fondamentaux de la modélisation 2D/3D sous <strong>SolidWorks</strong>.
+            Nous avons conçu un ensemble de pièces mécaniques simples (acier et aluminium) à partir de croquis géométriques de base, puis vérifié leur conformité par <strong>calcul de masse</strong> avec <strong>tolérance de ±5%</strong>.
+            Ensuite, un assemblage fonctionnel d'une pince mécanique a été réalisé, en respectant les <strong>contraintes</strong> de plans fournis et en localisant avec précision le <strong>centre de gravité</strong> de l’ensemble.
+          </p>
+
+          <h3>
+            <a href="./meca-niveau2" class="to-project">Niveau Intermédiaire: Modifications paramétriques et assemblage de chaîne</a>
+          </h3>
+          <p>
+            Ce niveau est basé sur un examen de certification SolidWorks Associate.
+            Il consistait à modéliser une pièce mécanique à partir de dimensions variables, puis à l’adapter dans deux phases successives avec ajout/retrait de matière, le tout sous <strong>contrainte</strong> stricte de <strong>tolérance de masse de ±1%</strong>.
+            Nous avons ensuite réalisé l’assemblage complet d’une <strong>chaîne mécanique</strong>, avec un placement précis des composants par rapport à l’origine, pour un calcul exact du <strong>centre de masse</strong> selon des angles prédéfinis.
+          </p>
+
+          <h3>
+            <a href="./meca-niveau3" class="to-project">Niveau Avancé: Conception d’une pièce complexe et solution mécanique</a>
+          </h3>
+          <p>
+            Ce dernier niveau visait à évaluer notre capacité à concevoir une solution mécanique complète face à un besoin concret.
+            Nous avons modélisé une <strong>pièce complexe</strong> à partir de dimensions paramétrées et de spécifications précises (découpes, filets, rayons, tolérances), avec validation par <strong>calcul de masse</strong>.
+            Ce défi faisait appel à toutes les compétences acquises précédemment : maîtrise avancée des fonctions <strong>SolidWorks</strong>, rigueur dans les détails techniques, et créativité pour proposer une solution fonctionnelle.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

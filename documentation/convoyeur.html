@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Système de convoyeur - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Système de convoyeur</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+
+        <div class="nav-section">
+
+          <button class="tab-button active" href="./convoyeur"><i class="fas fa-forward"></i> Convoyeur</button>
+          <div class="sub-links">
+            <a class="subtab-button" href="./convoyeur-meca">Partie mécanique</a>
+            <a class="subtab-button" href="./convoyeur-electro">Partie électronique</a>
+            <a class="subtab-button" href="./convoyeur-it">Partie informatique</a>
+            <a class="subtab-button" href="./convoyeur-validation">Tests et validation</a>
+          </div>
+        </div>
+        <a href="./trc25" class="nav-link"><i class="fas fa-robot"></i> TRC25</a>
+
+      </nav>
+    </div>
+
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section id="convoyeur-content" class="tab-content active">
+
+        <div id="introduction" class="subtab-content active">
+          <h2 id="intro" class="projet-titre">Introduction générale</h2>
+          <h3 id="1-intro">1. Contexte</h3>
+            <p>
+               Dans le cadre du développement durable et de l’optimisation des processus industriels, 
+               la ville industrielle de TEKBOT CITY souhaite accueillir une nouvelle entreprise spécialisée dans le recyclage des déchets. 
+               Afin de <strong>moderniser</strong> ses infrastructures et de renforcer l’efficacité du <strong>tri</strong>, 
+               il est envisagé d’installer un <strong>système intelligent de convoyeur</strong> capable d’identifier, 
+               trier et comptabiliser automatiquement différents types de déchets.
+            </p>
+
+            <p>
+              Ce projet s'inscrit dans le cadre de la TRC 2025, un challenge technologique pluridisciplinaire visant à combiner la <strong>mécanique</strong>, 
+              l’<strong>électronique</strong> et l’<strong>informatique embarquée</strong> pour résoudre des problématiques industrielles concrètes.
+            </p>
+          <h3 id="2-intro">2. Objectifs</h3>
+            <p>
+              L’objectif principal de ce projet est de concevoir, réaliser et tester 
+              un <strong>système de convoyeur intelligent</strong> capable de :
+              <ul>
+                <li>Détecter la présence d’un objet(un déchet) sur un tapis roulant,</li>
+                <li>Identifier sa couleur et son type(Rouge, Vert, Jaune, Bleu) à l’aide d’un capteur adapté,</li>
+                <li>Compter chaque type de déchet détecté,</li>
+                <li>Et afficher en temps réel ces données sur une interface web destinée aux administrateurs</li>
+              </ul>
+            </p>
+          <h3 id="3-intro">3. Présentation du système</h3>
+            <p>
+              Le système est composé de trois grandes parties interconnectées :
+            </p>
+            <ul>
+              <li>
+                <strong>La bande transporteuse</strong>(convoyeur) reste immobile en l’absence de déchet 
+                et s’active automatiquement dès qu’un objet est détecté par un capteur de présence. 
+                Elle transporte le déchet jusqu’à une zone de dépôt.
+              </li>
+              <li>
+                <strong>Le module de tri</strong> utilise un capteur de couleur pour identifier l’objet. 
+                Un algorithme embarqué analyse cette couleur et classe le déchet dans une catégorie définie. 
+                En fin de course, une indication visuelle informe l’équipe de collecte sur le bac approprié.
+              </li>
+              <li>
+                <strong>L’interface web</strong> reçoit les données via une communication série (Web Serial API) 
+                et affiche dynamiquement le nombre de déchets triés par couleur. Elle offre une visualisation claire, et permet un suivi en direct.
+              </li>
+            </ul>
+          <h3 id="4-intro">4. Technologies utilisées</h3>
+            <p>
+              Le projet exploite un ensemble cohérent de technologies issues des trois domaines du projet :
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Domaine</th>
+                  <th>Technologies / Outils utilisés</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Électronique</strong></td>
+                  <td>Arduino Nano, capteur de couleur(ColorPal), capteur de présence(Ultrason), moteur DC, LED RGB, driver moteur, alimentation Li‑Ion</td>
+                </tr>
+                <tr>
+                  <td><strong>Informatique</strong></td>
+                  <td>HTML, CSS, JavaScript (Web Serial API), Python, Chart.js pour les graphiques, communication série USB</td>
+                </tr>
+                <tr>
+                  <td><strong>Mécanique</strong></td>
+                  <td>Conception CAO sur SolidWorks, tapis roulant, structure en bois et plastique</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <div id="cahier" class="subtab-content">
+          <h2 id="cahier_de_charge" class="projet-titre">Cahier de charge</h2>
+          <h3 id="1-cahier">1. Besoins fonctionnels</h3>
+            <p>
+              Le système de convoyeur doit répondre aux besoins suivants
+            </p>
+            <ul>
+              <li>
+                <strong>Tri intelligent de 4 types de déchets</strong>, représentés par des objets de couleurs différentes:
+                <ul>
+                  <li>Rouge → Type 1</li>
+                  <li>Vert → Type 2</li>
+                  <li>Jaune → Type 3</li>
+                  <li>Bleu → Type 4</li>
+                </ul>
+              </li>
+              <li><strong>Détection automatique de la présence</strong> d’un objet sur la bande transporteuse à l’aide d’un capteur de présence</li>
+              <li><strong>Identification précise</strong> de la couleur du déchet via un capteur de couleur.</li>
+              <li><strong>Activation automatique</strong> du convoyeur uniquement lorsqu’un objet est détecté.</li>
+              <li><strong>Indication claire de la catégorie de tri</strong>, pour permettre une collecte manuelle efficace dans les bacs correspondants.</li>
+              <li><strong>Visualisation en temps réel</strong>l sur une interface web intuitive, permettant à l’administrateur de :</li>
+              <ul>
+                <li>Suivre le nombre de déchets triés par type.</li>
+                <li>Suivre la performance du système</li>
+                <li>Intervenir en cas de problème</li>
+              </ul>
+            </ul>
+
+
+          <h3 id="2-cahier">2. Contraintes</h3>
+            <p>
+              Le système doit respecter un ensemble de contraintes techniques fixées :
+            </p>
+            <ul>
+              <li>
+                <strong>Alimentation autonome</strong> à partir d’un bloc de batteries lithium, garantissant une mobilité et une sécurité énergétique.
+              </li>
+              <li>
+                <strong>Détection obligatoire par un système de capteurs imposés :</strong>
+                <ul>
+                  <li>Capteur de présence</li>
+                  <li>Capteur de couleur</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Microcontrôleur imposé :</strong> Arduino Nano ou ATmega
+              </li>
+              <li>
+                <strong>Contraintes mécaniques précises :</strong>
+                <ul>
+                  <li>Longueur du convoyeur : 650 mm.</li>
+                  <li>Hauteur du tapis par rapport au sol : 100 mm.</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Poids et dimensions des objets à trier :</strong>
+                <ul>
+                  <li>Forme : cube.</li>
+                  <li>Taille : 30 mm de côté.</li>
+                </ul>
+              </li>
+            </ul>
+        </div>
+
+        <div class="subtab-content">
+          <h2 class="projet-titre">Plan de réalisation du système</h2>
+          <p>
+            Ce document présente l’approche adoptée par notre équipe, les choix techniques réalisés dans chaque domaine, ainsi que les tests de validation du système complet.
+          </p>
+
+          <h3>
+            <a href="./convoyeur-meca" class="to-project">Partie Mécanique: Conception du convoyeur</a>
+          </h3>
+          <p>
+            Durant cette phase, nous avons conçu l’ensemble mécanique du système de convoyage, en respectant les contraintes strictes définies dans le cahier des charges. 
+            L’objectif principal était de concevoir un convoyeur stable, précis et reproductible, capable de transporter des objets cubiques conformement à la demande du client.
+          </p>
+
+          <p>
+            Le travail a commencé par une <strong>étude préliminaire</strong> de la structure : matériaux possibles, stabilité, intégration des capteurs, compatibilité avec les actionneurs. 
+            La bande transporteuse a été pensée pour offrir un mouvement fluide.
+          </p>
+
+          <p>
+            La modélisation a été entièrement réalisée sous <strong>SolidWorks</strong>. 
+            Chaque pièce — base, rouleaux, supports moteur, structures latérales — a été modélisée en respectant les cotes réelles. 
+            Un <strong>assemblage 3D</strong> a permis de vérifier l’alignement des pièces, le passage des câbles, et l’espace disponible pour les capteurs. 
+            Des plans cotés ont été générés pour l’usinage et la découpe.
+          </p>
+
+          <p>
+            Ce sous-système assure un guidage précis des déchets vers la zone de tri et offre un bon équilibre entre <strong>rigidité</strong>, <strong>encombrement</strong> et <strong>modularité</strong>.
+          </p>
+
+          <h3>
+            <a href="./convoyeur-electro" class="to-project">Partie Électronique: Détection et traitement des déchets</a>
+          </h3>
+          <p>
+            La partie électronique représente le <strong>cœur du tri intelligent</strong>. 
+            Elle repose sur un microcontrôleur Arduino Nano connecté à un ensemble de capteurs et d’actionneurs permettant la détection, l’analyse et la communication d’informations vers l’interface utilisateur.
+          </p>
+
+          <p>
+            <strong>La détection de la présence</strong> d’un déchet sur le convoyeur est assurée par deux capteurs: un <strong>capteur Ultrason</strong> en début de piste, et un <strong>capteur infrarouge</strong> à la fin.
+            Dès qu’un objet est détecté, un <strong>moteur DC</strong> est activé pour entraîner la bande transporteuse.
+          </p>
+
+          <p>
+            Une fois l’objet en mouvement, un <strong>capteur de couleur</strong> (TCS230) analyse la teinte de l’objet. 
+            Selon la couleur détectée (rouge, vert, jaune, bleu), un signal est généré pour <strong>classification</strong>.
+          </p>
+
+          <p>
+            Les données collectées sont ensuite envoyées au système informatique. 
+          </p>
+
+          <h3>
+            <a href="./convoyeur-it" class="to-project">Partie Informatique: Interface web</a>
+          </h3>
+          <p>
+            Cette partie est dédiée à la conception d’une <strong>interface web interactive</strong>, permettant de suivre en direct le tri des déchets par catégorie. 
+            L’interface vise à offrir un affichage clair, visuel et instantané des <strong>données issues du microcontrôleur</strong>.
+          </p>
+
+          <p>
+            Le développement s’est appuyé sur les technologies web standards : <strong>front-end</strong>(HTML, CSS, JS) et <strong>backend</strong>(Flask, Python).
+            La communication entre l’Arduino et l’interface est assurée via la <strong>Web Serial API</strong>, qui permet de lire en temps réel les données.
+          </p>
+
+          <p>
+            Un système de comptage dynamique met à jour les compteurs de chaque type de déchet. 
+            Des graphiques générés avec Chart.js offrent une vue synthétique de l’évolution du tri.
+            Ce composant logiciel permet aux opérateurs ou aux administrateurs de suivre en temps réel l’<strong>efficacité du tri et de détecter</strong> rapidement tout dysfonctionnement.
+          </p>
+
+          <h3>
+            <a href="./convoyeur-validation" class="to-project">Tests & Validation du système</a>
+          </h3>
+          <p>
+           La dernière phase du projet a été consacrée à la validation du système complet. 
+           L’objectif était de garantir que les différents modules — <strong>mécanique, électronique, informatique</strong> — fonctionnent de manière cohérente et fiable dans un environnement réel.
+          </p>
+          <p>
+            Des tests d’intégration ont été réalisés pour s’assurer de la synchronisation entre les modules.
+            Un test de stress a été mené avec le passage successif de plusieurs objets de différentes couleurs, simulant une session continue.
+          </p>
+          <p>
+            Des tests de performance ont permis de valider l’autonomie du système et la stabilité du tri dans le temps. 
+            Ce processus de validation rigoureux confirme que le système de convoyeur est fonctionnel et robuste.
+          </p>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/style-commun.css" />
+  <link rel="stylesheet" href="../styles/style-code.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+  <link rel="icon" type="image/x-icon" href="../logo/favicon.ico">
+  <title>Résilience Urbaine - B2MS CleanTech</title>
+</head>
+<body>
+  <header class="header">
+    <div class="section__container header__container_domaine">
+      <h2>Résilience Urbaine</h2>
+    </div>
+  </header>
+
+  <div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <nav class="main-nav">
+        <a href=".././" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
+        <a href="./it" class="nav-link"><i class="fas fa-desktop"></i> IT</a>
+        <a href="./electronique" class="nav-link"><i class="fas fa-microchip"></i> Électronique</a>
+        <a href="./mecanique" class="nav-link"><i class="fas fa-cogs"></i> Mécanique</a>
+        <a href="./convoyeur" class="nav-link"></i><i class="fas fa-forward"></i> Convoyeur</a>
+
+        <div class="nav-section">
+          <a href="./trc25" style="text-decoration: none;"><button class="tab-button active"><i class="fas fa-robot"></i> TRC25</button> </a>       
+          <div class="sub-links">
+            <a class="subtab-button" href="./trc25-convoyeur">Convoyeur 2.0</a>
+            <a class="subtab-button" href="./trc25-dofbot">Prise en main du Dofbot</a>
+            <a class="subtab-button" href="./trc25-communication">Communication Dofbot - Convoyeur</a>
+            <a class="subtab-button" href="./trc25-yolo">Modèle de détection YOLO</a>
+            <a class="subtab-button" href="./trc25-dofbot_ia">Détection et tri - Dofbot</a>
+            <a class="subtab-button" href="./trc25-ros">ROS</a>
+            <a class="subtab-button active" href="./trc25-meca">Système de ramassage</a>
+            <nav class="project-subnav active" id="subnav-meca">
+              <a href="#1-meca">1. Choix et modélisation</a>
+              <a href="#2-meca">2. Assemblage sous Solidworks</a>
+              <a href="#3-meca">3. Impression et montage</a>
+             </nav>
+          </div>
+        </div>
+
+      </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <section class="tab-content active">
+        <div class="subtab-content active">
+          <h2 id="meca" class="projet-titre">Système de ramassage</h2>
+            <p>
+              Après les testes de préselection de la compétition du Tekbot Robotic Challenge 2025 (TRC_2025), l'équipe mécanique 
+              poursuit son travail et mettant en profil son expertise en conception assisté par ordinateur sous solidwork. A 
+              travers cette documentation, nous allons présenter la conception et le fonctionnement d'un système de ramassage 
+              innovant développé par notre équipe. L'objectif était de développer un système efficace, facile à controler via ROS 
+              pour permettre au robot rosmaster X3 de pouvoir ramasser rapidement différentes types de déchets.
+            </p>
+
+          <h3 id="1-meca">1. Choix et modélisation</h3>
+            <p>
+              Après de longues discussions et plusieurs propositions étudiées, nous avons finalement adopté un système très simple
+              et facile à mettre en œuvre, permettant de ramasser les déchets de manière efficace. Ce mécanisme repose sur le principe 
+              pignon_crémaillère : des crémaillères guidées assurent un mouvement linéaire précis, tandis que des pignons entraînés
+              par un servomoteur convertissent la rotation en translation. Cette configuration nous permet d'obtenir un mouvement 
+              contrôlé, robuste et parfaitement adapté à la tâche de collecte. Nous allons détailler le mécanisme pour la suite de 
+              cette documentation.
+            </p>
+            <h4>a. Conception des pièces sous Solidworks</h4>
+              <p>
+                Les pièces ont été conçu sous solidwork, ainsi le système complet a été assemblé et testé sous solidwork avant de valider 
+                définitivement le système de ramassage. Une fois cette étapes confirmée, nous avons passé à l'impression des pièces.
+              </p>
+              <p>
+                La conception du pignon et des crémaillères constitue le cœur du système. Ces deux éléments garantissent le fonctionnement du système.
+                ET ceci grâce à deux boîtiers mécaniques fermés intégrant chacun un train d'engrenages couplé à une crémaillère.
+                Ces ensembles assurent la transmission du couple, la synchronisation des mouvements et la précision du déplacement des bras de ramassage.
+              </p>
+             
+              <div class="image-container">
+                <p> Les pignons:
+                  Le système de transmission est constitué de plusieurs pignons et engrenages disposés à l'intérieur de chaque boîtier mécanique.
+                  Un premier pignon est directement fixé sur l'axe du servomoteur. Il reçoit la rotation du moteur et la transmet à un train d'engrenages intermédiaires.
+                  Un second pignon, engrène avec la crémaillère. Il transforme la rotation transmise par les engrenages en un mouvement de translation linéaire de la crémaillère, 
+                  permettant ainsi le déplacement des bras de ramassage.
+                </p>
+                <img src="../images/TRC25/Mecanique/image1.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image2.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image3.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image4.webp" alt="image" class="image-small"/>
+              </div>
+
+              <p>
+                Les crémaillères sont les éléments chargés de transformer le mouvement de rotation transmis par les engrenages en un mouvement de translation linéaire.
+                  Dans chaque boîtier mécanique, une crémaillère est guidée par la structure interne du carter afin de garantir un déplacement rectiligne, sans jeu ni déviation.
+              </p>
+              <div class="image-container">
+                <img src="../images/TRC25/Mecanique/image5.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image6.webp" alt="image" class="image-small"/>             
+              </div>
+
+              <div class="image-container">
+                <p>
+                  Le système de ramassage est actionné par des servomoteurs à rotation continue.
+                  Contrairement aux servomoteurs classiques à position angulaire (0°-180°), ces servomoteurs ne se positionnent pas à un angle précis, 
+                  mais fournissent une rotation continue dont la vitesse et le sens de rotation sont contrôlés par le signal PWM.
+                </p>
+                <img src="../images/TRC25/Mecanique/image7.webp" alt="image" class="image-small"/> 
+              </div>
+
+              <div class="image-container">
+                <p>
+                 Les boîtiers mécaniques constituent la structure principale du système de ramassage.
+                 Chaque boîtier intègre un servomoteur à rotation continue, un train d'engrenages ainsi qu'une crémaillère.
+                 Ils assurent à la fois le support mécanique, le guidage des pièces mobiles et la protection des composants internes.
+                </p>
+                <img src="../images/TRC25/Mecanique/image8.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image9.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image10.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image11.webp" alt="image" class="image-small"/>
+              </div>
+
+              <div class="image-container">
+                <p>
+                  Assemblage des boîtiers
+                  Chaque boîtier du système de ramassage est assemblé comme un module mécatronique autonome.
+                  Il regroupe dans un même volume le servomoteur, les trains d'engrenages, le pignon de sortie et la crémaillère.
+                  Cette architecture compacte permet d'obtenir un mécanisme rigide, précis et facile à intégrer sur le robot.
+                </p>
+                <img src="../images/TRC25/Mecanique/image14.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image12.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image13.webp" alt="image" class="image-small"/>
+                <br>
+                <img src="../images/TRC25/Mecanique/image15.webp" alt="image" class="image-small"/>
+              </div>
+
+              <div class="image-container">
+                <p>
+                  Fixation de la boite sur le rosmaster X3:
+                  Afin d'intégrer le module de ramassage au Rosmaster X3, nous avons conçu une pièce de fixation spécifique.
+                  Cette pièce est solidement fixée sur la structure du robot et sert de support mécanique au boîtier contenant 
+                  le servomoteur, les engrenages et la crémaillère.               
+                </p>
+                <img src="../images/TRC25/Mecanique/image16.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image17.webp" alt="image" class="image-small"/>
+              </div>
+
+              <div class="image-container">
+                <p>
+                  Le système de ramassage est constitué de deux boîtiers mécaniques distincts, chacun ayant une fonction bien précise.
+
+                  Le premier boîtier est dédié au mouvement vertical du module.
+                  Il permet de monter et de descendre le système de ramassage afin d'éviter le contact permanent avec le sol lorsque le robot se déplace.
+                  Ce réglage protège la pelle, réduit les frottements et améliore la mobilité du Rosmaster X3.
+
+                  Le second boîtier est consacré au mécanisme de ramassage proprement dit.
+                  Il contient le servomoteur, les engrenages et les crémaillères qui actionnent la balayette, permettant de ramasser et retenir les déchets.
+                </p>
+              </div>
+
+          <h4>b. La pelle</h4>
+              <p>La pelle constitue l'organe terminal du système de ramassage.
+                Elle est fixée aux extrémités de la crémaillère du boîtier qui permet de monter et de descedre le système de 
+                ramassage et reçoit directement le mouvement généré par les engrenages.
+              </p>
+            <div class="image-container">
+              <img src="../images/TRC25/Mecanique/image18.webp" alt="image" class="image-small"/>
+            </div>
+
+          <h4>c. La balayette</h4>
+              <p>La balayette est l'élément frontal du système de ramassage.
+                 Elle est positionnée devant la pelle et fixée sur le mécanisme actionné par la crémaillère du boîtier de 
+                 ramassage. Son rôle est de guider les déchets vers la pelle en les poussant et en les recentrant pendant 
+                 la phase de fermeture du système.
+              </p>
+            <div class="image-container">
+              <img src="../images/TRC25/Mecanique/image19.webp" alt="image" class="image-small"/>
+            </div>
+
+          <h3 id="2-meca">2. Assemblage sous Solidworks</h3>
+            <p>
+              Après la conception et la fabrication de toutes les pièces, les deux boîtiers mécaniques, la structure de support, 
+              la pelle et la balayette sont assemblés pour former le module complet de ramassage du Rosmaster X3.
+              Une fois assemblé, le module est solidement fixé à l'avant du Rosmaster X3 via la pièce de support dédiée.
+              L'ensemble constitue un système compact, rigide et parfaitement intégré au robot, garantissant un ramassage 
+              efficace et fiable des déchets lors des épreuves du TRC_2025.
+            </p>
+            
+            <div class="image-container">
+                <img src="../images/TRC25/Mecanique/image20.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image22.webp" alt="image" class="image-small"/>
+                <img src="../images/TRC25/Mecanique/image21.webp" alt="image" class="image-small"/>
+              </div>
+
+            <figure>
+              <video controls width=80%>
+                <source src="../videos/TRC25/Mecanique/video1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+            </figure>
+
+            <p class="txt_center">
+              <a href="https://github.com/TekBot-Robotics-Challenge/2025-Team-B2MS_CleanTech-Docs/raw/refs/heads/main/TRC25/b2ms_ramassage.zip" target="_blank" class="download-link">
+                Télécharger b2ms_ramassage.zip
+              </a>
+            </p>
+
+          <h3 id="3-meca">3. Impression et montage</h3>
+          <p>Une fois la conception mécanique terminée, l'étape suivante consiste à imprimer toutes les pièces nécessaires pour 
+            le système de ramassage. L'impression 3D permet de produire des pièces précises et personnalisées, adaptées aux 
+            contraintes du RosMaster X3.
+          </p>
+
+           <div class="image-container">
+              <img src="../images/TRC25/Mecanique/image1_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image2_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image3_b.webp" alt="image" class="image-small"/>
+            </div>
+              <div class="image-container">
+              <img src="../images/TRC25/Mecanique/image4_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image5_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image8_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image12_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image15_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image16_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image18_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image23_b.webp" alt="image" class="image-small"/>
+            </div>
+            <div class="image-container">
+              <img src="../images/TRC25/Mecanique/image6_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image9_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image13_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image14_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image19_b.webp" alt="image" class="image-small"/>
+            </div>
+            <div class="image-container">
+              <img src="../images/TRC25/Mecanique/image17_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image20_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image21_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image25_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image29_b.webp" alt="image" class="image-small"/>
+            </div>
+            <div class="image-container">
+              <img src="../images/TRC25/Mecanique/image27_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image30_b.webp" alt="image" class="image-small"/>
+              <br>
+              <img src="../images/TRC25/Mecanique/image31_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image34_b.webp" alt="image" class="image-small"/>
+              <img src="../images/TRC25/Mecanique/image28_b.webp" alt="image" class="image-small"/>
+            </div>
+
+            <figure>
+              <video controls width=30%>
+                <source src="../videos/TRC25/Mecanique/video2.mp4" type="video/mp4">
+                votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+            </figure>
+
+            <figure>
+              <video controls width=auto>
+                <source src="../videos/TRC25/Mecanique/video3.mp4" type="video/mp4">
+                votre navigateur ne supporte pas la vidéo HTML5.
+              </video>
+            </figure>
+ 
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Copyright © 2025 Team B2MS CleanTech. All rights reserved.
+  </footer>
+
+  <script src="../scripts/script_commun.js"></script>
+  <script src="../scripts/script_code.js"></script>
+</body>
+</html>
