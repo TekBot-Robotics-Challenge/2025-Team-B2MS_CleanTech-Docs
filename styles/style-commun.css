@@ -14,7 +14,7 @@ body {
 }
 
 header {
-  padding: 1.5rem;
+  padding: 1rem;
   text-align: center;
   color: white;
   background-color: #007b5f;
@@ -50,10 +50,14 @@ h5{
   font-size: 1.25rem;
 }
 
-p, ul, span {
+p, ul, ol, span, summary{
   margin-top: 0;
   margin-bottom: 0.3rem;
   font-size: 1.25rem;
+}
+
+p, h5 {
+  margin-bottom: 0rem;
 }
 
 p span {
@@ -75,7 +79,7 @@ p span {
 }
 
 .tab-content {
-  padding-top: 70px;
+  padding-top: 60px;
 }
 
 .tab-content.active {
@@ -91,7 +95,7 @@ p span {
   display: flex;
   flex-direction: column;
   background-color: #d4ede1;
-  width: 250px;
+  width: 20%;
   padding: 1rem;
   position: sticky;
   top: 0;
@@ -99,14 +103,35 @@ p span {
   z-index: 1000;
 }
 
+.sidebar::-webkit-scrollbar {
+  width: 2px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #007b5f;
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .sidebar-toggle {
   display: none;
 }
 
+
 .main-nav {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 3rem); 
 }
+
+/* .nav-link{
+  text-decoration: none;
+} */
 
 .nav-link,
 .tab-button {
@@ -114,7 +139,6 @@ p span {
   border: none;
   color: #006f5c;
   text-align: left;
-  /* font-size: 1.25rem; */
   font-size: 1.1rem;
   padding: 0.7rem 0.5rem;
   display: flex;
@@ -161,7 +185,6 @@ p span {
   color: #007b5f;
 }
 
-/* CONTENU PRINCIPAL */
 .main-content {
   flex: 1;
   padding: 2rem;
@@ -169,7 +192,6 @@ p span {
   margin-top: -5rem;
 }
 
-/* SUBNAV Horizontale si besoin */
 .subnav {
   position: static;
   background-color: #d1e7dc;
@@ -215,7 +237,7 @@ p span {
   cursor: pointer;
   color: #004d3a;
   transition: color 0.3s;
-  font-size: 1.05rem;
+  font-size: 1.05rem !important;
 }
 
 .subtab-button.active {
@@ -241,7 +263,7 @@ p span {
 }
 
 .projet-titre {
-  font-size: 1.7rem;
+  font-size: 1.7rem !important;
   color: #007b5f;
   margin-bottom: 1rem;
   border-bottom: 2px solid #007b5f;
@@ -284,6 +306,12 @@ img {
 
 .image-mean {
   max-width: 60%;
+  height: auto;
+  cursor: pointer;
+}
+
+.image-50 {
+  max-width: 50%;
   height: auto;
   cursor: pointer;
 }
@@ -443,324 +471,515 @@ table .dash-list {
   color: #004d3a;
 }
 
-@media only screen and (min-width: 250px) and (max-width: 568px) {
-  header {
-    padding: 0.5rem;
+@media (max-width: 947px) {
+  header{
+    position: fixed;
+    height: 25%;
+    width: 100%;
+    padding: 0;
+    z-index: 1;
   }
 
-  h3 {
-    font-size: 0.7rem;
+  .section__container {
+    max-width: 950px;
+    margin-top: 1rem;
+    padding: 1rem 0.5rem;
   }
 
-  h4{
-    margin-left: 1rem;
-    font-size: 0.65rem;
-  }
-
-  h5{
-    margin-left: 1.5rem;
-    font-size: 0.6rem;
-  }
-
-  p, ul, span {
-    font-size: 0.53rem;
+  .header__container_domaine {
+    font-size: 2.5rem;
+    font-weight: 150;
+    line-height: 1.5rem;
+    margin-top: 4rem;
   }
 
   .tab-content {
-    padding-top: 70px;
+    padding-top: 150px;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;   
+    width: 50%;
+    height: 100vh;
+    background-color: #d4ede1;
+    padding: 1rem;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    transition: left 0.3s ease;
+    z-index: 2000;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 1.5rem;
+    right: 1rem;
+    font-size: 1.6rem;
+    color: #f4f6f8;
+    cursor: pointer;
+    z-index: 2100;
+    transition: left 0.3s ease;
   }
 
   .layout-container {
-    min-height: 100vh;
+    display: block;
   }
-
-  .sidebar {
-    width: 90px;
-    padding: 0.1rem;
-    height: 100vh;
-  }
-
-
-  .nav-link,
-  .tab-button {
-    font-size: 0.65rem;
-    padding: 0.1rem 0.1rem;
-  }
-
-
-  .nav-section .sub-links {
-    margin-left: 0.2rem;
-  }
-
-  .sub-links button {
-    font-size: 0.4rem;
-  }
-
-  .project-subnav {
-    margin-left: 1rem;
-    font-size: 0.5rem;
-  }
-
-  .main-content {
-    padding: 0.5rem;
-  }
-
-  .subtab-button {
-    font-size: 0.6rem;
-  }
-
-  .subtab-button.active::before {
-    margin-right: 0.3rem;
-  }
-
-  .subtab-content {
-    margin-top: 0.5rem;
-    padding: 0.5rem;
-  }
-
-  .projet-titre {
-    font-size: 0.9rem;
-  }
-
-  footer {
-    font-size: 0.5rem;
-  }
-
-  .download-link {
-    font-size: 0.6rem;
-  }
-
-  .header__container_domaine {
-    font-size: 1rem;
-  }
-
-  .section__container {
-    max-width: 568px;
-    padding: 1rem 0.3rem;
-  }
-
-  table, th, td {
-    padding: 0.3rem 0.2rem;
-    font-size: 0.5rem;
-  }
-
-  .to-project {
-    font-size: 1rem;           
-    margin-left: 0.5rem;
-  }
-
-  video{
-    width: 80% !important;
-    margin: 0.5rem auto;
-  }
-
-  .image-container {
-    margin: 0.5rem auto;
-  }
-}
-
-@media only screen and (min-width: 567px) and (max-width: 768px) {
-  header {
-    padding: 1rem;
-  }
-
+  
   h3 {
-    font-size: 1.1rem;
+    font-size: 1.45rem;
   }
 
   h4{
-    margin-left: 2rem;
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 
   h5{
-    margin-left: 2rem;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
   }
 
-  p, ul, span, .download-link {
-    font-size: 0.8rem;
+  p, ul, ol, span, summary{
+    font-size: 1.1rem;
   }
-
-
-  .sidebar {
-    width: 100px;
-    padding: 1rem;
-    height: 100vh;
-  }
-
 
   .nav-link,
   .tab-button {
-    font-size: 0.7rem;
-    padding: 0.5rem 0.5rem;
-  }
-
-
-  .nav-section .sub-links {
-    margin-left: 0.5rem;
-  }
-
-  .sub-links button {
     font-size: 1rem;
   }
 
-  .project-subnav {
-    margin-left: 1.2rem;
-    font-size: 0.65rem;
+  .sub-links button {
+    font-size: 0.9rem;
   }
 
-  .main-content {
-    padding: 1rem;
+  .project-subnav {
+    font-size: 1rem;
   }
 
   .subtab-button {
     font-size: 1rem;
-  }
-
-  .subtab-button.active::before {
-    margin-right: 0.5rem;
-  }
-
-  .subtab-content {
-    margin-top: 0.8rem;
-    padding: 0.8rem;
-  }
-
-  .projet-titre {
-    font-size: 1.2rem;
-  }
-
-  footer {
-    font-size: 0.7rem;
-  }
-
-  .header__container_domaine {
-    font-size: 2rem;
-  }
-
-  .section__container {
-    max-width: 768px;
-    padding: 2rem 1rem;
-  }
-
-  table, th, td {
-    padding: 0.5rem 0.5rem;
-    font-size: 0.8rem;
-  }
-
-  .to-project {
-    font-size: 1.1rem;           
-    margin-left: 1rem;
-  }
-
-  video{
-    width: 60% !important;
-    margin: 0.8rem auto;
-  }
-
-  .image-container {
-    margin: 0.8rem auto;
-  }
-}
-
-@media only screen and (min-width: 767px) and (max-width: 1000px) {
-  h3 {
-    font-size: 1.3rem;
-  }
-
-  h4{
-    margin-left: 3rem;
-    font-size: 1.2rem;
-  }
-
-  h5{
-    margin-left: 3.5rem;
-    font-size: 1.1rem;
-  }
-
-  p, ul, span, .download-link {
-    font-size: 1rem;
-  }
-
-  .sidebar {
-    width: 180px;
-    padding: 1rem;
-    height: 100vh;
-  }
-
-
-  .nav-link,
-  .tab-button {
-    font-size: 0.9rem;
-    padding: 1rem 1rem;
-  }
-
-
-  .nav-section .sub-links {
-    margin-left: 1rem;
-  }
-
-  .sub-links button {
-    font-size: 1.2rem;
-  }
-
-  .project-subnav {
-    margin-left: 2rem;
-    font-size: 1.1rem;
-  }
-
-  .main-content {
-    padding: 2rem;
-  }
-
-  .subtab-button {
-    font-size: 1.2rem;
-  }
-
-  .subtab-button.active::before {
-    margin-right: 1rem;
-  }
-
-  .subtab-content {
-    margin-top: 1rem;
-    padding: 1rem;
   }
 
   .projet-titre {
     font-size: 1.5rem;
   }
 
-  footer {
-    font-size: 1rem;
-  }
-
-  .header__container_domaine {
-    font-size: 2.5rem;
-  }
-
-  .section__container {
-    max-width: 1000px;
-    padding: 2rem 1rem;
-  }
-
-  table, th, td {
-    padding: 0.8rem 1rem;
-    font-size: 1rem;
+  .download-link {
+    font-size: 1.05rem;
   }
 
   .to-project {
-    font-size: 1.3rem;           
-    margin-left: 1rem;
+    font-size: 1.2rem;         
+    font-weight: 480;          
+    margin-left: 4rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
   }
 
   .image-container {
-    margin: 1rem auto;
+    margin: 0.2rem auto !important;
   }
 
-  video{
-    margin: 1rem auto;
+  video {
+    max-width: 80%;
+    margin: 0.2rem auto !important;
+  }
+
+  .arbo .folder,
+  .arbo .file {
+    margin-left: 12px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+  }
+
+  .arbo .img, .arbo .txt{
+    margin-right: 12px;
+  }
+
+  .arbo .folder > ul,
+  .arbo .file > ul {
+    padding-left: 10px;
+  }
+
+  table, th, td {
+    padding: 0.1rem 0.1rem;
+  }
+
+  table ul{
+    padding-left: 0.1rem;
+  }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 568px) {
+  header{
+    height: 21%;
+  }
+
+  .main-content {
+    padding: 0rem;
+  }
+
+  .section__container {
+    max-width: 560px;
+    margin-top: 0.1rem;
+    padding: 1.7rem 0.2rem;
+  }
+
+  .header__container_domaine {
+    font-size: 1.2rem;
+    font-weight: 80;
+    line-height: 1rem;
+    margin-top: 4.5rem;
+  }
+
+  .tab-content {
+    padding-top: 150px;
+  }
+
+  .sidebar {            
+    width: 65%;
+  }
+
+  .sidebar-toggle {
+    top: 1rem;
+    right: 1rem;
   }
 }
 
 
+@media only screen and (min-width: 567px) and (max-width: 768px) {
+  header{
+    height: 23%;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .section__container {
+    max-width: 700px;
+    margin-top: 1rem;
+    padding: 1.7rem 0.5rem;
+  }
+
+  .header__container_domaine {
+    font-size: 1.8rem;
+    font-weight: 100;
+    line-height: 1rem;
+    margin-top: 4.5rem;
+  }
+
+
+  .tab-content {
+    padding-top: 150px;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4{
+    font-size: 1.2rem;
+  }
+
+  h5{
+    font-size: 1.15rem;
+  }
+
+  p, ul, ol, span, summary{
+    font-size: 1.15rem;
+  }
+
+  .nav-link,
+  .tab-button {
+    font-size: 1rem;
+  }
+
+  .sub-links button {
+    font-size: 0.9rem;
+  }
+
+  .project-subnav {
+    font-size: 1rem;
+  }
+
+  .subtab-button {
+    font-size: 1rem;
+  }
+
+  .projet-titre {
+    font-size: 1.6rem;
+  }
+
+  .download-link {
+    font-size: 1.1rem;
+  }
+
+  .to-project {
+    font-size: 1.25rem;         
+    font-weight: 500;          
+    margin-left: 4rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+
+  .image-container {
+    margin: 1rem auto !important;
+  }
+
+  video {
+    max-width: 90%;
+    margin: 1rem auto !important;
+  }
+
+  .arbo .folder,
+  .arbo .file {
+    margin-left: 18px;
+    margin-top: 1.8px;
+    margin-bottom: 1.8px;
+  }
+
+  .arbo .img, .arbo .txt{
+    margin-right: 18px;
+  }
+
+  .arbo .folder > ul,
+  .arbo .file > ul {
+    padding-left: 13px;
+  }
+
+  table, th, td {
+    padding: 0.5rem 0.5rem;
+  }
+
+  table ul{
+    padding-left: 0.5rem;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 947px) {
+  header{
+    height: 23%;
+  }
+
+  .main-content {
+    padding: 1.2rem;
+  }
+
+  .section__container {
+    max-width: 1000px;
+    margin-top: 1rem;
+    padding: 1.7rem 0.5rem;
+  }
+
+   
+  .header__container_domaine {
+    font-size: 2.1rem;
+    font-weight: 120;
+    line-height: 1.2rem;
+    margin-top: 4rem;
+  }
+
+  .tab-content {
+    padding-top: 150px;
+  }
+
+  
+  h3 {
+    font-size: 1.55rem;
+  }
+
+  h4{
+    font-size: 1.25rem;
+  }
+
+  h5{
+    font-size: 1.2rem;
+  }
+
+  p, ul, ol, span, summary{
+    font-size: 1.2rem;
+  }
+
+  .nav-link,
+  .tab-button {
+    font-size: 1.05rem;
+  }
+
+  .sub-links button {
+    font-size: 0.9rem;
+  }
+
+  .project-subnav {
+    font-size: 1rem;
+  }
+
+  .subtab-button {
+    font-size: 1rem;
+  }
+
+  .projet-titre {
+    font-size: 1.65rem;
+  }
+
+  .download-link {
+    font-size: 1.15rem;
+  }
+
+  .to-project {
+    font-size: 1.3rem;         
+    font-weight: 550;          
+    margin-left: 4.5rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+
+  .image-container {
+    margin: 2rem auto;
+  }
+
+  video {
+    max-width: 90%;
+  }
+
+  .arbo .folder,
+  .arbo .file {
+    margin-left: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .arbo .img, .arbo .txt{
+    margin-right: 20px;
+  }
+
+  .arbo .folder > ul,
+  .arbo .file > ul {
+    padding-left: 15px;
+  }
+
+  table, th, td {
+    padding: 0.5rem 1rem;
+  }
+
+  table ul{
+    padding-left: 0.5rem;
+  }
+}
+
+
+@media only screen and (min-width: 947px) and (max-width: 1200px) {
+  header{
+    height: 24%;
+  }
+
+  .main-content {
+    padding: 2rem 1.3rem;
+  }
+
+  .section__container {
+    max-width: 1180px;
+    margin-top: 1rem;
+    padding: 1.2rem 0.5rem;
+  }
+
+   
+  .header__container_domaine {
+    font-size: 2.5rem;
+    font-weight: 120;
+    line-height: 1.2rem;
+    margin-top: 0rem;
+  }
+
+  h3 {
+    font-size: 1.55rem;
+  }
+
+  h4{
+    font-size: 1.25rem;
+  }
+
+  h5{
+    font-size: 1.2rem;
+  }
+
+  p, ul, ol, span, summary{
+    font-size: 1.2rem;
+  }
+
+  .nav-link,
+  .tab-button {
+    font-size: 1.05rem;
+  }
+
+  .sub-links button {
+    font-size: 0.9rem;
+  }
+
+  .project-subnav {
+    font-size: 1rem;
+  }
+
+  .subtab-button {
+    font-size: 1rem;
+  }
+
+  .projet-titre {
+    font-size: 1.65rem;
+  }
+
+  .download-link {
+    font-size: 1.15rem;
+  }
+
+  .to-project {
+    font-size: 1.3rem;         
+    font-weight: 550;          
+    margin-left: 4.5rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+
+  .image-container {
+    margin: 2rem auto;
+  }
+
+  video {
+    max-width: 90%;
+  }
+
+  .arbo .folder,
+  .arbo .file {
+    margin-left: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .arbo .img, .arbo .txt{
+    margin-right: 20px;
+  }
+
+  .arbo .folder > ul,
+  .arbo .file > ul {
+    padding-left: 15px;
+  }
+
+  table, th, td {
+    padding: 0.5rem 1rem;
+  }
+
+  table ul{
+    padding-left: 0.5rem;
+  }
+}

@@ -1,6 +1,44 @@
-// Menu burger responsive
-document.getElementById("sidebarToggle").addEventListener("click", () => {
-document.querySelector(".sidebar").classList.toggle("open");
+const sidebarToggle = document.getElementById("sidebarToggle");
+const sidebar = document.querySelector(".sidebar");
+const icon = sidebarToggle.querySelector("i");
+
+// Ouvrir / Fermer via bouton
+sidebarToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+
+  sidebar.classList.toggle("open");
+  sidebarToggle.classList.toggle("open");
+
+  if (sidebar.classList.contains("open")) {
+    icon.classList.replace("fa-bars", "fa-times");
+  } else {
+    icon.classList.replace("fa-times", "fa-bars");
+  }
+});
+
+// Empêche fermeture si on clique DANS la sidebar
+sidebar.addEventListener("click", (e) => {
+  if (!e.target.closest("a")) {
+    e.stopPropagation();
+  }
+});
+
+// Fermer si on clique sur un lien <a>
+sidebar.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    sidebar.classList.remove("open");
+    sidebarToggle.classList.remove("open");
+    icon.classList.replace("fa-times", "fa-bars");
+  });
+});
+
+// Clique ailleurs, ferme la sidebar
+document.addEventListener("click", () => {
+  if (sidebar.classList.contains("open")) {
+    sidebar.classList.remove("open");
+    sidebarToggle.classList.remove("open");
+    icon.classList.replace("fa-times", "fa-bars");
+  }
 });
 
 // Gérer activation des domaines
@@ -27,11 +65,6 @@ parent.querySelectorAll(".subtab-content").forEach(content => content.classList.
 const target = e.currentTarget.getAttribute("data-target");
 parent.querySelector("#" + target).classList.add("active");
 });
-});
-
-// script_commun.js
-document.getElementById("sidebarToggle").addEventListener("click", () => {
-  document.querySelector(".sidebar").classList.toggle("open");
 });
 
 

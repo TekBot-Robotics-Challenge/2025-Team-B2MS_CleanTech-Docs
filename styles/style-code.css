@@ -1,14 +1,21 @@
+:root {
+  /* --code-color: #1e1e1e; */
+  --code-color: #181a1f;
+}
+
+
 .code-container {
-  background-color: #0f1c2e;
+  background-color: var(--code-color);
   color: #e0e8f0;
   border: 1px solid #444;
   border-radius: 5px;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
   padding: 0rem;
-}
+} 
+
 
 details.code-container summary{
   padding: 1rem;
@@ -19,8 +26,12 @@ details.code-container pre {
   padding-top: 0 !important;
 }
 
+/* .code-container pre{
+  margin-top: -1rem;
+} */
 
 code {
+  background-color: var(--code-color) !important;
   display: block;    
   word-break: normal;      
 }
@@ -29,13 +40,11 @@ pre {
   max-height: 400px;
   overflow: auto;
   background: transparent; 
-  font-family: 'Courier New', monospace;
-  font-size: 0.85em;
 }
 
 pre, code {
   font-size: 15px;
-  padding: 0;
+  padding: 0 0.5rem !important;
   margin: 0;
   white-space: pre;
   font-family: 'Courier New', monospace;
@@ -61,7 +70,6 @@ pre::-webkit-scrollbar-thumb {
   background-color: transparent;
   color: white;
   border: none;
-  /* padding: 5px 10px; */
   margin-left: 5px;
   border-radius: 3px;
   cursor: pointer;
@@ -84,6 +92,7 @@ pre::-webkit-scrollbar-thumb {
 .notif.visible {
   opacity: 1;
 }
+
 
 @media only screen and (min-width: 250px) and (max-width: 568px) {
   pre, code, .btn-bar button, .notif {
