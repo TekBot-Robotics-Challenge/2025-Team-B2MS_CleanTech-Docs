@@ -127,11 +127,9 @@ nav {
   max-width: var(--max-width);
   margin: auto;
   z-index: 9;
-  /* height: 90px; */
 }
 
 .nav__bar {
-  /* position: relative;   */
   padding: 1rem 0;
   display: flex;
   align-items: center;
@@ -750,7 +748,6 @@ nav {
   margin-bottom: -3rem ;
 }
 
-
 @media (width > 576px) {
   .room__grid {
     grid-template-columns: repeat(2, 1fr);
@@ -825,7 +822,7 @@ nav {
 
 @media (min-width: 768px) {
     nav {
-        position: sticky;
+        /* position: sticky; */
         top: 0;
         z-index: 999;
         display: flex;
@@ -1058,7 +1055,6 @@ nav {
     }
 
     .logo-ecole {
-    /* margin-top: 1.5rem; */
     width: 100px;
     height: auto;
     }
@@ -1462,20 +1458,9 @@ nav {
     transition: transform 0.3s ease;
   }
 
-  /* .header-ensa {
-    padding: 2rem 2.5rem;
-    gap: 10px;
-    } */
-
   .logo-ecole a img:hover {
     transform: scale(1.05);
   }
-
-  /* .logo-ecole {
-    margin-bottom: 0.5rem;
-    width: 180px;
-    height: 60px;
-  } */
 
   nav {
     position: fixed;
