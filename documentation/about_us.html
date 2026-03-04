@@ -24,28 +24,42 @@
         color: #333;
         padding-top: 1rem;
       }
+      .section__header_about{
+        color: #333;
+      }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
   <title>B2MS CleanTech About us</title>
 </head>
 <body>
-    <header class="header">
 
-        <div class="section__container header__container_about" style="text-align: center;">
-            <ul class="nav__links" style="display: flex; justify-content: center; list-style: none; padding: 0;">
-            <li><a href=".././">Home</a></li>
-            <li><a href="#about">About us</a></li>
-            </ul>
+    <header class="header" id="home">
+      <nav class="nav__bar">
+        <div class="header-ensa effect">
+          <div class="logo-ecole">
+            <a href="https://ensa-marrakech.uca.ma/en/" target="_blank"><img src="../assets/ensa_marrakech.webp" alt="logo" /></a>
+          </div>
+          <div class="nav__menu__btn" id="menu-btn">
+            <i class="ri-menu-line">Menu</i>
+          </div>
         </div>
+        <ul class="nav__links" id="nav-links">
+          <li><a href=".././">Home</a></li>
+          <li><a href="#about">About us</a></li>
+        </ul>
 
-        <div class="section__container header__container_team">
-            <h1>B2MS CleanTech</h1>
+        <div class="logo-ecole">
+            <a href="https://trc.tekbot.io/" target="_blank"><img src="../assets/trc.png" alt="logo" /></a>
         </div>
+      </nav>
+
+      <div class="section__container header__container_team" id="home">
+        <h1>B2MS CleanTech</h1>
+      </div>
     </header>
 
     <section class="section__container room__container">
       <h2 class="section__header_about">OUR TEAM: United by Knowledge, Powered by Diversity</h2>
-      
       <p class="section__container_about" style="text-align: center">
         We are a dedicated group of engineering students from  
         <a href="https://ensa-marrakech.uca.ma/en/" target="_blank" class="section__container_about__link">ENSA Marrakech</a>, Morocco, specializing in Embedded Systems and Control Engineering. 
@@ -54,8 +68,7 @@
         This is more than a project — it's a collective vision driven by cultural richness and technical excellence. 
         As a ten-member team, we are participating in an African inter-university competition that brings together students from across the continent. 
         This experience allows us to put our skills into practice while fostering mutual learning and continental exchange.
-      </p>
-        
+      </p>   
     </section>
 
     <!-- IT  -->
