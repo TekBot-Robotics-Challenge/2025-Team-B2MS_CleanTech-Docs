@@ -1,12 +1,13 @@
+const success = '<i class="fa-solid fa-check" style="color:#28a745;"></i>';
 function copierCode(id, bouton) {
 const code = document.getElementById(id).innerText;
 navigator.clipboard.writeText(code).then(() => {
-const ancienTexte = bouton.innerText;
-bouton.innerText = "✅";
+const oldIcon = bouton.innerHTML;
+bouton.innerHTML = success;
 bouton.disabled = true;
 
 setTimeout(() => {
-  bouton.innerText = ancienTexte;
+  bouton.innerHTML = oldIcon;
   bouton.disabled = false;
 }, 1500);
 });
@@ -20,12 +21,12 @@ function telechargerCode(id, nomFichier, typeMime, bouton) {
   lien.download = nomFichier;
   lien.click();
 
-  const ancienTexte = bouton.innerText;
-  bouton.innerText = "✅";
+  const oldIcon = bouton.innerHTML;
+  bouton.innerHTML = success;
   bouton.disabled = true;
 
   setTimeout(() => {
-    bouton.innerText = ancienTexte;
+    bouton.innerHTML = oldIcon;
     bouton.disabled = false;
   }, 1500);
 }
