@@ -637,6 +637,20 @@ table .dash-list {
     margin-top: 4.5rem;
   }
 
+  @media only screen and (min-width: 350px) and (max-width: 400px) {
+    .header__container_domaine {
+      font-size: 1rem;
+      margin-top: 4.5rem;
+    }
+  }
+
+  @media only screen and (min-width: 250px) and (max-width: 350px) {
+    .header__container_domaine {
+      font-size: 0.9rem;
+      margin-top: 4.7rem;
+    }
+  }
+
   .tab-content {
     padding-top: 150px;
   }
@@ -648,6 +662,10 @@ table .dash-list {
   .sidebar-toggle {
     top: 1rem;
     right: 1rem;
+  }
+
+  video{
+    min-width: 100%;
   }
 }
 
@@ -737,6 +755,7 @@ table .dash-list {
   video {
     max-width: 90%;
     margin: 1rem auto !important;
+    min-width: 100%;
   }
 
   .arbo .folder,
@@ -875,7 +894,6 @@ table .dash-list {
     padding-left: 0.5rem;
   }
 }
-
 
 @media only screen and (min-width: 947px) and (max-width: 1200px) {
   header{
