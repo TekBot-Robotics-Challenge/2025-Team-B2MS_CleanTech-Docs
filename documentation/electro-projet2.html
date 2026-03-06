@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -618,8 +619,8 @@
               <div class="code-container">
                 <p>Code_maitre.ino </p>
                 <div class="btn-bar">
-                  <button onclick="copierCode('Code_maitre-ino', this)">📋</button>
-                  <button onclick="telechargerCode('Code_maitre-ino', 'Code_maitre.ino', 'text/ino', this)">🡇</button>
+                  <button onclick="copierCode('Code_maitre-ino', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('Code_maitre-ino', 'Code_maitre.ino', 'text/ino', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="Code_maitre-ino">
 #include &lt;Wire.h&gt;        
@@ -677,8 +678,8 @@ void loop() {
               <div class="code-container">
                 <p>Code_esclave.ino </p>
                 <div class="btn-bar">
-                  <button onclick="copierCode('Code_esclave-ino', this)">📋</button>
-                  <button onclick="telechargerCode('Code_esclave-ino', 'Code_esclave.ino', 'text/ino', this)">🡇</button>
+                  <button onclick="copierCode('Code_esclave-ino', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('Code_esclave-ino', 'Code_esclave.ino', 'text/ino', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="Code_esclave-ino">
 #include &lt;Wire.h&gt;               // Bibliothèque pour communication I2C

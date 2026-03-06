@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -100,7 +101,7 @@
             <li><strong>mise à jour</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test3_T1', this)">📋</button>
+                  <button onclick="copierCode('test3_T1', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T1">
 user@user:~$ sudo apt update
@@ -110,7 +111,7 @@ user@user:~$ sudo apt upgrade
             <li><strong>teleop_joy</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test3_T2', this)">📋</button>
+                  <button onclick="copierCode('test3_T2', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T2">
 user@user:~$ sudo apt install ros-humble-teleop-twist-joy
@@ -119,7 +120,7 @@ user@user:~$ sudo apt install ros-humble-teleop-twist-joy
             <li><strong>robot_localization</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test3_T3', this)">📋</button>
+                  <button onclick="copierCode('test3_T3', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T3">
 user@user:~$ sudo apt install ros-humble-robot-localization
@@ -128,7 +129,7 @@ user@user:~$ sudo apt install ros-humble-robot-localization
             <li><strong>rqt</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test3_T4', this)">📋</button>
+                  <button onclick="copierCode('test3_T4', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T4">
 user@user:~$ sudo apt install ros-humble-rqt*
@@ -137,7 +138,7 @@ user@user:~$ sudo apt install ros-humble-rqt*
               <li><strong>SLAM_toolbox</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test3_T5', this)">📋</button>
+                  <button onclick="copierCode('test3_T5', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T5">
 user@user:~$ sudo apt install ros-humble-slam-toolbox
@@ -146,7 +147,7 @@ user@user:~$ sudo apt install ros-humble-slam-toolbox
               <li><strong>Nav2</strong>:</li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test3_T6', this)">📋</button>
+                  <button onclick="copierCode('test3_T6', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T6">
 user@user:~$ sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup
@@ -163,7 +164,7 @@ user@user:~$ sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup
             <li><strong>Clonage du metapackage tekbot_sim</strong> depuis GitHub: </li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test3_T7', this)">📋</button>
+                  <button onclick="copierCode('test3_T7', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T7">
 user@user:~$ git clone https://github.com/charif-tekbot/tekbot_sim.git
@@ -172,7 +173,7 @@ user@user:~$ git clone https://github.com/charif-tekbot/tekbot_sim.git
             <li><strong>Compilation et configuration</strong> du workspace: </li>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test3_T8', this)">📋</button>
+                  <button onclick="copierCode('test3_T8', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T8">
 user@user:~$ cd tekbot_sim
@@ -229,7 +230,7 @@ user@user:~/tekbot_sim$ source configure.sh
           </p>
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('test3_T9', this)">📋</button>
+              <button onclick="copierCode('test3_T9', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test3_T9">
 user@user:~/tekbot_ws$ source install/setup.bash
@@ -350,7 +351,7 @@ user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
                   </p>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('cmd_a1', this)">📋</button>
+                        <button onclick="copierCode('cmd_a1', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="cmd_a1">
 user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
@@ -364,7 +365,7 @@ user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
                   </p>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('cmd_a2', this)">📋</button>
+                        <button onclick="copierCode('cmd_a2', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="cmd_a2">
 user@user:~/tekbot_ws$ ros2 launch slam_toolbox online_async_launch.py
@@ -379,7 +380,7 @@ user@user:~/tekbot_ws$ ros2 launch slam_toolbox online_async_launch.py
                     </p>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('cmd_a3', this)">📋</button>
+                        <button onclick="copierCode('cmd_a3', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="cmd_a3">
 user@user:~/tekbot_ws$ rviz2
@@ -406,7 +407,7 @@ user@user:~/tekbot_ws$ rviz2
                     </p>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('cmd_a4', this)">📋</button>
+                        <button onclick="copierCode('cmd_a4', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="cmd_a4">
 user@user:~/tekbot_ws$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
@@ -447,8 +448,8 @@ user@user:~/tekbot_ws$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
                   <strong>tekbot_mapping2_b2ms.launch.py</strong>
                 </p>
                 <div class="btn-bar">
-                  <button onclick="copierCode('tekbot_mapping2_b2ms-py', this)">📋</button>
-                  <button onclick="telechargerCode('tekbot_mapping2_b2ms-py', 'tekbot_mapping2_b2ms.launch.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('tekbot_mapping2_b2ms-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('tekbot_mapping2_b2ms-py', 'tekbot_mapping2_b2ms.launch.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="tekbot_mapping2_b2ms-py">
 from launch import LaunchDescription
@@ -501,7 +502,7 @@ def generate_launch_description():
                   <li><strong>CMakeLists.txt</strong>: on y ajoute</li>
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('test3_CMake1', this)">📋</button>
+                      <button onclick="copierCode('test3_CMake1', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="test3_CMake1">
 find_package(ament_cmake REQUIRED)
@@ -516,7 +517,7 @@ install(
                 <li><strong>package.xml</strong>: on y ajoute</li>
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('test3_package', this)">📋</button>
+                      <button onclick="copierCode('test3_package', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="test3_package">
 &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
@@ -531,7 +532,7 @@ install(
                 <li>Terminal 1: lancement de tekbot_maze.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('test3_T10', this)">📋</button>
+                    <button onclick="copierCode('test3_T10', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="test3_T10">
 user@user:~/tekbot_ws$ colcon build
@@ -543,7 +544,7 @@ user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
                 <li>Terminal 2: lancement de tekbot_mapping2_b2ms.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('test3_T11', this)">📋</button>
+                    <button onclick="copierCode('test3_T11', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="test3_T11">
 user@user:~/tekbot_ws$ source install/setup.bash
@@ -554,7 +555,7 @@ user@user:~/tekbot_ws$ ros2 launch tekbot_navigation tekbot_mapping2_b2ms.launch
                 <li>Terminal 3: execution de teleop_twist_keyboard</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('test3_T12', this)">📋</button>
+                    <button onclick="copierCode('test3_T12', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="test3_T12">
 user@user:~/tekbot_ws$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
@@ -652,7 +653,7 @@ user@user:~/tekbot_ws$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
                   </p>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('cmd_b1', this)">📋</button>
+                        <button onclick="copierCode('cmd_b1', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="cmd_b1">
 user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
@@ -666,7 +667,7 @@ user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
                   </p>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('cmd_b2', this)">📋</button>
+                        <button onclick="copierCode('cmd_b2', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="cmd_b2">
 user@user:~/tekbot_ws$ ros2 launch nav2_bringup localization_launch.py map:=./src/tekbot_sim/tekbot_navigation/maps/tekbot_map.yaml use_sim_time:=true
@@ -681,7 +682,7 @@ user@user:~/tekbot_ws$ ros2 launch nav2_bringup localization_launch.py map:=./sr
                   </p>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('cmd_b3', this)">📋</button>
+                        <button onclick="copierCode('cmd_b3', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="cmd_b3">
 user@user:~/tekbot_ws$ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true map_subscriber_transient_local:=true params_file:=./src/tekbot_sim/tekbot_navigation/config/nav2_params.yaml
@@ -699,7 +700,7 @@ user@user:~/tekbot_ws$ ros2 launch nav2_bringup navigation_launch.py use_sim_tim
                     </p>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('cmd_b4', this)">📋</button>
+                        <button onclick="copierCode('cmd_b4', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="cmd_b4">
 user@user:~/tekbot_ws$ rviz2
@@ -733,7 +734,7 @@ user@user:~/tekbot_ws$ rviz2
                 </p>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('cmd_b5', this)">📋</button>
+                    <button onclick="copierCode('cmd_b5', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="cmd_b5">
 user@user:~/tekbot_ws$ ros2 topic pub --once /initialpose geometry_msgs/msg/PoseWithCovarianceStamped "{header: {frame_id: 'map'}, pose: {pose: {position: {x: -2.5, y: -0.5, z: 0.0}}}}"
@@ -788,8 +789,8 @@ user@user:~/tekbot_ws$ ros2 topic pub --once /goal_pose geometry_msgs/msg/PoseSt
                   <strong>tekbot_nav_b2ms.launch.py</strong>
                 </p>
                 <div class="btn-bar">
-                  <button onclick="copierCode('tekbot_nav_b2ms-py', this)">📋</button>
-                  <button onclick="telechargerCode('tekbot_nav_b2ms-py', 'tekbot_nav_b2ms.launch.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('tekbot_nav_b2ms-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('tekbot_nav_b2ms-py', 'tekbot_nav_b2ms.launch.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="tekbot_nav_b2ms-py">
 from launch import LaunchDescription
@@ -879,7 +880,7 @@ def generate_launch_description():
                   <li><strong>CMakeLists.txt</strong>: on y ajoute</li>
                   <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('test3_CMake1', this)">📋</button>
+                    <button onclick="copierCode('test3_CMake1', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="test3_CMake1">
 find_package(nav2_bringup REQUIRED)
@@ -894,7 +895,7 @@ install(
                 <li><strong>package.xml</strong>: on y ajoute</li>
                   <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('test3_package', this)">📋</button>
+                    <button onclick="copierCode('test3_package', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="test3_package">
 &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
@@ -914,7 +915,7 @@ install(
                 <li>Terminal 1: lancement de tekbot_maze.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('test3_T13', this)">📋</button>
+                    <button onclick="copierCode('test3_T13', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="test3_T13">
 user@user:~/tekbot_ws$ colcon build
@@ -926,7 +927,7 @@ user@user:~/tekbot_ws$ ros2 launch maze_solving tekbot_maze.launch.py
                 <li>Terminal 2: lancement de tekbot_nav_b2ms.launch.py</li>
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('test3_T14', this)">📋</button>
+                    <button onclick="copierCode('test3_T14', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="test3_T14">
 user@user:~/tekbot_ws$ source install/setup.bash
@@ -957,8 +958,8 @@ user@user:~/tekbot_ws$ ros2 launch tekbot_navigation tekbot_nav_b2ms.launch.py
                   <strong>tekbot_nav2_b2ms.launch.py</strong>
                 </p>
                 <div class="btn-bar">
-                  <button onclick="copierCode('tekbot_nav2_b2ms-py', this)">📋</button>
-                  <button onclick="telechargerCode('tekbot_nav2_b2ms-py', 'tekbot_nav2_b2ms.launch.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('tekbot_nav2_b2ms-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('tekbot_nav2_b2ms-py', 'tekbot_nav2_b2ms.launch.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="tekbot_nav2_b2ms-py">
 import os

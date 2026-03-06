@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -528,7 +529,7 @@
                   La commande suivante permet d’identifier le processus utilisant la caméra :                
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('fuser', this)">📋</button>
+                      <button onclick="copierCode('fuser', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="fuser">
 fuser /dev/video0
@@ -551,7 +552,7 @@ fuser /dev/video0
                   il peut être arrêté manuellement à l’aide de la commande <strong><em>kill</em></strong> :
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('kill', this)">📋</button>
+                      <button onclick="copierCode('kill', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="kill">
 kill &lt;PID&gt;
@@ -563,7 +564,7 @@ kill &lt;PID&gt;
                   En cas de processus bloqué ou récalcitrant, la commande suivante peut être utilisée :
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('kill -9', this)">📋</button>
+                      <button onclick="copierCode('kill -9', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="kill -9">
 kill -9 &lt;PID&gt;
@@ -579,7 +580,7 @@ kill -9 &lt;PID&gt;
                   Une fois la caméra libérée, il est possible de lancer la commande suivante afin de vérifier que la caméra est bien fonctionnelle :
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('cheese', this)">📋</button>
+                      <button onclick="copierCode('cheese', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="cheese">
 cheese
@@ -610,7 +611,7 @@ cheese
                   Il suffit alors d’ouvrir un terminal et d’exécuter la commande suivante :              
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('jupyter_lab', this)">📋</button>
+                      <button onclick="copierCode('jupyter_lab', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="jupyter_lab">
 jupyter lab
@@ -685,7 +686,7 @@ jupyter lab
                   La commande <strong><em>ffmpeg</em></strong> permet de capturer l’écran et d’enregistrer une vidéo.
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('enregistrement', this)">📋</button>
+                      <button onclick="copierCode('enregistrement', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="enregistrement">
 ffmpeg -f x11grab -video_size 1280x720 -framerate 30 -i :0.0 -pix_fmt yuv420p output.mp4
@@ -797,7 +798,7 @@ ffmpeg -f x11grab -video_size 1280x720 -framerate 30 -i :0.0 -pix_fmt yuv420p ou
                     Il est également possible de se connecter au DOFBOT directement depuis un terminal sans utiliser PuTTY avec la commande:
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('ssh', this)">📋</button>
+                        <button onclick="copierCode('ssh', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="ssh">
 ssh jetson@adresse_ip_dofbot
@@ -832,7 +833,7 @@ ssh jetson@adresse_ip_dofbot
                     Pour terminer une connexion SSH avec le DOFBOT et fermer la session, il suffit de taper la commande: 
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('exit', this)">📋</button>
+                        <button onclick="copierCode('exit', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="exit">
 exit
@@ -1047,7 +1048,7 @@ exit
                   </p>
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('cmd_eMMC1', this)">📋</button>
+                      <button onclick="copierCode('cmd_eMMC1', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="cmd_eMMC1">
 lsusb
@@ -1065,7 +1066,7 @@ lsusb
                   </p>
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('cmd_eMMC2', this)">📋</button>
+                      <button onclick="copierCode('cmd_eMMC2', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="cmd_eMMC2">
 tar xzvf Jetson_Boot_USB.tar.gz
@@ -1079,7 +1080,7 @@ tar xzvf Jetson_Boot_USB.tar.gz
 
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('cmd_eMMC3', this)">📋</button>
+                      <button onclick="copierCode('cmd_eMMC3', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="cmd_eMMC3">
 sudo jetson_nano_boot_usb/Linux_for_Tegra/flash.sh -r jetson-nano-devkit-emmc mmcblk0p1

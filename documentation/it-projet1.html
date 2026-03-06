@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -102,8 +103,8 @@
 
             <div class="code-container">
               <div class="btn-bar">
-                <button onclick="copierCode('robot-cpp', this)">📋</button>
-                <button onclick="telechargerCode('robot-cpp', 'robot.cpp', 'text/x-c++src', this)">🡇</button>
+                <button onclick="copierCode('robot-cpp', this)"><i class="fas fa-solid fa-copy"></i></button>
+                <button onclick="telechargerCode('robot-cpp', 'robot.cpp', 'text/x-c++src', this)"><i class="fas fa-solid fa-circle-down"></i></button>
               </div>
               <pre><code class="hljs" id="robot-cpp">
 #include "robot.hpp"
@@ -186,8 +187,8 @@ void moveRobot(robot *p)
 
             <div class="code-container">
               <div class="btn-bar">
-                <button onclick="copierCode('deliveryRobot-cpp', this)">📋</button>
-                <button onclick="telechargerCode('deliveryRobot-cpp', 'deliveryRobot.cpp', 'text/x-c++src', this)">🡇</button>
+                <button onclick="copierCode('deliveryRobot-cpp', this)"><i class="fas fa-solid fa-copy"></i></button>
+                <button onclick="telechargerCode('deliveryRobot-cpp', 'deliveryRobot.cpp', 'text/x-c++src', this)"><i class="fas fa-solid fa-circle-down"></i></button>
               </div>
               <pre><code class="hljs" id="deliveryRobot-cpp">
 #include "deliveryRobot.hpp"
@@ -281,8 +282,8 @@ void deliveryRobot::setZone(zone ZONE)
 
             <div class="code-container">
               <div class="btn-bar">
-                <button onclick="copierCode('travellingRobot-cpp', this)">📋</button>
-                <button onclick="telechargerCode('travellingRobot-cpp', 'travellingRobot.cpp', 'text/x-c++src', this)">🡇</button>
+                <button onclick="copierCode('travellingRobot-cpp', this)"><i class="fas fa-solid fa-copy"></i></button>
+                <button onclick="telechargerCode('travellingRobot-cpp', 'travellingRobot.cpp', 'text/x-c++src', this)"><i class="fas fa-solid fa-circle-down"></i></button>
               </div>
               <pre><code class="hljs" id="travellingRobot-cpp">
 #include "travellingRobot.hpp"
@@ -364,8 +365,8 @@ void travellingRobot::setDirection(direction DIRECTION)
 
             <div class="code-container">
               <div class="btn-bar">
-                <button onclick="copierCode('armRobot-cpp', this)">📋</button>
-                <button onclick="telechargerCode('armRobot-cpp', 'armRobot.cpp', 'text/x-c++src', this)">🡇</button>
+                <button onclick="copierCode('armRobot-cpp', this)"><i class="fas fa-solid fa-copy"></i></button>
+                <button onclick="telechargerCode('armRobot-cpp', 'armRobot.cpp', 'text/x-c++src', this)"><i class="fas fa-solid fa-circle-down"></i></button>
               </div>
               <pre><code class="hljs" id="armRobot-cpp">
 #include "armRobot.hpp"
@@ -450,8 +451,8 @@ void armRobot::setRotationalDirection(rotate rotationalDirection_)
             </ul>  
             <div class="code-container">
               <div class="btn-bar">
-                <button onclick="copierCode('main-cpp', this)">📋</button>
-                <button onclick="telechargerCode('main-cpp', 'main.cpp', 'text/x-c++src', this)">🡇</button>
+                <button onclick="copierCode('main-cpp', this)"><i class="fas fa-solid fa-copy"></i></button>
+                <button onclick="telechargerCode('main-cpp', 'main.cpp', 'text/x-c++src', this)"><i class="fas fa-solid fa-circle-down"></i></button>
               </div>
               <pre><code class="hljs" id="main-cpp">
 #include "travellingRobot.hpp"

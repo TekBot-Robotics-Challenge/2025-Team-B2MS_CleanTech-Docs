@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -171,7 +172,7 @@
                 La détection de cette adresse peut être effectuée côté Dofbot à l’aide d’un scan du bus I²C, en exécutant la commande suivante :
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('scan_i2c', this)">📋</button>
+                    <button onclick="copierCode('scan_i2c', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="scan_i2c">
 i2cdetect -y -r -a 1
@@ -188,8 +189,8 @@ i2cdetect -y -r -a 1
               <details class="code-container">
                 <summary>i2c_dofbot.py</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('i2c_dofbot-py', this)">📋</button>
-                  <button onclick="telechargerCode('i2c_dofbot-py', 'i2c_dofbot.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('i2c_dofbot-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('i2c_dofbot-py', 'i2c_dofbot.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="i2c_dofbot-py">
 import smbus   #bibliotheque i2c
@@ -223,8 +224,8 @@ while True:
               <details class="code-container">
                 <summary>i2c_convoyeur.ino</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('i2c_convoyeur-ino', this)">📋</button>
-                  <button onclick="telechargerCode('i2c_convoyeur-ino', 'i2c_convoyeur.ino', 'text/ino', this)">🡇</button>
+                  <button onclick="copierCode('i2c_convoyeur-ino', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('i2c_convoyeur-ino', 'i2c_convoyeur.ino', 'text/ino', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="i2c_convoyeur-ino">
 #include &lt;Wire.h&gt;   //bibliothèque i2c
@@ -368,8 +369,8 @@ void requestEvent() {
               <details class="code-container">
                 <summary>esp_01.ino</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('esp_01-ino', this)">📋</button>
-                  <button onclick="telechargerCode('esp_01-ino', 'esp_01.ino', 'text/ino', this)">🡇</button>
+                  <button onclick="copierCode('esp_01-ino', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('esp_01-ino', 'esp_01.ino', 'text/ino', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="esp_01-ino">
 #include &lt;ESP8266WiFi.h&gt;
@@ -446,8 +447,8 @@ void sendToDofbot(String cmd) {
               <details class="code-container">
                 <summary>tcp_arduino.ino</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('tcp_arduino-ino', this)">📋</button>
-                  <button onclick="telechargerCode('tcp_arduino-ino', 'tcp_arduino.ino', 'text/ino', this)">🡇</button>
+                  <button onclick="copierCode('tcp_arduino-ino', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('tcp_arduino-ino', 'tcp_arduino.ino', 'text/ino', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="tcp_arduino-ino">
 #include &lt;SoftwareSerial.h&gt;
@@ -547,8 +548,8 @@ void interrupt_routine() {
               <details class="code-container">
                 <summary>tcp_dofbot.py</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('tcp_dofbot-py', this)">📋</button>
-                  <button onclick="telechargerCode('tcp_dofbot-py', 'tcp_dofbot.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('tcp_dofbot-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('tcp_dofbot-py', 'tcp_dofbot.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="tcp_dofbot-py">
 import socket
@@ -636,7 +637,7 @@ while True:
                 Une fois connecté, le périphérique série est reconnu sous Linux sous la forme :
                 <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('uart_connexion', this)">📋</button>
+                    <button onclick="copierCode('uart_connexion', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="uart_connexion">
 /dev/ttyUSB0
@@ -668,8 +669,8 @@ while True:
               <details class="code-container">
                 <summary>uart_arduino.ino</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('tcp_arduino-ino', this)">📋</button>
-                  <button onclick="telechargerCode('tcp_arduino-ino', 'tcp_arduino.ino', 'text/ino', this)">🡇</button>
+                  <button onclick="copierCode('tcp_arduino-ino', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('tcp_arduino-ino', 'tcp_arduino.ino', 'text/ino', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="tcp_arduino-ino">
 void setup()
@@ -690,8 +691,8 @@ delay(5000);
               <details class="code-container">
                 <summary>uart_dofbot.py</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('tcp_dofbot-py', this)">📋</button>
-                  <button onclick="telechargerCode('tcp_dofbot-py', 'tcp_dofbot.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('tcp_dofbot-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('tcp_dofbot-py', 'tcp_dofbot.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="tcp_dofbot-py">
 import serial
@@ -751,8 +752,8 @@ except:
               <details class="code-container">
                 <summary>tcp_server.py</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('tcp_server-py', this)">📋</button>
-                  <button onclick="telechargerCode('tcp_server-py', 'tcp_server.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('tcp_server-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('tcp_server-py', 'tcp_server.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="tcp_server-py">
 #!/usr/bin/env python
@@ -820,8 +821,8 @@ class tcp_Server:
               <details class="code-container">
                 <summary>uart_Arduino.py</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('uart_Arduino-py', this)">📋</button>
-                  <button onclick="telechargerCode('uart_Arduino-py', 'uart_Arduino.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('uart_Arduino-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('uart_Arduino-py', 'uart_Arduino.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="uart_Arduino-py">
 #!/usr/bin/env python

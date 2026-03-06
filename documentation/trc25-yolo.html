@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -103,7 +104,7 @@
                   <li>Création d'un nouvel environnement</li>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('creation_env', this)">📋</button>
+                        <button onclick="copierCode('creation_env', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="creation_env">
 conda create --name b2ms-env python=3.12 -y
@@ -112,7 +113,7 @@ conda create --name b2ms-env python=3.12 -y
                     <li>Activation de l'environnement créé</li>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('activation_env', this)">📋</button>
+                        <button onclick="copierCode('activation_env', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="activation_env">
 conda activate b2ms-env
@@ -121,7 +122,7 @@ conda activate b2ms-env
                     <li>Installation de <strong>Ultralytics</strong>: package de librairies python pour le modèle YOLO</li>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('ultralytics', this)">📋</button>
+                        <button onclick="copierCode('ultralytics', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="ultralytics">
 pip install ultralytics
@@ -134,7 +135,7 @@ pip install ultralytics
                   <li>Installation de PyTorch avec CUDA v12.4: pour les ordinateurs ayant un GPU</li>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('pytorch_gpu', this)">📋</button>
+                        <button onclick="copierCode('pytorch_gpu', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="pytorch_gpu">
 pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
@@ -148,7 +149,7 @@ pip install --upgrade torch torchvision torchaudio --index-url https://download.
                     <li>Vérification de PyTorch avec CUDA v12.4: cette commande affichera le GPU du système si CUDA a été installé correctement.</li>
                     <div class="code-container">
                       <div class="btn-bar">
-                        <button onclick="copierCode('pytorch_check', this)">📋</button>
+                        <button onclick="copierCode('pytorch_check', this)"><i class="fas fa-solid fa-copy"></i></button>
                       </div>
                       <pre><code class="hljs" id="pytorch_check">
 python -c "import torch; print(torch.cuda.get_device_name(0))"
@@ -163,7 +164,7 @@ python -c "import torch; print(torch.cuda.get_device_name(0))"
               Il faut commencer par <strong>activer</strong> l'environnement désiré.         
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('ipykernel', this)">📋</button>
+                  <button onclick="copierCode('ipykernel', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="ipykernel">
 conda activate b2ms-env
@@ -201,7 +202,7 @@ conda install jupyter
                 <li>Installation de Label Studio:</li>
                   <div class="code-container">
                     <div class="btn-bar">
-                      <button onclick="copierCode('label_studio', this)">📋</button>
+                      <button onclick="copierCode('label_studio', this)"><i class="fas fa-solid fa-copy"></i></button>
                     </div>
                     <pre><code class="hljs" id="label_studio">
 conda activate b2ms-env
@@ -211,7 +212,7 @@ pip install label-studio
                 <li>Lancement de Label Studio:</li>
                   <div class="code-container">
                   <div class="btn-bar">
-                    <button onclick="copierCode('label_studio_start', this)">📋</button>
+                    <button onclick="copierCode('label_studio_start', this)"><i class="fas fa-solid fa-copy"></i></button>
                   </div>
                   <pre><code class="hljs" id="label_studio_start">
 label-studio start
@@ -409,7 +410,7 @@ label-studio start
               </p>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('yaml', this)">📋</button>
+                  <button onclick="copierCode('yaml', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="yaml">
 path: D:\TRC25\IA\detection\data
@@ -436,7 +437,7 @@ names: [“dangereux”, ”menagers”, ”recyclables”]
               </p>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('jupyter_notebook', this)">📋</button>
+                  <button onclick="copierCode('jupyter_notebook', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="jupyter_notebook">
 jupyter notebook
@@ -456,7 +457,7 @@ jupyter notebook
                   import
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('import', this)">📋</button>
+                  <button onclick="copierCode('import', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="import">
 import torch                       # Gestion des tenseurs et exécution des modèles YOLO
@@ -487,7 +488,7 @@ import math                        # fonctions mathématiques
                   organisation des dossiers
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('data_structure', this)">📋</button>
+                  <button onclick="copierCode('data_structure', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="data_structure">
 # Paramètres
@@ -596,7 +597,7 @@ print(f"Validation : {len(os.listdir(val_img_path))} images")
                   Configuration d'entrainement
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('config_train', this)">📋</button>
+                  <button onclick="copierCode('config_train', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="config_train">
 # Chargement du modèle YOLOv8 pré-entraîné
@@ -694,7 +695,7 @@ for key, value in train_config.items():
                   Entrainement du modèle
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('train_model', this)">📋</button>
+                  <button onclick="copierCode('train_model', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="train_model">
 # Entraînement du modèle
@@ -727,7 +728,7 @@ print(f"Modèle sauvegardé dans : {results.save_dir}")
                   Visualisation des métriques
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('metric_visualization', this)">📋</button>
+                  <button onclick="copierCode('metric_visualization', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="metric_visualization">
 results_path = Path(f"{train_config["project"]}/{train_config["name"]}")
@@ -849,7 +850,7 @@ else:
                   Evaluation sur validation
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('evaluation_val', this)">📋</button>
+                  <button onclick="copierCode('evaluation_val', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="evaluation_val">
 # Évaluation du modèle entraîné
@@ -900,7 +901,7 @@ print(f"Latence moyenne : {latency:.3f} ms/image")
               <details class="code-container">
                 <summary>Chargement du modèle et fonction de prédiction</summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('predict_visualize', this)">📋</button>
+                  <button onclick="copierCode('predict_visualize', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="predict_visualize">
 # Chargement du meilleur modèle
@@ -956,7 +957,7 @@ def predict_and_visualize(model, image_path, conf_threshold=0.5):
                   Test sur une image
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('test1_model', this)">📋</button>
+                  <button onclick="copierCode('test1_model', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="test1_model">
 # Test sur une image d'exemple
@@ -982,7 +983,7 @@ else:
                   Tests sur un dossier d'images
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('test2_model', this)">📋</button>
+                  <button onclick="copierCode('test2_model', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="test2_model">
 import time
@@ -1035,7 +1036,7 @@ else:
                   Export du modèle
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('export_model', this)">📋</button>
+                  <button onclick="copierCode('export_model', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="export_model">
 # Export du modèle pour déploiement sur Jetson Nano
@@ -1095,7 +1096,7 @@ print(f"- TorchScript (.torchscript) : PyTorch optimisé")
               </p>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('script_env', this)">📋</button>
+                  <button onclick="copierCode('script_env', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="script_env">
 conda activate b2ms-env
@@ -1113,7 +1114,7 @@ cd detection
             <h4>b. Préparation du Dataset</h4>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('script_data', this)">📋</button>
+                  <button onclick="copierCode('script_data', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="script_data">
 python scripts/split_dataset.py --dataset_path="dataset" --train_per=0.8
@@ -1132,7 +1133,7 @@ python scripts/split_dataset.py --dataset_path="dataset" --train_per=0.8
             <h4>c. Entraînement du modèle</h4>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('script_train', this)">📋</button>
+                  <button onclick="copierCode('script_train', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="script_train">
 python scripts/training_model.py --model=yolov8n.pt --epochs=20 --imgsz=640 --batch=16
@@ -1158,7 +1159,7 @@ python scripts/training_model.py --model=yolov8n.pt --epochs=20 --imgsz=640 --ba
             <h4>d. Visualisation des métriques</h4>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('script_metric', this)">📋</button>
+                  <button onclick="copierCode('script_metric', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="script_metric">
 python scripts/metric_visualization.py --result_path=runs/detect/train/results.csv
@@ -1173,7 +1174,7 @@ python scripts/metric_visualization.py --result_path=runs/detect/train/results.c
             <h4>e. Evaluation sur données de validation</h4>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('script_evaluation_val', this)">📋</button>
+                  <button onclick="copierCode('script_evaluation_val', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="script_evaluation_val">
 python scripts/evaluate_val.py --model_path=runs/detect/train/weights/best.pt --imgsz=640
@@ -1191,7 +1192,7 @@ python scripts/evaluate_val.py --model_path=runs/detect/train/weights/best.pt --
             <h4>f. Lancement du modèle</h4>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('script_launch', this)">📋</button>
+                  <button onclick="copierCode('script_launch', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="script_launch">
 python scripts/detection_launch.py --model=runs/detect/train/weights/best.pt --source=usb0 --confidence=0.6 --resolution=640x640
@@ -1221,7 +1222,7 @@ python scripts/detection_launch.py --model=runs/detect/train/weights/best.pt --s
             <h4>g. Export du modèle</h4>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('script_export_model', this)">📋</button>
+                  <button onclick="copierCode('script_export_model', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="script_export_model">
 python scripts/export_model.py --model_path=runs/detect/train/weights/best.pt --export_to=models --name=b2ms_model --imgsz=640
@@ -1528,7 +1529,7 @@ python scripts/export_model.py --model_path=runs/detect/train/weights/best.pt --
                   Installation des dépendances
                 </summary>
                 <div class="btn-bar">
-                  <button onclick="copierCode('dofbot_ubuntu', this)">📋</button>
+                  <button onclick="copierCode('dofbot_ubuntu', this)"><i class="fas fa-solid fa-copy"></i></button>
                 </div>
                 <pre><code class="hljs" id="dofbot_ubuntu">
 sudo apt update

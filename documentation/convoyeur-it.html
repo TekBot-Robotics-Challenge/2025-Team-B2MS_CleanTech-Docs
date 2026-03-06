@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -93,8 +94,8 @@
             <div class="code-container">
               <p>code_convoyeur.ino</p>
               <div class="btn-bar">
-                <button onclick="copierCode('code_convoyeur-ino', this)">📋</button>
-                <button onclick="telechargerCode('code_convoyeur-ino', 'code_convoyeur.ino', 'text/ino', this)">🡇</button>
+                <button onclick="copierCode('code_convoyeur-ino', this)"><i class="fas fa-solid fa-copy"></i></button>
+                <button onclick="telechargerCode('code_convoyeur-ino', 'code_convoyeur.ino', 'text/ino', this)"><i class="fas fa-solid fa-circle-down"></i></button>
               </div>
               <pre><code class="hljs" id="code_convoyeur-ino">
 // boutons marche arrêt & urgence
@@ -462,8 +463,8 @@ void interrupt_routine()
               <div class="code-container">
                 <p>app.py</p>
                 <div class="btn-bar">
-                  <button onclick="copierCode('app-py', this)">📋</button>
-                  <button onclick="telechargerCode('app-py', 'app.py', 'text/py', this)">🡇</button>
+                  <button onclick="copierCode('app-py', this)"><i class="fas fa-solid fa-copy"></i></button>
+                  <button onclick="telechargerCode('app-py', 'app.py', 'text/py', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                 </div>
                 <pre><code class="hljs" id="app-py">  
 from flask import Flask, render_template, jsonify, request
@@ -704,8 +705,8 @@ if __name__ == '__main__':
                   <div class="code-container">
                     <p>index.html</p>
                     <div class="btn-bar">
-                      <button onclick="copierCode('index-html', this)">📋</button>
-                      <button onclick="telechargerCode('index-html', 'index.html', 'text/html', this)">🡇</button>
+                      <button onclick="copierCode('index-html', this)"><i class="fas fa-solid fa-copy"></i></button>
+                      <button onclick="telechargerCode('index-html', 'index.html', 'text/html', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                     </div>
                     <pre><code class="hljs" id="index-html">
 &lt;!DOCTYPE html&gt;
@@ -849,8 +850,8 @@ if __name__ == '__main__':
                 <div class="code-container">
                   <p>style.css</p>
                   <div class="btn-bar">
-                    <button onclick="copierCode('style-css', this)">📋</button>
-                    <button onclick="telechargerCode('style-css', 'style.css', 'text/css', this)">🡇</button>
+                    <button onclick="copierCode('style-css', this)"><i class="fas fa-solid fa-copy"></i></button>
+                    <button onclick="telechargerCode('style-css', 'style.css', 'text/css', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                   </div>
                   <pre><code class="hljs" id="style-css">
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
@@ -1531,8 +1532,8 @@ body.dark-theme .conveyor-container {
                 <div class="code-container">
                   <p>script.js</p>
                   <div class="btn-bar">
-                    <button onclick="copierCode('script-js', this)">📋</button>
-                    <button onclick="telechargerCode('script-js', 'script.js', 'text/js', this)">🡇</button>
+                    <button onclick="copierCode('script-js', this)"><i class="fas fa-solid fa-copy"></i></button>
+                    <button onclick="telechargerCode('script-js', 'script.js', 'text/js', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                   </div>
                   <pre><code class="hljs" id="script-js">
 let hasInitialized = false;

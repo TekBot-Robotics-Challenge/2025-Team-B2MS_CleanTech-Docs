@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -195,7 +196,7 @@
           <h4><strong>a. Création du workspace</strong></h4>
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('test2_T1', this)">📋</button>
+              <button onclick="copierCode('test2_T1', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test2_T1">
 user@user-VirtualBox:~$ cd Desktop
@@ -206,7 +207,7 @@ user@user-VirtualBox:~/Desktop$ mkdir -p workspace/src
           <h4><strong>b. Création du package</strong></h4>
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('test2_T2a', this)">📋</button>
+              <button onclick="copierCode('test2_T2a', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test2_T2a">
 user@user-VirtualBox:~/Desktop$ cd workspace/src
@@ -221,7 +222,7 @@ user@user-VirtualBox:~/Desktop/workspace/src$ ros2 pkg create sensor_data_evalua
           </p>
           <div class="code-container">
             <div class="btn-bar">
-              <button onclick="copierCode('test2_T2b', this)">📋</button>
+              <button onclick="copierCode('test2_T2b', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test2_T2b">
 user@user-VirtualBox:~/Desktop/workspace/src$ cd sensor_data_evaluation/src
@@ -258,8 +259,8 @@ user@user-VirtualBox:~/Desktop/workspace/src/sensor_data_evaluation/src$ chmod +
               <strong>sensor_node_publisher.cpp</strong>
             </p>
             <div class="btn-bar">
-              <button onclick="copierCode('sensor_node_publisher-cpp', this)">📋</button>
-              <button onclick="telechargerCode('sensor_node_publisher-cpp', 'sensor_node_publisher.cpp', 'text/x-c++src', this)">🡇</button>
+              <button onclick="copierCode('sensor_node_publisher-cpp', this)"><i class="fas fa-solid fa-copy"></i></button>
+              <button onclick="telechargerCode('sensor_node_publisher-cpp', 'sensor_node_publisher.cpp', 'text/x-c++src', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                </div>
             <pre><code class="hljs" id="sensor_node_publisher-cpp">
 #include &lt;chrono&gt;
@@ -347,8 +348,8 @@ int main(int argc, char * argv[])
               <strong>sensor_node_subscriber.cpp</strong>
             </p>
             <div class="btn-bar">
-              <button onclick="copierCode('sensor_node_subscriber-cpp', this)">📋</button>
-              <button onclick="telechargerCode('sensor_node_subscriber-cpp', 'sensor_node_subscriber.cpp', 'text/x-c++src', this)">🡇</button>
+              <button onclick="copierCode('sensor_node_subscriber-cpp', this)"><i class="fas fa-solid fa-copy"></i></button>
+              <button onclick="telechargerCode('sensor_node_subscriber-cpp', 'sensor_node_subscriber.cpp', 'text/x-c++src', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                </div>
             <pre><code class="hljs" id="sensor_node_subscriber-cpp">
 #include &lt;functional&gt;
@@ -423,8 +424,8 @@ int main(int argc, char * argv[])
               <strong>CMakeLists.txt</strong>
             </p>
             <div class="btn-bar">
-              <button onclick="copierCode('CMakeLists-txt', this)">📋</button>
-              <button onclick="telechargerCode('CMakeLists-txt', 'CMakeLists.txt', 'text/txt', this)">🡇</button>
+              <button onclick="copierCode('CMakeLists-txt', this)"><i class="fas fa-solid fa-copy"></i></button>
+              <button onclick="telechargerCode('CMakeLists-txt', 'CMakeLists.txt', 'text/txt', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                </div>
             <pre><code class="hljs" id="CMakeLists-txt">
 cmake_minimum_required(VERSION 3.8)
@@ -488,8 +489,8 @@ ament_package()
               <strong>package.xml</strong>
             </p>
             <div class="btn-bar">
-              <button onclick="copierCode('package-xml', this)">📋</button>
-              <button onclick="telechargerCode('package-xml', 'package.xml', 'text/xml', this)">🡇</button>
+              <button onclick="copierCode('package-xml', this)"><i class="fas fa-solid fa-copy"></i></button>
+              <button onclick="telechargerCode('package-xml', 'package.xml', 'text/xml', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                </div>
             <pre><code class="hljs" id="package-xml">
 &lt;?xml version="1.0"?&gt;
@@ -532,8 +533,8 @@ ament_package()
               <strong>sensor_data_eval_launch.xml</strong>
             </p>
             <div class="btn-bar">
-              <button onclick="copierCode('sensor_data_eval_launch-xml', this)">📋</button>
-              <button onclick="telechargerCode('sensor_data_eval_launch-xml', 'sensor_data_eval_launch.xml', 'text/xml', this)">🡇</button>
+              <button onclick="copierCode('sensor_data_eval_launch-xml', this)"><i class="fas fa-solid fa-copy"></i></button>
+              <button onclick="telechargerCode('sensor_data_eval_launch-xml', 'sensor_data_eval_launch.xml', 'text/xml', this)"><i class="fas fa-solid fa-circle-down"></i></button>
                </div>
             <pre><code class="hljs" id="sensor_data_eval_launch-xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -551,7 +552,7 @@ ament_package()
             </p>
               <div class="code-container">
                 <div class="btn-bar">
-                  <button onclick="copierCode('test2_T3', this)">📋</button>
+                  <button onclick="copierCode('test2_T3', this)"><i class="fas fa-solid fa-copy"></i></button>
             </div>
             <pre><code class="hljs" id="test2_T3">
 user@user-VirtualBox:~$ cd Desktop/workspace
